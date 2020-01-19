@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using Gibbed.Helpers;
+using Gibbed.IO;
 
 namespace Gibbed.TacticsOgre.FileFormats
 {
@@ -37,10 +37,10 @@ namespace Gibbed.TacticsOgre.FileFormats
                 throw new FormatException();
             }
 
-            var dataSize = input.ReadValueU32();
+            var dataSize = input.ReadValueS32();
             input.Seek(-4, SeekOrigin.Current);
             
-            if (input.Position + dataSize > basePosition + totalSize)
+            if (dataSize < 4 || input.Position + dataSize > basePosition + totalSize)
             {
                 throw new FormatException();
             }
@@ -91,9 +91,9 @@ namespace Gibbed.TacticsOgre.FileFormats
 
             if (textureOffset != palettesOffset)
             {
-                var textureSize = input.ReadValueU32();
+                var textureSize = input.ReadValueS32();
                 input.Seek(-4, SeekOrigin.Current);
-                if (input.Position + textureSize != palettesOffset)
+                if (textureSize < 4 || input.Position + textureSize != palettesOffset)
                 {
                     throw new FormatException();
                 }
@@ -119,9 +119,9 @@ namespace Gibbed.TacticsOgre.FileFormats
                 this.Palettes.Clear();
                 for (uint i = 0; i < paletteCount; i++)
                 {
-                    var paletteSize = input.ReadValueU32();
+                    var paletteSize = input.ReadValueS32();
                     input.Seek(-4, SeekOrigin.Current);
-                    if (input.Position + paletteSize > unknown0COffset)
+                    if (paletteSize < 4 || input.Position + paletteSize > unknown0COffset)
                     {
                         throw new FormatException();
                     }

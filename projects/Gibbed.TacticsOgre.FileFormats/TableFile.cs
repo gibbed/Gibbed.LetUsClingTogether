@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using Gibbed.Helpers;
+using Gibbed.IO;
 
 namespace Gibbed.TacticsOgre.FileFormats
 {
@@ -23,7 +23,7 @@ namespace Gibbed.TacticsOgre.FileFormats
             var titleId1 = input.ReadString(16, Encoding.ASCII);
             var titleId2 = input.ReadString(16, Encoding.ASCII);
 
-            var unknown30 = input.ReadValueU32(false);
+            var unknown30 = input.ReadValueU32(Endian.Big);
             var unknown34 = new byte[16];
             input.Read(unknown34, 0, unknown34.Length);
 
@@ -66,7 +66,7 @@ namespace Gibbed.TacticsOgre.FileFormats
                 throw new InvalidOperationException();
             }
 
-            var fileTable = input.ReadToMemoryStream(fileTableSize);
+            var fileTable = input.ReadToMemoryStream((int)fileTableSize);
 
             this.Directories.Clear();
             for (int i = 0; i < sources.Length; i++)

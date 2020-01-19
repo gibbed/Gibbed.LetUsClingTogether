@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
-using Gibbed.Helpers;
+using Gibbed.IO;
 using Gibbed.TacticsOgre.FileFormats;
 using NDesk.Options;
 
-namespace Gibbed.TacticsOgre.UnpackPack
+namespace Gibbed.TacticsOgre.UnpackBlob
 {
     internal class Program
     {
@@ -66,32 +66,36 @@ namespace Gibbed.TacticsOgre.UnpackPack
 
             using (var input = File.OpenRead(inputPath))
             {
-                if (input.ReadValueU32() != 0x646B6170)
-                {
-                    throw new FormatException();
-                }
-
                 var count = input.ReadValueU32();
-                var offsets = new uint[count];
+
+                var ids = new uint[count];
+                var sizes = new uint[count];
+
                 for (uint i = 0; i < count; i++)
                 {
-                    offsets[i] = input.ReadValueU32();
+                    ids[i] = input.ReadValueU32();
+                    sizes[i] = input.ReadValueU32();
                 }
-                var end = input.ReadValueU32();
+                var end = (uint)input.Length;
 
                 for (uint i = 0; i < count; i++)
                 {
-                    uint offset = offsets[i];
-                    uint nextOffset = i + 1 >= count ? end : offsets[i + 1];
-                    uint size = nextOffset - offset;
+                    uint id = ids[i];
+                    uint size = sizes[i];
 
-                    input.Seek(offset, SeekOrigin.Begin);
-                    var filePath = Path.Combine(outputPath, i.ToString());
+                    long current = input.Position;
                     var ext = FileExtensions.Detect(input, size);
+                    input.Seek(current, SeekOrigin.Begin);
+
+                    var filePath = Path.Combine(outputPath,
+                        string.Format("{0}_{1:X4}_{2:X2}_{3:X2}",
+                        i,
+                        (id & 0x0000FFFF) >> 0,
+                        (id & 0x00FF0000) >> 16,
+                        (id & 0xFF000000) >> 24));
                     filePath = Path.ChangeExtension(filePath, ext);
 
                     Console.WriteLine(filePath);
-                    input.Seek(offset, SeekOrigin.Begin);
                     using (var output = File.Create(filePath))
                     {
                         output.WriteFromStream(input, size);

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
-using Gibbed.Helpers;
+using Gibbed.IO;
 using Gibbed.TacticsOgre.FileFormats;
 using NDesk.Options;
 

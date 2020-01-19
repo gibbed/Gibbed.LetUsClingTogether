@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
-using Gibbed.Helpers;
+using Gibbed.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
 using Gibbed.TacticsOgre.FileFormats;
