@@ -27,5 +27,10 @@ namespace Gibbed.TacticsOgre.FileFormats.FileTable
         public long Id;
         public long DataBlockOffset;
         public uint DataSize;
+
+        public override string ToString()
+        {
+            return $"{this.Id} @ {this.DataBlockOffset} : {this.DataSize}";
+        }
     }
 }

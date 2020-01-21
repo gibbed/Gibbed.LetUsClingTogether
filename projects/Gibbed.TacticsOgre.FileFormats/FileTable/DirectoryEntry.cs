@@ -33,5 +33,10 @@ namespace Gibbed.TacticsOgre.FileFormats.FileTable
         {
             this.Files = new List<FileEntry>();
         }
+
+        public override string ToString()
+        {
+            return $"{this.Id}";
+        }
     }
 }

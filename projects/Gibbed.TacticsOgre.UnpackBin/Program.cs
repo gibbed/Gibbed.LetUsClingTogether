@@ -110,7 +110,8 @@ namespace Gibbed.TacticsOgre.UnpackBin
 
                         int idCount;
                         idCounts.TryGetValue(file.Id, out idCount);
-                        idCounts[file.Id] = idCount + 1;
+                        idCount++;
+                        idCounts[file.Id] = idCount;
 
                         if (idCount > 1)
                         {
