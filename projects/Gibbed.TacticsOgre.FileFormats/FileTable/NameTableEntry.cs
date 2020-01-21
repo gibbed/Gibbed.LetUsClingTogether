@@ -19,18 +19,31 @@
  * 3. This notice may not be removed or altered from any source
  *    distribution.
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace Gibbed.TacticsOgre.FileFormats.Table
+using System;
+using System.IO;
+using Gibbed.IO;
+
+namespace Gibbed.TacticsOgre.FileFormats.FileTable
 {
-    public class FileEntry
+    public struct NameTableEntry
     {
-        public ushort Group;
-        public uint Id;
-        public uint Offset;
-        public uint Size;
+        public uint NameHash;
+        public ushort DirectoryId;
+        public ushort FileId;
+
+        public static NameTableEntry Read(Stream input, Endian endian)
+        {
+            NameTableEntry instance;
+            instance.NameHash = input.ReadValueU32(endian);
+            instance.DirectoryId = input.ReadValueU16(endian);
+            instance.FileId = input.ReadValueU16(endian);
+            return instance;
+        }
+
+        public override string ToString()
+        {
+            return $"{this.NameHash:X8} => {this.DirectoryId} {this.FileId}";
+        }
     }
 }

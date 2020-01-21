@@ -19,17 +19,19 @@
  * 3. This notice may not be removed or altered from any source
  *    distribution.
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace Gibbed.TacticsOgre.FileFormats.Table
+using System.Collections.Generic;
+
+namespace Gibbed.TacticsOgre.FileFormats.FileTable
 {
     public class DirectoryEntry
     {
-        public ushort Id;
-        public List<FileEntry> Files
-            = new List<FileEntry>();
+        public ushort Id { get; set; }
+        public List<FileEntry> Files { get; }
+
+        public DirectoryEntry()
+        {
+            this.Files = new List<FileEntry>();
+        }
     }
 }

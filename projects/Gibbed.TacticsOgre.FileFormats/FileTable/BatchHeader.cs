@@ -19,25 +19,38 @@
  * 3. This notice may not be removed or altered from any source
  *    distribution.
  */
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 using Gibbed.IO;
 
-namespace Gibbed.TacticsOgre.FileFormats.Table
+namespace Gibbed.TacticsOgre.FileFormats.FileTable
 {
-    public class FileHeader
+    public struct BatchHeader
     {
-        public ushort Index; // index * 0x8000 to get offset
-        public uint Offset { get { return (uint)this.Index * 0x8000u; } }
-        public uint Size;
+        public ushort BaseFileId;
+        public ushort FileCount;
+        public ushort FileTableOffset;
+        public BatchFlags Flags;
 
-        public void Deserialize(Stream input)
+        public static BatchHeader Read(Stream input, Endian endian)
         {
-            this.Index = input.ReadValueU16();
-            this.Size = input.ReadValueU32();
+            BatchHeader instance;
+            instance.BaseFileId = input.ReadValueU16(endian);
+            instance.FileCount = input.ReadValueU16(endian);
+            instance.FileTableOffset = input.ReadValueU16(endian);
+            var rawFlags = input.ReadValueU16(endian);
+            instance.Flags = (BatchFlags)rawFlags;
+            if ((rawFlags & (~24576)) != 0)
+            {
+                throw new NotSupportedException("unknown directory flags");
+            }
+            return instance;
+        }
+
+        public override string ToString()
+        {
+            return $"{this.BaseFileId}=>{this.BaseFileId+this.FileCount-1}";
         }
     }
 }

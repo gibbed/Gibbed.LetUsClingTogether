@@ -19,10 +19,11 @@
  * 3. This notice may not be removed or altered from any source
  *    distribution.
  */
+
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml;
+using System.Text;
 using Gibbed.IO;
 using Gibbed.TacticsOgre.FileFormats;
 using NDesk.Options;
@@ -41,23 +42,13 @@ namespace Gibbed.TacticsOgre.UnpackBin
             bool verbose = false;
             bool showHelp = false;
 
-            OptionSet options = new OptionSet()
+            var options = new OptionSet()
             {
-                {
-                    "v|verbose",
-                    "be verbose (list files)",
-                    v => verbose = v != null
-                },
-
-                {
-                    "h|help",
-                    "show this message and exit", 
-                    v => showHelp = v != null
-                },
+                { "v|verbose", "be verbose (list files)", v => verbose = v != null },
+                { "h|help", "show this message and exit",  v => showHelp = v != null },
             };
 
             List<string> extra;
-
             try
             {
                 extra = options.Parse(args);
@@ -72,7 +63,7 @@ namespace Gibbed.TacticsOgre.UnpackBin
 
             if (extra.Count < 1 || extra.Count > 2 || showHelp == true)
             {
-                Console.WriteLine("Usage: {0} [OPTIONS]+ input_table [output_directory]", GetExecutableName());
+                Console.WriteLine("Usage: {0} [OPTIONS]+ input_FILETABLE [output_directory]", GetExecutableName());
                 Console.WriteLine("Unpack specified archive.");
                 Console.WriteLine();
                 Console.WriteLine("Options:");
@@ -81,45 +72,74 @@ namespace Gibbed.TacticsOgre.UnpackBin
             }
 
             string inputPath = extra[0];
-            string outputPath = extra.Count > 1 ? extra[1] : Path.ChangeExtension(inputPath, null) + "_unpacked";
+            string outputBasePath = extra.Count > 1 ? extra[1] : Path.ChangeExtension(inputPath, null) + "_unpacked";
 
-            Directory.CreateDirectory(outputPath);
-
-            var table = new TableFile();
+            FileTableFile table;
             using (var input = File.OpenRead(inputPath))
             {
+                table = new FileTableFile();
                 table.Deserialize(input);
             }
 
-            foreach (var source in table.Directories)
+            var inputBasePath = Path.GetDirectoryName(inputPath);
+
+            // TODO(gibbed):
+            //  - generate file index for successful repacking
+            //  - name lookup for name hashes (FNV32)
+
+            foreach (var directory in table.Directories)
             {
-                var sourcePath = Path.Combine(outputPath,
-                    source.Id.ToString());
-                var dataPath =
-                    Path.Combine(Path.GetDirectoryName(inputPath),
-                        string.Format("{0:X4}.bin", source.Id));
-                Directory.CreateDirectory(sourcePath);
+                var binPath = Path.Combine(inputBasePath, $"{directory.Id:X4}.BIN");
+                var outputDirectoryPath = Path.Combine(outputBasePath, $"{directory.Id}");
 
-                using (var input = File.OpenRead(dataPath))
+                var idCounts = new Dictionary<long, int>();
+
+                using (var input = File.OpenRead(binPath))
                 {
-                    foreach (var file in source.Files)
+                    foreach (var file in directory.Files)
                     {
-                        var filePath = Path.Combine(sourcePath,
-                            Path.Combine(
-                                file.Group.ToString(), 
-                                file.Id.ToString()));
-                        Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+                        var nameBuilder = new StringBuilder();
+                        nameBuilder.Append($"{file.Id}");
 
-                        input.Seek(file.Offset, SeekOrigin.Begin);
-                        var ext = FileExtensions.Detect(input, file.Size);
-                        filePath = Path.ChangeExtension(filePath, ext);
-
-                        Console.WriteLine(filePath);
-
-                        input.Seek(file.Offset, SeekOrigin.Begin);
-                        using (var output = File.Create(filePath))
+                        var nameIndex = table.NameTable.FindIndex(nte => nte.DirectoryId == directory.Id &&
+                                                                         nte.FileId == file.Id);
+                        if (nameIndex >= 0)
                         {
-                            output.WriteFromStream(input, file.Size);
+                            nameBuilder.Append($"_{table.NameTable[nameIndex].NameHash:X8}");
+                        }
+
+                        int idCount;
+                        idCounts.TryGetValue(file.Id, out idCount);
+                        idCounts[file.Id] = idCount + 1;
+
+                        if (idCount > 1)
+                        {
+                            nameBuilder.Append($"_DUP_{idCount}");
+                        }
+
+                        var outputPath = Path.Combine(outputDirectoryPath, nameBuilder.ToString());
+
+                        var outputParentPath = Path.GetDirectoryName(outputPath);
+                        if (string.IsNullOrEmpty(outputParentPath) == false)
+                        {
+                            Directory.CreateDirectory(outputParentPath);
+                        }
+
+                        var dataOffset = file.DataBlockOffset * 0x8000;
+
+                        input.Position = dataOffset;
+                        var extension = FileExtensions.Detect(input, file.DataSize);
+                        outputPath = Path.ChangeExtension(outputPath, extension);
+
+                        if (verbose == true)
+                        {
+                            Console.WriteLine(outputPath);
+                        }
+
+                        input.Position = dataOffset;
+                        using (var output = File.Create(outputPath))
+                        {
+                            output.WriteFromStream(input, file.DataSize);
                         }
                     }
                 }
