@@ -172,7 +172,9 @@ namespace Gibbed.TacticsOgre.UnpackFILETABLE
                             Directory.CreateDirectory(outputParentPath);
                         }
 
-                        var dataOffset = file.DataOffset;
+                        long dataOffset;
+                        dataOffset = directory.DataBaseOffset;
+                        dataOffset += (file.DataBlockOffset << directory.DataBlockSize) * FileTableFile.BaseDataBlockSize;
 
                         input.Position = dataOffset;
                         var extension = FileExtensions.Detect(input, file.DataSize);
@@ -205,6 +207,7 @@ namespace Gibbed.TacticsOgre.UnpackFILETABLE
                 tableManifest.Directories.Add(new FileTableManifest.Directory()
                 {
                     Id = directory.Id,
+                    DataBlockSize = directory.DataBlockSize,
                     IsInInstallData = directory.IsInInstallData,
                     FileManifest = CleanPathForManifest(PathHelper.GetRelativePath(outputBasePath, fileManifestPath)),
                 });

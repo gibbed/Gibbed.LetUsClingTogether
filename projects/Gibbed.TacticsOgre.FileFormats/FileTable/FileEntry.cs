@@ -24,14 +24,14 @@ namespace Gibbed.TacticsOgre.FileFormats.FileTable
 {
     public struct FileEntry
     {
-        public long Id;
+        public ushort Id;
         public uint? NameHash;
-        public long DataOffset;
+        public uint DataBlockOffset;
         public uint DataSize;
 
         public override string ToString()
         {
-            return $"{this.Id} @ {this.DataOffset} : {this.DataSize}";
+            return $"{this.Id} @ {this.DataBlockOffset} : {this.DataSize}";
         }
     }
 }

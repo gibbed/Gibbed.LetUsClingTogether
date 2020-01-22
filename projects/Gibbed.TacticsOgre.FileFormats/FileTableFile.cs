@@ -36,6 +36,7 @@ namespace Gibbed.TacticsOgre.FileFormats
 
         public const int BaseDataBlockSize = 0x800;
 
+        public Endian Endian { get; set; }
         public string TitleId1 { get; set; }
         public string TitleId2 { get; set; }
         public byte Unknown32 { get; set; }
@@ -82,9 +83,187 @@ namespace Gibbed.TacticsOgre.FileFormats
             };
         }
 
+        private static IEnumerable<int> ToBatchCounts<T>(IEnumerable<T> source, Func<T, int> predicate)
+        {
+            using (var e = source.GetEnumerator())
+            {
+                for (bool hasMore = e.MoveNext(); hasMore == true;)
+                {
+                    int first = predicate(e.Current), last = first, next;
+                    while ((hasMore = e.MoveNext()) && (next = predicate(e.Current)) > last && next - last == 1)
+                    {
+                        last = next;
+                    }
+                    yield return last - first + 1;
+                }
+            }
+        }
+
         public void Serialize(Stream output)
         {
-            throw new NotImplementedException();
+            var endian = this.Endian;
+
+            var directoryHeaders = new List<DirectoryHeader>();
+            var nameHeaders = new List<NameHeader>();
+            var batchHeaders = new List<BatchHeader>();
+
+            byte[] fileTableBytes;
+            using (var fileTable = new MemoryStream())
+            {
+                foreach (var directory in this.Directories.OrderBy(d => d.Id))
+                {
+                    ushort nameIndex = (ushort)nameHeaders.Count;
+                    ushort nameCount = 0;
+
+                    int batchIndex = batchHeaders.Count;
+
+                    var files = directory.Files.OrderBy(f => f.Id).ToList();
+                    var batchFileCounts = ToBatchCounts(files, f => f.Id).ToList();
+
+                    int fileIndex = 0;
+                    foreach (var batchFileCount in batchFileCounts)
+                    {
+                        if (batchFileCount < 1)
+                        {
+                            continue;
+                        }
+
+                        if (batchFileCount > ushort.MaxValue)
+                        {
+                            throw new InvalidOperationException();
+                        }
+
+                        if (fileTable.Position > 0x1FFFFFFF)
+                        {
+                            throw new InvalidOperationException();
+                        }
+
+                        long fileTablePosition = fileTable.Position;
+
+                        bool hasLargeDataOffset = false;
+                        bool hasLargeDataSize = false;
+                        for (int i = 0, o = fileIndex; i < batchFileCount; i++, o++)
+                        {
+                            var file = files[o];
+                            if (file.DataBlockOffset > ushort.MaxValue)
+                            {
+                                hasLargeDataOffset = true;
+                            }
+                            if (file.DataSize > ushort.MaxValue)
+                            {
+                                hasLargeDataSize = true;
+                            }
+                        }
+
+                        BatchFlags batchFlags;
+                        if (hasLargeDataOffset == true && hasLargeDataSize == true)
+                        {
+                            batchFlags = BatchFlags.LargeDataSize | /*BatchFlags.Unknown |*/ BatchFlags.LargeDataOffset;
+                            throw new NotSupportedException("needs testing in-game to verify");
+                        }
+                        else if (hasLargeDataOffset == true)
+                        {
+                            batchFlags = BatchFlags.Unknown | BatchFlags.LargeDataOffset;
+                        }
+                        else if (hasLargeDataSize == true)
+                        {
+                            batchFlags = BatchFlags.LargeDataSize | BatchFlags.Unknown;
+                        }
+                        else
+                        {
+                            batchFlags = BatchFlags.Unknown;
+                        }
+
+                        var writeFileHeader = _FileTableEntryWriters[(int)batchFlags];
+
+                        for (int i = 0, o = fileIndex; i < batchFileCount; i++, o++)
+                        {
+                            var file = files[o];
+                            if (file.NameHash != null)
+                            {
+                                nameHeaders.Add(new NameHeader()
+                                {
+                                    NameHash = file.NameHash.Value,
+                                    DirectoryId = directory.Id,
+                                    FileId = file.Id,
+                                });
+                                nameCount++;
+                            }
+                            FileHeader fileHeader;
+                            fileHeader.DataBlockOffset = file.DataBlockOffset;
+                            fileHeader.DataSize = file.DataSize;
+                            writeFileHeader(fileTable, fileHeader, endian);
+                        }
+
+                        BatchHeader batchHeader;
+                        batchHeader.BaseFileId = files[fileIndex].Id;
+                        batchHeader.FileCount = (ushort)batchFileCount;
+                        batchHeader.FileTableOffset = (int)fileTablePosition;
+                        batchHeader.Flags = batchFlags;
+                        batchHeaders.Add(batchHeader);
+
+                        fileIndex += batchFileCount;
+                    }
+
+                    DirectoryHeader directoryHeader;
+                    directoryHeader.Id = directory.Id;
+                    directoryHeader.Unknown02 = 0;
+                    directoryHeader.DataBaseOffset = directory.DataBaseOffset;
+                    directoryHeader.DataBlockSize = directory.DataBlockSize;
+                    directoryHeader.Unknown08 = 0;
+                    directoryHeader.IsInInstallData = false;
+                    directoryHeader.BatchCount = (ushort)batchFileCounts.Count;
+                    directoryHeader.NameTableCount = nameCount;
+                    directoryHeader.NameTableIndex = nameCount > 0 ? nameIndex : ushort.MaxValue;
+                    directoryHeader.BatchTableOffset = (ushort)(batchIndex * 8);
+                    directoryHeader.DataInstallBaseOffset = 0xFFFFFFFF;
+                    directoryHeaders.Add(directoryHeader);
+                }
+
+                fileTable.Flush();
+                fileTableBytes = fileTable.ToArray();
+            }
+
+            output.WriteValueU16(Signature, endian);
+            output.WriteValueU16((ushort)nameHeaders.Count, endian);
+            output.WriteValueU16((ushort)directoryHeaders.Count, endian);
+            output.WriteValueU16(4, endian);
+            var fileTableOffsetPosition = output.Position;
+            output.WriteValueU32(0xFFFFFFFFu, endian);
+            var totalSizePosition = output.Position;
+            output.WriteValueU32(0xFFFFFFFFu, endian);
+            output.WriteString(this.TitleId1, 16, Encoding.ASCII);
+            output.WriteString(this.TitleId2, 16, Encoding.ASCII);
+            output.WriteValueU16(0, endian);
+            output.WriteValueU8(this.Unknown32);
+            output.WriteValueU8(this.ParentalLevel);
+            output.WriteBytes(this.InstallDataCryptoKey);
+
+            foreach (var nameTableEntry in nameHeaders)
+            {
+                nameTableEntry.Write(output, endian);
+            }
+
+            foreach (var directoryHeader in directoryHeaders)
+            {
+                directoryHeader.Write(output, endian);
+            }
+
+            foreach (var batchHeader in batchHeaders)
+            {
+                batchHeader.Write(output, endian);
+            }
+
+            var fileTableOffset = (uint)output.Position;
+            output.WriteBytes(fileTableBytes);
+
+            var totalSize = (uint)output.Position;
+
+            output.Position = fileTableOffsetPosition;
+            output.WriteValueU32(fileTableOffset, endian);
+
+            output.Position = totalSizePosition;
+            output.WriteValueU32(totalSize, endian);
         }
 
         public void Deserialize(Stream input)
@@ -96,7 +275,7 @@ namespace Gibbed.TacticsOgre.FileFormats
             }
             var endian = magic == Signature ? Endian.Little : Endian.Big;
 
-            var nameTableCount = input.ReadValueU16(endian);
+            var nameCount = input.ReadValueU16(endian);
             var directoryCount = input.ReadValueU16(endian);
 
             var unknown06 = input.ReadValueU16(endian);
@@ -120,10 +299,10 @@ namespace Gibbed.TacticsOgre.FileFormats
 
             var installDataCryptoKey = input.ReadBytes(16);
 
-            var nameTableEntries = new NameHeader[nameTableCount];
-            for (int i = 0; i < nameTableCount; i++)
+            var nameHeaders = new NameHeader[nameCount];
+            for (int i = 0; i < nameCount; i++)
             {
-                nameTableEntries[i] = NameHeader.Read(input, endian);
+                nameHeaders[i] = NameHeader.Read(input, endian);
             }
 
             var directoryHeaders = new DirectoryHeader[directoryCount];
@@ -177,6 +356,8 @@ namespace Gibbed.TacticsOgre.FileFormats
                     var directory = new DirectoryEntry()
                     {
                         Id = directoryHeader.Id,
+                        DataBlockSize = directoryHeader.DataBlockSize,
+                        DataBaseOffset = directoryHeader.DataBaseOffset,
                         IsInInstallData = directoryHeader.IsInInstallData,
                     };
 
@@ -196,15 +377,10 @@ namespace Gibbed.TacticsOgre.FileFormats
                         }
 
                         data.Position = batchHeader.FileTableOffset;
-                        for (int j = 0; j < batchHeader.FileCount; j++)
+                        ushort fileId = batchHeader.BaseFileId;
+                        for (int j = 0; j < batchHeader.FileCount; j++, fileId++)
                         {
                             var fileHeader = readDataHeader(data, endian);
-
-                            var fileId = batchHeader.BaseFileId + (uint)j;
-
-                            long dataOffset;
-                            dataOffset = directoryHeader.DataBaseOffset;
-                            dataOffset += (fileHeader.DataBlockOffset << directoryHeader.DataBlockSize) * BaseDataBlockSize;
 
                             uint? nameHash = null;
                             if (directoryHeader.NameTableCount > 0)
@@ -215,21 +391,21 @@ namespace Gibbed.TacticsOgre.FileFormats
                                 }
 
                                 var nameIndex = Array.FindIndex(
-                                    nameTableEntries,
+                                    nameHeaders,
                                     directoryHeader.NameTableIndex,
                                     directoryHeader.NameTableCount,
                                     nte => nte.DirectoryId == directoryHeader.Id &&
                                            nte.FileId == fileId);
                                 if (nameIndex >= 0)
                                 {
-                                    nameHash = nameTableEntries[nameIndex].NameHash;
+                                    nameHash = nameHeaders[nameIndex].NameHash;
                                 }
                             }
 
                             FileEntry file;
                             file.Id = fileId;
                             file.NameHash = nameHash;
-                            file.DataOffset = dataOffset;
+                            file.DataBlockOffset = fileHeader.DataBlockOffset;
                             file.DataSize = fileHeader.DataSize;
                             directory.Files.Add(file);
                         }
@@ -238,6 +414,7 @@ namespace Gibbed.TacticsOgre.FileFormats
                     directories.Add(directory);
                 }
 
+                this.Endian = endian;
                 this.TitleId1 = titleId1;
                 this.TitleId2 = titleId2;
                 this.Unknown32 = unknown32;

@@ -25,7 +25,7 @@ using Newtonsoft.Json;
 
 namespace Gibbed.TacticsOgre.UnpackFILETABLE
 {
-    internal class FileTableManifest
+    public class FileTableManifest
     {
         public FileTableManifest()
         {
@@ -55,6 +55,9 @@ namespace Gibbed.TacticsOgre.UnpackFILETABLE
             [JsonProperty("id", Required = Required.Always)]
             public ushort Id { get; set; }
 
+            [JsonProperty("data_block_size", Required = Required.Always)]
+            public byte DataBlockSize { get; set; }
+
             [JsonProperty("in_install_data", DefaultValueHandling = DefaultValueHandling.Ignore)]
             public bool IsInInstallData { get; set; }
 
@@ -65,7 +68,7 @@ namespace Gibbed.TacticsOgre.UnpackFILETABLE
         public class File
         {
             [JsonProperty("id", Required = Required.Always)]
-            public long Id { get; set; }
+            public ushort Id { get; set; }
 
             [JsonProperty("name_hash", DefaultValueHandling = DefaultValueHandling.Ignore)]
             public uint? NameHash { get; set; }

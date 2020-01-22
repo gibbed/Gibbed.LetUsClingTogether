@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.UnpackBl
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{5AA38539-796A-48A3-9AE5-C68836014669}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.PackFILETABLE", "projects\Gibbed.TacticsOgre.PackFILETABLE\Gibbed.TacticsOgre.PackFILETABLE.csproj", "{6E02586A-213D-4492-91A7-55ACE72450E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{5EC48666-F81C-4A02-962C-AB5E74458E56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5EC48666-F81C-4A02-962C-AB5E74458E56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5EC48666-F81C-4A02-962C-AB5E74458E56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E02586A-213D-4492-91A7-55ACE72450E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E02586A-213D-4492-91A7-55ACE72450E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E02586A-213D-4492-91A7-55ACE72450E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E02586A-213D-4492-91A7-55ACE72450E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
