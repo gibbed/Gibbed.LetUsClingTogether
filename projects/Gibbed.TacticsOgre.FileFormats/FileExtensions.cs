@@ -136,7 +136,7 @@ namespace Gibbed.TacticsOgre.FileFormats
                 guess[6] == 'C' &&
                 guess[7] == 'F')
             {
-                return ".sedbsscf";
+                return ".scd";
             }
             else if (
                 read >= 16 &&
