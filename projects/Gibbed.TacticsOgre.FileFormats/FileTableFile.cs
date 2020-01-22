@@ -216,7 +216,7 @@ namespace Gibbed.TacticsOgre.FileFormats
                     directoryHeader.NameTableCount = nameCount;
                     directoryHeader.NameTableIndex = nameCount > 0 ? nameIndex : ushort.MaxValue;
                     directoryHeader.BatchTableOffset = (ushort)(batchIndex * 8);
-                    directoryHeader.DataInstallBaseOffset = 0xFFFFFFFF;
+                    directoryHeader.DataInstallBaseOffset = 0;
                     directoryHeaders.Add(directoryHeader);
                 }
 
