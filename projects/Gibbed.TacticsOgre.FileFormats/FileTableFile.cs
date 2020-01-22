@@ -34,13 +34,43 @@ namespace Gibbed.TacticsOgre.FileFormats
     {
         public const ushort Signature = 0x1EF1;
 
-        public List<NameTableEntry> NameTable { get; }
+        public const int BaseDataBlockSize = 0x800;
+
         public List<DirectoryEntry> Directories { get; }
 
         public FileTableFile()
         {
-            this.NameTable = new List<NameTableEntry>();
             this.Directories = new List<DirectoryEntry>();
+        }
+
+        private delegate FileHeader ReadFileHeader(Stream input, Endian endian);
+        private delegate void WriteFileHeader(Stream input, FileHeader instance, Endian endian);
+
+        private static readonly int[] _FileTableEntrySizes;
+        private static readonly ReadFileHeader[] _FileTableEntryReaders;
+        private static readonly WriteFileHeader[] _FileTableEntryWriters;
+
+        static FileTableFile()
+        {
+            _FileTableEntrySizes = new[] { 2, 0, 4, 6, 6, 8 };
+            _FileTableEntryReaders = new ReadFileHeader[]
+            {
+                null,
+                null,
+                FileHeader.Read2,
+                FileHeader.Read3,
+                FileHeader.Read4,
+                FileHeader.Read5,
+            };
+            _FileTableEntryWriters = new WriteFileHeader[]
+            {
+                null,
+                null,
+                FileHeader.Write2,
+                FileHeader.Write3,
+                FileHeader.Write4,
+                FileHeader.Write5,
+            };
         }
 
         public void Serialize(Stream output)
@@ -81,16 +111,21 @@ namespace Gibbed.TacticsOgre.FileFormats
 
             var unknown34 = input.ReadBytes(16); // GUID?
 
-            var nameTableEntries = new NameTableEntry[nameTableCount];
+            var nameTableEntries = new NameHeader[nameTableCount];
             for (int i = 0; i < nameTableCount; i++)
             {
-                nameTableEntries[i] = NameTableEntry.Read(input, endian);
+                nameTableEntries[i] = NameHeader.Read(input, endian);
             }
 
             var directoryHeaders = new DirectoryHeader[directoryCount];
             for (int i = 0; i < directoryCount; i++)
             {
-                directoryHeaders[i] = DirectoryHeader.Read(input, endian);
+                var directoryHeader = directoryHeaders[i] = DirectoryHeader.Read(input, endian);
+                if (directoryHeader.Unknown02 != 0 ||
+                    directoryHeader.Unknown08 != 0)
+                {
+                    throw new FormatException();
+                }
             }
 
             var totalBatchCount = directoryHeaders.Sum(s => s.BatchCount);
@@ -110,19 +145,18 @@ namespace Gibbed.TacticsOgre.FileFormats
             int fileTableSize = 0;
             foreach (var batchHeader in batchHeaders)
             {
-                var fileSizeSize = (batchHeader.Flags & BatchFlags.LargeFileSize) != 0
-                    ? 4
-                    : 2;
-                fileTableSize += batchHeader.FileCount * (2 + fileSizeSize);
+                var fileTableEntrySizeIndex = (int)batchHeader.Flags;
+                if (fileTableEntrySizeIndex == 1 || fileTableEntrySizeIndex > 5)
+                {
+                    throw new NotSupportedException();
+                }
+                fileTableSize += batchHeader.FileCount * _FileTableEntrySizes[fileTableEntrySizeIndex];
             }
 
             if (totalSize - fileTableOffset != fileTableSize)
             {
                 throw new InvalidOperationException();
             }
-
-            this.NameTable.Clear();
-            this.NameTable.AddRange(nameTableEntries);
 
             this.Directories.Clear();
             using (var data = input.ReadToMemoryStream(fileTableSize))
@@ -134,7 +168,7 @@ namespace Gibbed.TacticsOgre.FileFormats
                     var directory = new DirectoryEntry();
                     directory.Id = directoryHeader.Id;
 
-                    for (ushort i = 0; i < directoryHeader.BatchCount; i++)
+                    for (int i = 0; i < directoryHeader.BatchCount; i++)
                     {
                         if ((directoryHeader.BatchTableOffset % 8) != 0)
                         {
@@ -143,17 +177,48 @@ namespace Gibbed.TacticsOgre.FileFormats
 
                         var batchHeader = batchHeaders[batchIndexBase + i];
 
-                        var readSize = (batchHeader.Flags & BatchFlags.LargeFileSize) != 0
-                            ? (Func<uint>)(() => data.ReadValueU32(endian))
-                            : () => data.ReadValueU16(endian);
+                        var readDataHeader = _FileTableEntryReaders[(int)batchHeader.Flags];
+                        if (readDataHeader == null)
+                        {
+                            throw new NotSupportedException();
+                        }
 
                         data.Position = batchHeader.FileTableOffset;
                         for (int j = 0; j < batchHeader.FileCount; j++)
                         {
+                            var fileHeader = readDataHeader(data, endian);
+
+                            var fileId = batchHeader.BaseFileId + (uint)j;
+
+                            long dataOffset;
+                            dataOffset = directoryHeader.DataBaseOffset;
+                            dataOffset += (fileHeader.DataBlockOffset << directoryHeader.DataBlockSize) * BaseDataBlockSize;
+
+                            uint? nameHash = null;
+                            if (directoryHeader.NameTableCount > 0)
+                            {
+                                if (directoryHeader.NameTableIndex == 0xFFFF)
+                                {
+                                    throw new InvalidOperationException();
+                                }
+
+                                var nameIndex = Array.FindIndex(
+                                    nameTableEntries,
+                                    directoryHeader.NameTableIndex,
+                                    directoryHeader.NameTableCount,
+                                    nte => nte.DirectoryId == directoryHeader.Id &&
+                                           nte.FileId == fileId);
+                                if (nameIndex >= 0)
+                                {
+                                    nameHash = nameTableEntries[nameIndex].NameHash;
+                                }
+                            }
+
                             FileEntry file;
-                            file.Id = batchHeader.BaseFileId + (uint)j;
-                            file.DataBlockOffset = data.ReadValueU16(endian);
-                            file.DataSize = readSize();
+                            file.Id = fileId;
+                            file.NameHash = nameHash;
+                            file.DataOffset = dataOffset;
+                            file.DataSize = fileHeader.DataSize;
                             directory.Files.Add(file);
                         }
                     }

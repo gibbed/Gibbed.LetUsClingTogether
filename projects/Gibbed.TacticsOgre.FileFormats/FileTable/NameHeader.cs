@@ -20,25 +20,36 @@
  *    distribution.
  */
 
-using System;
 using System.IO;
 using Gibbed.IO;
 
 namespace Gibbed.TacticsOgre.FileFormats.FileTable
 {
-    public struct NameTableEntry
+    internal struct NameHeader
     {
         public uint NameHash;
         public ushort DirectoryId;
         public ushort FileId;
 
-        public static NameTableEntry Read(Stream input, Endian endian)
+        public static NameHeader Read(Stream input, Endian endian)
         {
-            NameTableEntry instance;
+            NameHeader instance;
             instance.NameHash = input.ReadValueU32(endian);
             instance.DirectoryId = input.ReadValueU16(endian);
             instance.FileId = input.ReadValueU16(endian);
             return instance;
+        }
+
+        public static void Write(Stream output, NameHeader instance, Endian endian)
+        {
+            output.WriteValueU32(instance.NameHash, endian);
+            output.WriteValueU16(instance.DirectoryId, endian);
+            output.WriteValueU16(instance.FileId, endian);
+        }
+
+        public void Write(Stream output, Endian endian)
+        {
+            Write(output, this, endian);
         }
 
         public override string ToString()

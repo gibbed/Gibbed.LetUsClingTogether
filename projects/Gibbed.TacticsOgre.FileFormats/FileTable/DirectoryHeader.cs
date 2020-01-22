@@ -25,52 +25,62 @@ using Gibbed.IO;
 
 namespace Gibbed.TacticsOgre.FileFormats.FileTable
 {
-    public struct DirectoryHeader
+    internal struct DirectoryHeader
     {
         public ushort Id;
-        public ushort Unknown02;
-        public ushort Unknown04;
-        public ushort Unknown06;
-        public ushort Unknown08;
+        public byte Unknown02;
+        public byte DataBlockSize;
+        public uint DataBaseOffset;
+        public byte Unknown08;
+        public bool IsInInstallData;
         public ushort BatchCount;
-        public ushort Unknown0C;
-        public short Unknown0E;
+        public ushort NameTableCount;
+        public ushort NameTableIndex;
         public uint BatchTableOffset;
-        public uint Unknown14;
+        public uint DataInstallBaseOffset;
 
         public static DirectoryHeader Read(Stream input, Endian endian)
         {
             DirectoryHeader instance;
             instance.Id = input.ReadValueU16(endian);
-            instance.Unknown02 = input.ReadValueU16(endian);
-            instance.Unknown04 = input.ReadValueU16(endian);
-            instance.Unknown06 = input.ReadValueU16(endian);
-            instance.Unknown08 = input.ReadValueU16(endian);
+            instance.Unknown02 = input.ReadValueU8();
+            instance.DataBlockSize = input.ReadValueU8();
+            instance.DataBaseOffset = input.ReadValueU32(endian);
+            instance.Unknown08 = input.ReadValueU8();
+            instance.IsInInstallData = input.ReadValueB8();
             instance.BatchCount = input.ReadValueU16(endian);
-            instance.Unknown0C = input.ReadValueU16(endian);
-            instance.Unknown0E = input.ReadValueS16(endian);
+            instance.NameTableCount = input.ReadValueU16(endian);
+            instance.NameTableIndex = input.ReadValueU16(endian);
             instance.BatchTableOffset = input.ReadValueU32(endian);
-            instance.Unknown14 = input.ReadValueU32(endian);
+            instance.DataInstallBaseOffset = input.ReadValueU32(endian);
             return instance;
         }
 
         public static void Write(Stream output, DirectoryHeader instance, Endian endian)
         {
             output.WriteValueU16(instance.Id, endian);
-            output.WriteValueU16(instance.Unknown02, endian);
-            output.WriteValueU16(instance.Unknown04, endian);
-            output.WriteValueU16(instance.Unknown06, endian);
-            output.WriteValueU16(instance.Unknown08, endian);
+            output.WriteValueU8(instance.Unknown02);
+            output.WriteValueU8(instance.DataBlockSize);
+            output.WriteValueU32(instance.DataBaseOffset, endian);
+            output.WriteValueU8(instance.Unknown08);
+            output.WriteValueB8(instance.IsInInstallData);
             output.WriteValueU16(instance.BatchCount, endian);
-            output.WriteValueU16(instance.Unknown0C, endian);
-            output.WriteValueS16(instance.Unknown0E, endian);
+            output.WriteValueU16(instance.NameTableCount, endian);
+            output.WriteValueU16(instance.NameTableIndex, endian);
             output.WriteValueU32(instance.BatchTableOffset, endian);
-            output.WriteValueU32(instance.Unknown14, endian);
+            output.WriteValueU32(instance.DataInstallBaseOffset, endian);
         }
 
         public void Write(Stream output, Endian endian)
         {
             Write(output, this, endian);
+        }
+
+        public override string ToString()
+        {
+            return this.IsInInstallData
+                ? $"{this.Id}, INSTALLABLE, {this.BatchCount} batches @ {this.BatchTableOffset}"
+                : $"{this.Id}, {this.BatchCount} batches @ {this.BatchTableOffset}";
         }
     }
 }

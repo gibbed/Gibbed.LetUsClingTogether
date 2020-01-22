@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using Gibbed.IO;
 using Gibbed.TacticsOgre.FileFormats;
@@ -85,7 +86,34 @@ namespace Gibbed.TacticsOgre.UnpackBin
 
             // TODO(gibbed):
             //  - generate file index for successful repacking
-            //  - name lookup for name hashes (FNV32)
+            //  - better name lookup for name hashes (FNV32)
+            //    (don't hardcode the list)
+            var names = new string[]
+            {
+                "MENU_COMMON_PACK",
+                "MENU_TEXTURE_MISC_PACK",
+                "MN_AT_ORGANIZE",
+                "MN_BIRTHDAY",
+                "MN_BT_MAIN",
+                "MN_BT_RESULT",
+                "MN_COMMON",
+                "MN_COMMONWIN",
+                "MN_EVENT",
+                "MN_INPUT",
+                "MN_ITEMICON",
+                "MN_KEY_LAYOUT",
+                "MN_MOVIE",
+                "MN_NETWORK",
+                "MN_OPTION",
+                "MN_ORGANIZE",
+                "MN_SHOP2",
+                "MN_STAFFROLL",
+                "MN_STATUS",
+                "MN_TITLE",
+                "MN_WARRENREPORT",
+                "MN_WORLD",
+            };
+            var nameHashLookup = names.ToDictionary(v => v.HashFNV32(), v => v);
 
             foreach (var directory in table.Directories)
             {
@@ -101,11 +129,17 @@ namespace Gibbed.TacticsOgre.UnpackBin
                         var nameBuilder = new StringBuilder();
                         nameBuilder.Append($"{file.Id}");
 
-                        var nameIndex = table.NameTable.FindIndex(nte => nte.DirectoryId == directory.Id &&
-                                                                         nte.FileId == file.Id);
-                        if (nameIndex >= 0)
+                        if (file.NameHash != null)
                         {
-                            nameBuilder.Append($"_{table.NameTable[nameIndex].NameHash:X8}");
+                            string name;
+                            if (nameHashLookup.TryGetValue(file.NameHash.Value, out name) == true)
+                            {
+                                nameBuilder.Append($"_{name}");
+                            }
+                            else
+                            {
+                                nameBuilder.Append($"_HASH[{file.NameHash.Value:X8}]");
+                            }
                         }
 
                         int idCount;
@@ -126,7 +160,7 @@ namespace Gibbed.TacticsOgre.UnpackBin
                             Directory.CreateDirectory(outputParentPath);
                         }
 
-                        var dataOffset = file.DataBlockOffset * 0x8000;
+                        var dataOffset = file.DataOffset;
 
                         input.Position = dataOffset;
                         var extension = FileExtensions.Detect(input, file.DataSize);

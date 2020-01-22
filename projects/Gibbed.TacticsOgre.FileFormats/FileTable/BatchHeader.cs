@@ -26,11 +26,11 @@ using Gibbed.IO;
 
 namespace Gibbed.TacticsOgre.FileFormats.FileTable
 {
-    public struct BatchHeader
+    internal struct BatchHeader
     {
         public ushort BaseFileId;
         public ushort FileCount;
-        public ushort FileTableOffset;
+        public int FileTableOffset;
         public BatchFlags Flags;
 
         public static BatchHeader Read(Stream input, Endian endian)
@@ -38,19 +38,36 @@ namespace Gibbed.TacticsOgre.FileFormats.FileTable
             BatchHeader instance;
             instance.BaseFileId = input.ReadValueU16(endian);
             instance.FileCount = input.ReadValueU16(endian);
-            instance.FileTableOffset = input.ReadValueU16(endian);
-            var rawFlags = input.ReadValueU16(endian);
-            instance.Flags = (BatchFlags)rawFlags;
-            if ((rawFlags & (~24576)) != 0)
-            {
-                throw new NotSupportedException("unknown directory flags");
-            }
+            var rawFlags = input.ReadValueU32(endian);
+            instance.FileTableOffset = (int)(rawFlags & 0x1FFFFFFF);
+            instance.Flags = (BatchFlags)((rawFlags >> 29) & 7);
             return instance;
+        }
+
+        public static void Write(Stream output, BatchHeader instance, Endian endian)
+        {
+            if (instance.FileTableOffset > 0x1FFFFFFF)
+            {
+                throw new ArgumentOutOfRangeException("file table offset too large", nameof(instance));
+            }
+
+            output.WriteValueU16(instance.BaseFileId, endian);
+            output.WriteValueU16(instance.FileCount, endian);
+            uint rawFlags = (uint)instance.FileTableOffset;
+            rawFlags |= (((uint)instance.Flags) & 7) << 29;
+            output.WriteValueU32(rawFlags, endian);
+        }
+
+        public void Write(Stream output, Endian endian)
+        {
+            Write(output, this, endian);
         }
 
         public override string ToString()
         {
-            return $"{this.BaseFileId}=>{this.BaseFileId+this.FileCount-1}";
+            return this.Flags == BatchFlags.None
+                ? $"{this.BaseFileId} => {this.BaseFileId + this.FileCount - 1}"
+                : $"{this.BaseFileId} => {this.BaseFileId + this.FileCount - 1} | {this.Flags}";
         }
     }
 }

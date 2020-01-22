@@ -25,9 +25,11 @@ using System;
 namespace Gibbed.TacticsOgre.FileFormats.FileTable
 {
     [Flags]
-    public enum BatchFlags : ushort
+    internal enum BatchFlags : byte
     {
-        LargeFileSize = 1 << 13,
-        Unknown14 = 1 << 14,
+        None = 0,
+        LargeDataSize = 1 << 0,
+        Unknown = 1 << 1,
+        LargeDataOffset = 1 << 2,
     }
 }
