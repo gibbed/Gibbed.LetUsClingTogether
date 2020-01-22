@@ -30,7 +30,7 @@ using Gibbed.TacticsOgre.FileFormats;
 using NDesk.Options;
 using Newtonsoft.Json;
 
-namespace Gibbed.TacticsOgre.UnpackBin
+namespace Gibbed.TacticsOgre.UnpackFILETABLE
 {
     internal class Program
     {

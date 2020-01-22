@@ -23,7 +23,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Gibbed.TacticsOgre.UnpackBin
+namespace Gibbed.TacticsOgre.UnpackFILETABLE
 {
     internal class FileTableManifest
     {

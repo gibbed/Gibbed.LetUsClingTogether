@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NDesk.Options", "projects\N
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.IO", "projects\Gibbed.IO\Gibbed.IO.csproj", "{5162A9FB-4DE1-4BBF-B7A2-5E8116AB0D26}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.UnpackBin", "projects\Gibbed.TacticsOgre.UnpackBin\Gibbed.TacticsOgre.UnpackBin.csproj", "{7FAC7FC1-12DD-44C2-B925-DEB93F5A8AB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.UnpackFILETABLE", "projects\Gibbed.TacticsOgre.UnpackFILETABLE\Gibbed.TacticsOgre.UnpackFILETABLE.csproj", "{7FAC7FC1-12DD-44C2-B925-DEB93F5A8AB3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.ConvertSprite", "projects\Gibbed.TacticsOgre.ConvertSprite\Gibbed.TacticsOgre.ConvertSprite.csproj", "{DA4A102E-D1EF-439C-842B-FDFB74D6D628}"
 EndProject
