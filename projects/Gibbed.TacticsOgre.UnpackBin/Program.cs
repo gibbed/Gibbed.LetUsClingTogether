@@ -28,6 +28,7 @@ using System.Text;
 using Gibbed.IO;
 using Gibbed.TacticsOgre.FileFormats;
 using NDesk.Options;
+using Newtonsoft.Json;
 
 namespace Gibbed.TacticsOgre.UnpackBin
 {
@@ -115,6 +116,16 @@ namespace Gibbed.TacticsOgre.UnpackBin
             };
             var nameHashLookup = names.ToDictionary(v => v.HashFNV32(), v => v);
 
+            var tableManifestPath = Path.Combine(outputBasePath, "@manifest.json");
+            var tableManifest = new FileTableManifest()
+            {
+                TitleId1 = table.TitleId1,
+                TitleId2 = table.TitleId2,
+                Unknown32 = table.Unknown32,
+                ParentalLevel = table.ParentalLevel,
+                InstallDataCryptoKey = table.InstallDataCryptoKey,
+            };
+
             foreach (var directory in table.Directories)
             {
                 var binPath = Path.Combine(inputBasePath, $"{directory.Id:X4}.BIN");
@@ -122,6 +133,7 @@ namespace Gibbed.TacticsOgre.UnpackBin
 
                 var idCounts = new Dictionary<long, int>();
 
+                var fileManifest = new List<FileTableManifest.File>();
                 using (var input = File.OpenRead(binPath))
                 {
                     foreach (var file in directory.Files)
@@ -129,9 +141,9 @@ namespace Gibbed.TacticsOgre.UnpackBin
                         var nameBuilder = new StringBuilder();
                         nameBuilder.Append($"{file.Id}");
 
+                        string name = null;
                         if (file.NameHash != null)
                         {
-                            string name;
                             if (nameHashLookup.TryGetValue(file.NameHash.Value, out name) == true)
                             {
                                 nameBuilder.Append($"_{name}");
@@ -176,9 +188,93 @@ namespace Gibbed.TacticsOgre.UnpackBin
                         {
                             output.WriteFromStream(input, file.DataSize);
                         }
+
+                        fileManifest.Add(new FileTableManifest.File()
+                        {
+                            Id = file.Id,
+                            NameHash = file.NameHash,
+                            Name = name,
+                            Path = CleanPathForManifest(PathHelper.GetRelativePath(outputDirectoryPath, outputPath)),
+                        });
                     }
                 }
+
+                var fileManifestPath = Path.Combine(outputDirectoryPath, "@manifest.json");
+                WriteManifest(fileManifestPath, fileManifest);
+
+                tableManifest.Directories.Add(new FileTableManifest.Directory()
+                {
+                    Id = directory.Id,
+                    IsInInstallData = directory.IsInInstallData,
+                    FileManifest = CleanPathForManifest(PathHelper.GetRelativePath(outputBasePath, fileManifestPath)),
+                });
             }
+
+            WriteManifest(tableManifestPath, tableManifest);
+        }
+
+        private static string CleanPathForManifest(string path)
+        {
+            return path.Replace(Path.DirectorySeparatorChar, '/')
+                       .Replace(Path.AltDirectorySeparatorChar, '/');
+        }
+
+        private static void WriteManifest(string path, FileTableManifest manifest)
+        {
+            string content;
+            using (var stringWriter = new StringWriter())
+            using (var writer = new JsonTextWriter(stringWriter))
+            {
+                writer.Indentation = 2;
+                writer.IndentChar = ' ';
+                writer.Formatting = Formatting.Indented;
+                var serializer = new JsonSerializer();
+                serializer.Serialize(writer, manifest);
+                writer.Flush();
+                stringWriter.Flush();
+                content = stringWriter.ToString();
+            }
+            File.WriteAllText(path, content, Encoding.UTF8);
+        }
+
+        private static void WriteManifest(string path, List<FileTableManifest.File> manifest)
+        {
+            string content;
+            using (var stringWriter = new StringWriter())
+            using (var writer = new JsonTextWriter(stringWriter))
+            {
+                writer.Indentation = 2;
+                writer.IndentChar = ' ';
+                writer.Formatting = Formatting.Indented;
+                writer.WriteStartArray();
+                foreach (var fileManifest in manifest)
+                {
+                    writer.WriteStartObject();
+                    var oldFormatting = writer.Formatting;
+                    writer.Formatting = Formatting.None;
+                    writer.WritePropertyName("id");
+                    writer.WriteValue(fileManifest.Id);
+                    if (fileManifest.Name != null)
+                    {
+                        writer.WritePropertyName("name");
+                        writer.WriteValue(fileManifest.Name);
+                    }
+                    else if (fileManifest.NameHash != null)
+                    {
+                        writer.WritePropertyName("name_hash");
+                        writer.WriteValue(fileManifest.NameHash.Value);
+                    }
+                    writer.WritePropertyName("path");
+                    writer.WriteValue(fileManifest.Path);
+                    writer.WriteEndObject();
+                    writer.Formatting = oldFormatting;
+                }
+                writer.WriteEndArray();
+                writer.Flush();
+                stringWriter.Flush();
+                content = stringWriter.ToString();
+            }
+            File.WriteAllText(path, content, Encoding.UTF8);
         }
     }
 }

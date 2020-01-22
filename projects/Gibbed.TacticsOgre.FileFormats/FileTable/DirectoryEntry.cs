@@ -27,6 +27,7 @@ namespace Gibbed.TacticsOgre.FileFormats.FileTable
     public class DirectoryEntry
     {
         public ushort Id { get; set; }
+        public bool IsInInstallData { get; set; }
         public List<FileEntry> Files { get; }
 
         public DirectoryEntry()

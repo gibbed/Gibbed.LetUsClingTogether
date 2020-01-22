@@ -36,6 +36,15 @@ namespace Gibbed.TacticsOgre.FileFormats
 
         public const int BaseDataBlockSize = 0x800;
 
+        public string TitleId1 { get; set; }
+        public string TitleId2 { get; set; }
+        public byte Unknown32 { get; set; }
+
+        // This value is used by the game when writing save data. PARENTAL_LEVEL in SFO.
+        public byte ParentalLevel { get; set; }
+
+        public byte[] InstallDataCryptoKey { get; set; }
+
         public List<DirectoryEntry> Directories { get; }
 
         public FileTableFile()
@@ -103,13 +112,13 @@ namespace Gibbed.TacticsOgre.FileFormats
 
             var unknown30 = input.ReadValueU16(endian);
             var unknown32 = input.ReadValueU8();
-            var unknown33 = input.ReadValueU8();
-            if (unknown30 != 0 || (unknown32 != 0 && unknown32 != 1) || unknown33 != 5)
+            var parentalLevel = input.ReadValueU8();
+            if (unknown30 != 0 || (unknown32 != 0 && unknown32 != 1))
             {
                 throw new FormatException();
             }
 
-            var unknown34 = input.ReadBytes(16); // GUID?
+            var installDataCryptoKey = input.ReadBytes(16);
 
             var nameTableEntries = new NameHeader[nameTableCount];
             for (int i = 0; i < nameTableCount; i++)
@@ -158,15 +167,18 @@ namespace Gibbed.TacticsOgre.FileFormats
                 throw new InvalidOperationException();
             }
 
-            this.Directories.Clear();
+            var directories = new List<DirectoryEntry>();
             using (var data = input.ReadToMemoryStream(fileTableSize))
             {
                 foreach (var directoryHeader in directoryHeaders)
                 {
                     var batchIndexBase = directoryHeader.BatchTableOffset / 8;
 
-                    var directory = new DirectoryEntry();
-                    directory.Id = directoryHeader.Id;
+                    var directory = new DirectoryEntry()
+                    {
+                        Id = directoryHeader.Id,
+                        IsInInstallData = directoryHeader.IsInInstallData,
+                    };
 
                     for (int i = 0; i < directoryHeader.BatchCount; i++)
                     {
@@ -223,8 +235,16 @@ namespace Gibbed.TacticsOgre.FileFormats
                         }
                     }
 
-                    this.Directories.Add(directory);
+                    directories.Add(directory);
                 }
+
+                this.TitleId1 = titleId1;
+                this.TitleId2 = titleId2;
+                this.Unknown32 = unknown32;
+                this.ParentalLevel = parentalLevel;
+                this.InstallDataCryptoKey = installDataCryptoKey;
+                this.Directories.Clear();
+                this.Directories.AddRange(directories);
             }
         }
     }
