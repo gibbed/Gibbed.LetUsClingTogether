@@ -6,6 +6,7 @@
     <Authors>Gibbed</Authors>
     <Description>http://gib.me/</Description>
     <Copyright>Copyright © Gibbed 2020</Copyright>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>..\..\bin\</OutputPath>
