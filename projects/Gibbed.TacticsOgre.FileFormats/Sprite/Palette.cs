@@ -24,55 +24,56 @@ using System;
 using System.IO;
 using Gibbed.IO;
 
-namespace Gibbed.TacticsOgre.FileFormats
+namespace Gibbed.TacticsOgre.FileFormats.Sprite
 {
-    public class SpriteFile
+    public struct Palette
     {
-        public Sprite.Sprite Sprite { get; set; }
+        public uint[] Colors;
 
-        public void Serialize(Stream output, Endian endian)
+        public static Palette Read(Stream input, Endian endian)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Deserialize(Stream input, Endian endian)
-        {
-            long basePosition = input.Position;
-
-            if (input.ReadValueU32(endian) != 0)
-            {
-                throw new FormatException();
-            }
+            var basePosition = input.Position;
 
             var totalSize = input.ReadValueU32(endian);
             if (basePosition + totalSize > input.Length)
             {
-                throw new FormatException();
+                throw new EndOfStreamException();
             }
 
-            var unknown08 = input.ReadValueU16(endian); // probably frame count?
-            var unknown0A = input.ReadValueU16(endian); // probably header size
-            var unknown0C = input.ReadValueU32(endian); // probably version
+            var dataSize = input.ReadValueU32(endian);
+            var dataOffset = input.ReadValueU32(endian);
+            var unknown0COffset = input.ReadValueU32(endian);
 
-            if (unknown08 != 1 || unknown0A != 16 || unknown0C != 3)
+            if (dataOffset != 0x10)
+            {
+                throw new FormatException();
+            }
+            else if (dataOffset + dataSize != unknown0COffset)
             {
                 throw new FormatException();
             }
 
-            if (input.Position > basePosition + totalSize)
+            if (dataOffset + dataSize + 32 != totalSize)
+            {
+                throw new InvalidOperationException();
+            }
+
+            if (dataSize % 4 != 0)
             {
                 throw new FormatException();
             }
 
-            var dataSize = input.ReadValueS32();
-            input.Seek(-4, SeekOrigin.Current);
-            
-            if (dataSize < 4 || input.Position + dataSize > basePosition + totalSize)
+            var colors = new uint[dataSize / 4];
+            for (int i = 0; i < colors.Length; i++)
             {
-                throw new FormatException();
+                colors[i] = input.ReadValueU32(endian);
             }
 
-            this.Sprite = FileFormats.Sprite.Sprite.Read(input, endian);
+            var unknownTail = input.ReadBytes(32);
+
+            Palette instance;
+            instance.Colors = colors;
+            return instance;
         }
     }
 }

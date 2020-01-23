@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.IO", "projects\Gibbe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.UnpackFILETABLE", "projects\Gibbed.TacticsOgre.UnpackFILETABLE\Gibbed.TacticsOgre.UnpackFILETABLE.csproj", "{7FAC7FC1-12DD-44C2-B925-DEB93F5A8AB3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.ConvertSprite", "projects\Gibbed.TacticsOgre.ConvertSprite\Gibbed.TacticsOgre.ConvertSprite.csproj", "{DA4A102E-D1EF-439C-842B-FDFB74D6D628}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.ExportSprite", "projects\Gibbed.TacticsOgre.ExportSprite\Gibbed.TacticsOgre.ExportSprite.csproj", "{DA4A102E-D1EF-439C-842B-FDFB74D6D628}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.UnpackPack", "projects\Gibbed.TacticsOgre.UnpackPack\Gibbed.TacticsOgre.UnpackPack.csproj", "{DB4D1378-7F7E-4F39-8A74-7E49EE58115A}"
 EndProject
