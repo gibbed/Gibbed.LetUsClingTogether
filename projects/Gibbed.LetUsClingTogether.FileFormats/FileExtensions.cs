@@ -40,8 +40,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
             byte[] guess = new byte[Math.Min(16, size)];
             int read = input.Read(guess, 0, guess.Length);
 
-            if (
-                read >= 2 &&
+            if (read >= 2 &&
                 guess[0] == 'P' &&
                 guess[1] == 'K')
             {

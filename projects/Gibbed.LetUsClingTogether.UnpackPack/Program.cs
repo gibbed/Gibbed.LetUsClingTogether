@@ -19,10 +19,10 @@
  * 3. This notice may not be removed or altered from any source
  *    distribution.
  */
+
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml;
 using Gibbed.IO;
 using Gibbed.LetUsClingTogether.FileFormats;
 using NDesk.Options;
@@ -41,23 +41,13 @@ namespace Gibbed.LetUsClingTogether.UnpackPack
             bool verbose = false;
             bool showHelp = false;
 
-            OptionSet options = new OptionSet()
+            var options = new OptionSet()
             {
-                {
-                    "v|verbose",
-                    "be verbose (list files)",
-                    v => verbose = v != null
-                },
-
-                {
-                    "h|help",
-                    "show this message and exit", 
-                    v => showHelp = v != null
-                },
+                { "v|verbose", "be verbose (list files)", v => verbose = v != null },
+                { "h|help", "show this message and exit", v => showHelp = v != null },
             };
 
             List<string> extra;
-
             try
             {
                 extra = options.Parse(args);
@@ -72,7 +62,7 @@ namespace Gibbed.LetUsClingTogether.UnpackPack
 
             if (extra.Count < 1 || extra.Count > 2 || showHelp == true)
             {
-                Console.WriteLine("Usage: {0} [OPTIONS]+ input_table [output_directory]", GetExecutableName());
+                Console.WriteLine("Usage: {0} [OPTIONS]+ input_pack [output_directory]", GetExecutableName());
                 Console.WriteLine("Unpack specified archive.");
                 Console.WriteLine();
                 Console.WriteLine("Options:");
@@ -81,41 +71,37 @@ namespace Gibbed.LetUsClingTogether.UnpackPack
             }
 
             string inputPath = extra[0];
-            string outputPath = extra.Count > 1 ? extra[1] : Path.ChangeExtension(inputPath, null) + "_unpacked";
+            string outputBasePath = extra.Count > 1 ? extra[1] : Path.ChangeExtension(inputPath, null) + "_unpacked";
 
-            Directory.CreateDirectory(outputPath);
+            Directory.CreateDirectory(outputBasePath);
 
             using (var input = File.OpenRead(inputPath))
             {
-                if (input.ReadValueU32() != 0x646B6170)
+                var header = new PackFile();
+                header.Deserialize(input);
+
+                var count = header.EntryOffsets.Count;
+                for (int i = 0; i < count; i++)
                 {
-                    throw new FormatException();
-                }
+                    var outputPath = Path.Combine(outputBasePath, $"{i}");
 
-                var count = input.ReadValueU32();
-                var offsets = new uint[count];
-                for (uint i = 0; i < count; i++)
-                {
-                    offsets[i] = input.ReadValueU32();
-                }
-                var end = input.ReadValueU32();
+                    uint entryOffset = header.EntryOffsets[i];
+                    uint nextEntryOffset = i + 1 >= count ? header.EndOffset : header.EntryOffsets[i + 1];
+                    uint entrySize = nextEntryOffset - entryOffset;
 
-                for (uint i = 0; i < count; i++)
-                {
-                    uint offset = offsets[i];
-                    uint nextOffset = i + 1 >= count ? end : offsets[i + 1];
-                    uint size = nextOffset - offset;
+                    input.Position = entryOffset;
+                    var extension = FileExtensions.Detect(input, entrySize);
+                    outputPath = Path.ChangeExtension(outputPath, extension);
 
-                    input.Seek(offset, SeekOrigin.Begin);
-                    var filePath = Path.Combine(outputPath, i.ToString());
-                    var ext = FileExtensions.Detect(input, size);
-                    filePath = Path.ChangeExtension(filePath, ext);
-
-                    Console.WriteLine(filePath);
-                    input.Seek(offset, SeekOrigin.Begin);
-                    using (var output = File.Create(filePath))
+                    if (verbose == true)
                     {
-                        output.WriteFromStream(input, size);
+                        Console.WriteLine(outputPath);
+                    }
+
+                    input.Position = entryOffset;
+                    using (var output = File.Create(outputPath))
+                    {
+                        output.WriteFromStream(input, entrySize);
                     }
                 }
             }
