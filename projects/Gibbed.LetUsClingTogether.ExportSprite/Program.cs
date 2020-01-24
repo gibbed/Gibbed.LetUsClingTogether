@@ -48,7 +48,7 @@ namespace Gibbed.LetUsClingTogether.ExportSprite
 
             var options = new OptionSet()
             {
-                { "v|verbose", "be verbose (list files)", v => verbose = v != null },
+                { "v|verbose", "be verbose", v => verbose = v != null },
                 { "h|help", "show this message and exit", v => showHelp = v != null },
             };
 

@@ -31,6 +31,11 @@ namespace Gibbed.LetUsClingTogether.FileFormats
     {
         public const uint Signature = 0x646B6170; // 'pakd'
 
+        public PackFile()
+        {
+            this.EntryOffsets = new List<uint>();
+        }
+
         public Endian Endian { get; set; }
         public List<uint> EntryOffsets { get; }
         public uint EndOffset { get; set; }

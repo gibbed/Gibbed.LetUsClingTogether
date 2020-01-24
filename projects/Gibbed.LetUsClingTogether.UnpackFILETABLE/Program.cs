@@ -41,11 +41,13 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
 
         public static void Main(string[] args)
         {
+            bool unpackNestedPacks = true;
             bool verbose = false;
             bool showHelp = false;
 
             var options = new OptionSet()
             {
+                { "d|dont-unpack-nested-packs", "don't unpack nested .pack files", v => unpackNestedPacks = v == null },
                 { "v|verbose", "be verbose (list files)", v => verbose = v != null },
                 { "h|help", "show this message and exit",  v => showHelp = v != null },
             };
@@ -128,16 +130,42 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
 
             foreach (var directory in table.Directories)
             {
+                var tableDirectory = new TableDirectory()
+                {
+                    Id = directory.Id,
+                    BasePath = Path.Combine(outputBasePath, $"{directory.Id}"),
+                };
+
+                var fileContainers = new List<IFileContainer>()
+                {
+                    tableDirectory,
+                };
+
                 var binPath = Path.Combine(inputBasePath, $"{directory.Id:X4}.BIN");
-                var outputDirectoryPath = Path.Combine(outputBasePath, $"{directory.Id}");
-
-                var idCounts = new Dictionary<long, int>();
-
-                var fileManifest = new List<FileTableManifest.File>();
                 using (var input = File.OpenRead(binPath))
                 {
+                    var fileQueue = new Queue<QueuedFile>();
                     foreach (var file in directory.Files)
                     {
+                        long dataOffset;
+                        dataOffset = directory.DataBaseOffset;
+                        dataOffset += (file.DataBlockOffset << directory.DataBlockSize) * FileTableFile.BaseDataBlockSize;
+
+                        fileQueue.Enqueue(new QueuedFile()
+                        {
+                            Id = file.Id,
+                            Parent = tableDirectory,
+                            NameHash = file.NameHash,
+                            DataOffset = dataOffset,
+                            DataSize = file.DataSize,
+                        });
+                    }
+
+                    while (fileQueue.Count > 0)
+                    {
+                        var file = fileQueue.Dequeue();
+                        var parent = file.Parent;
+
                         var nameBuilder = new StringBuilder();
                         nameBuilder.Append($"{file.Id}");
 
@@ -154,17 +182,43 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                             }
                         }
 
-                        int idCount;
-                        idCounts.TryGetValue(file.Id, out idCount);
-                        idCount++;
-                        idCounts[file.Id] = idCount;
-
-                        if (idCount > 1)
+                        if (parent.IdCounts != null)
                         {
-                            nameBuilder.Append($"_DUP_{idCount}");
+                            var idCounts = parent.IdCounts;
+                            int idCount;
+                            idCounts.TryGetValue(file.Id, out idCount);
+                            idCount++;
+                            idCounts[file.Id] = idCount;
+
+                            if (idCount > 1)
+                            {
+                                nameBuilder.Append($"_DUP_{idCount}");
+                            }
                         }
 
-                        var outputPath = Path.Combine(outputDirectoryPath, nameBuilder.ToString());
+                        if (unpackNestedPacks == true && file.DataSize >= 8)
+                        {
+                            input.Position = file.DataOffset;
+                            var fileMagic = input.ReadValueU32(Endian.Little);
+
+                            if (fileMagic == PackFile.Signature || fileMagic.Swap() == PackFile.Signature)
+                            {
+                                input.Position = file.DataOffset;
+                                var nestedPack = HandleNestedPack(input, fileQueue, file.Id, nameBuilder.ToString(), parent);
+                                fileContainers.Add(nestedPack);
+                                parent.FileManifests.Add(new FileTableManifest.File()
+                                {
+                                    Id = file.Id,
+                                    NameHash = file.NameHash,
+                                    Name = name,
+                                    IsPack = true,
+                                    Path = CleanPathForManifest(PathHelper.GetRelativePath(parent.BasePath, nestedPack.ManifestPath)),
+                                });
+                                continue;
+                            }
+                        }
+
+                        var outputPath = Path.Combine(parent.BasePath, nameBuilder.ToString());
 
                         var outputParentPath = Path.GetDirectoryName(outputPath);
                         if (string.IsNullOrEmpty(outputParentPath) == false)
@@ -172,11 +226,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                             Directory.CreateDirectory(outputParentPath);
                         }
 
-                        long dataOffset;
-                        dataOffset = directory.DataBaseOffset;
-                        dataOffset += (file.DataBlockOffset << directory.DataBlockSize) * FileTableFile.BaseDataBlockSize;
-
-                        input.Position = dataOffset;
+                        input.Position = file.DataOffset;
                         var extension = FileExtensions.Detect(input, file.DataSize);
                         outputPath = Path.ChangeExtension(outputPath, extension);
 
@@ -185,35 +235,126 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                             Console.WriteLine(outputPath);
                         }
 
-                        input.Position = dataOffset;
+                        input.Position = file.DataOffset;
                         using (var output = File.Create(outputPath))
                         {
                             output.WriteFromStream(input, file.DataSize);
                         }
 
-                        fileManifest.Add(new FileTableManifest.File()
+                        parent.FileManifests.Add(new FileTableManifest.File()
                         {
                             Id = file.Id,
                             NameHash = file.NameHash,
                             Name = name,
-                            Path = CleanPathForManifest(PathHelper.GetRelativePath(outputDirectoryPath, outputPath)),
+                            Path = CleanPathForManifest(PathHelper.GetRelativePath(parent.BasePath, outputPath)),
                         });
                     }
                 }
 
-                var fileManifestPath = Path.Combine(outputDirectoryPath, "@manifest.json");
-                WriteManifest(fileManifestPath, fileManifest);
+                foreach (var fileContainer in fileContainers)
+                {
+                    WriteManifest(fileContainer.ManifestPath, fileContainer);
+                }
 
                 tableManifest.Directories.Add(new FileTableManifest.Directory()
                 {
                     Id = directory.Id,
                     DataBlockSize = directory.DataBlockSize,
                     IsInInstallData = directory.IsInInstallData,
-                    FileManifest = CleanPathForManifest(PathHelper.GetRelativePath(outputBasePath, fileManifestPath)),
+                    FileManifest = CleanPathForManifest(PathHelper.GetRelativePath(outputBasePath, tableDirectory.ManifestPath)),
                 });
             }
 
             WriteManifest(tableManifestPath, tableManifest);
+        }
+
+        private static IFileContainer HandleNestedPack(
+            Stream input,
+            Queue<QueuedFile> fileQueue,
+            int id,
+            string name,
+            IFileContainer parent)
+        {
+            var basePosition = input.Position;
+
+            var packFile = new PackFile();
+            packFile.Deserialize(input);
+
+            var container = new NestedPack()
+            {
+                Id = id,
+                BasePath = Path.Combine(parent.BasePath, name),
+                Parent = parent,
+            };
+
+            var entryCount = packFile.EntryOffsets.Count;
+            for (int i = 0; i < entryCount; i++)
+            {
+                uint entryOffset = packFile.EntryOffsets[i];
+                uint nextEntryOffset = i + 1 >= entryCount
+                    ? packFile.EndOffset
+                    : packFile.EntryOffsets[i + 1];
+                uint entrySize = nextEntryOffset - entryOffset;
+                fileQueue.Enqueue(new QueuedFile()
+                {
+                    Id = i,
+                    Parent = container,
+                    DataOffset = basePosition + entryOffset,
+                    DataSize = entrySize,
+                });
+            }
+
+            return container;
+        }
+
+        private class QueuedFile
+        {
+            public int Id { get; set; }
+            public IFileContainer Parent { get; set; }
+            public uint? NameHash { get; set; }
+            public long DataOffset { get; set; }
+            public uint DataSize { get; set; }
+        }
+
+        private interface IFileContainer
+        {
+            int Id { get; }
+            string BasePath { get; }
+            string ManifestPath { get; }
+            IFileContainer Parent { get; }
+            Dictionary<long, int> IdCounts { get; }
+            List<FileTableManifest.File> FileManifests { get; }
+        }
+
+        private class TableDirectory : IFileContainer
+        {
+            public TableDirectory()
+            {
+                this.IdCounts = new Dictionary<long, int>();
+                this.FileManifests = new List<FileTableManifest.File>();
+            }
+
+            public int Id { get; set; }
+            public string BasePath { get; set; }
+            public string ManifestPath { get { return Path.Combine(this.BasePath, "@manifest.json"); } }
+            public IFileContainer Parent { get { return null; } }
+            public Dictionary<long, int> IdCounts { get; }
+            public List<FileTableManifest.File> FileManifests { get; }
+        }
+
+        private class NestedPack : IFileContainer
+        {
+            public NestedPack()
+            {
+                this.FileManifests = new List<FileTableManifest.File>();
+            }
+
+            public int Id { get; set; }
+            public string BasePath { get; set; }
+            public string ManifestPath { get { return Path.Combine(this.BasePath, "@manifest.json"); } }
+            public IFileContainer Parent { get; set; }
+            public Dictionary<long, int> IdCounts { get { return null; } }
+            public List<FileTableManifest.File> FileManifests { get; }
         }
 
         private static string CleanPathForManifest(string path)
@@ -240,7 +381,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             File.WriteAllText(path, content, Encoding.UTF8);
         }
 
-        private static void WriteManifest(string path, List<FileTableManifest.File> manifest)
+        private static void WriteManifest(string path, IFileContainer directory)
         {
             string content;
             using (var stringWriter = new StringWriter())
@@ -250,32 +391,52 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                 writer.IndentChar = ' ';
                 writer.Formatting = Formatting.Indented;
                 writer.WriteStartArray();
-                foreach (var fileManifest in manifest)
+
+                foreach (var fileManifest in directory.FileManifests)
                 {
                     writer.WriteStartObject();
                     var oldFormatting = writer.Formatting;
                     writer.Formatting = Formatting.None;
-                    writer.WritePropertyName("id");
-                    writer.WriteValue(fileManifest.Id);
-                    if (fileManifest.Name != null)
+
+                    if ((directory is NestedPack) == false)
                     {
-                        writer.WritePropertyName("name");
-                        writer.WriteValue(fileManifest.Name);
+                        writer.WritePropertyName("id");
+                        writer.WriteValue(fileManifest.Id);
+                        if (fileManifest.Name != null)
+                        {
+                            writer.WritePropertyName("name");
+                            writer.WriteValue(fileManifest.Name);
+                        }
+                        else if (fileManifest.NameHash != null)
+                        {
+                            writer.WritePropertyName("name_hash");
+                            writer.WriteValue(fileManifest.NameHash.Value);
+                        }
                     }
-                    else if (fileManifest.NameHash != null)
+
+                    if (fileManifest.IsPack == true)
                     {
-                        writer.WritePropertyName("name_hash");
-                        writer.WriteValue(fileManifest.NameHash.Value);
+                        writer.WritePropertyName("pack");
+                        writer.WriteValue(true);
                     }
+
                     writer.WritePropertyName("path");
                     writer.WriteValue(fileManifest.Path);
+
                     writer.WriteEndObject();
                     writer.Formatting = oldFormatting;
                 }
+
                 writer.WriteEndArray();
                 writer.Flush();
                 stringWriter.Flush();
                 content = stringWriter.ToString();
+            }
+
+            var pathParent = Path.GetDirectoryName(path);
+            if (string.IsNullOrEmpty(pathParent) == false)
+            {
+                Directory.CreateDirectory(pathParent);
             }
             File.WriteAllText(path, content, Encoding.UTF8);
         }

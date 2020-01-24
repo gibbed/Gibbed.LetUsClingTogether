@@ -146,7 +146,7 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
 
                         var file = new FileTable.FileEntry()
                         {
-                            Id = fileManifest.Id,
+                            Id = (ushort)fileManifest.Id,
                             NameHash = fileManifest.Name != null ? fileManifest.Name.HashFNV32() : fileManifest.NameHash,
                             DataBlockOffset = dataBlockOffset,
                             DataSize = dataSize,

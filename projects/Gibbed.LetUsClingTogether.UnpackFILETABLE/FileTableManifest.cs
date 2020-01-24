@@ -68,7 +68,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
         public class File
         {
             [JsonProperty("id", Required = Required.Always)]
-            public ushort Id { get; set; }
+            public int Id { get; set; }
 
             [JsonProperty("name_hash", DefaultValueHandling = DefaultValueHandling.Ignore)]
             public uint? NameHash { get; set; }
@@ -78,6 +78,9 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
 
             [JsonProperty("path", Required = Required.Always)]
             public string Path { get; set; }
+
+            [JsonProperty("pack", DefaultValueHandling = DefaultValueHandling.Ignore)]
+            public bool IsPack { get; set; }
         }
     }
 }
