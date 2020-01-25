@@ -1,0 +1,31 @@
+Text formatting operations are done with a FF byte followed by an operation byte, plus any arguments.
+
+FF xx ..
+
+
+Valid operations:
+
+  FF 80                 ; Newline.
+  FF 81 ?? ??           ; Unknown.
+  FF 82 rr gg bb aa     ; Set text color. Each component is computed as value - 1. So for the brighest red, FF 82 00 01 01 00 becomes rgba(255,0,0,255).
+  FF 83 ?? ?? ?? ?? ??  ; Unknown.
+  FF 84 ?? ?? ??        ; Unknown.
+  FF 85 ?? ??           ; Unknown.
+  FF 87 ??              ; Unknown.
+  FF 88 ss              ; Insert pixel spacing.
+  FF 89 ??              ; Unknown.
+  FF 8A ii              ; Glyph. 1-22 are valid.
+  FF 8B ?? ??           ; Unknown.
+  FF 8C ??              ; Unknown.
+  FF 8D ?? ??           ; Unknown.
+
+  FF 9B                 ; Reset text color to the previous color.
+
+TODO: figure out all valid operations.
+
+
+The game will end rendering text if an invalid operation is encountered.
+
+Invalid operations:
+
+  FF 86
