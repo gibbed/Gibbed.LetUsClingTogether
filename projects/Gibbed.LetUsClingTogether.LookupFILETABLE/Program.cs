@@ -102,7 +102,7 @@ namespace Gibbed.LetUsClingTogether.LookupFILETABLE
             var binPath = Path.Combine(inputBasePath, $"{directory.Id:X4}.BIN");
 
             var file = directory.Files[fileIndex];
-            Console.WriteLine($"File ID {file.Id}.");
+            Console.WriteLine($"File ID: {file.Id}");
 
             if (file.DataSize < 8)
             {
@@ -149,14 +149,14 @@ namespace Gibbed.LetUsClingTogether.LookupFILETABLE
                         break;
                     }
 
-                    Console.WriteLine($"{"".PadLeft(level)}Pack file index {i}.");
+                    Console.WriteLine($"{"".PadLeft(level)}Pack file index: {i}");
                     dataPosition = foundPosition;
                     level++;
                 }
             }
 
             var relativePosition = offset - dataPosition;
-            Console.WriteLine($"{"".PadLeft(level)}At offset 0x{relativePosition:X} ({relativePosition}).");
+            Console.WriteLine($"{"".PadLeft(level)}Offset: 0x{relativePosition:X} ({relativePosition})");
         }
 
         private static bool ParseArgument(string text, out long value)
