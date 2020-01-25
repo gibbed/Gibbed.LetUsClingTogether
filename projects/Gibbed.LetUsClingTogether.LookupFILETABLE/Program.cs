@@ -102,7 +102,8 @@ namespace Gibbed.LetUsClingTogether.LookupFILETABLE
             var binPath = Path.Combine(inputBasePath, $"{directory.Id:X4}.BIN");
 
             var file = directory.Files[fileIndex];
-            Console.WriteLine($"File ID: {file.Id}");
+            Console.WriteLine($"Directory ID: {directory.Id}");
+            Console.WriteLine($" File ID: {file.Id}");
 
             if (file.DataSize < 8)
             {
@@ -110,7 +111,7 @@ namespace Gibbed.LetUsClingTogether.LookupFILETABLE
             }
 
             long dataPosition;
-            int level = 1;
+            int level = 2;
             using (var input = File.OpenRead(binPath))
             {
                 dataPosition = file.DataBlockOffset * blockSize;
