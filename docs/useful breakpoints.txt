@@ -1,0 +1,6 @@
+Useful for watching when the game looks up info for a directory/file ID combination:
+
+  address: 0x08A2BD18
+  log format: get file info: {a1} {a2}
+
+Disable break, enable log.
