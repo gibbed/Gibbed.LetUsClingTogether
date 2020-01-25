@@ -21,7 +21,9 @@
  */
 
 using System.Collections.Generic;
+using Gibbed.IO;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
 {
@@ -31,6 +33,10 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
         {
             this.Directories = new List<Directory>();
         }
+
+        [JsonProperty("endian", Required = Required.Always)]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public Endian Endian { get; set; }
 
         [JsonProperty("title_id_1", Required = Required.Always)]
         public string TitleId1 { get; set; }
@@ -67,8 +73,8 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
 
         public class File
         {
-            [JsonProperty("id", Required = Required.Always)]
-            public int Id { get; set; }
+            [JsonProperty("id", DefaultValueHandling = DefaultValueHandling.Ignore)]
+            public int? Id { get; set; }
 
             [JsonProperty("name_hash", DefaultValueHandling = DefaultValueHandling.Ignore)]
             public uint? NameHash { get; set; }
@@ -76,11 +82,36 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             [JsonProperty("name", DefaultValueHandling = DefaultValueHandling.Ignore)]
             public string Name { get; set; }
 
+            [JsonProperty("pack_id", DefaultValueHandling = DefaultValueHandling.Ignore)]
+            public PackId? PackId { get; set; }
+
             [JsonProperty("path", Required = Required.Always)]
             public string Path { get; set; }
 
             [JsonProperty("pack", DefaultValueHandling = DefaultValueHandling.Ignore)]
             public bool IsPack { get; set; }
+        }
+
+        public struct PackId
+        {
+            [JsonProperty("file", DefaultValueHandling = DefaultValueHandling.Ignore)]
+            public ushort FileId { get; set; }
+
+            [JsonProperty("dir", DefaultValueHandling = DefaultValueHandling.Ignore)]
+            public ushort DirectoryId { get; set; }
+
+            public uint RawId { get { return (((uint)this.DirectoryId) << 16) | this.FileId; } }
+
+            public PackId(uint rawId)
+            {
+                this.FileId = (ushort)(rawId & 0xFFFFu);
+                this.DirectoryId = (ushort)((rawId >> 16) & 0xFFFFu);
+            }
+
+            public static PackId? Create(uint? rawId)
+            {
+                return rawId == null ? (PackId?)null : new PackId(rawId.Value);
+            }
         }
     }
 }

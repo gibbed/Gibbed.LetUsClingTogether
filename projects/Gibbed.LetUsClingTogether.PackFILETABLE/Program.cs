@@ -47,7 +47,7 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
 
             var options = new OptionSet()
             {
-                { "v|verbose", "be verbose (list files)", v => verbose = v != null },
+                { "v|verbose", "be verbose", v => verbose = v != null },
                 { "h|help", "show this message and exit",  v => showHelp = v != null },
             };
 
@@ -100,6 +100,8 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
                 InstallDataCryptoKey = tableManifest.InstallDataCryptoKey,
             };
 
+            var endian = table.Endian;
+
             foreach (var directoryManifest in tableManifest.Directories)
             {
                 var fileManifestPath = Path.Combine(baseManifestInputPath, CleanPathForManifest(directoryManifest.FileManifest));
@@ -127,6 +129,7 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
                 {
                     var dataBlockSize = (uint)FileTableFile.BaseDataBlockSize << directory.DataBlockSize;
                     uint dataBlockOffset = 0;
+
                     foreach (var fileManifest in fileManifests.OrderBy(fm => fm.Id))
                     {
                         var inputPath = Path.Combine(baseInputPath, CleanPathForManifest(fileManifest.Path));
@@ -134,14 +137,21 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
                         output.Position = dataBlockOffset * dataBlockSize;
 
                         uint dataSize;
-                        using (var input = File.OpenRead(inputPath))
+                        if (fileManifest.IsPack == false)
                         {
-                            if (input.Length > uint.MaxValue)
+                            using (var input = File.OpenRead(inputPath))
                             {
-                                throw new InvalidOperationException("file too large");
+                                if (input.Length > uint.MaxValue)
+                                {
+                                    throw new InvalidOperationException("file too large");
+                                }
+                                dataSize = (uint)input.Length;
+                                output.WriteFromStream(input, dataSize);
                             }
-                            dataSize = (uint)input.Length;
-                            output.WriteFromStream(input, dataSize);
+                        }
+                        else
+                        {
+                            dataSize = HandleNestedPack(inputPath, output, endian);
                         }
 
                         var file = new FileTable.FileEntry()
@@ -160,7 +170,6 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
 
                         directory.Files.Add(file);
                     }
-                    //output.SetLength(dataBlockOffset * dataBlockSize);
                 }
 
                 table.Directories.Add(directory);
@@ -183,6 +192,224 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
             }
 
             File.WriteAllBytes(tablePath, tableBytes);
+        }
+
+        private static uint HandleNestedPack(
+            string rootFileManifestPath,
+            Stream output,
+            Endian endian)
+        {
+            var opStack = new Stack<PackOperation>();
+            opStack.Push(new PackOperation()
+            {
+                Type = PackOperationType.File,
+                Path = rootFileManifestPath,
+                IsPack = true,
+            });
+
+            var paddingBytes = new byte[16];
+
+            var basePosition = output.Position;
+            while (opStack.Count > 0)
+            {
+                var op = opStack.Pop();
+                if (op.Type == PackOperationType.Pad)
+                {
+                    output.WriteBytes(paddingBytes);
+                    continue;
+                }
+
+                if (op.Type == PackOperationType.Header)
+                {
+                    var endPosition = output.Position;
+
+                    var nestedPack = op.Parent;
+
+                    var packFile = new PackFile()
+                    {
+                        Endian = endian,
+                    };
+
+                    var count = nestedPack.Entries.Count;
+
+                    var hasIds = nestedPack.Entries.Any(e => e.RawId != null);
+
+                    for (int i = 0; i < count; i++)
+                    {
+                        var entry = nestedPack.Entries[i];
+                        var entryOffset = (uint)(entry.Position - nestedPack.HeaderPosition);
+                        packFile.Entries.Add(new PackFile.Entry(entry.RawId ?? 0, entryOffset));
+
+                        if (i + 1 < count)
+                        {
+                            var nextEntry = nestedPack.Entries[i + 1];
+                            if (entry.Position + entry.Size > nextEntry.Position)
+                            {
+                                throw new InvalidOperationException();
+                            }
+                        }
+                    }
+
+                    uint totalSize;
+                    if (count > 0)
+                    {
+                        var lastEntry = nestedPack.Entries[count - 1];
+                        totalSize = (uint)((lastEntry.Position - nestedPack.HeaderPosition) + lastEntry.Size);
+                    }
+                    else
+                    {
+                        totalSize = (uint)(nestedPack.DataPosition - nestedPack.HeaderPosition);
+                    }
+
+                    packFile.TotalSize = totalSize;
+
+                    output.Position = nestedPack.HeaderPosition;
+                    packFile.Serialize(output);
+
+                    if (output.Position > nestedPack.DataPosition)
+                    {
+                        throw new InvalidOperationException();
+                    }
+
+                    if (nestedPack.Parent != null)
+                    {
+                        var previousParentEntry = nestedPack.Parent.Entries[nestedPack.ParentIndex];
+                        nestedPack.Parent.Entries[nestedPack.ParentIndex] = new NestedPackEntry(
+                            nestedPack.HeaderPosition,
+                            packFile.TotalSize + 16 /* padding */,
+                            previousParentEntry.RawId);
+                    }
+
+                    output.Position = endPosition;
+                    continue;
+                }
+
+                if (op.Type != PackOperationType.File)
+                {
+                    throw new NotSupportedException();
+                }
+
+                if (op.IsPack == false)
+                {
+                    long dataPosition = output.Position;
+                    uint dataSize;
+                    using (var input = File.OpenRead(op.Path))
+                    {
+                        if (input.Length > uint.MaxValue)
+                        {
+                            throw new InvalidOperationException("file too large");
+                        }
+                        dataSize = (uint)input.Length;
+                        output.WriteFromStream(input, dataSize);
+                    }
+                    op.Parent.Entries.Add(new NestedPackEntry(dataPosition, dataSize, op.PackId));
+                }
+                else
+                {
+                    var basePath = Path.GetDirectoryName(op.Path);
+                    var fileManifests = ReadManifest<List<FileTableManifest.File>>(op.Path);
+
+                    var headerPosition = output.Position;
+
+                    var hasIds = fileManifests.Any(fm => fm.PackId != null);
+                    var headerSize = PackFile.GetHeaderSize(fileManifests.Count, hasIds);
+                    output.Position += headerSize;
+
+                    var dataPosition = output.Position;
+
+                    var nestedPack = new NestedPack()
+                    {
+                        HeaderPosition = headerPosition,
+                        DataPosition = dataPosition,
+                    };
+
+                    if (op.Parent != null)
+                    {
+                        nestedPack.Parent = op.Parent;
+                        nestedPack.ParentIndex = op.Parent.Entries.Count;
+                        op.Parent.Entries.Add(new NestedPackEntry(-1, 0, op.PackId));
+                    }
+
+                    opStack.Push(new PackOperation()
+                    {
+                        Type = PackOperationType.Header,
+                        Parent = nestedPack,
+                    });
+
+                    if (op.Parent != null)
+                    {
+                        opStack.Push(new PackOperation()
+                        {
+                            Type = PackOperationType.Pad,
+                            Parent = nestedPack,
+                        });
+                    }
+
+                    foreach (var fileManifest in fileManifests.AsEnumerable().Reverse())
+                    {
+                        opStack.Push(new PackOperation()
+                        {
+                            Type = PackOperationType.File,
+                            Parent = nestedPack,
+                            Path = Path.Combine(basePath, CleanPathForManifest(fileManifest.Path)),
+                            IsPack = fileManifest.IsPack,
+                            PackId = fileManifest.PackId?.RawId,
+                        });
+                    }
+                }
+            }
+
+            return (uint)(output.Position - basePosition);
+        }
+
+        private class PackOperation
+        {
+            public PackOperationType Type { get; set; }
+            public NestedPack Parent { get; set; }
+            public string Path { get; set; }
+            public bool IsPack { get; set; }
+            public uint? PackId { get; set; }
+        }
+
+        private enum PackOperationType
+        {
+            Invalid = 0,
+            File,
+            Pad,
+            Header,
+        }
+
+        private class NestedPack
+        {
+            public NestedPack()
+            {
+                this.Entries = new List<NestedPackEntry>();
+            }
+
+            public NestedPack Parent { get; set; }
+            public int ParentIndex { get; set; }
+            public long HeaderPosition { get; set; }
+            public long DataPosition { get; set; }
+            public List<NestedPackEntry> Entries { get; }
+        }
+
+        private struct NestedPackEntry
+        {
+            public NestedPackEntry(long position, uint size, uint? id)
+            {
+                this.Position = position;
+                this.Size = size;
+                this.RawId = id;
+            }
+
+            public uint? RawId { get; set; }
+            public long Position { get; set; }
+            public uint Size { get; set; }
+
+            public override string ToString()
+            {
+                return $"@{this.Position} {this.Size} => {this.Position + this.Size})";
+            }
         }
 
         private static string CleanPathForManifest(string path)

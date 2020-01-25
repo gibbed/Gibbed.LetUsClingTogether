@@ -80,13 +80,13 @@ namespace Gibbed.LetUsClingTogether.UnpackPack
                 var header = new PackFile();
                 header.Deserialize(input);
 
-                var count = header.EntryOffsets.Count;
-                for (int i = 0; i < count; i++)
+                var entryCount = header.Entries.Count;
+                for (int i = 0; i < entryCount; i++)
                 {
                     var outputPath = Path.Combine(outputBasePath, $"{i}");
 
-                    uint entryOffset = header.EntryOffsets[i];
-                    uint nextEntryOffset = i + 1 >= count ? header.EndOffset : header.EntryOffsets[i + 1];
+                    uint entryOffset = header.Entries[i].Offset;
+                    uint nextEntryOffset = i + 1 >= entryCount ? header.TotalSize : header.Entries[i + 1].Offset;
                     uint entrySize = nextEntryOffset - entryOffset;
 
                     input.Position = entryOffset;

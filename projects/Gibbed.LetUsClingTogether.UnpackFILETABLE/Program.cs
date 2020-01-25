@@ -29,6 +29,7 @@ using Gibbed.IO;
 using Gibbed.LetUsClingTogether.FileFormats;
 using NDesk.Options;
 using Newtonsoft.Json;
+using PackId = Gibbed.LetUsClingTogether.UnpackFILETABLE.FileTableManifest.PackId;
 
 namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
 {
@@ -48,7 +49,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             var options = new OptionSet()
             {
                 { "d|dont-unpack-nested-packs", "don't unpack nested .pack files", v => unpackNestedPacks = v == null },
-                { "v|verbose", "be verbose (list files)", v => verbose = v != null },
+                { "v|verbose", "be verbose", v => verbose = v != null },
                 { "h|help", "show this message and exit",  v => showHelp = v != null },
             };
 
@@ -121,6 +122,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             var tableManifestPath = Path.Combine(outputBasePath, "@manifest.json");
             var tableManifest = new FileTableManifest()
             {
+                Endian = table.Endian,
                 TitleId1 = table.TitleId1,
                 TitleId2 = table.TitleId2,
                 Unknown32 = table.Unknown32,
@@ -200,7 +202,6 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                         {
                             input.Position = file.DataOffset;
                             var fileMagic = input.ReadValueU32(Endian.Little);
-
                             if (fileMagic == PackFile.Signature || fileMagic.Swap() == PackFile.Signature)
                             {
                                 input.Position = file.DataOffset;
@@ -212,6 +213,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                                     NameHash = file.NameHash,
                                     Name = name,
                                     IsPack = true,
+                                    PackId = PackId.Create(file.PackRawId),
                                     Path = CleanPathForManifest(PathHelper.GetRelativePath(parent.BasePath, nestedPack.ManifestPath)),
                                 });
                                 continue;
@@ -246,6 +248,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                             Id = file.Id,
                             NameHash = file.NameHash,
                             Name = name,
+                            PackId = PackId.Create(file.PackRawId),
                             Path = CleanPathForManifest(PathHelper.GetRelativePath(parent.BasePath, outputPath)),
                         });
                     }
@@ -261,7 +264,8 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                     Id = directory.Id,
                     DataBlockSize = directory.DataBlockSize,
                     IsInInstallData = directory.IsInInstallData,
-                    FileManifest = CleanPathForManifest(PathHelper.GetRelativePath(outputBasePath, tableDirectory.ManifestPath)),
+                    FileManifest = CleanPathForManifest(
+                        PathHelper.GetRelativePath(outputBasePath, tableDirectory.ManifestPath)),
                 });
             }
 
@@ -287,19 +291,21 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                 Parent = parent,
             };
 
-            var entryCount = packFile.EntryOffsets.Count;
+            var hasIds = packFile.Entries.Any(e => e.RawId != 0);
+            var entryCount = packFile.Entries.Count;
             for (int i = 0; i < entryCount; i++)
             {
-                uint entryOffset = packFile.EntryOffsets[i];
-                uint nextEntryOffset = i + 1 >= entryCount
-                    ? packFile.EndOffset
-                    : packFile.EntryOffsets[i + 1];
-                uint entrySize = nextEntryOffset - entryOffset;
+                var entry = packFile.Entries[i];
+                uint nextEntryOffset = i + 1 < entryCount
+                    ? packFile.Entries[i + 1].Offset
+                    : packFile.TotalSize;
+                uint entrySize = nextEntryOffset - entry.Offset;
                 fileQueue.Enqueue(new QueuedFile()
                 {
                     Id = i,
                     Parent = container,
-                    DataOffset = basePosition + entryOffset,
+                    PackRawId = hasIds == false ? (uint?)null : entry.RawId,
+                    DataOffset = basePosition + entry.Offset,
                     DataSize = entrySize,
                 });
             }
@@ -312,6 +318,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             public int Id { get; set; }
             public IFileContainer Parent { get; set; }
             public uint? NameHash { get; set; }
+            public uint? PackRawId { get; set; }
             public long DataOffset { get; set; }
             public uint DataSize { get; set; }
         }
@@ -411,6 +418,19 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                         {
                             writer.WritePropertyName("name_hash");
                             writer.WriteValue(fileManifest.NameHash.Value);
+                        }
+                    }
+                    else
+                    {
+                        if (fileManifest.PackId != null)
+                        {
+                            writer.WritePropertyName("pack_id");
+                            writer.WriteStartObject();
+                            writer.WritePropertyName("dir");
+                            writer.WriteValue(fileManifest.PackId.Value.DirectoryId);
+                            writer.WritePropertyName("file");
+                            writer.WriteValue(fileManifest.PackId.Value.FileId);
+                            writer.WriteEndObject();
                         }
                     }
 
