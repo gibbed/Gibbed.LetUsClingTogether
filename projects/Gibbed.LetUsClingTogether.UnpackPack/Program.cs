@@ -90,7 +90,7 @@ namespace Gibbed.LetUsClingTogether.UnpackPack
                     uint entrySize = nextEntryOffset - entryOffset;
 
                     input.Position = entryOffset;
-                    var extension = FileExtensions.Detect(input, entrySize);
+                    var extension = FileDetection.Guess(input, (int)entrySize);
                     outputPath = Path.ChangeExtension(outputPath, extension);
 
                     if (verbose == true)

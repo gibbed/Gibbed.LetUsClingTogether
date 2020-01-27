@@ -19,10 +19,10 @@
  * 3. This notice may not be removed or altered from any source
  *    distribution.
  */
+
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml;
 using Gibbed.IO;
 using Gibbed.LetUsClingTogether.FileFormats;
 using NDesk.Options;
@@ -41,23 +41,13 @@ namespace Gibbed.LetUsClingTogether.UnpackBlob
             bool verbose = false;
             bool showHelp = false;
 
-            OptionSet options = new OptionSet()
+            var options = new OptionSet()
             {
-                {
-                    "v|verbose",
-                    "be verbose (list files)",
-                    v => verbose = v != null
-                },
-
-                {
-                    "h|help",
-                    "show this message and exit", 
-                    v => showHelp = v != null
-                },
+                { "v|verbose", "be verbose", v => verbose = v != null },
+                { "h|help", "show this message and exit",  v => showHelp = v != null },
             };
 
             List<string> extra;
-
             try
             {
                 extra = options.Parse(args);
@@ -72,8 +62,7 @@ namespace Gibbed.LetUsClingTogether.UnpackBlob
 
             if (extra.Count < 1 || extra.Count > 2 || showHelp == true)
             {
-                Console.WriteLine("Usage: {0} [OPTIONS]+ input_table [output_directory]", GetExecutableName());
-                Console.WriteLine("Unpack specified archive.");
+                Console.WriteLine("Usage: {0} [OPTIONS]+ input_blob [output_directory]", GetExecutableName());
                 Console.WriteLine();
                 Console.WriteLine("Options:");
                 options.WriteOptionDescriptions(Console.Out);
@@ -81,21 +70,21 @@ namespace Gibbed.LetUsClingTogether.UnpackBlob
             }
 
             string inputPath = extra[0];
-            string outputPath = extra.Count > 1 ? extra[1] : Path.ChangeExtension(inputPath, null) + "_unpacked";
-
-            Directory.CreateDirectory(outputPath);
+            string baseOutputPath = extra.Count > 1 ? extra[1] : Path.ChangeExtension(inputPath, null) + "_unpacked";
 
             using (var input = File.OpenRead(inputPath))
             {
-                var count = input.ReadValueU32();
+                const Endian endian = Endian.Little;
+
+                var count = input.ReadValueU32(endian);
 
                 var ids = new uint[count];
                 var sizes = new uint[count];
 
                 for (uint i = 0; i < count; i++)
                 {
-                    ids[i] = input.ReadValueU32();
-                    sizes[i] = input.ReadValueU32();
+                    ids[i] = input.ReadValueU32(endian);
+                    sizes[i] = input.ReadValueU32(endian);
                 }
                 var end = (uint)input.Length;
 
@@ -104,20 +93,31 @@ namespace Gibbed.LetUsClingTogether.UnpackBlob
                     uint id = ids[i];
                     uint size = sizes[i];
 
-                    long current = input.Position;
-                    var ext = FileExtensions.Detect(input, size);
-                    input.Seek(current, SeekOrigin.Begin);
+                    long currentPosition = input.Position;
+                    var extension = FileDetection.Guess(input, (int)size);
+                    input.Position = currentPosition;
 
-                    var filePath = Path.Combine(outputPath,
-                        string.Format("{0}_{1:X4}_{2:X2}_{3:X2}",
+                    var name = string.Format(
+                        "{0}_{1:X4}_{2:X2}_{3:X2}",
                         i,
                         (id & 0x0000FFFF) >> 0,
                         (id & 0x00FF0000) >> 16,
-                        (id & 0xFF000000) >> 24));
-                    filePath = Path.ChangeExtension(filePath, ext);
+                        (id & 0xFF000000) >> 24);
 
-                    Console.WriteLine(filePath);
-                    using (var output = File.Create(filePath))
+                    var outputPath = Path.Combine(baseOutputPath, Path.ChangeExtension(name, extension));
+
+                    if (verbose == true)
+                    {
+                        Console.WriteLine(outputPath);
+                    }
+
+                    var outputParentPath = Path.GetDirectoryName(outputPath);
+                    if (string.IsNullOrEmpty(outputParentPath) == false)
+                    {
+                        Directory.CreateDirectory(outputParentPath);
+                    }
+
+                    using (var output = File.Create(outputPath))
                     {
                         output.WriteFromStream(input, size);
                     }
