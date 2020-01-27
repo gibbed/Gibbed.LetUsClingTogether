@@ -127,6 +127,15 @@ namespace Gibbed.LetUsClingTogether.FileFormats
             }
             else if (
                 count >= 4 &&
+                buffer[index + 0] == 'P' &&
+                buffer[index + 1] == 'G' &&
+                buffer[index + 2] == 'R' &&
+                buffer[index + 3] == 'S')
+            {
+                return ".pgrs";
+            }
+            else if (
+                count >= 4 &&
                 buffer[index + 0] == 'x' &&
                 buffer[index + 1] == 'l' &&
                 buffer[index + 2] == 'c')
