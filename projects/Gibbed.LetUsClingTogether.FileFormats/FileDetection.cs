@@ -129,10 +129,9 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                 count >= 4 &&
                 buffer[index + 0] == 'x' &&
                 buffer[index + 1] == 'l' &&
-                buffer[index + 2] == 'c' &&
-                buffer[index + 3] == 'e')
+                buffer[index + 2] == 'c')
             {
-                return ".eclx";
+                return ".xlc";
             }
             else if (
                 count >= 4 &&
