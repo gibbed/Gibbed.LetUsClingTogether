@@ -229,7 +229,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                         }
 
                         input.Position = file.DataOffset;
-                        var extension = FileDetection.Guess(input, (int)file.DataSize);
+                        var extension = FileDetection.Guess(input, (int)file.DataSize, file.DataSize);
                         outputPath = Path.ChangeExtension(outputPath, extension);
 
                         if (verbose == true)

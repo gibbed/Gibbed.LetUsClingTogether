@@ -30,14 +30,14 @@ namespace Gibbed.LetUsClingTogether.FileFormats
     {
         public const int BestGuessLength = 16;
 
-        public static string Guess(Stream input, int length)
+        public static string Guess(Stream input, int length, long fileSize)
         {
             var guessSize = Math.Min(length, BestGuessLength);
             var guessBytes = input.ReadBytes(guessSize);
-            return Guess(guessBytes, 0, guessSize);
+            return Guess(guessBytes, 0, guessSize, fileSize);
         }
 
-        public static string Guess(byte[] buffer, int index, int count)
+        public static string Guess(byte[] buffer, int index, int count, long fileSize)
         {
             if (buffer == null)
             {
@@ -167,7 +167,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
             else if (
                 count >= 16 &&
                 BitConverter.ToUInt32(buffer, index + 0x0) == 0 &&
-                BitConverter.ToUInt32(buffer, index + 0x4) <= count &&
+                BitConverter.ToUInt32(buffer, index + 0x4) + index <= fileSize &&
                 BitConverter.ToUInt32(buffer, index + 0x8) == 0x00100001 &&
                 BitConverter.ToUInt32(buffer, index + 0xC) == 3)
             {

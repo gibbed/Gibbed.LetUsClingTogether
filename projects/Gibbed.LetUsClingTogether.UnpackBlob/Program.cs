@@ -94,7 +94,7 @@ namespace Gibbed.LetUsClingTogether.UnpackBlob
                     uint size = sizes[i];
 
                     long currentPosition = input.Position;
-                    var extension = FileDetection.Guess(input, (int)size);
+                    var extension = FileDetection.Guess(input, (int)size, size);
                     input.Position = currentPosition;
 
                     var name = string.Format(
