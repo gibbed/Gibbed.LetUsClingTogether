@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using Gibbed.IO;
 using Gibbed.LetUsClingTogether.FileFormats;
@@ -80,6 +81,7 @@ namespace Gibbed.LetUsClingTogether.ExportSprite
                 if (Directory.Exists(inputPath) == true)
                 {
                     inputPaths.AddRange(Directory.GetFiles(inputPath, "*.sprite", SearchOption.AllDirectories));
+                    inputPaths.AddRange(Directory.GetFiles(inputPath, "*.ashg", SearchOption.AllDirectories));
                 }
                 else
                 {
@@ -87,7 +89,7 @@ namespace Gibbed.LetUsClingTogether.ExportSprite
                 }
             }
 
-            foreach (var inputPath in inputPaths)
+            foreach (var inputPath in inputPaths.OrderBy(v => v))
             {
                 string outputPath = Path.ChangeExtension(inputPath, null);
 
@@ -102,13 +104,21 @@ namespace Gibbed.LetUsClingTogether.ExportSprite
 
         private static void Export(string inputPath, string outputPath)
         {
+            var inputBytes = File.ReadAllBytes(inputPath);
+
+            if (BitConverter.ToUInt32(inputBytes, 0) == 0x67687361) // 'ashg'
+            {
+                inputBytes = RLE.Decompress(inputBytes, 0, inputBytes.Length);
+            }
+
             var file = new SpriteFile();
-            using (var input = File.OpenRead(inputPath))
+            using (var input = new MemoryStream(inputBytes, false))
             {
                 file.Deserialize(input, Endian.Little);
             }
 
             var sprite = file.Sprite;
+
             if (sprite.Texture != null)
             {
                 var texture = sprite.Texture.Value;
