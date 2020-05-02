@@ -127,12 +127,39 @@ namespace Gibbed.LetUsClingTogether.FileFormats
             }
             else if (
                 count >= 4 &&
+                buffer[index + 0] == 'E' &&
+                buffer[index + 1] == 'M' &&
+                buffer[index + 2] == 'E' &&
+                buffer[index + 3] == 'S')
+            {
+                return ".emes"; // event message?
+            }
+            else if (
+                count >= 4 &&
                 buffer[index + 0] == 'P' &&
                 buffer[index + 1] == 'G' &&
                 buffer[index + 2] == 'R' &&
                 buffer[index + 3] == 'S')
             {
                 return ".pgrs";
+            }
+            else if (
+                count >= 4 &&
+                buffer[index + 0] == 'I' &&
+                buffer[index + 1] == 'D' &&
+                buffer[index + 2] == 'X' &&
+                buffer[index + 3] == '0')
+            {
+                return ".idx0";
+            }
+            else if (
+                count >= 4 &&
+                buffer[index + 0] == 'I' &&
+                buffer[index + 1] == 'N' &&
+                buffer[index + 2] == 'V' &&
+                buffer[index + 3] == 'K')
+            {
+                return ".invk";
             }
             else if (
                 count >= 4 &&
@@ -172,6 +199,13 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                 BitConverter.ToUInt32(buffer, index + 0xC) == 3)
             {
                 return ".sprite";
+            }
+            else if (
+                count >= 4 &&
+                fileSize >= 100 &&
+                BitConverter.ToUInt32(buffer, index + 0x0) == 0x8000000C)
+            {
+                return ".script";
             }
 
             return ".unknown";
