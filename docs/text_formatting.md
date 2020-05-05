@@ -80,10 +80,10 @@ Indices 1-23 (`01`-`17`) are valid.
 | 2  | `02` | Circle button |
 | 3  | `03` | Cross button |
 | 4  | `04` | Triangle button |
-| 5  | `05` | D-pad Up button |
-| 6  | `06` | D-pad Down button |
-| 7  | `07` | D-pad Right button |
-| 8  | `08` | D-pad Left button |
+| 5  | `05` | D-pad Up button, small |
+| 6  | `06` | D-pad Down button, small |
+| 7  | `07` | D-pad Right button, small |
+| 8  | `08` | D-pad Left button, small |
 | 9  | `09` | Trigger Left button |
 | 10 | `0A` | Trigger Right button |
 | 11 | `0B` | Select button |
@@ -93,9 +93,9 @@ Indices 1-23 (`01`-`17`) are valid.
 | 15 | `0F` | Circle button, small |
 | 16 | `10` | Triangle button, small |
 | 17 | `11` | Cross button, small |
-| 18 | `12` | D-Pad Up and D-Pad down buttons |
-| 19 | `13` | D-Pad Left and D-Pad Right buttons |
-| 20 | `14` | D-Pad Right button, large? |
-| 21 | `15` | D-Pad Left button, large? |
+| 18 | `12` | D-Pad Up and D-Pad down buttons, small |
+| 19 | `13` | D-Pad Left and D-Pad Right buttons, small |
+| 20 | `14` | D-Pad Right button |
+| 21 | `15` | D-Pad Left button |
 | 22 | `16` | :x: |
 | 23 | `17` | :heavy_check_mark: |
