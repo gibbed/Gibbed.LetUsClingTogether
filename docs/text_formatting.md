@@ -68,7 +68,7 @@ Each component is computed as `component - 1`. So for the brighest red, `FF 82 0
 
 `ii` = Glyph index
 
-For the original, unmodified font family in the game:
+*For the original unmodified font family in the game:*
 
 Indices 1-23 (`01`-`17`) are valid.
 
@@ -95,7 +95,7 @@ Indices 1-23 (`01`-`17`) are valid.
 | 17 | `11` | Cross button, small |
 | 18 | `12` | D-Pad Up and D-Pad down buttons |
 | 19 | `13` | D-Pad Left and D-Pad Right buttons |
-| 20 | `14` | D-Pad Right button large? |
-| 21 | `15` | D-Pad Left button large? |
+| 20 | `14` | D-Pad Right button, large? |
+| 21 | `15` | D-Pad Left button, large? |
 | 22 | `16` | :x: |
 | 23 | `17` | :heavy_check_mark: |
