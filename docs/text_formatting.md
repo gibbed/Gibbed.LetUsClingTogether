@@ -18,7 +18,7 @@ Using an operation outside of the range `80` - `A9` will likely cause game crash
 | `FF 87 ??`             | Unknown. |
 | `FF 88 ss`             | Insert pixel spacing. |
 | `FF 89 ??`             | Unknown. |
-| `FF 8A ii`             | [Insert glyph](#insert-glyph). 1-22 are valid. |
+| `FF 8A ii`             | [Insert glyph](#insert-glyph). 1-23 (`01`-`17`) are valid. |
 | `FF 8B ?? ??`          | Unknown. |
 | `FF 8C ??`             | Unknown. |
 | `FF 8D ?? ??`          | Unknown. |
@@ -59,4 +59,8 @@ Set text color. Each component is computed as `value - 1`. So for the brighest r
 
 ## Insert Glyph
 
-TODO: glyph table.
+`FF 8A ii`
+
+1-23 (`01`-`17`) are valid.
+
+ ![Glyph Map](https://i.imgur.com/SWHNzEe.png)
