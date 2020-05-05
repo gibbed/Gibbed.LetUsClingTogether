@@ -9,12 +9,12 @@ Using an operation outside of the range `80` - `A9` will likely cause game crash
 | Code                   | Note |
 | ---------------------- | ---- |
 | `FF 80`                | Insert newline. |
-| `FF 81 ?? ??`          | Unknown. Dialogue pacing? |
+| `FF 81 ww uu`          | [Indicate wrap area](#indicate-wrap-area). |
 | `FF 82 rr gg bb aa`    | [Set text color](#set-text-color). |
 | `FF 83 ?? ?? ?? ?? ??` | Unknown. |
 | `FF 84 ?? ?? ??`       | Unknown. |
 | `FF 85 ?? ??`          | Unknown. |
-| `FF 86`                | Unknown. |
+| `FF 86`                | Insert page break. |
 | `FF 87 ??`             | Unknown. |
 | `FF 88 ss`             | Insert pixel spacing. |
 | `FF 89 ??`             | Unknown. |
@@ -50,6 +50,21 @@ Using an operation outside of the range `80` - `A9` will likely cause game crash
 | `FF A7`                | Unknown. |
 | `FF A8`                | Unknown. |
 | `FF A9`                | Unknown. |
+
+## Indicate Wrap Area
+
+`FF 81 ww uu`
+
+`ww` = Width of following area in pixels
+`uu` = Unknown
+
+Indicates a wrap area, eg: where a newline can be inserted if the following area is too large to fit in the remaining space available on the current line.
+
+The value of `ww` seems to be ignored and overwritten at runtime with the computed width of the following area.
+
+The value of `uu` does not seem to matter, except if it is a value of `DE` (`222`), it will stop rendering any following text. Possibly an error case.
+
+Since both arguments seem to don't really matter, `FF 81 01 01` seems to be the standard usage.
 
 ## Set Text Color
 
