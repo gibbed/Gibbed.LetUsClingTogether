@@ -37,8 +37,8 @@ Using an operation outside of the range `80` - `A9` will likely cause game crash
 | `FF 9A ??`             | Unknown. |
 | `FF 9B`                | Reset text color. |
 | `FF 9C ?? ??`          | Unknown. |
-| `FF 9D ??`             | Unknown. |
-| `FF 9E`                | Unknown. |
+| `FF 9D ii`             | [Set font palette](#set-font-palette). |
+| `FF 9E`                | Reset font palette. |
 | `FF 9F`                | Uppercase following character. |
 | `FF A0`                | Unknown. |
 | `FF A1`                | Unknown. |
@@ -114,3 +114,13 @@ Indices 1-23 (`01`-`17`) are valid.
 | 21 | `15` | D-Pad Left button                  | large |
 | 22 | `16` | :x:                                |       |
 | 23 | `17` | :heavy_check_mark:                 |       |
+
+## Set Font Palette
+
+`FF 9D ii`
+
+`ii` = Palette index
+
+*For the original unmodified font family in the game:*
+
+Indices 1-17 (`01`-`11`) are valid.
