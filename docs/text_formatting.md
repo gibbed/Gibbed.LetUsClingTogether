@@ -55,12 +55,47 @@ Using an operation outside of the range `80` - `A9` will likely cause game crash
 
 `FF 82 rr gg bb aa`
 
-Set text color. Each component is computed as `value - 1`. So for the brighest red, `FF 82 00 01 01 00` becomes `rgba(255,0,0,255)`.
+`rr` = Red component
+`gg` = Green component
+`bb` = Blue component
+`aa` = Alpha component
+
+Each component is computed as `component - 1`. So for the brighest red, `FF 82 00 01 01 00` becomes `rgba(255,0,0,255)` (`FF0000FF`).
 
 ## Insert Glyph
 
 `FF 8A ii`
 
-1-23 (`01`-`17`) are valid.
+`ii` = Glyph index
 
- ![Glyph Map](https://i.imgur.com/SWHNzEe.png)
+For the original, unmodified font family in the game:
+
+Indices 1-23 (`01`-`17`) are valid.
+
+![Glyph Map](https://i.imgur.com/SWHNzEe.png)
+
+| d  | h    | Description |
+| -- | ---- | - |
+| 1  | `01` | Square button |
+| 2  | `02` | Circle button |
+| 3  | `03` | Cross button |
+| 4  | `04` | Triangle button |
+| 5  | `05` | D-pad Up button |
+| 6  | `06` | D-pad Down button |
+| 7  | `07` | D-pad Right button |
+| 8  | `08` | D-pad Left button |
+| 9  | `09` | Trigger Left button |
+| 10 | `0A` | Trigger Right button |
+| 11 | `0B` | Select button |
+| 12 | `0C` | Start button |
+| 13 | `0D` | Font block |
+| 14 | `0E` | Square button, small |
+| 15 | `0F` | Circle button, small |
+| 16 | `10` | Triangle button, small |
+| 17 | `11` | Cross button, small |
+| 18 | `12` | D-Pad Up and D-Pad down buttons |
+| 19 | `13` | D-Pad Left and D-Pad Right buttons |
+| 20 | `14` | D-Pad Right button large? |
+| 21 | `15` | D-Pad Left button large? |
+| 22 | `16` | :x: |
+| 23 | `17` | :heavy_check_mark: |
