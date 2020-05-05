@@ -74,28 +74,28 @@ Indices 1-23 (`01`-`17`) are valid.
 
 ![Glyph Map](https://i.imgur.com/SWHNzEe.png)
 
-| d  | h    | Description |
-| -- | ---- | - |
-| 1  | `01` | Square button |
-| 2  | `02` | Circle button |
-| 3  | `03` | Cross button |
-| 4  | `04` | Triangle button |
-| 5  | `05` | D-pad Up button, small |
-| 6  | `06` | D-pad Down button, small |
-| 7  | `07` | D-pad Right button, small |
-| 8  | `08` | D-pad Left button, small |
-| 9  | `09` | Trigger Left button |
-| 10 | `0A` | Trigger Right button |
-| 11 | `0B` | Select button |
-| 12 | `0C` | Start button |
-| 13 | `0D` | Font block |
-| 14 | `0E` | Square button, small |
-| 15 | `0F` | Circle button, small |
-| 16 | `10` | Triangle button, small |
-| 17 | `11` | Cross button, small |
-| 18 | `12` | D-Pad Up and D-Pad down buttons, small |
-| 19 | `13` | D-Pad Left and D-Pad Right buttons, small |
-| 20 | `14` | D-Pad Right button |
-| 21 | `15` | D-Pad Left button |
-| 22 | `16` | :x: |
-| 23 | `17` | :heavy_check_mark: |
+| d  | h    | Description                        | Extra |
+| -- | ---- | ---------------------------------- | ----- |
+| 1  | `01` | Square button                      | large |
+| 2  | `02` | Circle button                      | large |
+| 3  | `03` | Cross button                       | large |
+| 4  | `04` | Triangle button                    | large |
+| 5  | `05` | D-pad Up button                    | small |
+| 6  | `06` | D-pad Down button                  | small |
+| 7  | `07` | D-pad Right button                 | small |
+| 8  | `08` | D-pad Left button                  | small |
+| 9  | `09` | Trigger Left button                |       |
+| 10 | `0A` | Trigger Right button               |       |
+| 11 | `0B` | Select button                      |       |
+| 12 | `0C` | Start button                       |       |
+| 13 | `0D` | Font block                         |       |
+| 14 | `0E` | Square button                      | small |
+| 15 | `0F` | Circle button                      | small |
+| 16 | `10` | Triangle button                    | small |
+| 17 | `11` | Cross button                       | small |
+| 18 | `12` | D-Pad Up and D-Pad down buttons    | small |
+| 19 | `13` | D-Pad Left and D-Pad Right buttons | small |
+| 20 | `14` | D-Pad Right button                 | large |
+| 21 | `15` | D-Pad Left button                  | large |
+| 22 | `16` | :x:                                |       |
+| 23 | `17` | :heavy_check_mark:                 |       |
