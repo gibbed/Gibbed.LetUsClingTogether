@@ -9,8 +9,8 @@ Using an operation outside of the range `80` - `A9` will likely cause game crash
 | Code                   | Note |
 | ---------------------- | ---- |
 | `FF 80`                | Insert newline. |
-| `FF 81 ww uu`          | [Indicate wrap area](#indicate-wrap-area). |
-| `FF 82 rr gg bb aa`    | [Set text color](#set-text-color). |
+| `FF 81 ww uu`          | [Indicate wrap area](#ff-81---indicate-wrap-area). |
+| `FF 82 rr gg bb aa`    | [Set text color](#ff-82---set-text-color). |
 | `FF 83 ?? ?? ?? ?? ??` | Unknown. |
 | `FF 84 ?? ?? ??`       | Unknown. |
 | `FF 85 ?? ??`          | Unknown. |
@@ -18,7 +18,7 @@ Using an operation outside of the range `80` - `A9` will likely cause game crash
 | `FF 87 ??`             | Unknown. |
 | `FF 88 ss`             | Insert pixel spacing. |
 | `FF 89 ??`             | Unknown. |
-| `FF 8A ii`             | [Insert glyph](#insert-glyph). 1-23 (`01`-`17`) are valid. |
+| `FF 8A ii`             | [Insert glyph](#ff-8a---insert-glyph). 1-23 (`01`-`17`) are valid. |
 | `FF 8B ?? ??`          | Unknown. |
 | `FF 8C ??`             | Unknown. |
 | `FF 8D ?? ??`          | Unknown. |
@@ -37,7 +37,7 @@ Using an operation outside of the range `80` - `A9` will likely cause game crash
 | `FF 9A ??`             | Unknown. |
 | `FF 9B`                | Reset text color. |
 | `FF 9C ?? ??`          | Unknown. |
-| `FF 9D ii`             | [Set font palette](#set-font-palette). |
+| `FF 9D ii`             | [Set font palette](#ff-9d---set-font-palette). 1-17 (`01`-`11`) are valid. |
 | `FF 9E`                | Reset font palette. |
 | `FF 9F`                | Uppercase following character. |
 | `FF A0`                | Unknown. |
@@ -51,14 +51,14 @@ Using an operation outside of the range `80` - `A9` will likely cause game crash
 | `FF A8`                | Unknown. |
 | `FF A9`                | Unknown. |
 
-## Indicate Wrap Area
+## `FF 81` - Indicate Wrap Area
 
 `FF 81 ww uu`
 
-`ww` = Width of following area in pixels
-`uu` = Unknown
+* `ww` = Width of following area in pixels
+* `uu` = Unknown
 
-Indicates a wrap area, eg: where a newline can be inserted if the following area is too large to fit in the remaining space available on the current line.
+Indicates a wrap area, a location where a newline can be inserted if the following area is too large to fit in the remaining space available on the current line.
 
 The value of `ww` seems to be ignored and overwritten at runtime with the computed width of the following area.
 
@@ -66,22 +66,22 @@ The value of `uu` does not seem to matter, except if it is a value of `DE` (`222
 
 Since both arguments seem to don't really matter, `FF 81 01 01` seems to be the standard usage.
 
-## Set Text Color
+## `FF 82` - Set Text Color
 
 `FF 82 rr gg bb aa`
 
-`rr` = Red component
-`gg` = Green component
-`bb` = Blue component
-`aa` = Alpha component
+* `rr` = Red component
+* `gg` = Green component
+* `bb` = Blue component
+* `aa` = Alpha component
 
 Each component is computed as `component - 1`. So for the brighest red, `FF 82 00 01 01 00` becomes `rgba(255,0,0,255)` (`FF0000FF`).
 
-## Insert Glyph
+## `FF 8A` - Insert Glyph
 
 `FF 8A ii`
 
-`ii` = Glyph index
+* `ii` = Glyph index
 
 *For the original unmodified font family in the game:*
 
@@ -115,11 +115,11 @@ Indices 1-23 (`01`-`17`) are valid.
 | 22 | `16` | :x:                                |       |
 | 23 | `17` | :heavy_check_mark:                 |       |
 
-## Set Font Palette
+## `FF 9D` - Set Font Palette
 
 `FF 9D ii`
 
-`ii` = Palette index
+* `ii` = Palette index
 
 *For the original unmodified font family in the game:*
 
