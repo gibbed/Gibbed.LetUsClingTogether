@@ -20,7 +20,7 @@ Using an operation outside of the range `80` - `A9` will likely cause game crash
 | `FF 89 ??`             | Unknown. |
 | `FF 8A ii`             | [Insert glyph](#ff-8a---insert-glyph). 1-23 (`01`-`17`) are valid. |
 | `FF 8B ?? ??`          | Unknown. |
-| `FF 8C ??`             | Unknown. |
+| `FF 8C dd`             | [Insert choice](#ff-8c---insert-choice). |
 | `FF 8D ?? ??`          | Unknown. |
 | `FF 8E ?? ??`          | Unknown. |
 | `FF 8F ?? ??`          | Unknown. |
@@ -49,7 +49,7 @@ Using an operation outside of the range `80` - `A9` will likely cause game crash
 | `FF A6`                | Unknown. |
 | `FF A7`                | Unknown. |
 | `FF A8`                | Unknown. |
-| `FF A9`                | Unknown. |
+| `FF A9`                | New page?/reset state? |
 
 ## `FF 81` - Indicate Wrap Area
 
@@ -114,6 +114,12 @@ Indices 1-23 (`01`-`17`) are valid.
 | 21 | `15` | D-Pad Left button                  | large |
 | 22 | `16` | :x:                                |       |
 | 23 | `17` | :heavy_check_mark:                 |       |
+
+## `FF 8C` - Insert Choice
+
+`FF 8C dd`
+
+* `dd` = Index of default/initial selected option, starting at 1.
 
 ## `FF 9D` - Set Font Palette
 
