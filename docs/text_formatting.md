@@ -18,7 +18,7 @@ Using an operation outside of the range `80` - `A9` will likely cause game crash
 | `FF 87 ??`             | Unknown. |
 | `FF 88 ss`             | Insert pixel spacing. |
 | `FF 89 ??`             | Unknown. |
-| `FF 8A ii`             | [Insert glyph](#ff-8a---insert-glyph). 1-23 (`01`-`17`) are valid. |
+| `FF 8A ii`             | [Insert icon](#ff-8a---insert-icon). 1-23 (`01`-`17`) are valid. |
 | `FF 8B ?? ??`          | Unknown. |
 | `FF 8C dd`             | [Insert choice](#ff-8c---insert-choice). |
 | `FF 8D ?? ??`          | Unknown. |
@@ -77,17 +77,17 @@ Since both arguments seem to don't really matter, `FF 81 01 01` seems to be the 
 
 Each component is computed as `component - 1`. So for the brighest red, `FF 82 00 01 01 00` becomes `rgba(255,0,0,255)` (`FF0000FF`).
 
-## `FF 8A` - Insert Glyph
+## `FF 8A` - Insert Icon
 
 `FF 8A ii`
 
-* `ii` = Glyph index
+* `ii` = Icon index
 
 *For the original unmodified font family in the game:*
 
 Indices 1-23 (`01`-`17`) are valid.
 
-![Glyph Map](https://i.imgur.com/SWHNzEe.png)
+![Icon Map](https://i.imgur.com/SWHNzEe.png)
 
 | d  | h    | Description                        | Extra |
 | -- | ---- | ---------------------------------- | ----- |
