@@ -20,7 +20,7 @@ Using an operation outside of the range `80` - `A9` will likely cause game crash
 | `FF 89 ??`             | Unknown. |
 | `FF 8A ii`             | [Insert icon](#ff-8a---insert-icon). 1-23 (`01`-`17`) are valid. |
 | `FF 8B ?? ??`          | Unknown. |
-| `FF 8C dd`             | [Insert choice](#ff-8c---insert-choice). |
+| `FF 8C dd`             | [Insert select](#ff-8c---insert-select). |
 | `FF 8D ?? ??`          | Unknown. |
 | `FF 8E ?? ??`          | Unknown. |
 | `FF 8F ?? ??`          | Unknown. |
@@ -115,7 +115,7 @@ Indices 1-23 (`01`-`17`) are valid.
 | 22 | `16` | :x:                                |       |
 | 23 | `17` | :heavy_check_mark:                 |       |
 
-## `FF 8C` - Insert Choice
+## `FF 8C` - Insert Select
 
 `FF 8C dd`
 
