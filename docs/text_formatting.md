@@ -27,7 +27,7 @@ Using an operation outside of the range `80` - `A9` will likely cause game crash
 | `FF 90 ?? ??`          | Unknown. |
 | `FF 91`                | Unknown. |
 | `FF 92`                | Unknown. |
-| `FF 93`                | Insert protagonist name. |
+| `FF 93`                | Insert hero name. |
 | `FF 94`                | Insert order name. |
 | `FF 95 ?? ?? ??`       | Unknown. |
 | `FF 96`                | Unknown. |
