@@ -73,7 +73,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
             var unknown000C = input.ReadValueU32(endian);
             var unknown0010 = input.ReadValueU32(endian);
             var dataSize = input.ReadValueU32(endian);
-            var battlefield = input.ReadValueU16(endian);
+            var battlefieldId = input.ReadValueU16(endian);
             var unknown001A = input.ReadValueU16(endian);
             var rankLimitEnabled = input.ReadValueB8();
             var unknown001D = input.ReadValueU8();
@@ -108,7 +108,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
             }
 
             this.Endian = endian;
-            this.BattlefieldId = battlefield;
+            this.BattlefieldId = battlefieldId;
             this.RankLimitEnabled = rankLimitEnabled;
             this.MapNameId = mapNameId;
             this.Party = party;
