@@ -78,8 +78,21 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Sprite
                 texture = null;
             }
 
-            Palette[] palettes;
-            if (paletteCount == 0)
+            var palettes = new Palette[paletteCount];
+            if (paletteCount != 0)
+            {
+                for (uint i = 0; i < paletteCount; i++)
+                {
+                    var paletteSize = input.ReadValueS32(endian);
+                    input.Seek(-4, SeekOrigin.Current);
+                    if (paletteSize < 4 || input.Position + paletteSize > basePosition + unknown0COffset)
+                    {
+                        throw new FormatException();
+                    }
+                    palettes[i] = Palette.Read(input, endian);
+                }
+            }
+            else
             {
                 Palette palette;
                 using (var data = new MemoryStream(FileFormats.Sprite.Palettes.Default))
@@ -93,20 +106,6 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Sprite
                 }
                 palettes = new Palette[1];
                 palettes[0] = palette;
-            }
-            else
-            {
-                palettes = new Palette[paletteCount];
-                for (uint i = 0; i < paletteCount; i++)
-                {
-                    var paletteSize = input.ReadValueS32(endian);
-                    input.Seek(-4, SeekOrigin.Current);
-                    if (paletteSize < 4 || input.Position + paletteSize > basePosition + unknown0COffset)
-                    {
-                        throw new FormatException();
-                    }
-                    palettes[i] = Palette.Read(input, endian);
-                }
             }
 
             Sprite instance;

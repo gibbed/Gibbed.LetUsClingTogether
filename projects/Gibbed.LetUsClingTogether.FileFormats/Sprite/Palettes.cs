@@ -22,7 +22,7 @@
 
 namespace Gibbed.LetUsClingTogether.FileFormats.Sprite
 {
-    internal static class Palettes
+    public static class Palettes
     {
         public static readonly byte[] Default;
 
