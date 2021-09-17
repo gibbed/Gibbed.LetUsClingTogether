@@ -46,10 +46,10 @@ namespace Gibbed.LetUsClingTogether.LookupFILETABLE
                 { "h|help", "show this message and exit",  v => showHelp = v != null },
             };
 
-            List<string> extra;
+            List<string> extras;
             try
             {
-                extra = options.Parse(args);
+                extras = options.Parse(args);
             }
             catch (OptionException e)
             {
@@ -59,9 +59,9 @@ namespace Gibbed.LetUsClingTogether.LookupFILETABLE
                 return;
             }
 
-            if (extra.Count < 3 || extra.Count > 3 || showHelp == true ||
-                ParseArgument(extra[1], out uint directoryId) == false ||
-                ParseArgument(extra[2], out long offset) == false)
+            if (extras.Count < 3 || extras.Count > 3 || showHelp == true ||
+                ParseArgument(extras[1], out uint directoryId) == false ||
+                ParseArgument(extras[2], out long offset) == false)
             {
                 Console.WriteLine("Usage: {0} [OPTIONS]+ input_FILETABLE <dir> <offset>", GetExecutableName());
                 Console.WriteLine();
@@ -70,7 +70,7 @@ namespace Gibbed.LetUsClingTogether.LookupFILETABLE
                 return;
             }
 
-            string inputPath = extra[0];
+            string inputPath = extras[0];
 
             FileTableFile table;
             using (var input = File.OpenRead(inputPath))

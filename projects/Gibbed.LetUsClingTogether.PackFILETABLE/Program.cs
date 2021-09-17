@@ -51,10 +51,10 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
                 { "h|help", "show this message and exit",  v => showHelp = v != null },
             };
 
-            List<string> extra;
+            List<string> extras;
             try
             {
-                extra = options.Parse(args);
+                extras = options.Parse(args);
             }
             catch (OptionException e)
             {
@@ -64,7 +64,7 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
                 return;
             }
 
-            if (extra.Count < 1 || extra.Count > 2 || showHelp == true)
+            if (extras.Count < 1 || extras.Count > 2 || showHelp == true)
             {
                 Console.WriteLine("Usage: {0} [OPTIONS]+ input_manifest [output_directory]", GetExecutableName());
                 Console.WriteLine("Unpack specified archive.");
@@ -74,7 +74,7 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
                 return;
             }
 
-            string baseManifestInputPath = extra[0];
+            string baseManifestInputPath = extras[0];
             string tableManifestPath;
 
             if (Directory.Exists(baseManifestInputPath) == true)
@@ -87,7 +87,7 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
                 baseManifestInputPath = Path.GetDirectoryName(tableManifestPath);
             }
 
-            string outputBasePath = extra.Count > 1 ? extra[1] : baseManifestInputPath + "_packed";
+            string outputBasePath = extras.Count > 1 ? extras[1] : baseManifestInputPath + "_packed";
 
             var tableManifest = ReadManifest<FileTableManifest>(tableManifestPath);
 

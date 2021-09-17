@@ -47,10 +47,10 @@ namespace Gibbed.LetUsClingTogether.UnpackPack
                 { "h|help", "show this message and exit", v => showHelp = v != null },
             };
 
-            List<string> extra;
+            List<string> extras;
             try
             {
-                extra = options.Parse(args);
+                extras = options.Parse(args);
             }
             catch (OptionException e)
             {
@@ -60,7 +60,7 @@ namespace Gibbed.LetUsClingTogether.UnpackPack
                 return;
             }
 
-            if (extra.Count < 1 || extra.Count > 2 || showHelp == true)
+            if (extras.Count < 1 || extras.Count > 2 || showHelp == true)
             {
                 Console.WriteLine("Usage: {0} [OPTIONS]+ input_pack [output_directory]", GetExecutableName());
                 Console.WriteLine("Unpack specified archive.");
@@ -70,8 +70,8 @@ namespace Gibbed.LetUsClingTogether.UnpackPack
                 return;
             }
 
-            string inputPath = extra[0];
-            string outputBasePath = extra.Count > 1 ? extra[1] : Path.ChangeExtension(inputPath, null) + "_unpacked";
+            string inputPath = extras[0];
+            string outputBasePath = extras.Count > 1 ? extras[1] : Path.ChangeExtension(inputPath, null) + "_unpacked";
 
             Directory.CreateDirectory(outputBasePath);
 

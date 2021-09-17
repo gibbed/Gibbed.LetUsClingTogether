@@ -47,10 +47,10 @@ namespace Gibbed.LetUsClingTogether.UnpackBlob
                 { "h|help", "show this message and exit",  v => showHelp = v != null },
             };
 
-            List<string> extra;
+            List<string> extras;
             try
             {
-                extra = options.Parse(args);
+                extras = options.Parse(args);
             }
             catch (OptionException e)
             {
@@ -60,7 +60,7 @@ namespace Gibbed.LetUsClingTogether.UnpackBlob
                 return;
             }
 
-            if (extra.Count < 1 || extra.Count > 2 || showHelp == true)
+            if (extras.Count < 1 || extras.Count > 2 || showHelp == true)
             {
                 Console.WriteLine("Usage: {0} [OPTIONS]+ input_blob [output_directory]", GetExecutableName());
                 Console.WriteLine();
@@ -69,8 +69,8 @@ namespace Gibbed.LetUsClingTogether.UnpackBlob
                 return;
             }
 
-            string inputPath = extra[0];
-            string baseOutputPath = extra.Count > 1 ? extra[1] : Path.ChangeExtension(inputPath, null) + "_unpacked";
+            string inputPath = extras[0];
+            string baseOutputPath = extras.Count > 1 ? extras[1] : Path.ChangeExtension(inputPath, null) + "_unpacked";
 
             using (var input = File.OpenRead(inputPath))
             {

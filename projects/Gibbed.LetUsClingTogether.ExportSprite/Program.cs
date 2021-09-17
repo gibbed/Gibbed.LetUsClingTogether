@@ -53,10 +53,10 @@ namespace Gibbed.LetUsClingTogether.ExportSprite
                 { "h|help", "show this message and exit", v => showHelp = v != null },
             };
 
-            List<string> extra;
+            List<string> extras;
             try
             {
-                extra = options.Parse(args);
+                extras = options.Parse(args);
             }
             catch (OptionException e)
             {
@@ -66,7 +66,7 @@ namespace Gibbed.LetUsClingTogether.ExportSprite
                 return;
             }
 
-            if (extra.Count < 1 || showHelp == true)
+            if (extras.Count < 1 || showHelp == true)
             {
                 Console.WriteLine("Usage: {0} [OPTIONS]+ input_sprite+", GetExecutableName());
                 Console.WriteLine();
@@ -76,7 +76,7 @@ namespace Gibbed.LetUsClingTogether.ExportSprite
             }
 
             var inputPaths = new List<string>();
-            foreach (var inputPath in extra)
+            foreach (var inputPath in extras)
             {
                 if (Directory.Exists(inputPath) == true)
                 {
