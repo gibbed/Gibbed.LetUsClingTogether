@@ -132,7 +132,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                 buffer[index + 2] == 'E' &&
                 buffer[index + 3] == 'S')
             {
-                return ".emes"; // event message?
+                return ".event_messages";
             }
             else if (
                 count >= 4 &&
