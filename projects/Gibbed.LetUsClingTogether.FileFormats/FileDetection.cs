@@ -154,6 +154,15 @@ namespace Gibbed.LetUsClingTogether.FileFormats
             }
             else if (
                 count >= 4 &&
+                buffer[index + 0] == 'T' &&
+                buffer[index + 1] == 'A' &&
+                buffer[index + 2] == 'S' &&
+                buffer[index + 3] == 'K')
+            {
+                return ".task";
+            }
+            else if (
+                count >= 4 &&
                 buffer[index + 0] == 'I' &&
                 buffer[index + 1] == 'N' &&
                 buffer[index + 2] == 'V' &&
