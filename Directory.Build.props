@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <GibbedIO_TargetFrameworksToBuild>net48</GibbedIO_TargetFrameworksToBuild>
+    <NDeskOptions_TargetFrameworksToBuild>net48</NDeskOptions_TargetFrameworksToBuild>
+  </PropertyGroup>
+</Project>
