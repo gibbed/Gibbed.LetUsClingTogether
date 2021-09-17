@@ -137,21 +137,34 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
                         output.Position = dataBlockOffset * dataBlockSize;
 
                         uint dataSize;
-                        if (fileManifest.IsPack == false)
+                        using (var temp = new MemoryStream())
                         {
-                            using (var input = File.OpenRead(inputPath))
+                            if (fileManifest.IsPack == false)
                             {
-                                if (input.Length > uint.MaxValue)
+                                using (var input = File.OpenRead(inputPath))
                                 {
-                                    throw new InvalidOperationException("file too large");
+                                    if (input.Length > uint.MaxValue)
+                                    {
+                                        throw new InvalidOperationException("file too large");
+                                    }
+                                    dataSize = (uint)input.Length;
+                                    temp.WriteFromStream(input, dataSize);
                                 }
-                                dataSize = (uint)input.Length;
-                                output.WriteFromStream(input, dataSize);
                             }
-                        }
-                        else
-                        {
-                            dataSize = HandleNestedPack(inputPath, output, endian);
+                            else
+                            {
+                                dataSize = HandleNestedPack(inputPath, temp, endian);
+                            }
+
+                            if (fileManifest.IsZip == false)
+                            {
+                                temp.Position = 0;
+                                output.WriteFromStream(temp, dataSize);
+                            }
+                            else
+                            {
+                                throw new NotImplementedException();
+                            }
                         }
 
                         var file = new FileTable.FileEntry()
@@ -369,6 +382,8 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
             public string Path { get; set; }
             public bool IsPack { get; set; }
             public uint? PackId { get; set; }
+            public bool IsZip { get; set; }
+            public string ZipFileName { get; set; }
         }
 
         private enum PackOperationType

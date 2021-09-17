@@ -8,6 +8,9 @@
     <Copyright>Copyright © Gibbed 2020</Copyright>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Gibbed.IO\Gibbed.IO.csproj" />
   </ItemGroup>
 </Project>

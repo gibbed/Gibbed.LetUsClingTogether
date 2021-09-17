@@ -85,11 +85,17 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             [JsonProperty("pack_id", DefaultValueHandling = DefaultValueHandling.Ignore)]
             public PackId? PackId { get; set; }
 
-            [JsonProperty("path", Required = Required.Always)]
-            public string Path { get; set; }
+            [JsonProperty("zip", DefaultValueHandling = DefaultValueHandling.Ignore)]
+            public bool IsZip { get; set; }
+
+            [JsonProperty("zip_name", DefaultValueHandling = DefaultValueHandling.Ignore)]
+            public string ZipName { get; set; }
 
             [JsonProperty("pack", DefaultValueHandling = DefaultValueHandling.Ignore)]
             public bool IsPack { get; set; }
+
+            [JsonProperty("path", Required = Required.Always)]
+            public string Path { get; set; }
         }
 
         public struct PackId

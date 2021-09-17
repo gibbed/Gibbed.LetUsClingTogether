@@ -42,6 +42,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
 
         public static void Main(string[] args)
         {
+            bool uncompressedZIPs = true;
             bool unpackNestedPacks = true;
             bool verbose = false;
             bool showHelp = false;
@@ -158,6 +159,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                             Id = file.Id,
                             Parent = tableDirectory,
                             NameHash = file.NameHash,
+                            DataStream = input,
                             DataOffset = dataOffset,
                             DataSize = file.DataSize,
                         });
@@ -168,8 +170,29 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                         var file = fileQueue.Dequeue();
                         var parent = file.Parent;
 
+                        long id;
+
                         var nameBuilder = new StringBuilder();
-                        nameBuilder.Append($"{file.Id}");
+
+                        if (file.PackRawId.HasValue == false)
+                        {
+                            id = file.Id;
+                            nameBuilder.Append($"{file.Id}");
+                        }
+                        else
+                        {
+                            id = file.PackRawId.Value;
+                            var packId = PackId.Create(file.PackRawId).Value;
+                            var fileId = packId.FileId & 0xFFF;
+                            var unknown = (packId.FileId & 0xF000) >> 12;
+
+                            nameBuilder.Append($"{packId.DirectoryId}_{fileId}");
+
+                            if (unknown != 0)
+                            {
+                                nameBuilder.Append($"_{unknown}");
+                            }
+                        }
 
                         string name = null;
                         if (file.NameHash != null)
@@ -188,9 +211,9 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                         {
                             var idCounts = parent.IdCounts;
                             int idCount;
-                            idCounts.TryGetValue(file.Id, out idCount);
+                            idCounts.TryGetValue(id, out idCount);
                             idCount++;
-                            idCounts[file.Id] = idCount;
+                            idCounts[id] = idCount;
 
                             if (idCount > 1)
                             {
@@ -198,59 +221,15 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                             }
                         }
 
-                        if (unpackNestedPacks == true && file.DataSize >= 8)
-                        {
-                            input.Position = file.DataOffset;
-                            var fileMagic = input.ReadValueU32(Endian.Little);
-                            if (fileMagic == PackFile.Signature || fileMagic.Swap() == PackFile.Signature)
-                            {
-                                input.Position = file.DataOffset;
-                                var nestedPack = HandleNestedPack(input, fileQueue, file.Id, nameBuilder.ToString(), parent);
-                                fileContainers.Add(nestedPack);
-                                parent.FileManifests.Add(new FileTableManifest.File()
-                                {
-                                    Id = file.Id,
-                                    NameHash = file.NameHash,
-                                    Name = name,
-                                    IsPack = true,
-                                    PackId = PackId.Create(file.PackRawId),
-                                    Path = CleanPathForManifest(PathHelper.GetRelativePath(parent.BasePath, nestedPack.ManifestPath)),
-                                });
-                                continue;
-                            }
-                        }
-
-                        var outputPath = Path.Combine(parent.BasePath, nameBuilder.ToString());
-
-                        var outputParentPath = Path.GetDirectoryName(outputPath);
-                        if (string.IsNullOrEmpty(outputParentPath) == false)
-                        {
-                            Directory.CreateDirectory(outputParentPath);
-                        }
-
-                        input.Position = file.DataOffset;
-                        var extension = FileDetection.Guess(input, (int)file.DataSize, file.DataSize);
-                        outputPath = Path.ChangeExtension(outputPath, extension);
-
-                        if (verbose == true)
-                        {
-                            Console.WriteLine(outputPath);
-                        }
-
-                        input.Position = file.DataOffset;
-                        using (var output = File.Create(outputPath))
-                        {
-                            output.WriteFromStream(input, file.DataSize);
-                        }
-
-                        parent.FileManifests.Add(new FileTableManifest.File()
-                        {
-                            Id = file.Id,
-                            NameHash = file.NameHash,
-                            Name = name,
-                            PackId = PackId.Create(file.PackRawId),
-                            Path = CleanPathForManifest(PathHelper.GetRelativePath(parent.BasePath, outputPath)),
-                        });
+                        HandleFile(
+                            file,
+                            name,
+                            nameBuilder.ToString(),
+                            fileQueue,
+                            fileContainers,
+                            verbose,
+                            uncompressedZIPs,
+                            unpackNestedPacks);
                     }
                 }
 
@@ -270,6 +249,120 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             }
 
             WriteManifest(tableManifestPath, tableManifest);
+        }
+
+        private static void HandleFile(
+            QueuedFile file,
+            string fileName,
+            string filePath,
+            Queue<QueuedFile> fileQueue,
+            List<IFileContainer> fileContainers,
+            bool verbose,
+            bool uncompressedZIPs,
+            bool unpackNestedPacks)
+        {
+            var parent = file.Parent;
+
+            MemoryStream temp = null;
+            Stream input = file.DataStream;
+            long dataOffset = file.DataOffset;
+            uint dataSize = file.DataSize;
+            string zipName = null;
+
+            if (uncompressedZIPs == true && dataSize >= 4)
+            {
+                input.Position = dataOffset;
+                var fileMagic = input.ReadValueU32(Endian.Little);
+                if (fileMagic == 0x04034B50) // 'PK\x03\x04'
+                {
+                    input.Position = dataOffset;
+                    using (var zip = new ICSharpCode.SharpZipLib.Zip.ZipInputStream(input))
+                    {
+                        zip.IsStreamOwner = false;
+
+                        var zipEntry = zip.GetNextEntry();
+                        if (zipEntry == null)
+                        {
+                            throw new InvalidOperationException();
+                        }
+
+                        if (zipEntry.Size > int.MaxValue)
+                        {
+                            throw new InvalidOperationException();
+                        }
+
+                        temp = zip.ReadToMemoryStream((int)zipEntry.Size);
+                        input = temp;
+                        dataOffset = 0;
+                        dataSize = (uint)zipEntry.Size;
+                        zipName = zipEntry.Name;
+
+                        zipEntry = zip.GetNextEntry();
+                        if (zipEntry != null)
+                        {
+                            throw new InvalidOperationException();
+                        }
+                    }
+                }
+            }
+
+            if (unpackNestedPacks == true && dataSize >= 8)
+            {
+                input.Position = dataOffset;
+                var fileMagic = input.ReadValueU32(Endian.Little);
+                if (fileMagic == PackFile.Signature || fileMagic.Swap() == PackFile.Signature)
+                {
+                    input.Position = dataOffset;
+                    var nestedPack = HandleNestedPack(input, fileQueue, file.Id, filePath, parent);
+                    fileContainers.Add(nestedPack);
+                    parent.FileManifests.Add(new FileTableManifest.File()
+                    {
+                        Id = file.Id,
+                        NameHash = file.NameHash,
+                        Name = fileName,
+                        IsZip = zipName != null,
+                        ZipName = zipName,
+                        IsPack = true,
+                        PackId = PackId.Create(file.PackRawId),
+                        Path = CleanPathForManifest(PathHelper.GetRelativePath(parent.BasePath, nestedPack.ManifestPath)),
+                    });
+                    return;
+                }
+            }
+
+            var outputPath = Path.Combine(parent.BasePath, filePath);
+
+            var outputParentPath = Path.GetDirectoryName(outputPath);
+            if (string.IsNullOrEmpty(outputParentPath) == false)
+            {
+                Directory.CreateDirectory(outputParentPath);
+            }
+
+            input.Position = dataOffset;
+            var extension = FileDetection.Guess(input, (int)dataSize, dataSize);
+            outputPath = Path.ChangeExtension(outputPath, extension);
+
+            if (verbose == true)
+            {
+                Console.WriteLine(outputPath);
+            }
+
+            input.Position = dataOffset;
+            using (var output = File.Create(outputPath))
+            {
+                output.WriteFromStream(input, dataSize);
+            }
+
+            parent.FileManifests.Add(new FileTableManifest.File()
+            {
+                Id = file.Id,
+                NameHash = file.NameHash,
+                Name = fileName,
+                IsZip = zipName != null,
+                ZipName = zipName,
+                PackId = PackId.Create(file.PackRawId),
+                Path = CleanPathForManifest(PathHelper.GetRelativePath(parent.BasePath, outputPath)),
+            });
         }
 
         private static IFileContainer HandleNestedPack(
@@ -305,6 +398,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                     Id = i,
                     Parent = container,
                     PackRawId = hasIds == false ? (uint?)null : entry.RawId,
+                    DataStream = input,
                     DataOffset = basePosition + entry.Offset,
                     DataSize = entrySize,
                 });
@@ -319,6 +413,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             public IFileContainer Parent { get; set; }
             public uint? NameHash { get; set; }
             public uint? PackRawId { get; set; }
+            public Stream DataStream { get; set; }
             public long DataOffset { get; set; }
             public uint DataSize { get; set; }
         }
@@ -353,6 +448,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
         {
             public NestedPack()
             {
+                this.IdCounts = new Dictionary<long, int>();
                 this.FileManifests = new List<FileTableManifest.File>();
             }
 
@@ -360,7 +456,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             public string BasePath { get; set; }
             public string ManifestPath { get { return Path.Combine(this.BasePath, "@manifest.json"); } }
             public IFileContainer Parent { get; set; }
-            public Dictionary<long, int> IdCounts { get { return null; } }
+            public Dictionary<long, int> IdCounts { get; }
             public List<FileTableManifest.File> FileManifests { get; }
         }
 
@@ -432,6 +528,15 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                             writer.WriteValue(fileManifest.PackId.Value.FileId);
                             writer.WriteEndObject();
                         }
+                    }
+
+                    if (fileManifest.IsZip == true)
+                    {
+                        writer.WritePropertyName("zip");
+                        writer.WriteValue(true);
+
+                        writer.WritePropertyName("zip_name");
+                        writer.WriteValue(fileManifest.ZipName);
                     }
 
                     if (fileManifest.IsPack == true)
