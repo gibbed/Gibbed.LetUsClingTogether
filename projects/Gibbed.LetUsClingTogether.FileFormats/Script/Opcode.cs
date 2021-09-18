@@ -24,12 +24,10 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Script
 {
     public enum Opcode : byte
     {
-        Unknown0 = 0,
-
-        Undefined1 = 1, // no handler
-        Undefined2 = 2, // no handler
-
-        Return = 3,
+        Invalid = 0,
+        // 1 (invalid)
+        // 2 (invalid)
+        Unknown3 = 3,
         Pop = 4,
         Either = 5,
         Both = 6,
@@ -65,24 +63,24 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Script
 
         // ????
         // These interact with a large amount of data, possibly variables/data in the script file?
-        Unknown33 = 33,
-        Unknown34 = 34,
-        Unknown35 = 35,
-        Unknown36 = 36,
-        Unknown37 = 37,
-        Unknown38 = 38,
-        Unknown39 = 39,
-        Unknown40 = 40,
-        Unknown41 = 41,
+        Unknown33 = 33, // can adjust code pointer
+        Unknown34 = 34, // can adjust code pointer
+        Unknown35 = 35, // can adjust code pointer
+        Unknown36 = 36, // can adjust code pointer
+        Unknown37 = 37, // can adjust code pointer
+        Unknown38 = 38, // can adjust code pointer
+        Unknown39 = 39, // can adjust code pointer
+        Unknown40 = 40, // can adjust code pointer
+        Unknown41 = 41, // can adjust code pointer
         // ????
 
         NoOperation42 = 42,
         NoOperation43 = 43,
         NoOperation44 = 44,
 
-        UnknownJump45 = 45,
-        UnknownJump46 = 46,
-        UnknownJump47 = 47,
+        Return = 45, // can adjust code pointer
+        UnknownReturn46 = 46, // can adjust code pointer
+        UnknownJump47 = 47, // can adjust code pointer
         UnknownJump48 = 48,
 
         Undefined49 = 49, // no handler
@@ -119,9 +117,9 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Script
         Undefined71 = 71,
 
         MaybeGetVariable = 72,
-        Unknown73 = 73,
+        MaybeSetVariable = 73,
         Unknown74 = 74,
-        MaybeSetVariable = 75,
+        Unknown75 = 75,
 
         PushUnknown76 = 76,
         PushUnknown77 = 77,
@@ -129,30 +127,30 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Script
         PushInt = 79, // short constant in bytecode
         Unknown80 = 80,
 
-        Unknown81 = 81, // same handler as Unknown96
+        Jump = 81, //  // can adjust code pointer, same handler as Jump_
+        JumpIfEqual = 82, // can adjust code pointer
+        JumpIfGreaterThan = 83, // can adjust code pointer
+        JumpIfGreaterThanOrEqual = 84, // can adjust code pointer
+        JumpIfLessThan = 85, // can adjust code pointer
+        JumpIfLessThanOrEqual = 86, // can adjust code pointer
+        JumpIfBetween = 87, // can adjust code pointer
 
-        UnknownBazEquals = 82,
-        UnknownBazGreaterThan = 83,
-        UnknownBazGreaterThanOrEqual = 84,
-        UnknownBazLessThan = 85,
-        UnknownBazLessThanOrEqual = 86,
-        UnknownBazLessThanOrEqual_Two = 87,
+        CallNative = 88, // can adjust code pointer
+        UnknownCallNative = 89, // can adjust code pointer
 
-        UnknownBar88 = 88,
-        UnknownBar89 = 89,
-        UnknownBar90 = 90,
-        UnknownBar91 = 91,
-        UnknownBar92 = 92,
-        CallNative = 93,
-        UnknownBar94 = 94,
+        PopBarAndJump = 90, // can adjust code pointer
+        PopBarAndJumpIfNotZero = 91, // can adjust code pointer
+        PopBarAndJumpIfZero = 92, // can adjust code pointer
+        CallNativeWithBar = 93, // can adjust code pointer
+        UnknownBar94 = 94, // can adjust code pointer
 
-        Unknown95 = 95,
+        Unknown95 = 95, // can adjust code pointer
 
-        Unknown96 = 96, // same handler as Unknown81
+        Jump_ = 96, // same handler as Jump
 
         Unknown97 = 97,
 
         Unknown98 = 98,
-        Unknown99 = 99,
+        Unknown99 = 99, // can adjust code pointer
     }
 }

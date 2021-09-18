@@ -24,9 +24,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using Gibbed.IO;
 using Gibbed.LetUsClingTogether.FileFormats.Script;
 using NDesk.Options;
+using ScriptFile = Gibbed.LetUsClingTogether.FileFormats.ScriptFile;
 
 namespace Gibbed.LetUsClingTogether.DisassembleScript
 {
@@ -75,9 +75,7 @@ namespace Gibbed.LetUsClingTogether.DisassembleScript
             // temporary, until I do real file output
             Console.OutputEncoding = Encoding.UTF8;
 
-            var sjis = Encoding.GetEncoding(932);
-
-            var eventNativeMethodNames = new Dictionary<int, string>()
+            var eventNativeNames = new Dictionary<int, string>()
             {
                 { 0, "Delay" },
                 { 27, "Talk_LeftLower" },
@@ -90,151 +88,92 @@ namespace Gibbed.LetUsClingTogether.DisassembleScript
                 { 65, "Unit_SetSprite" },
             };
 
+            var script = new ScriptFile();
             var scriptBytes = File.ReadAllBytes(inputPath);
             using (var input = new MemoryStream(scriptBytes, false))
             {
-                const uint signature = 0x8000000C;
+                script.Deserialize(input);
+            }
 
-                var magic = input.ReadValueU32(Endian.Little);
-                if (magic != signature && magic.Swap() != signature)
+            Console.WriteLine("Author: {0}", script.AuthorName);
+            Console.WriteLine("Source Name: {0}", script.SourceName);
+            Console.WriteLine("Source Version?: {0}", script.MaybeSourceVersion);
+
+            if (script.EventCounts.Count > 0)
+            {
+                Console.Write("Event Counts: ");
+                foreach (var eventCount in script.EventCounts)
                 {
-                    throw new FormatException();
+                    Console.Write(" {0}", eventCount);
                 }
-                var endian = magic == signature ? Endian.Little : Endian.Big;
+                Console.WriteLine();
+            }
 
-                var totalSize = input.ReadValueU32(endian);
-                var authorNameOffset = input.ReadValueU32(endian);
-                var sourceNameOffset = input.ReadValueU32(endian);
-                var versionOffset = input.ReadValueU32(endian);
-                var unknown14Offset = input.ReadValueU32(endian);
-                var functionTableOffset = input.ReadValueU32(endian);
-                var unknown1C = input.ReadValueU32(endian);
-                var unknown20 = input.ReadValueU32(endian);
-                var unknown24 = input.ReadValueU32(endian);
-                var unknown28Offset = input.ReadValueU32(endian);
-                var unknown2COffset = input.ReadValueU32(endian);
-                var unknown30Offset = input.ReadValueU32(endian);
-                var unknown34 = input.ReadValueU32(endian);
-                var unknown38 = input.ReadValueU32(endian);
-                var unknown3C = input.ReadValueU32(endian);
-                var unknown40 = input.ReadValueU32(endian);
-                var unknown44 = input.ReadValueU32(endian);
-                var unknown48Offset = input.ReadValueU32(endian);
-                var stringTableOffset = input.ReadValueU32(endian);
-                var unknown50 = input.ReadValueS16(endian);
-                var unknown52 = input.ReadValueS16(endian);
-                var unknown54Offset = input.ReadValueU32(endian);
-                var unknown58 = input.ReadValueU32(endian);
-                var unknown5COffset = input.ReadValueU32(endian);
-                var unknown60 = input.ReadValueU32(endian);
+            foreach (var ev in script.Events)
+            {
+                Console.WriteLine();
 
-                input.Position = authorNameOffset;
-                var authorName = input.ReadStringZ(sjis);
+                Console.WriteLine("event {0}", ev.Name);
 
-                input.Position = sourceNameOffset;
-                var sourceName = input.ReadStringZ(sjis);
+                Console.WriteLine("  evtable index = {0}", ev.TableIndex);
+                Console.WriteLine("  unknown06 = {0}", ev.Unknown06);
+                Console.WriteLine("  unknown1C = {0}", ev.Unknown1C);
+                Console.WriteLine("  unknown20 = {0}", ev.Unknown20);
+                Console.WriteLine("  evindex = {0}", ev.Index);
+                Console.WriteLine("  unknown24 = {0}", ev.Unknown24);
+                Console.WriteLine("  unknown28 = {0}", ev.Unknown28);
+                Console.WriteLine("  unknown2C = {0}", ev.Unknown2C);
 
-                input.Position = versionOffset;
-                var version = input.ReadStringZ(sjis);
-
-                input.Position = functionTableOffset;
-                var functionCount = input.ReadValueS32(endian);
-
-                Console.WriteLine("Author: {0}", authorName);
-                Console.WriteLine("Source: {0}", sourceName);
-                Console.WriteLine("Version?: {0}", version);
-
-                var rawFunctionInfos = new RawFunctionInfo[functionCount];
-                for (int i = 0; i < functionCount; i++)
+                if (ev.Jumps.Count > 0)
                 {
-                    RawFunctionInfo rawFunctionInfo;
-                    rawFunctionInfo.NameOffset = input.ReadValueU32(endian);
-                    rawFunctionInfo.Unknown04 = input.ReadValueU32(endian);
-                    rawFunctionInfo.CodeOffset = input.ReadValueU32(endian);
-                    rawFunctionInfo.CodeCount = input.ReadValueS32(endian);
-                    rawFunctionInfo.Unknown10 = input.ReadValueU32(endian);
-                    rawFunctionInfo.Unknown14 = input.ReadValueU32(endian);
-                    rawFunctionInfo.Unknown18 = input.ReadValueU32(endian);
-                    rawFunctionInfo.Unknown1C = input.ReadValueU32(endian);
-                    rawFunctionInfo.Unknown20 = input.ReadValueU32(endian);
-                    rawFunctionInfo.Unknown24 = input.ReadValueU32(endian);
-                    rawFunctionInfo.Unknown28 = input.ReadValueU32(endian);
-                    rawFunctionInfo.Unknown2C = input.ReadValueU32(endian);
-                    rawFunctionInfos[i] = rawFunctionInfo;
-                }
-
-                foreach (var rawFunctionInfo in rawFunctionInfos)
-                {
-                    Console.WriteLine();
-
-                    input.Position = stringTableOffset + rawFunctionInfo.NameOffset;
-                    var name = input.ReadStringZ(sjis);
-
-                    Console.WriteLine("function {0}", name);
-
-                    input.Position = rawFunctionInfo.CodeOffset;
-                    for (int i = 0; i < rawFunctionInfo.CodeCount; i++)
+                    Console.Write("  jump table:");
+                    foreach (var jump in ev.Jumps)
                     {
-                        var instructionPosition = input.Position;
+                        Console.Write(" {0}", jump);
+                    }
+                    Console.WriteLine();
+                }
 
-                        var opcode = (Opcode)input.ReadValueU8();
-                        var extraBytes = input.ReadBytes(opcode.GetSize() - 1);
+                foreach (var function in ev.Functions)
+                {
+                    Console.WriteLine("  function {0}", function.Name);
 
-                        Console.Write("  ");
+                    for (int bodyIndex = function.BodyStart; bodyIndex < function.BodyEnd; bodyIndex++)
+                    {
+                        var instruction = ev.Code[bodyIndex];
+                        var opcode = instruction.Opcode;
 
-                        Console.Write("@{0:X} : ", instructionPosition);
-                        Console.Write("@{0:X} : ", instructionPosition - rawFunctionInfo.CodeOffset);
+                        Console.Write("    ");
 
-                        Console.Write("{0}", opcode.ToString().PadRight(24));
+                        Console.Write("@{0:D4} ", bodyIndex);
 
-                        if (opcode == Opcode.CallNative)
+                        Console.Write("{0}", opcode.ToString().PadRight(28));
+
+                        if (opcode == Opcode.CallNative ||
+                            opcode == Opcode.UnknownCallNative ||
+                            opcode == Opcode.CallNativeWithBar)
                         {
-                            if (extraBytes.Length != 2)
+                            var argument = instruction.Argument;
+                            Console.Write(" {0}", argument);
+                            if (eventNativeNames.TryGetValue(argument, out var eventNativeName) == true)
                             {
-                                throw new FormatException();
-                            }
-
-                            var arg = BitConverter.ToInt16(extraBytes, 0);
-                            Console.Write(" {0}", arg);
-
-                            if (eventNativeMethodNames.TryGetValue(arg, out var nativeMethodName) == true)
-                            {
-                                Console.Write(" ({0})", nativeMethodName);
+                                Console.Write(" ({0})", eventNativeName);
                             }
                         }
-                        else if (opcode >= Opcode.Undefined71)
+                        else if (opcode.IsJump() == true)
                         {
-                            if (extraBytes.Length != 2)
-                            {
-                                throw new FormatException();
-                            }
-                            var arg = BitConverter.ToInt16(extraBytes, 0);
-                            Console.Write(" {0}", arg);
+                            var argument = instruction.Argument;
+                            var index = ev.Jumps[argument];
+                            Console.Write(" {0} => @{1:D4}", argument, index);
                         }
-                        else if (extraBytes.Length > 0)
+                        else if (opcode.HasArgument() == true)
                         {
-                            Console.Write(" {0}", BitConverter.ToString(extraBytes));
+                            Console.Write(" {0}", instruction.Argument);
                         }
                         Console.WriteLine();
                     }
                 }
             }
         }
-    }
-
-    internal struct RawFunctionInfo
-    {
-        public uint NameOffset;
-        public uint Unknown04;
-        public uint CodeOffset;
-        public int CodeCount;
-        public uint Unknown10;
-        public uint Unknown14;
-        public uint Unknown18;
-        public uint Unknown1C;
-        public uint Unknown20;
-        public uint Unknown24;
-        public uint Unknown28;
-        public uint Unknown2C;
     }
 }
