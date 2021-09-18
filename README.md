@@ -2,7 +2,7 @@
 
 Tools for modding the PSP remake of Tactics Ogre: Let Us Cling Together.
 
-[![Build status](https://ci.appveyor.com/api/projects/status/9cl2i5x0j2rlwgih/branch/master?svg=true)](https://ci.appveyor.com/project/gibbed/gibbed-letusclingtogether/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/9cl2i5x0j2rlwgih/branch/main?svg=true)](https://ci.appveyor.com/project/gibbed/gibbed-letusclingtogether/branch/main)
 
 ## What?
 
