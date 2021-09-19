@@ -83,7 +83,7 @@ Each component is computed as `component - 1`. So for the brighest red, `FF 82 0
 
 * `aa` - string array variable index
 * `??` - ???
-* `cc` - condition variable index. If the index is `FE`, string 0 is used. Otherwise it checks if the variable is greather than 1, if it is, it uses string 1, otherwise it uses string 0.
+* `cc` - condition variable index. If the index is `FE`, string index `0` is used. Otherwise it checks if the variable is greather than `1`, if it is, it uses string index `1`, otherwise it uses string index `0`.
 * `??` - ???
 * `??` - ???
 
@@ -92,7 +92,7 @@ Each component is computed as `component - 1`. So for the brighest red, `FF 82 0
 `FF 84 vv ?? ??`
 
 * `tt` - value variable index
-* `oo` - one string variable index. When the value is 1: if the index is `FF`, string "1" is used. Otherwise, it uses the specified string variable.
+* `oo` - one string variable index. When the value is `1`: if the index is `FF`, string "1" is used. Otherwise, it uses the specified string variable.
 * `jj` - ???
 
 ## `FF 8A` - Insert Icon
