@@ -11,8 +11,8 @@ Using an operation outside of the range `80` - `A9` will likely cause game crash
 | `FF 80`                | Insert newline. |
 | `FF 81 ww uu`          | [Indicate wrap area](#ff-81---indicate-wrap-area). |
 | `FF 82 rr gg bb aa`    | [Set text color](#ff-82---set-text-color). |
-| `FF 83 ?? ?? ?? ?? ??` | Insert string variable? |
-| `FF 84 ?? ?? ??`       | Insert number variable? |
+| `FF 83 aa ?? cc ?? ??` | [Insert string variable](#ff-83---insert-string-variable). |
+| `FF 84 vv ?? ??`       | [Insert number variable](#ff-84---insert-number-variable). |
 | `FF 85 ?? ??`          | Unknown. |
 | `FF 86`                | Insert page break. |
 | `FF 87 ??`             | Unknown. |
@@ -76,6 +76,24 @@ Since both arguments seem to don't really matter, `FF 81 01 01` seems to be the 
 * `aa` = Alpha component
 
 Each component is computed as `component - 1`. So for the brighest red, `FF 82 00 01 01 00` becomes `rgba(255,0,0,255)` (`FF0000FF`).
+
+## `FF 83` - Insert String Variable
+
+`FF 83 aa ?? cc ?? ??`
+
+* `aa` - string array variable index
+* `??` - ???
+* `cc` - condition variable index. If the index is `FE`, string 0 is used. Otherwise it checks if the variable is greather than 1, if it is, it uses string 1, otherwise it uses string 0.
+* `??` - ???
+* `??` - ???
+
+## `FF 84` - Insert Number Variable
+
+`FF 84 vv ?? ??`
+
+* `tt` - value variable index
+* `oo` - one string variable index. When the value is 1: if the index is `FF`, string "1" is used. Otherwise, it uses the specified string variable.
+* `jj` - ???
 
 ## `FF 8A` - Insert Icon
 
