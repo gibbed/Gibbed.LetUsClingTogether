@@ -1,0 +1,10 @@
+[600]
+path = "fonts"
+
+5.path = "main.font_family"
+8.path = "normal.font"
+9.path = "dialogue.font"
+10.path = "credits_header.font"
+11.path = "credits_text.font"
+12.path = "header.font"
+13.path = "light.font"

@@ -1,0 +1,8 @@
+[2700]
+path = "ending"
+
+[2700.0]
+path = "credits"
+
+0.path = "credits_text.xlc"
+1.path = "credits_order.xlc"
