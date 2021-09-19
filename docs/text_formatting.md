@@ -81,19 +81,27 @@ Each component is computed as `component - 1`. So for the brighest red, `FF 82 0
 
 `FF 83 aa ?? cc ?? ??`
 
-* `aa` - string array variable index
-* `??` - ???
-* `cc` - condition variable index. If the index is `FE`, string index `0` is used. Otherwise it checks if the variable is greather than `1`, if it is, it uses string index `1`, otherwise it uses string index `0`.
-* `??` - ???
-* `??` - ???
+* `aa` - String array variable index
+* `??` - Unknown
+* `cc` - Condition variable index
+* `??` - Unknown
+* `??` - Unknown
+
+Both string array variable index and condition variable index are one-based.
+
+If the condition variable index is `-1` (`FF`), string index `0` is used. Otherwise it checks if the condition variable value is greather than `1`. If it is, it uses string index `1`, otherwise it uses string index `0`.
 
 ## `FF 84` - Insert Number Variable
 
 `FF 84 vv oo ??`
 
-* `vv` - value variable index
-* `oo` - one string variable index. When the value is `1`: if the index is `FF`, string "1" is used. Otherwise, it uses the specified string variable.
-* `??` - ???
+* `vv` - Value variable index
+* `oo` - One string variable index
+* `??` - Unknown
+
+Both value variable index and one string variable index are one-based.
+
+If the variable value is `1`: If the one string variable index is `-1` (`FF`), string `"1"` is used. Otherwise, it uses the specified string variable.
 
 ## `FF 8A` - Insert Icon
 
