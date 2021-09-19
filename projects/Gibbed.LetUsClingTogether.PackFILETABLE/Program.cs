@@ -27,7 +27,7 @@ using System.Linq;
 using Gibbed.IO;
 using Gibbed.LetUsClingTogether.FileFormats;
 using NDesk.Options;
-using Newtonsoft.Json;
+using static Gibbed.LetUsClingTogether.FileFormats.InvariantShorthand;
 using FileTable = Gibbed.LetUsClingTogether.FileFormats.FileTable;
 using FileTableManifest = Gibbed.LetUsClingTogether.UnpackFILETABLE.FileTableManifest;
 
@@ -79,7 +79,7 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
 
             if (Directory.Exists(baseManifestInputPath) == true)
             {
-                tableManifestPath = Path.Combine(baseManifestInputPath, "@manifest.json");
+                tableManifestPath = Path.Combine(baseManifestInputPath, "@manifest.toml");
             }
             else
             {
@@ -89,10 +89,12 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
 
             string outputBasePath = extras.Count > 1 ? extras[1] : baseManifestInputPath + "_packed";
 
-            var tableManifest = ReadManifest<FileTableManifest>(tableManifestPath);
+            FileTableManifest tableManifest;
+            ReadManifest(tableManifestPath, out tableManifest);
 
             var table = new FileTableFile()
             {
+                Endian = tableManifest.Endian,
                 TitleId1 = tableManifest.TitleId1,
                 TitleId2 = tableManifest.TitleId2,
                 Unknown32 = tableManifest.Unknown32,
@@ -105,11 +107,12 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
             foreach (var directoryManifest in tableManifest.Directories)
             {
                 var fileManifestPath = Path.Combine(baseManifestInputPath, CleanPathForManifest(directoryManifest.FileManifest));
-                var fileManifests = ReadManifest<List<FileTableManifest.File>>(fileManifestPath);
+                List<FileTableManifest.File> fileManifests;
+                ReadManifest(fileManifestPath, out fileManifests);
 
                 var baseInputPath = Path.GetDirectoryName(fileManifestPath);
 
-                var outputPath = Path.Combine(outputBasePath, $"{directoryManifest.Id:X4}.BIN");
+                var outputPath = Path.Combine(outputBasePath, _($"{directoryManifest.Id:X4}.BIN"));
 
                 var outputParentPath = Path.GetDirectoryName(outputPath);
                 if (string.IsNullOrEmpty(outputParentPath) == false)
@@ -122,7 +125,9 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
                     Id = directoryManifest.Id,
                     DataBaseOffset = 0,
                     DataBlockSize = directoryManifest.DataBlockSize,
+                    // TODO(gibbed): don't currently support building install data
                     IsInInstallData = false,
+                    DataInstallBaseOffset = 0, // directoryManifest.IsInInstallData == false ? 0u : 0xCCCCCCCCu,
                 };
 
                 using (var output = File.Create(outputPath))
@@ -320,7 +325,8 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
                 else
                 {
                     var basePath = Path.GetDirectoryName(op.Path);
-                    var fileManifests = ReadManifest<List<FileTableManifest.File>>(op.Path);
+                    List<FileTableManifest.File> fileManifests;
+                    ReadManifest(op.Path, out fileManifests);
 
                     var headerPosition = output.Position;
 
@@ -432,15 +438,93 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
             return path.Replace('/', Path.DirectorySeparatorChar);
         }
 
-        private static T ReadManifest<T>(string path)
+        private static void ReadManifest(string path, out FileTableManifest manifest)
         {
-            var content = File.ReadAllText(path);
-            using (var stringReader = new StringReader(content))
-            using (var reader = new JsonTextReader(stringReader))
+            Tommy.TomlTable rootTable;
+            var inputBytes = File.ReadAllBytes(path);
+            using (var input = new MemoryStream(inputBytes, false))
+            using (var reader = new StreamReader(input, true))
             {
-                var serializer = new JsonSerializer();
-                return serializer.Deserialize<T>(reader);
+                rootTable = Tommy.TOML.Parse(reader);
             }
+
+            if (TryParseEnum<Endian>(rootTable["endian"], out var endian) == false)
+            {
+                throw new FormatException();
+            }
+
+            manifest = new FileTableManifest();
+            manifest.Endian = endian;
+            manifest.TitleId1 = rootTable["title_id_1"]?.AsString?.Value ?? throw new FormatException();
+            manifest.TitleId2 = rootTable["title_id_2"]?.AsString?.Value ?? throw new FormatException();
+            manifest.Unknown32 = (byte)(rootTable["unknown32"]?.AsInteger?.Value ?? throw new FormatException());
+            manifest.ParentalLevel = (byte)(rootTable["parental_level"]?.AsInteger?.Value ?? throw new FormatException());
+            manifest.InstallDataCryptoKey = Convert.FromBase64String(rootTable["install_data_crypto_key"]?.AsString?.Value ?? throw new FormatException());
+            manifest.IsInInstallDataDefault = rootTable["is_in_install_data_default"]?.AsBoolean?.Value ?? throw new FormatException();
+            foreach (Tommy.TomlTable directoryTable in rootTable["directories"])
+            {
+                var directory = new FileTableManifest.Directory();
+                directory.Id = (ushort)(directoryTable["id"]?.AsInteger?.Value ?? throw new FormatException());
+                directory.DataBlockSize = (byte)(directoryTable["data_block_size"]?.AsInteger?.Value ?? 4);
+                directory.IsInInstallData = directoryTable["is_in_install_data"]?.AsBoolean?.Value ?? manifest.IsInInstallDataDefault;
+                directory.FileManifest = directoryTable["file_manifest"]?.AsString?.Value ?? throw new FormatException();
+                manifest.Directories.Add(directory);
+            }
+        }
+
+        private static void ReadManifest(string path, out List<FileTableManifest.File> manifests)
+        {
+            Tommy.TomlTable rootTable;
+            var inputBytes = File.ReadAllBytes(path);
+            using (var input = new MemoryStream(inputBytes, false))
+            using (var reader = new StreamReader(input, true))
+            {
+                rootTable = Tommy.TOML.Parse(reader);
+            }
+
+            manifests = new List<FileTableManifest.File>();
+            foreach (Tommy.TomlTable fileTable in rootTable["files"])
+            {
+                var manifest = new FileTableManifest.File();
+                manifest.Id = (int?)(fileTable["id"]?.AsInteger?.Value ?? null);
+                manifest.NameHash = (uint?)(fileTable["name_hash"]?.AsInteger?.Value ?? null);
+                manifest.Name = fileTable["name"]?.AsString?.Value;
+                manifest.PackId = ReadManifestPackId(fileTable["pack_id"]?.AsTable);
+                manifest.IsZip = fileTable["zip"]?.AsBoolean?.Value ?? false;
+                manifest.ZipName = fileTable["zip_name"]?.AsString?.Value;
+                manifest.IsPack = fileTable["pack"]?.AsBoolean?.Value ?? false;
+                manifest.Path = fileTable["path"]?.AsString?.Value;
+                manifests.Add(manifest);
+            }
+        }
+
+        private static FileTableManifest.PackId? ReadManifestPackId(Tommy.TomlTable table)
+        {
+            if (table == null)
+            {
+                return null;
+            }
+            FileTableManifest.PackId packId = default;
+            packId.DirectoryId = (ushort)(table["dir"]?.AsInteger?.Value ?? throw new FormatException());
+            packId.FileId = (ushort)(table["file"]?.AsInteger?.Value ?? throw new FormatException());
+            return packId;
+        }
+
+        private static bool TryParseEnum<T>(Tommy.TomlNode node, out T value)
+            where T : struct
+        {
+            var s = node?.AsString?.Value;
+            if (string.IsNullOrEmpty(s) == true)
+            {
+                value = default;
+                return false;
+            }
+            if (Enum.TryParse(s, true, out value) == false)
+            {
+                value = default;
+                return false;
+            }
+            return true;
         }
     }
 }

@@ -28,7 +28,7 @@ using System.Text;
 using Gibbed.IO;
 using Gibbed.LetUsClingTogether.FileFormats;
 using NDesk.Options;
-using Newtonsoft.Json;
+using static Gibbed.LetUsClingTogether.FileFormats.InvariantShorthand;
 using PackId = Gibbed.LetUsClingTogether.UnpackFILETABLE.FileTableManifest.PackId;
 
 namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
@@ -42,14 +42,15 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
 
         public static void Main(string[] args)
         {
-            bool uncompressedZIPs = true;
             bool unpackNestedPacks = true;
+            bool unpackNestedZIPs = true;
             bool verbose = false;
             bool showHelp = false;
 
             var options = new OptionSet()
             {
-                { "d|dont-unpack-nested-packs", "don't unpack nested .pack files", v => unpackNestedPacks = v == null },
+                { "np|dont-unpack-nested-packs", "don't unpack nested .pack files", v => unpackNestedPacks = v == null },
+                { "nz|dont-unpack-zips", "don't unpack nested .zip files", v => unpackNestedZIPs = v == null },
                 { "v|verbose", "be verbose", v => verbose = v != null },
                 { "h|help", "show this message and exit",  v => showHelp = v != null },
             };
@@ -80,6 +81,8 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             string inputPath = extras[0];
             string outputBasePath = extras.Count > 1 ? extras[1] : Path.ChangeExtension(inputPath, null) + "_unpacked";
 
+            var rootLookup = Lookup.Load();
+
             FileTableFile table;
             using (var input = File.OpenRead(inputPath))
             {
@@ -90,7 +93,6 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             var inputBasePath = Path.GetDirectoryName(inputPath);
 
             // TODO(gibbed):
-            //  - generate file index for successful repacking
             //  - better name lookup for name hashes (FNV32)
             //    (don't hardcode the list)
             var names = new string[]
@@ -120,7 +122,13 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             };
             var nameHashLookup = names.ToDictionary(v => v.HashFNV32(), v => v);
 
-            var tableManifestPath = Path.Combine(outputBasePath, "@manifest.json");
+            var isInstallDataCounts = table.Directories
+                .GroupBy(d => d.IsInInstallData)
+                .OrderBy(v => v.Key)
+                .Select(v => v.Count())
+                .ToArray();
+
+            var tableManifestPath = Path.Combine(outputBasePath, "@manifest.toml");
             var tableManifest = new FileTableManifest()
             {
                 Endian = table.Endian,
@@ -129,14 +137,25 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                 Unknown32 = table.Unknown32,
                 ParentalLevel = table.ParentalLevel,
                 InstallDataCryptoKey = table.InstallDataCryptoKey,
+                IsInInstallDataDefault = isInstallDataCounts[1] > isInstallDataCounts[0],
             };
 
             foreach (var directory in table.Directories)
             {
+                var directoryPath = _($"{directory.Id}");
+                var directoryLookup = rootLookup[directoryPath];
+
+                var directoryLookupPath = directoryLookup["path"]?.AsString?.Value;
+                if (directoryLookupPath != null)
+                {
+                    directoryPath = directoryLookupPath.Replace('/', Path.DirectorySeparatorChar);
+                }
+
                 var tableDirectory = new TableDirectory()
                 {
                     Id = directory.Id,
-                    BasePath = Path.Combine(outputBasePath, $"{directory.Id}"),
+                    BasePath = Path.Combine(outputBasePath, directoryPath),
+                    Lookup = directoryLookup,
                 };
 
                 var fileContainers = new List<IFileContainer>()
@@ -144,7 +163,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                     tableDirectory,
                 };
 
-                var binPath = Path.Combine(inputBasePath, $"{directory.Id:X4}.BIN");
+                var binPath = Path.Combine(inputBasePath, _($"{directory.Id:X4}.BIN"));
                 using (var input = File.OpenRead(binPath))
                 {
                     var fileQueue = new Queue<QueuedFile>();
@@ -172,38 +191,25 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
 
                         long id;
 
-                        var nameBuilder = new StringBuilder();
+                        var filePathBuilder = new StringBuilder();
 
                         if (file.PackRawId.HasValue == false)
                         {
                             id = file.Id;
-                            nameBuilder.Append($"{file.Id}");
+                            filePathBuilder.Append(_($"{file.Id}"));
                         }
                         else
                         {
                             id = file.PackRawId.Value;
                             var packId = PackId.Create(file.PackRawId).Value;
+
                             var fileId = packId.FileId & 0xFFF;
                             var unknown = (packId.FileId & 0xF000) >> 12;
-
-                            nameBuilder.Append($"{packId.DirectoryId}_{fileId}");
+                            filePathBuilder.Append(_($"{packId.DirectoryId}_{fileId}"));
 
                             if (unknown != 0)
                             {
-                                nameBuilder.Append($"_{unknown}");
-                            }
-                        }
-
-                        string name = null;
-                        if (file.NameHash != null)
-                        {
-                            if (nameHashLookup.TryGetValue(file.NameHash.Value, out name) == true)
-                            {
-                                nameBuilder.Append($"_{name}");
-                            }
-                            else
-                            {
-                                nameBuilder.Append($"_HASH[{file.NameHash.Value:X8}]");
+                                filePathBuilder.Append(_($"_{unknown}"));
                             }
                         }
 
@@ -217,19 +223,50 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
 
                             if (idCount > 1)
                             {
-                                nameBuilder.Append($"_DUP_{idCount}");
+                                filePathBuilder.Append(_($"_DUP_{idCount}"));
+                            }
+                        }
+
+                        string fileName;
+                        if (file.NameHash == null)
+                        {
+                            fileName = null;
+                        }
+                        else if (nameHashLookup.TryGetValue(file.NameHash.Value, out fileName) == false)
+                        {
+                            fileName = null;
+                        }
+
+                        var filePath = filePathBuilder.ToString();
+
+                        var fileLookup = parent.Lookup[filePath];
+                        var fileLookupPath = fileLookup["path"]?.AsString?.Value;
+                        if (fileLookupPath != null)
+                        {
+                            filePath = fileLookupPath.Replace('/', Path.DirectorySeparatorChar);
+                        }
+                        else if (file.NameHash != null)
+                        {
+                            if (fileName != null)
+                            {
+                                filePathBuilder.Append(_($"_{fileName}"));
+                            }
+                            else
+                            {
+                                filePathBuilder.Append(_($"_HASH[{file.NameHash.Value:X8}]"));
                             }
                         }
 
                         HandleFile(
                             file,
-                            name,
-                            nameBuilder.ToString(),
+                            fileName,
+                            filePath,
+                            fileLookup,
                             fileQueue,
                             fileContainers,
                             verbose,
-                            uncompressedZIPs,
-                            unpackNestedPacks);
+                            unpackNestedPacks,
+                            unpackNestedZIPs);
                     }
                 }
 
@@ -255,11 +292,12 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             QueuedFile file,
             string fileName,
             string filePath,
+            Tommy.TomlNode fileLookup,
             Queue<QueuedFile> fileQueue,
             List<IFileContainer> fileContainers,
             bool verbose,
-            bool uncompressedZIPs,
-            bool unpackNestedPacks)
+            bool unpackNestedPacks,
+            bool unpackNestedZIPs)
         {
             var parent = file.Parent;
 
@@ -269,7 +307,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             uint dataSize = file.DataSize;
             string zipName = null;
 
-            if (uncompressedZIPs == true && dataSize >= 4)
+            if (unpackNestedZIPs == true && dataSize >= 4)
             {
                 input.Position = dataOffset;
                 var fileMagic = input.ReadValueU32(Endian.Little);
@@ -313,7 +351,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                 if (fileMagic == PackFile.Signature || fileMagic.Swap() == PackFile.Signature)
                 {
                     input.Position = dataOffset;
-                    var nestedPack = HandleNestedPack(input, fileQueue, file.Id, filePath, parent);
+                    var nestedPack = HandleNestedPack(input, fileQueue, file.Id, filePath, fileLookup, parent);
                     fileContainers.Add(nestedPack);
                     parent.FileManifests.Add(new FileTableManifest.File()
                     {
@@ -338,9 +376,13 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                 Directory.CreateDirectory(outputParentPath);
             }
 
-            input.Position = dataOffset;
-            var extension = FileDetection.Guess(input, (int)dataSize, dataSize);
-            outputPath = Path.ChangeExtension(outputPath, extension);
+            string fileExtension = Path.GetExtension(filePath);
+            if (string.IsNullOrEmpty(fileExtension) == true)
+            {
+                input.Position = dataOffset;
+                fileExtension = FileDetection.Guess(input, (int)dataSize, dataSize);
+                outputPath = Path.ChangeExtension(outputPath, fileExtension);
+            }
 
             if (verbose == true)
             {
@@ -369,7 +411,8 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             Stream input,
             Queue<QueuedFile> fileQueue,
             int id,
-            string name,
+            string path,
+            Tommy.TomlNode lookup,
             IFileContainer parent)
         {
             var basePosition = input.Position;
@@ -380,8 +423,9 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             var container = new NestedPack()
             {
                 Id = id,
-                BasePath = Path.Combine(parent.BasePath, name),
+                BasePath = Path.Combine(parent.BasePath, path),
                 Parent = parent,
+                Lookup = lookup,
             };
 
             var hasIds = packFile.Entries.Any(e => e.RawId != 0);
@@ -426,6 +470,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             IFileContainer Parent { get; }
             Dictionary<long, int> IdCounts { get; }
             List<FileTableManifest.File> FileManifests { get; }
+            public Tommy.TomlNode Lookup { get; }
         }
 
         private class TableDirectory : IFileContainer
@@ -438,10 +483,11 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
 
             public int Id { get; set; }
             public string BasePath { get; set; }
-            public string ManifestPath { get { return Path.Combine(this.BasePath, "@manifest.json"); } }
+            public string ManifestPath { get { return Path.Combine(this.BasePath, "@manifest.toml"); } }
             public IFileContainer Parent { get { return null; } }
             public Dictionary<long, int> IdCounts { get; }
             public List<FileTableManifest.File> FileManifests { get; }
+            public Tommy.TomlNode Lookup { get; set; }
         }
 
         private class NestedPack : IFileContainer
@@ -454,10 +500,11 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
 
             public int Id { get; set; }
             public string BasePath { get; set; }
-            public string ManifestPath { get { return Path.Combine(this.BasePath, "@manifest.json"); } }
+            public string ManifestPath { get { return Path.Combine(this.BasePath, "@manifest.toml"); } }
             public IFileContainer Parent { get; set; }
             public Dictionary<long, int> IdCounts { get; }
             public List<FileTableManifest.File> FileManifests { get; }
+            public Tommy.TomlNode Lookup { get; set; }
         }
 
         private static string CleanPathForManifest(string path)
@@ -468,94 +515,46 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
 
         private static void WriteManifest(string path, FileTableManifest manifest)
         {
-            string content;
-            using (var stringWriter = new StringWriter())
-            using (var writer = new JsonTextWriter(stringWriter))
+            var directoryArray = new Tommy.TomlArray()
             {
-                writer.Indentation = 2;
-                writer.IndentChar = ' ';
-                writer.Formatting = Formatting.Indented;
-                var serializer = new JsonSerializer();
-                serializer.Serialize(writer, manifest);
-                writer.Flush();
-                stringWriter.Flush();
-                content = stringWriter.ToString();
-            }
-            File.WriteAllText(path, content, Encoding.UTF8);
-        }
+                IsMultiline = true,
+            };
 
-        private static void WriteManifest(string path, IFileContainer directory)
-        {
-            string content;
-            using (var stringWriter = new StringWriter())
-            using (var writer = new JsonTextWriter(stringWriter))
+            foreach (var directory in manifest.Directories)
             {
-                writer.Indentation = 2;
-                writer.IndentChar = ' ';
-                writer.Formatting = Formatting.Indented;
-                writer.WriteStartArray();
-
-                foreach (var fileManifest in directory.FileManifests)
+                var directoryTable = new Tommy.TomlTable()
                 {
-                    writer.WriteStartObject();
-                    var oldFormatting = writer.Formatting;
-                    writer.Formatting = Formatting.None;
-
-                    if ((directory is NestedPack) == false)
-                    {
-                        writer.WritePropertyName("id");
-                        writer.WriteValue(fileManifest.Id);
-                        if (fileManifest.Name != null)
-                        {
-                            writer.WritePropertyName("name");
-                            writer.WriteValue(fileManifest.Name);
-                        }
-                        else if (fileManifest.NameHash != null)
-                        {
-                            writer.WritePropertyName("name_hash");
-                            writer.WriteValue(fileManifest.NameHash.Value);
-                        }
-                    }
-                    else
-                    {
-                        if (fileManifest.PackId != null)
-                        {
-                            writer.WritePropertyName("pack_id");
-                            writer.WriteStartObject();
-                            writer.WritePropertyName("dir");
-                            writer.WriteValue(fileManifest.PackId.Value.DirectoryId);
-                            writer.WritePropertyName("file");
-                            writer.WriteValue(fileManifest.PackId.Value.FileId);
-                            writer.WriteEndObject();
-                        }
-                    }
-
-                    if (fileManifest.IsZip == true)
-                    {
-                        writer.WritePropertyName("zip");
-                        writer.WriteValue(true);
-
-                        writer.WritePropertyName("zip_name");
-                        writer.WriteValue(fileManifest.ZipName);
-                    }
-
-                    if (fileManifest.IsPack == true)
-                    {
-                        writer.WritePropertyName("pack");
-                        writer.WriteValue(true);
-                    }
-
-                    writer.WritePropertyName("path");
-                    writer.WriteValue(fileManifest.Path);
-
-                    writer.WriteEndObject();
-                    writer.Formatting = oldFormatting;
+                    IsInline = true,
+                    ["id"] = directory.Id,
+                };
+                if (directory.DataBlockSize != 4)
+                {
+                    directoryTable["data_block_size"] = directory.DataBlockSize;
                 }
+                if (directory.IsInInstallData != manifest.IsInInstallDataDefault)
+                {
+                    directoryTable["in_install_data"] = directory.IsInInstallData;
+                }
+                directoryTable["file_manifest"] = directory.FileManifest;
+                directoryArray.Add(directoryTable);
+            }
 
-                writer.WriteEndArray();
-                writer.Flush();
-                stringWriter.Flush();
-                content = stringWriter.ToString();
+            var rootTable = new Tommy.TomlTable()
+            {
+                ["endian"] = _($"{manifest.Endian}"),
+                ["title_id_1"] = manifest.TitleId1,
+                ["title_id_2"] = manifest.TitleId2,
+                ["unknown32"] = manifest.Unknown32,
+                ["parental_level"] = manifest.ParentalLevel,
+                ["install_data_crypto_key"] = Convert.ToBase64String(manifest.InstallDataCryptoKey),
+                ["is_in_install_data_default"] = manifest.IsInInstallDataDefault,
+                ["directories"] = directoryArray,
+            };
+
+            var sb = new StringBuilder();
+            using (var writer = new StringWriter(sb))
+            {
+                rootTable.WriteTo(writer);
             }
 
             var pathParent = Path.GetDirectoryName(path);
@@ -563,7 +562,83 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             {
                 Directory.CreateDirectory(pathParent);
             }
-            File.WriteAllText(path, content, Encoding.UTF8);
+
+            File.WriteAllText(path, sb.ToString(), Encoding.UTF8);
+        }
+
+        private static void WriteManifest(string path, IFileContainer directory)
+        {
+            var fileArray = new Tommy.TomlArray()
+            {
+                IsMultiline = true,
+            };
+
+            foreach (var fileManifest in directory.FileManifests)
+            {
+                var fileTable = new Tommy.TomlTable()
+                {
+                    IsInline = true,
+                };
+
+                if ((directory is NestedPack) == false)
+                {
+                    fileTable["id"] = fileManifest.Id;
+                    if (fileManifest.Name != null)
+                    {
+                        fileTable["name"] = fileManifest.Name;
+                    }
+                    else if (fileManifest.NameHash != null)
+                    {
+                        fileTable["name_hash"] = fileManifest.NameHash.Value;
+                    }
+                }
+                else
+                {
+                    if (fileManifest.PackId != null)
+                    {
+                        fileTable["pack_id"] = new Tommy.TomlTable()
+                        {
+                            IsInline = true,
+                            ["dir"] = fileManifest.PackId.Value.DirectoryId,
+                            ["file"] = fileManifest.PackId.Value.FileId,
+                        };
+                    }
+                }
+
+                if (fileManifest.IsZip == true)
+                {
+                    fileTable["zip"] = true;
+                    fileTable["zip_name"] = fileManifest.ZipName;
+                }
+
+                if (fileManifest.IsPack == true)
+                {
+                    fileTable["pack"] = true;
+                }
+
+                fileTable["path"] = fileManifest.Path;
+
+                fileArray.Add(fileTable);
+            }
+
+            var rootTable = new Tommy.TomlTable()
+            {
+                ["files"] = fileArray,
+            };
+
+            var sb = new StringBuilder();
+            using (var writer = new StringWriter(sb))
+            {
+                rootTable.WriteTo(writer);
+            }
+
+            var pathParent = Path.GetDirectoryName(path);
+            if (string.IsNullOrEmpty(pathParent) == false)
+            {
+                Directory.CreateDirectory(pathParent);
+            }
+
+            File.WriteAllText(path, sb.ToString(), Encoding.UTF8);
         }
     }
 }

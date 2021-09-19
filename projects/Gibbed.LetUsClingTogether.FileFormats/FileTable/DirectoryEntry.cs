@@ -30,6 +30,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats.FileTable
         public byte DataBlockSize { get; set; }
         public uint DataBaseOffset { get; set; }
         public bool IsInInstallData { get; set; }
+        public uint DataInstallBaseOffset { get; set; }
         public List<FileEntry> Files { get; }
 
         public DirectoryEntry()

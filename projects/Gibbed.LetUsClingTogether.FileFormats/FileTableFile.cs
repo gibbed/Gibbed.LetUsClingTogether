@@ -211,12 +211,12 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                     directoryHeader.DataBaseOffset = directory.DataBaseOffset;
                     directoryHeader.DataBlockSize = directory.DataBlockSize;
                     directoryHeader.Unknown08 = 0;
-                    directoryHeader.IsInInstallData = false;
+                    directoryHeader.IsInInstallData = directory.IsInInstallData;
                     directoryHeader.BatchCount = (ushort)batchFileCounts.Count;
                     directoryHeader.NameTableCount = nameCount;
                     directoryHeader.NameTableIndex = nameCount > 0 ? nameIndex : ushort.MaxValue;
                     directoryHeader.BatchTableOffset = (ushort)(batchIndex * 8);
-                    directoryHeader.DataInstallBaseOffset = 0;
+                    directoryHeader.DataInstallBaseOffset = directory.DataInstallBaseOffset;
                     directoryHeaders.Add(directoryHeader);
                 }
 

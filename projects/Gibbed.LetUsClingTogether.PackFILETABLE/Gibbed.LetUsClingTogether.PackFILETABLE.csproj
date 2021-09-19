@@ -12,12 +12,10 @@
     <OutputPath>..\..\bin\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Gibbed.IO\Gibbed.IO.csproj" />
     <ProjectReference Include="..\Gibbed.LetUsClingTogether.FileFormats\Gibbed.LetUsClingTogether.FileFormats.csproj" />
     <ProjectReference Include="..\Gibbed.LetUsClingTogether.UnpackFILETABLE\Gibbed.LetUsClingTogether.UnpackFILETABLE.csproj" />
     <ProjectReference Include="..\NDesk.Options\NDesk.Options.csproj" />
+    <ProjectReference Include="..\Tommy\Tommy.csproj" />
   </ItemGroup>
 </Project>
