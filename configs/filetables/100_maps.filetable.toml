@@ -3,1096 +3,1096 @@ path = "maps"
 
 [100.1]
 path = "bg000_01.zip"
-0.path = "bg000_01.map"
+0_0.path = "bg000_01.map"
 
 [100.2]
 path = "bg000_02.zip"
-0.path = "bg000_02.map"
+0_0.path = "bg000_02.map"
 
 [100.3]
 path = "bg000_03.zip"
-0.path = "bg000_03.map"
+0_0.path = "bg000_03.map"
 
 [100.4]
 path = "bg000_09.zip"
-0.path = "bg000_09.map"
+0_0.path = "bg000_09.map"
 
 [100.5]
 path = "bg000_0A.zip"
-0.path = "bg000_0A.map"
+0_0.path = "bg000_0A.map"
 
 [100.6]
 path = "bg000_0B.zip"
-0.path = "bg000_0B.map"
+0_0.path = "bg000_0B.map"
 
 [100.7]
 path = "bg000_0C.zip"
-0.path = "bg000_0C.map"
+0_0.path = "bg000_0C.map"
 
 [100.8]
 path = "bg000_0D.zip"
-0.path = "bg000_0D.map"
+0_0.path = "bg000_0D.map"
 
 [100.9]
 path = "bg000_0F.zip"
-0.path = "bg000_0F.map"
+0_0.path = "bg000_0F.map"
 
 [100.10]
 path = "bg001_01.zip"
-0.path = "bg001_01.map"
+0_0.path = "bg001_01.map"
 
 [100.11]
 path = "bg002_01.zip"
-0.path = "bg002_01.map"
+0_0.path = "bg002_01.map"
 
 [100.12]
 path = "bg002_02.zip"
-0.path = "bg002_02.map"
+0_0.path = "bg002_02.map"
 
 [100.13]
 path = "bg002_03.zip"
-0.path = "bg002_03.map"
+0_0.path = "bg002_03.map"
 
 [100.14]
 path = "bg002_04.zip"
-0.path = "bg002_04.map"
+0_0.path = "bg002_04.map"
 
 [100.15]
 path = "bg002_05.zip"
-0.path = "bg002_05.map"
+0_0.path = "bg002_05.map"
 
 [100.16]
 path = "bg003_01.zip"
-0.path = "bg003_01.map"
+0_0.path = "bg003_01.map"
 
 [100.17]
 path = "bg004_01.zip"
-0.path = "bg004_01.map"
+0_0.path = "bg004_01.map"
 
 [100.18]
 path = "bg005_01.zip"
-0.path = "bg005_01.map"
+0_0.path = "bg005_01.map"
 
 [100.19]
 path = "bg005_02.zip"
-0.path = "bg005_02.map"
+0_0.path = "bg005_02.map"
 
 [100.20]
 path = "bg006_01.zip"
-0.path = "bg006_01.map"
+0_0.path = "bg006_01.map"
 
 [100.21]
 path = "bg006_02.zip"
-0.path = "bg006_02.map"
+0_0.path = "bg006_02.map"
 
 [100.22]
 path = "bg007_01.zip"
-0.path = "bg007_01.map"
+0_0.path = "bg007_01.map"
 
 [100.23]
 path = "bg007_02.zip"
-0.path = "bg007_02.map"
+0_0.path = "bg007_02.map"
 
 [100.24]
 path = "bg008_01.zip"
-0.path = "bg008_01.map"
+0_0.path = "bg008_01.map"
 
 [100.25]
 path = "bg008_02.zip"
-0.path = "bg008_02.map"
+0_0.path = "bg008_02.map"
 
 [100.26]
 path = "bg008_03.zip"
-0.path = "bg008_03.map"
+0_0.path = "bg008_03.map"
 
 [100.27]
 path = "bg008_04.zip"
-0.path = "bg008_04.map"
+0_0.path = "bg008_04.map"
 
 [100.28]
 path = "bg009_01.zip"
-0.path = "bg009_01.map"
+0_0.path = "bg009_01.map"
 
 [100.29]
 path = "bg009_02.zip"
-0.path = "bg009_02.map"
+0_0.path = "bg009_02.map"
 
 [100.30]
 path = "bg009_03.zip"
-0.path = "bg009_03.map"
+0_0.path = "bg009_03.map"
 
 [100.31]
 path = "bg010_01.zip"
-0.path = "bg010_01.map"
+0_0.path = "bg010_01.map"
 
 [100.32]
 path = "bg010_02.zip"
-0.path = "bg010_02.map"
+0_0.path = "bg010_02.map"
 
 [100.33]
 path = "bg011_01.zip"
-0.path = "bg011_01.map"
+0_0.path = "bg011_01.map"
 
 [100.34]
 path = "bg012_01.zip"
-0.path = "bg012_01.map"
+0_0.path = "bg012_01.map"
 
 [100.35]
 path = "bg013_01.zip"
-0.path = "bg013_01.map"
+0_0.path = "bg013_01.map"
 
 [100.36]
 path = "bg013_02.zip"
-0.path = "bg013_02.map"
+0_0.path = "bg013_02.map"
 
 [100.37]
 path = "bg013_03.zip"
-0.path = "bg013_03.map"
+0_0.path = "bg013_03.map"
 
 [100.38]
 path = "bg013_04.zip"
-0.path = "bg013_04.map"
+0_0.path = "bg013_04.map"
 
 [100.39]
 path = "bg013_05.zip"
-0.path = "bg013_05.map"
+0_0.path = "bg013_05.map"
 
 [100.40]
 path = "bg013_06.zip"
-0.path = "bg013_06.map"
+0_0.path = "bg013_06.map"
 
 [100.41]
 path = "bg014_01.zip"
-0.path = "bg014_01.map"
+0_0.path = "bg014_01.map"
 
 [100.42]
 path = "bg014_02.zip"
-0.path = "bg014_02.map"
+0_0.path = "bg014_02.map"
 
 [100.43]
 path = "bg014_03.zip"
-0.path = "bg014_03.map"
+0_0.path = "bg014_03.map"
 
 [100.44]
 path = "bg014_04.zip"
-0.path = "bg014_04.map"
+0_0.path = "bg014_04.map"
 
 [100.45]
 path = "bg014_05.zip"
-0.path = "bg014_05.map"
+0_0.path = "bg014_05.map"
 
 [100.46]
 path = "bg014_06.zip"
-0.path = "bg014_06.map"
+0_0.path = "bg014_06.map"
 
 [100.47]
 path = "bg014_07.zip"
-0.path = "bg014_07.map"
+0_0.path = "bg014_07.map"
 
 [100.48]
 path = "bg014_08.zip"
-0.path = "bg014_08.map"
+0_0.path = "bg014_08.map"
 
 [100.49]
 path = "bg014_09.zip"
-0.path = "bg014_09.map"
+0_0.path = "bg014_09.map"
 
 [100.50]
 path = "bg014_0A.zip"
-0.path = "bg014_0A.map"
+0_0.path = "bg014_0A.map"
 
 [100.51]
 path = "bg014_0B.zip"
-0.path = "bg014_0B.map"
+0_0.path = "bg014_0B.map"
 
 [100.52]
 path = "bg014_0C.zip"
-0.path = "bg014_0C.map"
+0_0.path = "bg014_0C.map"
 
 [100.53]
 path = "bg014_0D.zip"
-0.path = "bg014_0D.map"
+0_0.path = "bg014_0D.map"
 
 [100.54]
 path = "bg014_0E.zip"
-0.path = "bg014_0E.map"
+0_0.path = "bg014_0E.map"
 
 [100.55]
 path = "bg014_0F.zip"
-0.path = "bg014_0F.map"
+0_0.path = "bg014_0F.map"
 
 [100.56]
 path = "bg014_10.zip"
-0.path = "bg014_10.map"
+0_0.path = "bg014_10.map"
 
 [100.57]
 path = "bg014_11.zip"
-0.path = "bg014_11.map"
+0_0.path = "bg014_11.map"
 
 [100.58]
 path = "bg014_12.zip"
-0.path = "bg014_12.map"
+0_0.path = "bg014_12.map"
 
 [100.59]
 path = "bg021_01.zip"
-0.path = "bg021_01.map"
+0_0.path = "bg021_01.map"
 
 [100.60]
 path = "bg021_02.zip"
-0.path = "bg021_02.map"
+0_0.path = "bg021_02.map"
 
 [100.61]
 path = "bg021_03.zip"
-0.path = "bg021_03.map"
+0_0.path = "bg021_03.map"
 
 [100.62]
 path = "bg021_04.zip"
-0.path = "bg021_04.map"
+0_0.path = "bg021_04.map"
 
 [100.63]
 path = "bg022_01.zip"
-0.path = "bg022_01.map"
+0_0.path = "bg022_01.map"
 
 [100.64]
 path = "bg015_01.zip"
-0.path = "bg015_01.map"
+0_0.path = "bg015_01.map"
 
 [100.65]
 path = "bg125_03.zip"
-0.path = "bg125_03.map"
+0_0.path = "bg125_03.map"
 
 [100.66]
 path = "bg015_02.zip"
-0.path = "bg015_02.map"
+0_0.path = "bg015_02.map"
 
 [100.67]
 path = "bg127_01.zip"
-0.path = "bg127_01.map"
+0_0.path = "bg127_01.map"
 
 [100.68]
 path = "bg016_01.zip"
-0.path = "bg016_01.map"
+0_0.path = "bg016_01.map"
 
 [100.69]
 path = "bg016_15.zip"
-0.path = "bg016_15.map"
+0_0.path = "bg016_15.map"
 
 [100.70]
 path = "bg016_02.zip"
-0.path = "bg016_02.map"
+0_0.path = "bg016_02.map"
 
 [100.71]
 path = "bg016_03.zip"
-0.path = "bg016_03.map"
+0_0.path = "bg016_03.map"
 
 [100.72]
 path = "bg016_04.zip"
-0.path = "bg016_04.map"
+0_0.path = "bg016_04.map"
 
 [100.73]
 path = "bg016_05.zip"
-0.path = "bg016_05.map"
+0_0.path = "bg016_05.map"
 
 [100.74]
 path = "bg016_06.zip"
-0.path = "bg016_06.map"
+0_0.path = "bg016_06.map"
 
 [100.75]
 path = "bg016_07.zip"
-0.path = "bg016_07.map"
+0_0.path = "bg016_07.map"
 
 [100.76]
 path = "bg016_09.zip"
-0.path = "bg016_09.map"
+0_0.path = "bg016_09.map"
 
 [100.77]
 path = "bg017_01.zip"
-0.path = "bg017_01.map"
+0_0.path = "bg017_01.map"
 
 [100.78]
 path = "bg017_02.zip"
-0.path = "bg017_02.map"
+0_0.path = "bg017_02.map"
 
 [100.79]
 path = "bg115_01.zip"
-0.path = "bg115_01.map"
+0_0.path = "bg115_01.map"
 
 [100.80]
 path = "bg115_02.zip"
-0.path = "bg115_02.map"
+0_0.path = "bg115_02.map"
 
 [100.81]
 path = "bg130_01.zip"
-0.path = "bg130_01.map"
+0_0.path = "bg130_01.map"
 
 [100.82]
 path = "bg135_01.zip"
-0.path = "bg135_01.map"
+0_0.path = "bg135_01.map"
 
 [100.83]
 path = "bg140_01.zip"
-0.path = "bg140_01.map"
+0_0.path = "bg140_01.map"
 
 [100.84]
 path = "bg150_01.zip"
-0.path = "bg150_01.map"
+0_0.path = "bg150_01.map"
 
 [100.85]
 path = "bg151_01.zip"
-0.path = "bg151_01.map"
+0_0.path = "bg151_01.map"
 
 [100.86]
 path = "bg200_01.zip"
-0.path = "bg200_01.map"
+0_0.path = "bg200_01.map"
 
 [100.87]
 path = "bg201_01.zip"
-0.path = "bg201_01.map"
+0_0.path = "bg201_01.map"
 
 [100.88]
 path = "bg202_01.zip"
-0.path = "bg202_01.map"
+0_0.path = "bg202_01.map"
 
 [100.89]
 path = "bg203_01.zip"
-0.path = "bg203_01.map"
+0_0.path = "bg203_01.map"
 
 [100.90]
 path = "bg203_02.zip"
-0.path = "bg203_02.map"
+0_0.path = "bg203_02.map"
 
 [100.91]
 path = "bg204_01.zip"
-0.path = "bg204_01.map"
+0_0.path = "bg204_01.map"
 
 [100.92]
 path = "bg205_01.zip"
-0.path = "bg205_01.map"
+0_0.path = "bg205_01.map"
 
 [100.93]
 path = "bg206_01.zip"
-0.path = "bg206_01.map"
+0_0.path = "bg206_01.map"
 
 [100.94]
 path = "bg207_01.zip"
-0.path = "bg207_01.map"
+0_0.path = "bg207_01.map"
 
 [100.95]
 path = "bg207_02.zip"
-0.path = "bg207_02.map"
+0_0.path = "bg207_02.map"
 
 [100.96]
 path = "bg208_01.zip"
-0.path = "bg208_01.map"
+0_0.path = "bg208_01.map"
 
 [100.97]
 path = "bg208_02.zip"
-0.path = "bg208_02.map"
+0_0.path = "bg208_02.map"
 
 [100.98]
 path = "bg209_01.zip"
-0.path = "bg209_01.map"
+0_0.path = "bg209_01.map"
 
 [100.99]
 path = "bg210_04.zip"
-0.path = "bg210_04.map"
+0_0.path = "bg210_04.map"
 
 [100.100]
 path = "bg210_01.zip"
-0.path = "bg210_01.map"
+0_0.path = "bg210_01.map"
 
 [100.101]
 path = "bg210_02.zip"
-0.path = "bg210_02.map"
+0_0.path = "bg210_02.map"
 
 [100.102]
 path = "bg210_03.zip"
-0.path = "bg210_03.map"
+0_0.path = "bg210_03.map"
 
 [100.103]
 path = "bg211_01.zip"
-0.path = "bg211_01.map"
+0_0.path = "bg211_01.map"
 
 [100.104]
 path = "bg212_01.zip"
-0.path = "bg212_01.map"
+0_0.path = "bg212_01.map"
 
 [100.105]
 path = "bg213_01.zip"
-0.path = "bg213_01.map"
+0_0.path = "bg213_01.map"
 
 [100.106]
 path = "bg213_02.zip"
-0.path = "bg213_02.map"
+0_0.path = "bg213_02.map"
 
 [100.107]
 path = "bg213_03.zip"
-0.path = "bg213_03.map"
+0_0.path = "bg213_03.map"
 
 [100.108]
 path = "bg214_01.zip"
-0.path = "bg214_01.map"
+0_0.path = "bg214_01.map"
 
 [100.109]
 path = "bg215_01.zip"
-0.path = "bg215_01.map"
+0_0.path = "bg215_01.map"
 
 [100.110]
 path = "bg216_01.zip"
-0.path = "bg216_01.map"
+0_0.path = "bg216_01.map"
 
 [100.111]
 path = "bg217_01.zip"
-0.path = "bg217_01.map"
+0_0.path = "bg217_01.map"
 
 [100.112]
 path = "bg016_08.zip"
-0.path = "bg016_08.map"
+0_0.path = "bg016_08.map"
 
 [100.113]
 path = "bg125_10.zip"
-0.path = "bg125_10.map"
+0_0.path = "bg125_10.map"
 
 [100.114]
 path = "bg125_11.zip"
-0.path = "bg125_11.map"
+0_0.path = "bg125_11.map"
 
 [100.115]
 path = "bg125_12.zip"
-0.path = "bg125_12.map"
+0_0.path = "bg125_12.map"
 
 [100.116]
 path = "bg125_13.zip"
-0.path = "bg125_13.map"
+0_0.path = "bg125_13.map"
 
 [100.117]
 path = "bg125_14.zip"
-0.path = "bg125_14.map"
+0_0.path = "bg125_14.map"
 
 [100.118]
 path = "bg125_20.zip"
-0.path = "bg125_20.map"
+0_0.path = "bg125_20.map"
 
 [100.119]
 path = "bg125_21.zip"
-0.path = "bg125_21.map"
+0_0.path = "bg125_21.map"
 
 [100.120]
 path = "bg125_22.zip"
-0.path = "bg125_22.map"
+0_0.path = "bg125_22.map"
 
 [100.121]
 path = "bg125_23.zip"
-0.path = "bg125_23.map"
+0_0.path = "bg125_23.map"
 
 [100.122]
 path = "bg125_24.zip"
-0.path = "bg125_24.map"
+0_0.path = "bg125_24.map"
 
 [100.123]
 path = "bg125_25.zip"
-0.path = "bg125_25.map"
+0_0.path = "bg125_25.map"
 
 [100.124]
 path = "bg018_01.zip"
-0.path = "bg018_01.map"
+0_0.path = "bg018_01.map"
 
 [100.125]
 path = "bg018_02.zip"
-0.path = "bg018_02.map"
+0_0.path = "bg018_02.map"
 
 [100.126]
 path = "bg018_10.zip"
-0.path = "bg018_10.map"
+0_0.path = "bg018_10.map"
 
 [100.133]
 path = "bg018_17.zip"
-0.path = "bg018_17.map"
+0_0.path = "bg018_17.map"
 
 [100.134]
 path = "bg018_18.zip"
-0.path = "bg018_18.map"
+0_0.path = "bg018_18.map"
 
 [100.136]
 path = "bg136_01.zip"
-0.path = "bg136_01.map"
+0_0.path = "bg136_01.map"
 
 [100.137]
 path = "bg105_01.zip"
-0.path = "bg105_01.map"
+0_0.path = "bg105_01.map"
 
 [100.138]
 path = "bg105_02.zip"
-0.path = "bg105_02.map"
+0_0.path = "bg105_02.map"
 
 [100.139]
 path = "bg105_03.zip"
-0.path = "bg105_03.map"
+0_0.path = "bg105_03.map"
 
 [100.140]
 path = "bg105_04.zip"
-0.path = "bg105_04.map"
+0_0.path = "bg105_04.map"
 
 [100.141]
 path = "bg105_05.zip"
-0.path = "bg105_05.map"
+0_0.path = "bg105_05.map"
 
 [100.142]
 path = "bg105_06.zip"
-0.path = "bg105_06.map"
+0_0.path = "bg105_06.map"
 
 [100.143]
 path = "bg105_07.zip"
-0.path = "bg105_07.map"
+0_0.path = "bg105_07.map"
 
 [100.144]
 path = "bg105_09.zip"
-0.path = "bg105_09.map"
+0_0.path = "bg105_09.map"
 
 [100.145]
 path = "bg120_01.zip"
-0.path = "bg120_01.map"
+0_0.path = "bg120_01.map"
 
 [100.146]
 path = "bg120_02.zip"
-0.path = "bg120_02.map"
+0_0.path = "bg120_02.map"
 
 [100.147]
 path = "bg120_03.zip"
-0.path = "bg120_03.map"
+0_0.path = "bg120_03.map"
 
 [100.148]
 path = "bg120_04.zip"
-0.path = "bg120_04.map"
+0_0.path = "bg120_04.map"
 
 [100.149]
 path = "bg120_05.zip"
-0.path = "bg120_05.map"
+0_0.path = "bg120_05.map"
 
 [100.150]
 path = "bg120_07.zip"
-0.path = "bg120_07.map"
+0_0.path = "bg120_07.map"
 
 [100.151]
 path = "bg120_08.zip"
-0.path = "bg120_08.map"
+0_0.path = "bg120_08.map"
 
 [100.152]
 path = "bg120_09.zip"
-0.path = "bg120_09.map"
+0_0.path = "bg120_09.map"
 
 [100.153]
 path = "bg121_01.zip"
-0.path = "bg121_01.map"
+0_0.path = "bg121_01.map"
 
 [100.154]
 path = "bg121_02.zip"
-0.path = "bg121_02.map"
+0_0.path = "bg121_02.map"
 
 [100.155]
 path = "bg121_03.zip"
-0.path = "bg121_03.map"
+0_0.path = "bg121_03.map"
 
 [100.156]
 path = "bg121_04.zip"
-0.path = "bg121_04.map"
+0_0.path = "bg121_04.map"
 
 [100.157]
 path = "bg121_05.zip"
-0.path = "bg121_05.map"
+0_0.path = "bg121_05.map"
 
 [100.158]
 path = "bg112_01.zip"
-0.path = "bg112_01.map"
+0_0.path = "bg112_01.map"
 
 [100.159]
 path = "bg111_01.zip"
-0.path = "bg111_01.map"
+0_0.path = "bg111_01.map"
 
 [100.160]
 path = "bg111_02.zip"
-0.path = "bg111_02.map"
+0_0.path = "bg111_02.map"
 
 [100.161]
 path = "bg111_03.zip"
-0.path = "bg111_03.map"
+0_0.path = "bg111_03.map"
 
 [100.162]
 path = "bg111_04.zip"
-0.path = "bg111_04.map"
+0_0.path = "bg111_04.map"
 
 [100.163]
 path = "bg111_05.zip"
-0.path = "bg111_05.map"
+0_0.path = "bg111_05.map"
 
 [100.164]
 path = "bg111_06.zip"
-0.path = "bg111_06.map"
+0_0.path = "bg111_06.map"
 
 [100.165]
 path = "bg111_07.zip"
-0.path = "bg111_07.map"
+0_0.path = "bg111_07.map"
 
 [100.166]
 path = "bg111_08.zip"
-0.path = "bg111_08.map"
+0_0.path = "bg111_08.map"
 
 [100.167]
 path = "bg111_09.zip"
-0.path = "bg111_09.map"
+0_0.path = "bg111_09.map"
 
 [100.168]
 path = "bg111_10.zip"
-0.path = "bg111_10.map"
+0_0.path = "bg111_10.map"
 
 [100.169]
 path = "bg111_11.zip"
-0.path = "bg111_11.map"
+0_0.path = "bg111_11.map"
 
 [100.170]
 path = "bg111_12.zip"
-0.path = "bg111_12.map"
+0_0.path = "bg111_12.map"
 
 [100.171]
 path = "bg111_13.zip"
-0.path = "bg111_13.map"
+0_0.path = "bg111_13.map"
 
 [100.172]
 path = "bg165_01.zip"
-0.path = "bg165_01.map"
+0_0.path = "bg165_01.map"
 
 [100.173]
 path = "bg165_02.zip"
-0.path = "bg165_02.map"
+0_0.path = "bg165_02.map"
 
 [100.174]
 path = "bg165_03.zip"
-0.path = "bg165_03.map"
+0_0.path = "bg165_03.map"
 
 [100.175]
 path = "bg165_04.zip"
-0.path = "bg165_04.map"
+0_0.path = "bg165_04.map"
 
 [100.176]
 path = "bg165_05.zip"
-0.path = "bg165_05.map"
+0_0.path = "bg165_05.map"
 
 [100.177]
 path = "bg170_01.zip"
-0.path = "bg170_01.map"
+0_0.path = "bg170_01.map"
 
 [100.178]
 path = "bg170_03.zip"
-0.path = "bg170_03.map"
+0_0.path = "bg170_03.map"
 
 [100.179]
 path = "bg170_05.zip"
-0.path = "bg170_05.map"
+0_0.path = "bg170_05.map"
 
 [100.180]
 path = "bg019_11.zip"
-0.path = "bg019_11.map"
+0_0.path = "bg019_11.map"
 
 [100.181]
 path = "bg175_06.zip"
-0.path = "bg175_06.map"
+0_0.path = "bg175_06.map"
 
 [100.182]
 path = "bg175_07.zip"
-0.path = "bg175_07.map"
+0_0.path = "bg175_07.map"
 
 [100.183]
 path = "bg175_08.zip"
-0.path = "bg175_08.map"
+0_0.path = "bg175_08.map"
 
 [100.184]
 path = "bg019_23.zip"
-0.path = "bg019_23.map"
+0_0.path = "bg019_23.map"
 
 [100.185]
 path = "bg180_02.zip"
-0.path = "bg180_02.map"
+0_0.path = "bg180_02.map"
 
 [100.186]
 path = "bg180_04.zip"
-0.path = "bg180_04.map"
+0_0.path = "bg180_04.map"
 
 [100.187]
 path = "bg180_10.zip"
-0.path = "bg180_10.map"
+0_0.path = "bg180_10.map"
 
 [100.188]
 path = "bg019_33.zip"
-0.path = "bg019_33.map"
+0_0.path = "bg019_33.map"
 
 [100.189]
 path = "bg185_01.zip"
-0.path = "bg185_01.map"
+0_0.path = "bg185_01.map"
 
 [100.190]
 path = "bg185_05.zip"
-0.path = "bg185_05.map"
+0_0.path = "bg185_05.map"
 
 [100.191]
 path = "bg019_42.zip"
-0.path = "bg019_42.map"
+0_0.path = "bg019_42.map"
 
 [100.192]
 path = "bg019_44.zip"
-0.path = "bg019_44.map"
+0_0.path = "bg019_44.map"
 
 [100.193]
 path = "bg190_09.zip"
-0.path = "bg190_09.map"
+0_0.path = "bg190_09.map"
 
 [100.194]
 path = "bg190_11.zip"
-0.path = "bg190_11.map"
+0_0.path = "bg190_11.map"
 
 [100.195]
 path = "bg019_61.zip"
-0.path = "bg019_61.map"
+0_0.path = "bg019_61.map"
 
 [100.196]
 path = "bg019_63.zip"
-0.path = "bg019_63.map"
+0_0.path = "bg019_63.map"
 
 [100.197]
 path = "bg195_04.zip"
-0.path = "bg195_04.map"
+0_0.path = "bg195_04.map"
 
 [100.198]
 path = "bg195_07.zip"
-0.path = "bg195_07.map"
+0_0.path = "bg195_07.map"
 
 [100.199]
 path = "bg019_70.zip"
-0.path = "bg019_70.map"
+0_0.path = "bg019_70.map"
 
 [100.200]
 path = "bg019_74.zip"
-0.path = "bg019_74.map"
+0_0.path = "bg019_74.map"
 
 [100.201]
 path = "bg018_03.zip"
-0.path = "bg018_03.map"
+0_0.path = "bg018_03.map"
 
 [100.202]
 path = "bg019_01.zip"
-0.path = "bg019_01.map"
+0_0.path = "bg019_01.map"
 
 [100.203]
 path = "bg019_02.zip"
-0.path = "bg019_02.map"
+0_0.path = "bg019_02.map"
 
 [100.204]
 path = "bg019_03.zip"
-0.path = "bg019_03.map"
+0_0.path = "bg019_03.map"
 
 [100.205]
 path = "bg019_04.zip"
-0.path = "bg019_04.map"
+0_0.path = "bg019_04.map"
 
 [100.206]
 path = "bg019_05.zip"
-0.path = "bg019_05.map"
+0_0.path = "bg019_05.map"
 
 [100.207]
 path = "bg019_06.zip"
-0.path = "bg019_06.map"
+0_0.path = "bg019_06.map"
 
 [100.208]
 path = "bg019_07.zip"
-0.path = "bg019_07.map"
+0_0.path = "bg019_07.map"
 
 [100.209]
 path = "bg020_01.zip"
-0.path = "bg020_01.map"
+0_0.path = "bg020_01.map"
 
 [100.210]
 path = "bg020_02.zip"
-0.path = "bg020_02.map"
+0_0.path = "bg020_02.map"
 
 [100.211]
 path = "bg020_03.zip"
-0.path = "bg020_03.map"
+0_0.path = "bg020_03.map"
 
 [100.212]
 path = "bg020_04.zip"
-0.path = "bg020_04.map"
+0_0.path = "bg020_04.map"
 
 [100.213]
 path = "bg020_05.zip"
-0.path = "bg020_05.map"
+0_0.path = "bg020_05.map"
 
 [100.214]
 path = "bg020_06.zip"
-0.path = "bg020_06.map"
+0_0.path = "bg020_06.map"
 
 [100.215]
 path = "bg020_07.zip"
-0.path = "bg020_07.map"
+0_0.path = "bg020_07.map"
 
 [100.216]
 path = "bg020_08.zip"
-0.path = "bg020_08.map"
+0_0.path = "bg020_08.map"
 
 [100.217]
 path = "bg020_09.zip"
-0.path = "bg020_09.map"
+0_0.path = "bg020_09.map"
 
 [100.218]
 path = "bg020_0A.zip"
-0.path = "bg020_0A.map"
+0_0.path = "bg020_0A.map"
 
 [100.219]
 path = "bg020_0B.zip"
-0.path = "bg020_0B.map"
+0_0.path = "bg020_0B.map"
 
 [100.220]
 path = "bg020_0C.zip"
-0.path = "bg020_0C.map"
+0_0.path = "bg020_0C.map"
 
 [100.221]
 path = "bg020_0D.zip"
-0.path = "bg020_0D.map"
+0_0.path = "bg020_0D.map"
 
 [100.222]
 path = "bg020_0E.zip"
-0.path = "bg020_0E.map"
+0_0.path = "bg020_0E.map"
 
 [100.223]
 path = "bg020_0F.zip"
-0.path = "bg020_0F.map"
+0_0.path = "bg020_0F.map"
 
 [100.224]
 path = "bg020_10.zip"
-0.path = "bg020_10.map"
+0_0.path = "bg020_10.map"
 
 [100.225]
 path = "bg020_11.zip"
-0.path = "bg020_11.map"
+0_0.path = "bg020_11.map"
 
 [100.226]
 path = "bg020_12.zip"
-0.path = "bg020_12.map"
+0_0.path = "bg020_12.map"
 
 [100.227]
 path = "bg020_13.zip"
-0.path = "bg020_13.map"
+0_0.path = "bg020_13.map"
 
 [100.228]
 path = "bg020_14.zip"
-0.path = "bg020_14.map"
+0_0.path = "bg020_14.map"
 
 [100.229]
 path = "bg020_15.zip"
-0.path = "bg020_15.map"
+0_0.path = "bg020_15.map"
 
 [100.230]
 path = "bg020_16.zip"
-0.path = "bg020_16.map"
+0_0.path = "bg020_16.map"
 
 [100.231]
 path = "bg020_17.zip"
-0.path = "bg020_17.map"
+0_0.path = "bg020_17.map"
 
 [100.232]
 path = "bg320_25.zip"
-0.path = "bg320_25.map"
+0_0.path = "bg320_25.map"
 
 [100.233]
 path = "bg320_26.zip"
-0.path = "bg320_26.map"
+0_0.path = "bg320_26.map"
 
 [100.234]
 path = "bg320_27.zip"
-0.path = "bg320_27.map"
+0_0.path = "bg320_27.map"
 
 [100.235]
 path = "bg320_28.zip"
-0.path = "bg320_28.map"
+0_0.path = "bg320_28.map"
 
 [100.236]
 path = "bg320_29.zip"
-0.path = "bg320_29.map"
+0_0.path = "bg320_29.map"
 
 [100.237]
 path = "bg320_30.zip"
-0.path = "bg320_30.map"
+0_0.path = "bg320_30.map"
 
 [100.238]
 path = "bg320_31.zip"
-0.path = "bg320_31.map"
+0_0.path = "bg320_31.map"
 
 [100.239]
 path = "bg320_32.zip"
-0.path = "bg320_32.map"
+0_0.path = "bg320_32.map"
 
 [100.240]
 path = "bg320_33.zip"
-0.path = "bg320_33.map"
+0_0.path = "bg320_33.map"
 
 [100.241]
 path = "bg320_34.zip"
-0.path = "bg320_34.map"
+0_0.path = "bg320_34.map"
 
 [100.242]
 path = "bg320_35.zip"
-0.path = "bg320_35.map"
+0_0.path = "bg320_35.map"
 
 [100.243]
 path = "bg320_36.zip"
-0.path = "bg320_36.map"
+0_0.path = "bg320_36.map"
 
 [100.244]
 path = "bg020_37.zip"
-0.path = "bg020_37.map"
+0_0.path = "bg020_37.map"
 
 [100.245]
 path = "bg020_38.zip"
-0.path = "bg020_38.map"
+0_0.path = "bg020_38.map"
 
 [100.246]
 path = "bg021_05.zip"
-0.path = "bg021_05.map"
+0_0.path = "bg021_05.map"
 
 [100.247]
 path = "bg320_40.zip"
-0.path = "bg320_40.map"
+0_0.path = "bg320_40.map"
 
 [100.248]
 path = "bg320_43.zip"
-0.path = "bg320_43.map"
+0_0.path = "bg320_43.map"
 
 [100.249]
 path = "bg320_44.zip"
-0.path = "bg320_44.map"
+0_0.path = "bg320_44.map"
 
 [100.250]
 path = "bg320_45.zip"
-0.path = "bg320_45.map"
+0_0.path = "bg320_45.map"
 
 [100.251]
 path = "bg320_47.zip"
-0.path = "bg320_47.map"
+0_0.path = "bg320_47.map"
 
 [100.252]
 path = "bg320_49.zip"
-0.path = "bg320_49.map"
+0_0.path = "bg320_49.map"
 
 [100.253]
 path = "bg320_50.zip"
-0.path = "bg320_50.map"
+0_0.path = "bg320_50.map"
 
 [100.254]
 path = "bg320_51.zip"
-0.path = "bg320_51.map"
+0_0.path = "bg320_51.map"
 
 [100.255]
 path = "bg320_53.zip"
-0.path = "bg320_53.map"
+0_0.path = "bg320_53.map"
 
 [100.256]
 path = "bg320_58.zip"
-0.path = "bg320_58.map"
+0_0.path = "bg320_58.map"
 
 [100.257]
 path = "bg320_63.zip"
-0.path = "bg320_63.map"
+0_0.path = "bg320_63.map"
 
 [100.258]
 path = "bg320_64.zip"
-0.path = "bg320_64.map"
+0_0.path = "bg320_64.map"
 
 [100.259]
 path = "bg320_65.zip"
-0.path = "bg320_65.map"
+0_0.path = "bg320_65.map"
 
 [100.260]
 path = "bg320_68.zip"
-0.path = "bg320_68.map"
+0_0.path = "bg320_68.map"
 
 [100.261]
 path = "bg320_70.zip"
-0.path = "bg320_70.map"
+0_0.path = "bg320_70.map"
 
 [100.262]
 path = "bg320_71.zip"
-0.path = "bg320_71.map"
+0_0.path = "bg320_71.map"
 
 [100.263]
 path = "bg320_73.zip"
-0.path = "bg320_73.map"
+0_0.path = "bg320_73.map"
 
 [100.264]
 path = "bg300_50.zip"
-0.path = "bg300_50.map"
+0_0.path = "bg300_50.map"
 
 [100.265]
 path = "bg300_51.zip"
-0.path = "bg300_51.map"
+0_0.path = "bg300_51.map"
 
 [100.266]
 path = "bg000_52.zip"
-0.path = "bg000_52.map"
+0_0.path = "bg000_52.map"
 
 [100.267]
 path = "bg300_53.zip"
-0.path = "bg300_53.map"
+0_0.path = "bg300_53.map"
 
 [100.268]
 path = "bg300_54.zip"
-0.path = "bg300_54.map"
+0_0.path = "bg300_54.map"
 
 [100.269]
 path = "bg300_56.zip"
-0.path = "bg300_56.map"
+0_0.path = "bg300_56.map"
 
 [100.270]
 path = "bg016_50.zip"
-0.path = "bg016_50.map"
+0_0.path = "bg016_50.map"
 
 [100.271]
 path = "bg021_06.zip"
-0.path = "bg021_06.map"
+0_0.path = "bg021_06.map"
 
 [100.272]
 path = "bg218_01.zip"
-0.path = "bg218_01.map"
+0_0.path = "bg218_01.map"
 
 [100.273]
 path = "bg213_04.zip"
-0.path = "bg213_04.map"
+0_0.path = "bg213_04.map"
 
 [100.274]
 path = "bg213_05.zip"
-0.path = "bg213_05.map"
+0_0.path = "bg213_05.map"
 
 [100.275]
 path = "bg213_06.zip"
-0.path = "bg213_06.map"
+0_0.path = "bg213_06.map"
 
 [100.276]
 path = "bg213_07.zip"
-0.path = "bg213_07.map"
+0_0.path = "bg213_07.map"
 
 [100.277]
 path = "bg301_0C.zip"
-0.path = "bg301_0C.map"
+0_0.path = "bg301_0C.map"
 
 [100.278]
 path = "bg302_06.zip"
-0.path = "bg302_06.map"
+0_0.path = "bg302_06.map"
 
 [100.279]
 path = "bg302_07.zip"
-0.path = "bg302_07.map"
+0_0.path = "bg302_07.map"
 
 [100.280]
 path = "bg302_08.zip"
-0.path = "bg302_08.map"
+0_0.path = "bg302_08.map"
 
 [100.281]
 path = "bg020_18.zip"
-0.path = "bg020_18.map"
+0_0.path = "bg020_18.map"
