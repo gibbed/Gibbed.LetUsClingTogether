@@ -12,7 +12,7 @@ Using an operation outside of the range `80` - `A9` will likely cause game crash
 | `FF 81 ww uu`          | [Indicate wrap area](#ff-81---indicate-wrap-area). |
 | `FF 82 rr gg bb aa`    | [Set text color](#ff-82---set-text-color). |
 | `FF 83 aa ?? cc ?? ??` | [Insert string variable](#ff-83---insert-string-variable). |
-| `FF 84 vv ?? ??`       | [Insert number variable](#ff-84---insert-number-variable). |
+| `FF 84 vv oo ??`       | [Insert number variable](#ff-84---insert-number-variable). |
 | `FF 85 ?? ??`          | Unknown. |
 | `FF 86`                | Insert page break. |
 | `FF 87 ??`             | Unknown. |
@@ -89,11 +89,11 @@ Each component is computed as `component - 1`. So for the brighest red, `FF 82 0
 
 ## `FF 84` - Insert Number Variable
 
-`FF 84 vv ?? ??`
+`FF 84 vv oo ??`
 
 * `tt` - value variable index
 * `oo` - one string variable index. When the value is `1`: if the index is `FF`, string "1" is used. Otherwise, it uses the specified string variable.
-* `jj` - ???
+* `??` - ???
 
 ## `FF 8A` - Insert Icon
 
