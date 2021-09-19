@@ -1,4 +1,7 @@
 [1000.1]
 3.path = "equipment.xlc"
-9.path = "map_spawns.xlc"
+7.path = "class_text.xlc"
+9.path = "map_parties.xlc" # not sure if completely accurate
 27.path = "equipment_text.xlc"
+28.path = "factions.xlc"
+37.path = "map_spawn_coordinates.xlc"

@@ -2,4 +2,4 @@
 path = "multiplayer"
 
 [2500.0]
-1.path = "map_list.xlc"
+1.path = "multiplayer_map_list.xlc"
