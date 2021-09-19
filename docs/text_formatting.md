@@ -11,8 +11,8 @@ Using an operation outside of the range `80` - `A9` will likely cause game crash
 | `FF 80`                | Insert newline. |
 | `FF 81 ww uu`          | [Indicate wrap area](#ff-81---indicate-wrap-area). |
 | `FF 82 rr gg bb aa`    | [Set text color](#ff-82---set-text-color). |
-| `FF 83 ?? ?? ?? ?? ??` | Unknown. |
-| `FF 84 ?? ?? ??`       | Unknown. |
+| `FF 83 ?? ?? ?? ?? ??` | Insert string variable? |
+| `FF 84 ?? ?? ??`       | Insert number variable? |
 | `FF 85 ?? ??`          | Unknown. |
 | `FF 86`                | Insert page break. |
 | `FF 87 ??`             | Unknown. |
