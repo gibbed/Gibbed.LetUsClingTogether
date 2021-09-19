@@ -45,10 +45,18 @@ Appears to be settings/rendering hints about a block of string data.
 `FC ff ww ww cc uu ..`
 
 * `ff` - Flags.
-Flag 0 (`01`) appears to indicate end of data, and stops parsing completely even if length is non-zero.
+Flag 0 (`01`) indicates a variable follows before any chaacter data.
 * `ww ww` - Width? Possibly a hint to the text renderer of some sort.
-* `cc` - Count of following codepoints. (**this means no formatting operations/etc!**)
+* `cc` - Count of following visible characters (**this means not counting formatting operations/etc!**)
 * `uu` - Always seems to be 8 or 16.
+
+### Variable
+
+`ff uu c1 c2 c3 c4`
+Flag 0 (`01`) indicates a variable follows before any chaacter data.
+* `ff` - Flags.
+* `uu` - Always seems to be 8 or 16.
+* `c1 c2 c3 c4` - Variable name? (in ASCII).
 
 ## `FD`
 
