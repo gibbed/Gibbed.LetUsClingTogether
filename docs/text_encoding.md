@@ -42,13 +42,13 @@ Codepoint is the result of the following calculation:
 
 Appears to be settings/rendering hints about a block of string data.
 
-`FC ff ww ww ll uu ..`
+`FC ff ww ww cc uu ..`
 
 * `ff` - Flags.
 Flag 0 (`01`) appears to indicate end of data, and stops parsing completely even if length is non-zero.
 * `ww ww` - Width? Possibly a hint to the text renderer of some sort.
-* `ll` - Byte length of following string data.
-* `uu` - Always seems to be 8.
+* `cc` - Count of following codepoints. (**this means no formatting operations/etc!**)
+* `uu` - Always seems to be 8 or 16.
 
 ## `FD`
 
