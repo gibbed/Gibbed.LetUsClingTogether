@@ -419,6 +419,8 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
         {
             var basePosition = input.Position;
 
+            path = Path.ChangeExtension(path, null);
+
             var packFile = new PackFile();
             packFile.Deserialize(input);
 
