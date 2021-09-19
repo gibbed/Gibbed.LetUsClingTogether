@@ -137,7 +137,9 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                 Unknown32 = table.Unknown32,
                 ParentalLevel = table.ParentalLevel,
                 InstallDataCryptoKey = table.InstallDataCryptoKey,
-                IsInInstallDataDefault = isInstallDataCounts[1] > isInstallDataCounts[0],
+                IsInInstallDataDefault =
+                    isInstallDataCounts.Length == 2 &&
+                    isInstallDataCounts[1] > isInstallDataCounts[0],
             };
 
             foreach (var directory in table.Directories)
