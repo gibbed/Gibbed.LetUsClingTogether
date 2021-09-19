@@ -48,8 +48,8 @@ before_build:
 after_build:
   - set TZ=GMT
   - git log . > git-log.txt
-  - 7z a -r -tzip -mx=9 -x!*/LICENSE.txt luct_%APPVEYOR_BUILD_VERSION%.zip                    ./LICENSE.txt ./README.txt git-log.txt bin/*.exe bin/*.dll           bin/projects
-  - 7z a -r -tzip -mx=9 -x!*/LICENSE.txt luct_%APPVEYOR_BUILD_VERSION%_with-debug-symbols.zip ./LICENSE.txt ./README.txt git-log.txt bin/*.exe bin/*.dll bin/*.pdb bin/projects
+  - 7z a -r -tzip -mx=9 -x!*/LICENSE.txt luct_%APPVEYOR_BUILD_VERSION%.zip                    ./LICENSE.txt ./README.txt git-log.txt bin/*.exe bin/*.dll           bin/projects bin/configs
+  - 7z a -r -tzip -mx=9 -x!*/LICENSE.txt luct_%APPVEYOR_BUILD_VERSION%_with-debug-symbols.zip ./LICENSE.txt ./README.txt git-log.txt bin/*.exe bin/*.dll bin/*.pdb bin/projects bin/configs
 
 artifacts:
   - path: '*.zip'
