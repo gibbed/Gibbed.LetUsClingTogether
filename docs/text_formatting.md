@@ -91,7 +91,7 @@ Each component is computed as `component - 1`. So for the brighest red, `FF 82 0
 
 `FF 84 vv oo ??`
 
-* `tt` - value variable index
+* `vv` - value variable index
 * `oo` - one string variable index. When the value is `1`: if the index is `FF`, string "1" is used. Otherwise, it uses the specified string variable.
 * `??` - ???
 
