@@ -1,4 +1,9 @@
 [800]
 path = "world_map"
 
+[800.0]
+0_21.path = "world_map_locations.xlc"
+0_22.path = "world_map_paths.xlc"
+
+[800]
 1.path = "world_map.gmo"
