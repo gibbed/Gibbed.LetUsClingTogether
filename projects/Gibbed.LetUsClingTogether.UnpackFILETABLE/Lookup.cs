@@ -58,7 +58,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                     table = TOML.Parse(reader);
                 }
 
-                TommyExtensionsWithBugfix.MergeWith(root, table, true);
+                TommyExtensions.MergeWith(root, table, true);
             }
 
             return root;

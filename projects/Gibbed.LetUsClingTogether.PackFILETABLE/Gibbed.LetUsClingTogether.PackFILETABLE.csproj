@@ -16,6 +16,6 @@
     <ProjectReference Include="..\Gibbed.LetUsClingTogether.FileFormats\Gibbed.LetUsClingTogether.FileFormats.csproj" />
     <ProjectReference Include="..\Gibbed.LetUsClingTogether.UnpackFILETABLE\Gibbed.LetUsClingTogether.UnpackFILETABLE.csproj" />
     <ProjectReference Include="..\NDesk.Options\NDesk.Options.csproj" />
-    <ProjectReference Include="..\Tommy\Tommy.csproj" />
+    <ProjectReference Include="..\Tommy\Tommy\Tommy.csproj" />
   </ItemGroup>
 </Project>

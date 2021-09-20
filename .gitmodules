@@ -6,3 +6,6 @@
 	path = projects/Gibbed.IO
 	url = https://github.com/gibbed/Gibbed.IO.git
 	branch = main
+[submodule "projects/Tommy"]
+	path = projects/Tommy
+	url = https://github.com/gibbed/Tommy.git
