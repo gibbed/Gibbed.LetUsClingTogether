@@ -106,7 +106,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                 buffer[index + 1] == 'A' &&
                 buffer[index + 2] == 'S')
             {
-                return ".spriteanim";
+                return ".sprite_animation";
             }
             else if (
                 count >= 4 &&
@@ -123,7 +123,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                 buffer[index + 1] == 'F' &&
                 buffer[index + 2] == 'X')
             {
-                return ".efx";
+                return ".effect";
             }
             else if (
                 count >= 4 &&
@@ -136,21 +136,21 @@ namespace Gibbed.LetUsClingTogether.FileFormats
             }
             else if (
                 count >= 4 &&
-                buffer[index + 0] == 'P' &&
-                buffer[index + 1] == 'G' &&
-                buffer[index + 2] == 'R' &&
-                buffer[index + 3] == 'S')
-            {
-                return ".pgrs";
-            }
-            else if (
-                count >= 4 &&
                 buffer[index + 0] == 'I' &&
                 buffer[index + 1] == 'D' &&
                 buffer[index + 2] == 'X' &&
                 buffer[index + 3] == '0')
             {
-                return ".idx0";
+                return ".scene_resources";
+            }
+            else if (
+                count >= 4 &&
+                buffer[index + 0] == 'P' &&
+                buffer[index + 1] == 'G' &&
+                buffer[index + 2] == 'R' &&
+                buffer[index + 3] == 'S')
+            {
+                return ".screenplay_progress";
             }
             else if (
                 count >= 4 &&
@@ -159,7 +159,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                 buffer[index + 2] == 'S' &&
                 buffer[index + 3] == 'K')
             {
-                return ".task";
+                return ".screenplay_task";
             }
             else if (
                 count >= 4 &&
@@ -168,7 +168,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                 buffer[index + 2] == 'V' &&
                 buffer[index + 3] == 'K')
             {
-                return ".invk";
+                return ".screenplay_invocation";
             }
             else if (
                 count >= 4 &&
@@ -214,7 +214,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                 fileSize >= 100 &&
                 BitConverter.ToUInt32(buffer, index + 0x0) == 0x8000000C)
             {
-                return ".script";
+                return ".scene";
             }
 
             return ".unknown";
