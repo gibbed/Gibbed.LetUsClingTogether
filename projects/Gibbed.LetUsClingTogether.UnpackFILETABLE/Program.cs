@@ -204,15 +204,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                         {
                             id = file.PackRawId.Value;
                             var packId = PackId.Create(file.PackRawId).Value;
-
-                            var fileId = packId.FileId & 0xFFF;
-                            var unknown = (packId.FileId & 0xF000) >> 12;
-                            filePathBuilder.Append(_($"{packId.DirectoryId}_{fileId}"));
-
-                            if (unknown != 0)
-                            {
-                                filePathBuilder.Append(_($"_{unknown}"));
-                            }
+                            filePathBuilder.Append(_($"{packId.DirectoryId}_{packId.FileId}"));
                         }
 
                         if (parent.IdCounts != null)
