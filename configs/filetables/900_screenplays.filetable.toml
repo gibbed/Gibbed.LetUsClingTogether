@@ -52,8 +52,8 @@ path = "chapter_4"
 0_1.path = "C4.progress"
 0_2.path = "C4.invocation"
 0_3.path = "C4.task"
-0_4.path = "C4_1.messages"
-0_5.path = "C4_2.messages"
+0_4.path = "C4_0.messages"
+0_5.path = "C4_1.messages"
 
 [900.17]
 path = "epilogue"
@@ -68,8 +68,8 @@ path = "dlc"
 0_1.path = "DLC.progress"
 0_2.path = "DLC.invocation"
 0_3.path = "DLC.task"
-0_4.path = "DLC_1.messages"
-0_5.path = "DLC_2.messages"
+0_4.path = "DLC_0.messages"
+0_5.path = "DLC_1.messages"
 
 [900.20]
 path = "death_agony"
