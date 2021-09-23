@@ -1,0 +1,647 @@
+# C2a
+
+[902]
+path = "chapters/chapter_2/chaos"
+
+
+[902.1]
+path = "C2a_ST_001"
+
+0_3001.path  = "scene_2a_0.scene"
+0_35769.path = "scene_2a_0.resources"
+
+
+[902.10]
+path = "C2a_ST_010"
+
+0_3002.path  = "scene_2a_1.scene"
+0_35770.path = "scene_2a_1.resources"
+
+
+[902.20]
+path = "C2a_ST_020"
+
+0_3003.path  = "scene_2a_2.scene"
+0_35771.path = "scene_2a_2.resources"
+1_3003.path  = "scene_2a_2.messages"
+
+0_3004.path  = "scene_2a_3.scene"
+0_35772.path = "scene_2a_3.resources"
+1_3004.path  = "scene_2a_3.messages"
+
+
+[902.30]
+path = "C2a_ST_030"
+
+0_3007.path  = "scene_2a_4.scene"
+0_35775.path = "scene_2a_4.resources"
+1_3007.path  = "scene_2a_4.messages"
+
+0_3008.path  = "scene_2a_5.scene"
+0_35776.path = "scene_2a_5.resources"
+1_3008.path  = "scene_2a_5.messages"
+
+0_3009.path  = "scene_2a_6.scene"
+0_35777.path = "scene_2a_6.resources"
+1_3009.path  = "scene_2a_6.messages"
+
+0_3010.path  = "scene_2a_7.scene"
+0_35778.path = "scene_2a_7.resources"
+1_3010.path  = "scene_2a_7.messages"
+
+0_3011.path  = "scene_2a_8.scene"
+0_35779.path = "scene_2a_8.resources"
+1_3011.path  = "scene_2a_8.messages"
+
+0_3012.path  = "scene_2a_9.scene"
+0_35780.path = "scene_2a_9.resources"
+1_3012.path  = "scene_2a_9.messages"
+
+0_3013.path  = "scene_2a_10.scene"
+0_35781.path = "scene_2a_10.resources"
+1_3013.path  = "scene_2a_10.messages"
+
+0_3014.path  = "scene_2a_11.scene"
+0_35782.path = "scene_2a_11.resources"
+1_3014.path  = "scene_2a_11.messages"
+
+0_3015.path  = "scene_2a_12.scene"
+0_35783.path = "scene_2a_12.resources"
+1_3015.path  = "scene_2a_12.messages"
+
+
+[902.40]
+path = "C2a_ST_040"
+
+0_3016.path  = "scene_2a_13.scene"
+0_35784.path = "scene_2a_13.resources"
+1_3016.path  = "scene_2a_13.messages"
+
+0_3017.path  = "scene_2a_14.scene"
+0_35785.path = "scene_2a_14.resources"
+1_3017.path  = "scene_2a_14.messages"
+
+0_3018.path  = "scene_2a_15.scene"
+0_35786.path = "scene_2a_15.resources"
+1_3018.path  = "scene_2a_15.messages"
+
+0_3019.path  = "scene_2a_16.scene"
+0_35787.path = "scene_2a_16.resources"
+1_3019.path  = "scene_2a_16.messages"
+
+
+[902.50]
+path = "C2a_ST_050"
+
+0_3020.path  = "scene_2a_17.scene"
+0_35788.path = "scene_2a_17.resources"
+1_3020.path  = "scene_2a_17.messages"
+
+0_3021.path  = "scene_2a_18.scene"
+0_35789.path = "scene_2a_18.resources"
+1_3021.path  = "scene_2a_18.messages"
+
+0_3022.path  = "scene_2a_19.scene"
+0_35790.path = "scene_2a_19.resources"
+1_3022.path  = "scene_2a_19.messages"
+
+0_3023.path  = "scene_2a_20.scene"
+0_35791.path = "scene_2a_20.resources"
+1_3023.path  = "scene_2a_20.messages"
+
+0_3024.path  = "scene_2a_21.scene"
+0_35792.path = "scene_2a_21.resources"
+1_3024.path  = "scene_2a_21.messages"
+
+0_3025.path  = "scene_2a_22.scene"
+0_35793.path = "scene_2a_22.resources"
+1_3025.path  = "scene_2a_22.messages"
+
+0_3026.path  = "scene_2a_24.scene"
+0_35794.path = "scene_2a_24.resources"
+1_3026.path  = "scene_2a_24.messages"
+
+0_3027.path  = "scene_2a_23.scene"
+0_35795.path = "scene_2a_23.resources"
+1_3027.path  = "scene_2a_23.messages"
+
+
+[902.60]
+path = "C2a_ST_060"
+
+0_3035.path  = "scene_2a_25.scene"
+0_35803.path = "scene_2a_25.resources"
+1_3035.path  = "scene_2a_25.messages"
+
+0_3037.path  = "scene_2a_26.scene"
+0_35805.path = "scene_2a_26.resources"
+1_3037.path  = "scene_2a_26.messages"
+
+0_3038.path  = "scene_2a_27.scene"
+0_35806.path = "scene_2a_27.resources"
+1_3038.path  = "scene_2a_27.messages"
+
+0_3041.path  = "scene_2a_28.scene"
+0_35809.path = "scene_2a_28.resources"
+1_3041.path  = "scene_2a_28.messages"
+
+
+[902.70]
+path = "C2a_ST_070"
+
+0_3047.path  = "scene_2a_29.scene"
+0_35815.path = "scene_2a_29.resources"
+1_3047.path  = "scene_2a_29.messages"
+
+0_3049.path  = "scene_2a_30.scene"
+0_35817.path = "scene_2a_30.resources"
+1_3049.path  = "scene_2a_30.messages"
+
+0_3050.path  = "scene_2a_31.scene"
+0_35818.path = "scene_2a_31.resources"
+1_3050.path  = "scene_2a_31.messages"
+
+0_3051.path  = "scene_2a_32.scene"
+0_35819.path = "scene_2a_32.resources"
+1_3051.path  = "scene_2a_32.messages"
+
+0_3054.path  = "scene_2a_33.scene"
+0_35822.path = "scene_2a_33.resources"
+1_3054.path  = "scene_2a_33.messages"
+
+0_3055.path  = "scene_2a_125.scene"
+0_35823.path = "scene_2a_125.resources"
+1_3055.path  = "scene_2a_125.messages"
+
+0_3056.path  = "scene_2a_126.scene"
+0_35824.path = "scene_2a_126.resources"
+1_3056.path  = "scene_2a_126.messages"
+
+0_3057.path  = "scene_2a_127.scene"
+0_35825.path = "scene_2a_127.resources"
+1_3057.path  = "scene_2a_127.messages"
+
+0_3058.path  = "scene_2a_34.scene"
+0_35826.path = "scene_2a_34.resources"
+1_3058.path  = "scene_2a_34.messages"
+
+0_3061.path  = "scene_2a_35.scene"
+0_35829.path = "scene_2a_35.resources"
+1_3061.path  = "scene_2a_35.messages"
+
+
+[902.80]
+path = "C2a_ST_080"
+
+0_3064.path  = "scene_2a_36.scene"
+0_35832.path = "scene_2a_36.resources"
+1_3064.path  = "scene_2a_36.messages"
+
+0_3065.path  = "scene_2a_37.scene"
+0_35833.path = "scene_2a_37.resources"
+1_3065.path  = "scene_2a_37.messages"
+
+
+[902.90]
+path = "C2a_ST_090"
+
+0_3066.path  = "scene_2a_38.scene"
+0_35834.path = "scene_2a_38.resources"
+1_3066.path  = "scene_2a_38.messages"
+
+0_3068.path  = "scene_2a_39.scene"
+0_35836.path = "scene_2a_39.resources"
+1_3068.path  = "scene_2a_39.messages"
+
+
+[902.110]
+path = "C2a_ST_110"
+
+0_3073.path  = "scene_2a_40.scene"
+0_35841.path = "scene_2a_40.resources"
+1_3073.path  = "scene_2a_40.messages"
+
+0_3075.path  = "scene_2a_41.scene"
+0_35843.path = "scene_2a_41.resources"
+1_3075.path  = "scene_2a_41.messages"
+
+0_3078.path  = "scene_2a_42.scene"
+0_35846.path = "scene_2a_42.resources"
+1_3078.path  = "scene_2a_42.messages"
+
+0_3081.path  = "scene_2a_43.scene"
+0_35849.path = "scene_2a_43.resources"
+1_3081.path  = "scene_2a_43.messages"
+
+0_3082.path  = "scene_2a_44.scene"
+0_35850.path = "scene_2a_44.resources"
+1_3082.path  = "scene_2a_44.messages"
+
+
+[902.130]
+path = "C2a_ST_130"
+
+0_3083.path  = "scene_2a_45.scene"
+0_35851.path = "scene_2a_45.resources"
+1_3083.path  = "scene_2a_45.messages"
+
+0_3084.path  = "scene_2a_46.scene"
+0_35852.path = "scene_2a_46.resources"
+1_3084.path  = "scene_2a_46.messages"
+
+0_3086.path  = "scene_2a_47.scene"
+0_35854.path = "scene_2a_47.resources"
+1_3086.path  = "scene_2a_47.messages"
+
+0_3087.path  = "scene_2a_48.scene"
+0_35855.path = "scene_2a_48.resources"
+1_3087.path  = "scene_2a_48.messages"
+
+0_3088.path  = "scene_2a_49.scene"
+0_35856.path = "scene_2a_49.resources"
+1_3088.path  = "scene_2a_49.messages"
+
+0_3089.path  = "scene_2a_50.scene"
+0_35857.path = "scene_2a_50.resources"
+1_3089.path  = "scene_2a_50.messages"
+
+0_3091.path  = "scene_2a_51.scene"
+0_35859.path = "scene_2a_51.resources"
+1_3091.path  = "scene_2a_51.messages"
+
+0_3092.path  = "scene_2a_52.scene"
+0_35860.path = "scene_2a_52.resources"
+1_3092.path  = "scene_2a_52.messages"
+
+0_3094.path  = "scene_2a_53.scene"
+0_35862.path = "scene_2a_53.resources"
+1_3094.path  = "scene_2a_53.messages"
+
+0_3095.path  = "scene_2a_54.scene"
+0_35863.path = "scene_2a_54.resources"
+1_3095.path  = "scene_2a_54.messages"
+
+0_3097.path  = "scene_2a_55.scene"
+0_35865.path = "scene_2a_55.resources"
+1_3097.path  = "scene_2a_55.messages"
+
+
+[902.140]
+path = "C2a_ST_140"
+
+0_3102.path  = "scene_2a_56.scene"
+0_35870.path = "scene_2a_56.resources"
+1_3102.path  = "scene_2a_56.messages"
+
+0_3107.path  = "scene_2a_57.scene"
+0_35875.path = "scene_2a_57.resources"
+1_3107.path  = "scene_2a_57.messages"
+
+0_3109.path  = "scene_2a_58.scene"
+0_35877.path = "scene_2a_58.resources"
+1_3109.path  = "scene_2a_58.messages"
+
+0_3111.path  = "scene_2a_59.scene"
+0_35879.path = "scene_2a_59.resources"
+1_3111.path  = "scene_2a_59.messages"
+
+0_3113.path  = "scene_2a_60.scene"
+0_35881.path = "scene_2a_60.resources"
+1_3113.path  = "scene_2a_60.messages"
+
+0_3114.path  = "scene_2a_61.scene"
+0_35882.path = "scene_2a_61.resources"
+1_3114.path  = "scene_2a_61.messages"
+
+0_3118.path  = "scene_2a_62.scene"
+0_35886.path = "scene_2a_62.resources"
+1_3118.path  = "scene_2a_62.messages"
+
+
+[902.160]
+path = "C2a_ST_160"
+
+0_3122.path  = "scene_2a_63.scene"
+0_35890.path = "scene_2a_63.resources"
+1_3122.path  = "scene_2a_63.messages"
+
+0_3124.path  = "scene_2a_64.scene"
+0_35892.path = "scene_2a_64.resources"
+1_3124.path  = "scene_2a_64.messages"
+
+0_3126.path  = "scene_2a_65.scene"
+0_35894.path = "scene_2a_65.resources"
+1_3126.path  = "scene_2a_65.messages"
+
+0_3128.path  = "scene_2a_66.scene"
+0_35896.path = "scene_2a_66.resources"
+1_3128.path  = "scene_2a_66.messages"
+
+0_3130.path  = "scene_2a_67.scene"
+0_35898.path = "scene_2a_67.resources"
+1_3130.path  = "scene_2a_67.messages"
+
+0_3132.path  = "scene_2a_68.scene"
+0_35900.path = "scene_2a_68.resources"
+1_3132.path  = "scene_2a_68.messages"
+
+
+[902.170]
+path = "C2a_ST_170"
+
+0_3142.path  = "scene_2a_69.scene"
+0_35910.path = "scene_2a_69.resources"
+1_3142.path  = "scene_2a_69.messages"
+
+0_3157.path  = "scene_2a_70.scene"
+0_35925.path = "scene_2a_70.resources"
+1_3157.path  = "scene_2a_70.messages"
+
+0_3159.path  = "scene_2a_71.scene"
+0_35927.path = "scene_2a_71.resources"
+1_3159.path  = "scene_2a_71.messages"
+
+0_3161.path  = "scene_2a_72.scene"
+0_35929.path = "scene_2a_72.resources"
+1_3161.path  = "scene_2a_72.messages"
+
+0_3163.path  = "scene_2a_73.scene"
+0_35931.path = "scene_2a_73.resources"
+1_3163.path  = "scene_2a_73.messages"
+
+0_3165.path  = "scene_2a_74.scene"
+0_35933.path = "scene_2a_74.resources"
+1_3165.path  = "scene_2a_74.messages"
+
+
+[902.180]
+path = "C2a_ST_180"
+
+0_3174.path  = "scene_2a_75.scene"
+0_35942.path = "scene_2a_75.resources"
+1_3174.path  = "scene_2a_75.messages"
+
+0_3175.path  = "scene_2a_76.scene"
+0_35943.path = "scene_2a_76.resources"
+1_3175.path  = "scene_2a_76.messages"
+
+0_3176.path  = "scene_2a_77.scene"
+0_35944.path = "scene_2a_77.resources"
+1_3176.path  = "scene_2a_77.messages"
+
+0_3177.path  = "scene_2a_78.scene"
+0_35945.path = "scene_2a_78.resources"
+1_3177.path  = "scene_2a_78.messages"
+
+
+[902.190]
+path = "C2a_ST_190"
+
+0_3178.path  = "scene_2a_79.scene"
+0_35946.path = "scene_2a_79.resources"
+1_3178.path  = "scene_2a_79.messages"
+
+0_3179.path  = "scene_2a_80.scene"
+0_35947.path = "scene_2a_80.resources"
+1_3179.path  = "scene_2a_80.messages"
+
+0_3180.path  = "scene_2a_81.scene"
+0_35948.path = "scene_2a_81.resources"
+1_3180.path  = "scene_2a_81.messages"
+
+0_3181.path  = "scene_2a_82.scene"
+0_35949.path = "scene_2a_82.resources"
+1_3181.path  = "scene_2a_82.messages"
+
+
+[902.200]
+path = "C2a_ST_200"
+
+0_3182.path  = "scene_2a_83.scene"
+0_35950.path = "scene_2a_83.resources"
+1_3182.path  = "scene_2a_83.messages"
+
+0_3183.path  = "scene_2a_84.scene"
+0_35951.path = "scene_2a_84.resources"
+1_3183.path  = "scene_2a_84.messages"
+
+0_3193.path  = "scene_2a_85.scene"
+0_35961.path = "scene_2a_85.resources"
+1_3193.path  = "scene_2a_85.messages"
+
+0_3200.path  = "scene_2a_86.scene"
+0_35968.path = "scene_2a_86.resources"
+1_3200.path  = "scene_2a_86.messages"
+
+0_3201.path  = "scene_2a_87.scene"
+0_35969.path = "scene_2a_87.resources"
+1_3201.path  = "scene_2a_87.messages"
+
+0_3206.path  = "scene_2a_88.scene"
+0_35974.path = "scene_2a_88.resources"
+1_3206.path  = "scene_2a_88.messages"
+
+0_3213.path  = "scene_2a_89.scene"
+0_35981.path = "scene_2a_89.resources"
+1_3213.path  = "scene_2a_89.messages"
+
+0_3214.path  = "scene_2a_90.scene"
+0_35982.path = "scene_2a_90.resources"
+1_3214.path  = "scene_2a_90.messages"
+
+0_3217.path  = "scene_2a_91.scene"
+0_35985.path = "scene_2a_91.resources"
+1_3217.path  = "scene_2a_91.messages"
+
+
+[902.210]
+path = "C2a_ST_210"
+
+0_3220.path  = "scene_2a_92.scene"
+0_35988.path = "scene_2a_92.resources"
+1_3220.path  = "scene_2a_92.messages"
+
+
+[902.220]
+path = "C2a_ST_220"
+
+0_3221.path  = "scene_2a_93.scene"
+0_35989.path = "scene_2a_93.resources"
+1_3221.path  = "scene_2a_93.messages"
+
+0_3222.path  = "scene_2a_130.scene"
+0_35990.path = "scene_2a_130.resources"
+1_3222.path  = "scene_2a_130.messages"
+
+0_3223.path  = "scene_2a_131.scene"
+0_35991.path = "scene_2a_131.resources"
+1_3223.path  = "scene_2a_131.messages"
+
+0_3224.path  = "scene_2a_132.scene"
+0_35992.path = "scene_2a_132.resources"
+1_3224.path  = "scene_2a_132.messages"
+
+0_3225.path  = "scene_2a_94.scene"
+0_35993.path = "scene_2a_94.resources"
+1_3225.path  = "scene_2a_94.messages"
+
+
+[902.225]
+path = "C2a_ST_225"
+
+0_3226.path  = "scene_2a_95.scene"
+0_35994.path = "scene_2a_95.resources"
+
+
+[902.226]
+path = "C2a_ST_226"
+
+0_3227.path  = "scene_2a_96.scene"
+0_35995.path = "scene_2a_96.resources"
+1_3227.path  = "scene_2a_96.messages"
+
+
+[902.227]
+path = "C2a_ST_227"
+
+0_3228.path  = "scene_2a_97.scene"
+0_35996.path = "scene_2a_97.resources"
+1_3228.path  = "scene_2a_97.messages"
+
+
+[902.240]
+path = "C2a_ST_240"
+
+0_3231.path  = "scene_2a_98.scene"
+0_35999.path = "scene_2a_98.resources"
+1_3231.path  = "scene_2a_98.messages"
+
+
+[902.250]
+path = "C2a_ST_250"
+
+0_3233.path  = "scene_2a_99.scene"
+0_36001.path = "scene_2a_99.resources"
+1_3233.path  = "scene_2a_99.messages"
+
+0_3234.path  = "scene_2a_100.scene"
+0_36002.path = "scene_2a_100.resources"
+1_3234.path  = "scene_2a_100.messages"
+
+0_3235.path  = "scene_2a_101.scene"
+0_36003.path = "scene_2a_101.resources"
+1_3235.path  = "scene_2a_101.messages"
+
+0_3236.path  = "scene_2a_102.scene"
+0_36004.path = "scene_2a_102.resources"
+1_3236.path  = "scene_2a_102.messages"
+
+0_3237.path  = "scene_2a_103.scene"
+0_36005.path = "scene_2a_103.resources"
+1_3237.path  = "scene_2a_103.messages"
+
+0_3238.path  = "scene_2a_104.scene"
+0_36006.path = "scene_2a_104.resources"
+1_3238.path  = "scene_2a_104.messages"
+
+0_3239.path  = "scene_2a_105.scene"
+0_36007.path = "scene_2a_105.resources"
+1_3239.path  = "scene_2a_105.messages"
+
+
+[902.260]
+path = "C2a_ST_260"
+
+0_3240.path  = "scene_2a_106.scene"
+0_36008.path = "scene_2a_106.resources"
+1_3240.path  = "scene_2a_106.messages"
+
+0_3241.path  = "scene_2a_107.scene"
+0_36009.path = "scene_2a_107.resources"
+1_3241.path  = "scene_2a_107.messages"
+
+0_3242.path  = "scene_2a_108.scene"
+0_36010.path = "scene_2a_108.resources"
+1_3242.path  = "scene_2a_108.messages"
+
+0_3243.path  = "scene_2a_109.scene"
+0_36011.path = "scene_2a_109.resources"
+1_3243.path  = "scene_2a_109.messages"
+
+0_3244.path  = "scene_2a_110.scene"
+0_36012.path = "scene_2a_110.resources"
+1_3244.path  = "scene_2a_110.messages"
+
+0_3245.path  = "scene_2a_111.scene"
+0_36013.path = "scene_2a_111.resources"
+1_3245.path  = "scene_2a_111.messages"
+
+0_3246.path  = "scene_2a_112.scene"
+0_36014.path = "scene_2a_112.resources"
+1_3246.path  = "scene_2a_112.messages"
+
+
+[902.270]
+path = "C2a_ST_270"
+
+0_3247.path  = "scene_2a_113.scene"
+0_36015.path = "scene_2a_113.resources"
+
+
+[902.280]
+path = "C2a_ST_280"
+
+0_3248.path  = "scene_2a_114.scene"
+0_36016.path = "scene_2a_114.resources"
+
+
+[902.290]
+path = "C2a_ST_290"
+
+0_3249.path  = "scene_2a_115.scene"
+0_36017.path = "scene_2a_115.resources"
+1_3249.path  = "scene_2a_115.messages"
+
+
+[902.300]
+path = "C2a_ST_300"
+
+0_3257.path  = "scene_2a_120.scene"
+0_36025.path = "scene_2a_120.resources"
+1_3257.path  = "scene_2a_120.messages"
+
+
+[902.310]
+path = "C2a_ST_310"
+
+
+[902.311]
+path = "C2a_ST_311"
+
+
+[902.312]
+path = "C2a_ST_312"
+
+
+[902.313]
+path = "C2a_ST_313"
+
+
+[902.314]
+path = "C2a_ST_314"
+
+
+[902.315]
+path = "C2a_ST_315"
+
+
+[902.316]
+path = "C2a_ST_316"
+
+
+[902.317]
+path = "C2a_ST_317"
+
+
+[902.330]
+path = "C2a_ST_330"

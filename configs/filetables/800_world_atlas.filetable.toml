@@ -1,0 +1,14 @@
+# 'world atlas' instead of 'world map' to distinguish it from maps since they're very
+# different things in the game.
+#
+# Also Yasumi Matsuno has a file called "TOPSP_world_atlas.xlsx". :)
+
+[800]
+path = "world_atlas"
+
+[800.0]
+0_21.path = "world_atlas_locations.xlc"
+0_22.path = "world_atlas_paths.xlc"
+
+[800.1]
+path = "world_atlas.gmo"
