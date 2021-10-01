@@ -1,16 +1,27 @@
 # Gibbed's Let Us Cling Together Tools
 
-Tools for modding the PSP remake of Tactics Ogre: Let Us Cling Together.
+Tools for modding the PSP remake of [Tactics Ogre: Let Us Cling Together](https://en.wikipedia.org/wiki/Tactics_Ogre%3A_Let_Us_Cling_Together_%282010_video_game%29).
 
 [![Build status](https://ci.appveyor.com/api/projects/status/9cl2i5x0j2rlwgih/branch/main?svg=true)](https://ci.appveyor.com/project/gibbed/gibbed-letusclingtogether/branch/main)
+
+## Targets
+
+Intended to work with all available regional versions of the game, though only the following have been tested:
+
+* JP (`ULJM05753`): タクティクスオウガ　運命の輪
+    * Tactics Ogre: Unmei no Wa
+    * Tactics Ogre: Wheel of Fortune
+* US (`ULUS10565`): Tactics Ogre: Let Us Cling Together
+* EU/AU (`ULES10500`): Tactics Ogre: Let Us Cling Together
 
 ## What?
 
 *Experimental!*
 
-* Unpacker for `FILETABLE.BIN` (and corresponding `.BIN` files).
-* Packer for `FILETABLE.BIN` (and corresponding `.BIN` files).
-* Exporter for sprite data (`*.sprite`)— incomplete, still needs work.
+* `UnpackFILETABLE`: Unpacker for `FILETABLE.BIN` (and corresponding `.BIN` files).
+* `PackFILETABLE`: Packer for `FILETABLE.BIN` (and corresponding `.BIN` files).
+* `LookupFILETABLE`: Translates offsets in `.BIN` files to their corresponding file entries.
+* `ExportSprite`: Exporter for sprite data (`*.sprite`)— incomplete, still needs work.
 
 ## TODO
 
