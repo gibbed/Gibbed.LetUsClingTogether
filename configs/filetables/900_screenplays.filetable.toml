@@ -72,4 +72,16 @@ path = "dlc"
 0_5.path = "DLC_1.messages"
 
 [900.20]
-path = "death_agony"
+path = "global"
+
+3.path = "global_flags.xlc"
+6.path = "death_agony_messages.xlc"
+
+7.path = "death_agony.invocation" # assumed
+8.path = "death_agony.task" # assumed
+9.path = "death_agony.scene" # assumed
+
+10.path = "battle_start.progress" # assumed
+11.path = "battle_start.invocation" # assumed
+12.path = "battle_start.task" # assumed
+13.path = "battle_start.scene"
