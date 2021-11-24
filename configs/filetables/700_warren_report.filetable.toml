@@ -1,0 +1,17 @@
+[700]
+name = "warren_report"
+
+[700.0]
+
+0.path = "warren_report_menu_text.xlc"
+
+3.path = "warren_report_people.xlc"
+4.path = "warren_report_music.xlc"
+5.path = "warren_report_play_guide_basics.xlc"
+6.path = "warren_report_play_guide_tactics.xlc"
+
+11.path = "warren_report_people.invocation"
+
+17.path = "warren_report_music.invocation"
+18.path = "warren_report_play_guide_tactics.invocation"
+19.path = "warren_report_play_guide_basics.invocation"
