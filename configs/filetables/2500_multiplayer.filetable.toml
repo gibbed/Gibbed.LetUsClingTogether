@@ -2,4 +2,15 @@
 path = "multiplayer"
 
 [2500.0]
+path = "common"
+
+0.path = "tarot_cards.xlc"
+# game expects sheet to be 44 entries
+0.expandable = false
+
 1.path = "multiplayer_map_list.xlc"
+
+5.path = "multiplayer.progress"
+
+[2500.0.4]
+path = "multiplayer_map_previews"

@@ -2,7 +2,7 @@
 path = "ending"
 
 [2700.0]
-path = "credits"
+path = "staffroll"
 
-0.path = "credits_text.xlc"
-1.path = "credits_order.xlc"
+0.path = "staffroll_text.xlc"
+1.path = "staffroll_order.xlc"

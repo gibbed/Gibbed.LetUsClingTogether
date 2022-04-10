@@ -4,7 +4,7 @@
 
 6.path = "classes.xlc"
 7.path = "class_text.xlc"
-
+8.path = "consumables.xlc"
 9.path = "map_parties.xlc" # not sure if completely accurate
 
 20.path = "random_character_names.xlc"
