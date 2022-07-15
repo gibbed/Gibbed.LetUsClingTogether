@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2021 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -24,9 +24,9 @@ using System;
 using System.IO;
 using Gibbed.IO;
 
-namespace Gibbed.LetUsClingTogether.FileFormats.Script
+namespace Gibbed.LetUsClingTogether.ScriptFormats
 {
-    public struct EventHeader
+    public struct ScriptHeader
     {
         public uint NameOffset;
         public ushort TableIndex;
@@ -43,9 +43,9 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Script
         public uint Unknown28;
         public uint Unknown2C;
 
-        public static EventHeader Read(Stream input, Endian endian)
+        public static ScriptHeader Read(Stream input, Endian endian)
         {
-            EventHeader instance;
+            ScriptHeader instance;
             instance.NameOffset = input.ReadValueU32(endian);
             instance.TableIndex = input.ReadValueU16(endian);
             instance.Unknown06 = input.ReadValueU16(endian);

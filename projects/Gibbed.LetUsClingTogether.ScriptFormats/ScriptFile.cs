@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2021 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -26,9 +26,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Gibbed.IO;
-using Gibbed.LetUsClingTogether.FileFormats.Script;
 
-namespace Gibbed.LetUsClingTogether.FileFormats
+namespace Gibbed.LetUsClingTogether.ScriptFormats
 {
     public class ScriptFile
     {
@@ -39,14 +38,14 @@ namespace Gibbed.LetUsClingTogether.FileFormats
             SJIS = Encoding.GetEncoding(932);
         }
 
-        private readonly List<ushort> _EventCounts;
-        private readonly List<Event> _Events;
+        private readonly List<ushort> _ScriptCounts;
+        private readonly List<Script> _Scripts;
         private readonly List<Unknown28Header> _Unknown28s;
 
         public ScriptFile()
         {
-            this._EventCounts = new List<ushort>();
-            this._Events = new List<Event>();
+            this._ScriptCounts = new List<ushort>();
+            this._Scripts = new List<Script>();
             this._Unknown28s = new List<Unknown28Header>();
         }
 
@@ -54,8 +53,8 @@ namespace Gibbed.LetUsClingTogether.FileFormats
         public string AuthorName { get; set; }
         public string SourceName { get; set; }
         public string MaybeSourceVersion { get; set; }
-        public List<ushort> EventCounts { get { return this._EventCounts; } }
-        public List<Event> Events { get { return this._Events; } }
+        public List<ushort> ScriptCounts { get { return this._ScriptCounts; } }
+        public List<Script> Scripts { get { return this._Scripts; } }
         public List<Unknown28Header> Unknown28s { get { return this._Unknown28s; } }
 
         public void Serialize(Stream output)
@@ -78,19 +77,19 @@ namespace Gibbed.LetUsClingTogether.FileFormats
             var maybeSourceVersion = input.ReadStringZ(SJIS);
 
             input.Position = header.EventCountTableOffset;
-            var eventCountCount = input.ReadValueU16(endian);
-            var eventCounts = new ushort[eventCountCount];
-            for (int i = 0; i < eventCountCount; i++)
+            var scriptCountCount = input.ReadValueU16(endian);
+            var scriptCounts = new ushort[scriptCountCount];
+            for (int i = 0; i < scriptCountCount; i++)
             {
-                eventCounts[i] = input.ReadValueU16(endian);
+                scriptCounts[i] = input.ReadValueU16(endian);
             }
 
             input.Position = header.EventTableOffset;
-            var eventCount = input.ReadValueS32(endian);
-            var eventHeaders = new EventHeader[eventCount];
-            for (int i = 0; i < eventCount; i++)
+            var scriptCount = input.ReadValueS32(endian);
+            var scriptHeaders = new ScriptHeader[scriptCount];
+            for (int i = 0; i < scriptCount; i++)
             {
-                eventHeaders[i] = EventHeader.Read(input, endian);
+                scriptHeaders[i] = ScriptHeader.Read(input, endian);
             }
 
             input.Position = header.Unknown28Offset;
@@ -116,15 +115,15 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                 unknown30Offsets[i] = input.ReadValueU32(endian);
             }
 
-            var events = new Event[eventCount];
-            for (int eventIndex = 0; eventIndex < eventCount; eventIndex++)
+            var scripts = new Script[scriptCount];
+            for (int scriptIndex = 0; scriptIndex < scriptCount; scriptIndex++)
             {
-                var eventHeader = eventHeaders[eventIndex];
+                var scriptHeader = scriptHeaders[scriptIndex];
 
-                input.Position = header.StringTableOffset + eventHeader.NameOffset;
-                var eventName = input.ReadStringZ(SJIS);
+                input.Position = header.StringTableOffset + scriptHeader.NameOffset;
+                var scriptName = input.ReadStringZ(SJIS);
 
-                input.Position = eventHeader.JumpTableOffset;
+                input.Position = scriptHeader.JumpTableOffset;
                 var jumpCount = input.ReadValueS32(endian);
                 var jumpOffsets = new uint[jumpCount];
                 for (int i = 0; i < jumpCount; i++)
@@ -132,7 +131,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                     jumpOffsets[i] = input.ReadValueU32(endian);
                 }
 
-                input.Position = eventHeader.FunctionTableOffset;
+                input.Position = scriptHeader.FunctionTableOffset;
                 var functionCount = input.ReadValueS32(endian);
                 var functionHeaders = new FunctionHeader[functionCount];
                 for (int i = 0; i < functionCount; i++)
@@ -140,7 +139,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                     functionHeaders[i] = FunctionHeader.Read(input, endian);
                 }
 
-                input.Position = eventHeader.Unknown18Offset;
+                input.Position = scriptHeader.Unknown18Offset;
                 var unknown18Count = input.ReadValueU16(endian);
                 var unknown18s = new short[unknown18Count];
                 for (int i = 0; i < unknown18Count; i++)
@@ -155,9 +154,9 @@ namespace Gibbed.LetUsClingTogether.FileFormats
 
                 var codeOffsetsToIndices = new Dictionary<uint, int>();
                 uint codeOffset = 0;
-                var code = new Instruction[eventHeader.CodeCount];
-                input.Position = eventHeader.CodeOffset;
-                for (int i = 0; i < eventHeader.CodeCount; i++)
+                var code = new Instruction[scriptHeader.CodeCount];
+                input.Position = scriptHeader.CodeOffset;
+                for (int i = 0; i < scriptHeader.CodeCount; i++)
                 {
                     if (codeOffsetsUnique.Contains(codeOffset) == true)
                     {
@@ -168,14 +167,14 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                     codeOffset++;
 
                     Instruction instruction;
-                    if (opcode.HasArgument() == false)
+                    if (opcode.HasImmediate() == false)
                     {
                         instruction = new Instruction(opcode);
                     }
                     else
                     {
-                        var argument = input.ReadValueS16(endian);
-                        instruction = new Instruction(opcode, argument);
+                        var immediate = input.ReadValueS16(endian);
+                        instruction = new Instruction(opcode, immediate);
                         codeOffset += 2;
                     }
                     code[i] = instruction;
@@ -218,35 +217,35 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                     };
                 }
 
-                var ev = new Event()
+                var script = new Script()
                 {
-                    Name = eventName,
-                    TableIndex = eventHeader.TableIndex,
-                    Unknown06 = eventHeader.Unknown06,
-                    Unknown1C = eventHeader.Unknown1C,
-                    Unknown20 = eventHeader.Unknown20,
-                    Index = eventHeader.Index,
-                    Unknown24 = eventHeader.Unknown24,
-                    Unknown28 = eventHeader.Unknown28,
-                    Unknown2C = eventHeader.Unknown2C,
+                    Name = scriptName,
+                    TableIndex = scriptHeader.TableIndex,
+                    Unknown06 = scriptHeader.Unknown06,
+                    Unknown1C = scriptHeader.Unknown1C,
+                    Unknown20 = scriptHeader.Unknown20,
+                    Index = scriptHeader.Index,
+                    Unknown24 = scriptHeader.Unknown24,
+                    Unknown28 = scriptHeader.Unknown28,
+                    Unknown2C = scriptHeader.Unknown2C,
                 };
-                ev.Code.AddRange(code);
-                ev.Jumps.AddRange(jumps);
-                ev.Functions.AddRange(functions);
-                ev.Unknown18s.AddRange(unknown18s);
-                events[eventIndex] = ev;
+                script.Code.AddRange(code);
+                script.Jumps.AddRange(jumps);
+                script.Functions.AddRange(functions);
+                script.Unknown18s.AddRange(unknown18s);
+                scripts[scriptIndex] = script;
             }
 
-            this.EventCounts.Clear();
-            this.Events.Clear();
+            this.ScriptCounts.Clear();
+            this.Scripts.Clear();
             this.Unknown28s.Clear();
 
             this.Endian = endian;
             this.AuthorName = authorName;
             this.SourceName = sourceName;
             this.MaybeSourceVersion = maybeSourceVersion;
-            this.EventCounts.AddRange(eventCounts);
-            this.Events.AddRange(events);
+            this.ScriptCounts.AddRange(scriptCounts);
+            this.Scripts.AddRange(scripts);
             this.Unknown28s.AddRange(unknown28s);
         }
     }

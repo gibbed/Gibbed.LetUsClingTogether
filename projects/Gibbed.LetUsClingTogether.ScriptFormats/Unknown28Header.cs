@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2021 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -20,12 +20,22 @@
  *    distribution.
  */
 
-namespace Gibbed.LetUsClingTogether.FileFormats.Script
+using System.IO;
+using Gibbed.IO;
+
+namespace Gibbed.LetUsClingTogether.ScriptFormats
 {
-    public class Function
+    public struct Unknown28Header
     {
-        public string Name { get; set; }
-        public int BodyStart { get; set; }
-        public int BodyEnd { get; set; }
+        public uint Unknown0;
+        public uint Unknown4;
+
+        public static Unknown28Header Read(Stream input, Endian endian)
+        {
+            Unknown28Header instance;
+            instance.Unknown0 = input.ReadValueU32(endian);
+            instance.Unknown4 = input.ReadValueU32(endian);
+            return instance;
+        }
     }
 }

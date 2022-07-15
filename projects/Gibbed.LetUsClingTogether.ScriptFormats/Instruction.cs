@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2021 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -20,23 +20,23 @@
  *    distribution.
  */
 
-namespace Gibbed.LetUsClingTogether.FileFormats.Script
+namespace Gibbed.LetUsClingTogether.ScriptFormats
 {
     public struct Instruction
     {
         public readonly Opcode Opcode;
-        public readonly short Argument;
+        public readonly short Immediate;
 
         public Instruction(Opcode opcode)
         {
             this.Opcode = opcode;
-            this.Argument = -1;
+            this.Immediate = -1;
         }
 
-        public Instruction(Opcode opcode, short argument)
+        public Instruction(Opcode opcode, short immediate)
         {
             this.Opcode = opcode;
-            this.Argument = argument;
+            this.Immediate = immediate;
         }
     }
 }

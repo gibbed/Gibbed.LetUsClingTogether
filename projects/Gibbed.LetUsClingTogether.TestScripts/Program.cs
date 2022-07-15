@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2021 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -24,7 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using NDesk.Options;
-using ScriptFile = Gibbed.LetUsClingTogether.FileFormats.ScriptFile;
+using ScriptFile = Gibbed.LetUsClingTogether.ScriptFormats.ScriptFile;
 
 namespace Gibbed.LetUsClingTogether.TestScripts
 {
@@ -61,7 +61,7 @@ namespace Gibbed.LetUsClingTogether.TestScripts
 
             if (extras.Count < 1 || showHelp == true)
             {
-                Console.WriteLine("Usage: {0} [OPTIONS]+ input_script", GetExecutableName());
+                Console.WriteLine("Usage: {0} [OPTIONS]+ input_script+", GetExecutableName());
                 Console.WriteLine();
                 Console.WriteLine("Options:");
                 options.WriteOptionDescriptions(Console.Out);

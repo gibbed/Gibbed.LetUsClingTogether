@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2021 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -24,9 +24,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using Gibbed.LetUsClingTogether.FileFormats.Script;
+using Gibbed.LetUsClingTogether.ScriptFormats;
 using NDesk.Options;
-using ScriptFile = Gibbed.LetUsClingTogether.FileFormats.ScriptFile;
 
 namespace Gibbed.LetUsClingTogether.DisassembleScript
 {
@@ -75,7 +74,7 @@ namespace Gibbed.LetUsClingTogether.DisassembleScript
             // temporary, until I do real file output
             Console.OutputEncoding = Encoding.UTF8;
 
-            var eventNativeNames = new Dictionary<int, string>()
+            var targetNames = new Dictionary<int, string>()
             {
                 { 0, "Delay" },
                 { 27, "Talk_LeftLower" },
@@ -88,87 +87,85 @@ namespace Gibbed.LetUsClingTogether.DisassembleScript
                 { 65, "Unit_SetSprite" },
             };
 
-            var script = new ScriptFile();
+            var scriptFile = new ScriptFile();
             var scriptBytes = File.ReadAllBytes(inputPath);
             using (var input = new MemoryStream(scriptBytes, false))
             {
-                script.Deserialize(input);
+                scriptFile.Deserialize(input);
             }
 
-            Console.WriteLine("Author: {0}", script.AuthorName);
-            Console.WriteLine("Source Name: {0}", script.SourceName);
-            Console.WriteLine("Source Version?: {0}", script.MaybeSourceVersion);
+            Console.WriteLine($"Author: {scriptFile.AuthorName}");
+            Console.WriteLine($"Source Name: {scriptFile.SourceName}");
+            Console.WriteLine($"Source Version?: {scriptFile.MaybeSourceVersion}");
 
-            if (script.EventCounts.Count > 0)
+            if (scriptFile.ScriptCounts.Count > 0)
             {
-                Console.Write("Event Counts: ");
-                foreach (var eventCount in script.EventCounts)
+                Console.Write("Script Counts: ");
+                foreach (var scriptCount in scriptFile.ScriptCounts)
                 {
-                    Console.Write(" {0}", eventCount);
+                    Console.Write($" {scriptCount}");
                 }
                 Console.WriteLine();
             }
 
-            foreach (var ev in script.Events)
+            foreach (var script in scriptFile.Scripts)
             {
                 Console.WriteLine();
 
-                Console.WriteLine("event {0}", ev.Name);
+                Console.WriteLine($"script {script.Name}");
 
-                Console.WriteLine("  evtable index = {0}", ev.TableIndex);
-                Console.WriteLine("  unknown06 = {0}", ev.Unknown06);
-                Console.WriteLine("  unknown1C = {0}", ev.Unknown1C);
-                Console.WriteLine("  unknown20 = {0}", ev.Unknown20);
-                Console.WriteLine("  evindex = {0}", ev.Index);
-                Console.WriteLine("  unknown24 = {0}", ev.Unknown24);
-                Console.WriteLine("  unknown28 = {0}", ev.Unknown28);
-                Console.WriteLine("  unknown2C = {0}", ev.Unknown2C);
+                Console.WriteLine($"  table index = {script.TableIndex}");
+                Console.WriteLine($"  unknown06 = {script.Unknown06}");
+                Console.WriteLine($"  unknown1C = {script.Unknown1C}");
+                Console.WriteLine($"  unknown20 = {script.Unknown20}");
+                Console.WriteLine($"  index = {script.Index}");
+                Console.WriteLine($"  unknown24 = {script.Unknown24}");
+                Console.WriteLine($"  unknown28 = {script.Unknown28}");
+                Console.WriteLine($"  unknown2C = {script.Unknown2C}");
 
-                if (ev.Jumps.Count > 0)
+                if (script.Jumps.Count > 0)
                 {
                     Console.Write("  jump table:");
-                    foreach (var jump in ev.Jumps)
+                    foreach (var jump in script.Jumps)
                     {
-                        Console.Write(" {0}", jump);
+                        Console.Write($" {jump}");
                     }
                     Console.WriteLine();
                 }
 
-                foreach (var function in ev.Functions)
+                foreach (var function in script.Functions)
                 {
-                    Console.WriteLine("  function {0}", function.Name);
+                    Console.WriteLine($"  function {function.Name} ({function.BodyStart})");
 
                     for (int bodyIndex = function.BodyStart; bodyIndex < function.BodyEnd; bodyIndex++)
                     {
-                        var instruction = ev.Code[bodyIndex];
+                        var instruction = script.Code[bodyIndex];
                         var opcode = instruction.Opcode;
 
                         Console.Write("    ");
+                        Console.Write($"@{bodyIndex:D4} ");
+                        Console.Write(opcode.ToString().PadRight(28));
 
-                        Console.Write("@{0:D4} ", bodyIndex);
-
-                        Console.Write("{0}", opcode.ToString().PadRight(28));
-
-                        if (opcode == Opcode.CallNative ||
-                            opcode == Opcode.UnknownCallNative ||
-                            opcode == Opcode.CallNativeWithBar)
+                        if (opcode == Opcode.Call ||
+                            opcode == Opcode.CallAct ||
+                            opcode == Opcode.CallAndPopA)
                         {
-                            var argument = instruction.Argument;
-                            Console.Write(" {0}", argument);
-                            if (eventNativeNames.TryGetValue(argument, out var eventNativeName) == true)
+                            var immediate = instruction.Immediate;
+                            Console.Write($" {immediate}");
+                            if (targetNames.TryGetValue(immediate, out var targetName) == true)
                             {
-                                Console.Write(" ({0})", eventNativeName);
+                                Console.Write($" ({targetName})");
                             }
                         }
                         else if (opcode.IsJump() == true)
                         {
-                            var argument = instruction.Argument;
-                            var index = ev.Jumps[argument];
-                            Console.Write(" {0} => @{1:D4}", argument, index);
+                            var immediate = instruction.Immediate;
+                            var index = script.Jumps[immediate];
+                            Console.Write($" {immediate} => @{index:D4}");
                         }
-                        else if (opcode.HasArgument() == true)
+                        else if (opcode.HasImmediate() == true)
                         {
-                            Console.Write(" {0}", instruction.Argument);
+                            Console.Write($" {instruction.Immediate}");
                         }
                         Console.WriteLine();
                     }

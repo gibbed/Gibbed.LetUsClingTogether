@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2021 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -24,7 +24,7 @@ using System;
 using System.IO;
 using Gibbed.IO;
 
-namespace Gibbed.LetUsClingTogether.FileFormats.Script
+namespace Gibbed.LetUsClingTogether.ScriptFormats
 {
     public struct FileHeader
     {
