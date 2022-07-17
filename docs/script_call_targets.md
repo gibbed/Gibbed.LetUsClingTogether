@@ -6,7 +6,7 @@
 
 | # | Name | Arg<sup>1</sup> | Ret<sup>2</sup> | Act<sup>3</sup> | US<sup>4</sup> | JP<sup>5</sup> |
 |:-----:|:---------------------------- |:-:|:---:|:---:| -----:| -----:|
-| 0     | unknown                      | ? | Yes | No  | 18686 | 18684 |
+| 0     | wait                         | ? | Yes | No  | 18686 | 18684 |
 | 1     | unknown                      | ? | Yes | No  | 2038  | *     |
 | 2     | unknown                      | ? | Yes | No  | 775   | *     |
 | 3     | unknown                      | ? | Yes | No  | 1163  | *     |
@@ -33,14 +33,14 @@
 | 24    | unknown                      | ? | Yes | No  | 86    | *     |
 | 25    | unknown                      | ? | Yes | No  | 118   | *     |
 | 26    | unknown                      | ? | Yes | No  | 109   | *     |
-| 27    | unknown                      | ? | Yes | No  | 749   | *     |
-| 28    | unknown                      | ? | Yes | No  | 3162  | *     |
-| 29    | unknown                      | ? | Yes | No  | 1460  | *     |
-| 30    | unknown                      | ? | Yes | No  | 1501  | *     |
-| 31    | unknown                      | ? | Yes | No  | 238   | *     |
-| 32    | unknown                      | ? | Yes | No  | 334   | *     |
+| 27    | talk_leftlower               | ? | Yes | No  | 749   | *     |
+| 28    | talk_leftupper               | ? | Yes | No  | 3162  | *     |
+| 29    | talk_rightlower              | ? | Yes | No  | 1460  | *     |
+| 30    | talk_rightupper              | ? | Yes | No  | 1501  | *     |
+| 31    | talk_rightmiddle             | ? | Yes | No  | 238   | *     |
+| 32    | talk_leftmiddle              | ? | Yes | No  | 334   | *     |
 | 33    | unknown                      | ? | Yes | No  | 77    | *     |
-| 34    | unknown                      | ? | Yes | No  | 176   | *     |
+| 34    | message_fullscreen           | ? | Yes | No  | 176   | *     |
 | 35    | unknown                      | ? | Yes | No  | 259   | *     |
 | 36    | unknown                      | ? | Yes | No  | 219   | *     |
 | 37    | unknown                      | ? | Yes | No  | 37    | *     |
@@ -71,7 +71,7 @@
 | 62    | unknown                      | ? | Yes | No  | 11    | *     |
 | 63    | unknown                      | ? | Yes | No  | 13    | *     |
 |_64_   |_unknown_                     |_?_|_?_  |_?_  |       |       |
-| 65    | unknown                      | ? | Yes | No  | 2879  | 2878  |
+| 65    | unit_setsprite               | ? | Yes | No  | 2879  | 2878  |
 | 66    | unknown                      | ? | Yes | No  | 21    | *     |
 | 67    | unknown                      | ? | Yes | No  | 751   | *     |
 | 68    | unknown                      | ? | Yes | No  | 16    | *     |
