@@ -71,7 +71,7 @@
 | 62    | unknown                      | ? | ?   | No  | 11    | *     |
 | 63    | unknown                      | ? | ?   | No  | 13    | *     |
 |_64_   |_unknown_                     |_2_|_?_  |_?_  |       |       |
-| 65    | unit_setsprite               | 2 | ?   | No  | 2879  | 2878  |
+| 65    | unit_set_sprite              | 2 | ?   | No  | 2879  | 2878  |
 | 66    | unknown                      | ? | ?   | No  | 21    | *     |
 | 67    | unknown                      | ? | ?   | No  | 751   | *     |
 | 68    | unknown                      | ? | ?   | No  | 16    | *     |
@@ -93,11 +93,11 @@
 | 84    | unknown                      | ? | ?   | No  | 426   | *     |
 | 85    | unknown                      | ? | ?   | No  | 22    | *     |
 | 86    | unknown                      | ? | ?   | No  | 416   | *     |
-|_87_   |_unknown_                     |_?_|_?_  |_?_  |       |       |
-| 88    | unknown                      | ? | ?   | No  | 185   | *     |
-| 89    | unknown                      | ? | ?   | No  | 11    | *     |
-| 90    | unknown                      | ? | ?   | No  | 401   | *     |
-| 91    | unknown                      | ? | ?   | No  | 2     | *     |
+|_87_   |_unknown_                     |_1_|_Yes_|_?_  |       |       |
+| 88    | unknown                      | 0 | Yes | No  | 185   | *     |
+| 89    | unknown                      | 0 | Yes | No  | 11    | *     |
+| 90    | get_global_value             | 1 | Yes | No  | 401   | *     |
+| 91    | get_global_flag              | 1 | Yes | No  | 2     | *     |
 |_92_   |_unknown_                     |_?_|_?_  |_?_  |       |       |
 |_93_   |_unknown_                     |_?_|_?_  |_?_  |       |       |
 | 94    | unknown                      | ? | ?   | No  | 88    | *     |
@@ -140,7 +140,7 @@
 | 131   | unknown                      | ? | ?   | No  | 387   | *     |
 | 132   | unknown                      | ? | ?   | No  | 1     | *     |
 | 133   | unknown                      | ? | ?   | No  | 1     | *     |
-| 134   | unknown                      | ? | ?   | No  | 48    | *     |
+| 134   | unknown                      | 0 | Yes | No  | 48    | *     |
 | 135   | unknown                      | ? | ?   | No  | 284   | *     |
 | 136   | unknown                      | ? | ?   | No  | 66    | *     |
 | 137   | unknown                      | ? | ?   | No  | 389   | 388   |
@@ -278,7 +278,7 @@
 |_269_  |_unknown_                     |_?_|_?_  |_?_  |       |       |
 |_270_  |_unknown_                     |_?_|_?_  |_?_  |       |       |
 | 271   | unknown                      | ? | ?   | No  | 235   | *     |
-| 272   | unknown                      | ? | ?   | No  | 197   | *     |
+| 272   | unknown                      | 0 | Yes | No  | 197   | *     |
 | 273   | unknown                      | ? | ?   | No  | 1     | *     |
 | 274   | unknown                      | ? | ?   | No  | 12    | *     |
 | 275   | unknown                      | ? | ?   | No  | 12    | *     |
