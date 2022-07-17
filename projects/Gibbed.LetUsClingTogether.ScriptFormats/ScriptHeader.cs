@@ -36,7 +36,7 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
         public uint FunctionTableOffset;
         public uint JumpTableOffset;
         public uint Unknown18Offset;
-        public uint Unknown1C;
+        public uint Unknown1COffset;
         public ushort Unknown20;
         public ushort Index;
         public uint Unknown24;
@@ -54,7 +54,7 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
             instance.FunctionTableOffset = input.ReadValueU32(endian);
             instance.JumpTableOffset = input.ReadValueU32(endian);
             instance.Unknown18Offset = input.ReadValueU32(endian);
-            instance.Unknown1C = input.ReadValueU32(endian);
+            instance.Unknown1COffset = input.ReadValueU32(endian);
             instance.Unknown20 = input.ReadValueU16(endian);
             instance.Index = input.ReadValueU16(endian);
             instance.Unknown24 = input.ReadValueU32(endian);
@@ -85,7 +85,7 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
 
         public override string ToString()
         {
-            return $"{Unknown1C}";
+            return $"{Unknown1COffset}";
         }
     }
 }

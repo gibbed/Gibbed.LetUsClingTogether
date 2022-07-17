@@ -40,22 +40,28 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
 
         private readonly List<ushort> _ScriptCounts;
         private readonly List<Script> _Scripts;
-        private readonly List<Unknown28Header> _Unknown28s;
+        private readonly List<int> _IntTable;
+        private readonly List<float> _FloatTable;
+        private readonly List<VariableHeader> _Variables;
 
         public ScriptFile()
         {
-            this._ScriptCounts = new List<ushort>();
-            this._Scripts = new List<Script>();
-            this._Unknown28s = new List<Unknown28Header>();
+            this._ScriptCounts = new();
+            this._Scripts = new();
+            this._IntTable = new();
+            this._FloatTable = new();
+            this._Variables = new();
         }
 
         public Endian Endian { get; set; }
         public string AuthorName { get; set; }
         public string SourceName { get; set; }
-        public string MaybeSourceVersion { get; set; }
+        public string Date { get; set; }
         public List<ushort> ScriptCounts { get { return this._ScriptCounts; } }
         public List<Script> Scripts { get { return this._Scripts; } }
-        public List<Unknown28Header> Unknown28s { get { return this._Unknown28s; } }
+        public List<int> IntTable {  get { return this._IntTable; } }
+        public List<float> FloatTable { get { return this._FloatTable; } }
+        public List<VariableHeader> Variables { get { return this._Variables; } }
 
         public void Serialize(Stream output)
         {
@@ -64,7 +70,7 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
 
         public void Deserialize(Stream input)
         {
-            var header = FileHeader.Read(input);
+            var header = ScriptFileHeader.Read(input);
             var endian = header.Endian;
 
             input.Position = header.AuthorNameOffset;
@@ -73,10 +79,10 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
             input.Position = header.SourceNameOffset;
             var sourceName = input.ReadStringZ(SJIS);
 
-            input.Position = header.MaybeSourceVersionOffset;
-            var maybeSourceVersion = input.ReadStringZ(SJIS);
+            input.Position = header.DateOffset;
+            var date = input.ReadStringZ(SJIS);
 
-            input.Position = header.EventCountTableOffset;
+            input.Position = header.ScriptCountTableOffset;
             var scriptCountCount = input.ReadValueU16(endian);
             var scriptCounts = new ushort[scriptCountCount];
             for (int i = 0; i < scriptCountCount; i++)
@@ -84,7 +90,7 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
                 scriptCounts[i] = input.ReadValueU16(endian);
             }
 
-            input.Position = header.EventTableOffset;
+            input.Position = header.ScriptTableOffset;
             var scriptCount = input.ReadValueS32(endian);
             var scriptHeaders = new ScriptHeader[scriptCount];
             for (int i = 0; i < scriptCount; i++)
@@ -92,12 +98,28 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
                 scriptHeaders[i] = ScriptHeader.Read(input, endian);
             }
 
-            input.Position = header.Unknown28Offset;
-            var unknown28Count = input.ReadValueS32(endian);
-            var unknown28s = new Unknown28Header[unknown28Count];
-            for (int i = 0; i < unknown28Count; i++)
+            input.Position = header.IntTableOffset;
+            var intTableCount = input.ReadValueS32(endian);
+            var intTable = new int[intTableCount];
+            for (int i = 0; i < intTableCount; i++)
             {
-                unknown28s[i] = Unknown28Header.Read(input, endian);
+                intTable[i] = input.ReadValueS32(endian);
+            }
+
+            input.Position = header.FloatTableOffset;
+            var floatTableCount = input.ReadValueS32(endian);
+            var floatTable = new float[floatTableCount];
+            for (int i = 0; i < floatTableCount; i++)
+            {
+                floatTable[i] = input.ReadValueF32(endian);
+            }
+
+            input.Position = header.VariableTableOffset;
+            var variableCount = input.ReadValueS32(endian);
+            var variables = new VariableHeader[variableCount];
+            for (int i = 0; i < variableCount; i++)
+            {
+                variables[i] = VariableHeader.Read(input, endian);
             }
 
             input.Position = header.Unknown2COffset;
@@ -152,7 +174,7 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
                     .Distinct()
                     .OrderBy(v => v).ToArray();
 
-                var codeOffsetsToIndices = new Dictionary<uint, int>();
+                Dictionary<uint, int> codeOffsetsToIndices = new();
                 uint codeOffset = 0;
                 var code = new Instruction[scriptHeader.CodeCount];
                 input.Position = scriptHeader.CodeOffset;
@@ -222,7 +244,7 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
                     Name = scriptName,
                     TableIndex = scriptHeader.TableIndex,
                     Unknown06 = scriptHeader.Unknown06,
-                    Unknown1C = scriptHeader.Unknown1C,
+                    Unknown1C = scriptHeader.Unknown1COffset,
                     Unknown20 = scriptHeader.Unknown20,
                     Index = scriptHeader.Index,
                     Unknown24 = scriptHeader.Unknown24,
@@ -238,15 +260,19 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
 
             this.ScriptCounts.Clear();
             this.Scripts.Clear();
-            this.Unknown28s.Clear();
+            this.IntTable.Clear();
+            this.FloatTable.Clear();
+            this.Variables.Clear();
 
             this.Endian = endian;
             this.AuthorName = authorName;
             this.SourceName = sourceName;
-            this.MaybeSourceVersion = maybeSourceVersion;
+            this.Date = date;
             this.ScriptCounts.AddRange(scriptCounts);
             this.Scripts.AddRange(scripts);
-            this.Unknown28s.AddRange(unknown28s);
+            this.IntTable.AddRange(intTable);
+            this.FloatTable.AddRange(floatTable);
+            this.Variables.AddRange(variables);
         }
     }
 }

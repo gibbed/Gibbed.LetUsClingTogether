@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using NDesk.Options;
 using ScriptFile = Gibbed.LetUsClingTogether.ScriptFormats.ScriptFile;
 
@@ -73,6 +74,7 @@ namespace Gibbed.LetUsClingTogether.TestScripts
             {
                 if (Directory.Exists(inputPath) == true)
                 {
+                    inputPaths.AddRange(Directory.GetFiles(inputPath, "*.scene", SearchOption.AllDirectories));
                     inputPaths.AddRange(Directory.GetFiles(inputPath, "*.script", SearchOption.AllDirectories));
                 }
                 else
@@ -85,10 +87,11 @@ namespace Gibbed.LetUsClingTogether.TestScripts
             {
                 Console.WriteLine(inputPath);
 
-                var script = new ScriptFile();
-                using (var input = File.OpenRead(inputPath))
+                var scriptBytes = File.ReadAllBytes(inputPath);
+                ScriptFile scriptFile = new();
+                using (var input = new MemoryStream(scriptBytes, false))
                 {
-                    script.Deserialize(input);
+                    scriptFile.Deserialize(input);
                 }
             }
         }

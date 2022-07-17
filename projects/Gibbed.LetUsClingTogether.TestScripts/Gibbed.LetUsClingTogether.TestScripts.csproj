@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
+    <LangVersion>9.0</LangVersion>
     <TargetFramework>net48</TargetFramework>
     <Company>Gibbed</Company>
     <Authors>Gibbed</Authors>

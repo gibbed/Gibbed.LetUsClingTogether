@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using Gibbed.LetUsClingTogether.ScriptFormats;
 using NDesk.Options;
@@ -74,9 +75,11 @@ namespace Gibbed.LetUsClingTogether.DisassembleScript
             // temporary, until I do real file output
             Console.OutputEncoding = Encoding.UTF8;
 
+            var opcodePadding = 1 + Enum.GetNames(typeof(Opcode)).Max(v => v.Length);
+
             var targetNames = new Dictionary<int, string>()
             {
-                { 0, "Delay" },
+                { 0, "Wait" },
                 { 27, "Talk_LeftLower" },
                 { 28, "Talk_LeftUpper" },
                 { 29, "Talk_RightLower" },
@@ -96,7 +99,7 @@ namespace Gibbed.LetUsClingTogether.DisassembleScript
 
             Console.WriteLine($"Author: {scriptFile.AuthorName}");
             Console.WriteLine($"Source Name: {scriptFile.SourceName}");
-            Console.WriteLine($"Source Version?: {scriptFile.MaybeSourceVersion}");
+            Console.WriteLine($"Date: {scriptFile.Date}");
 
             if (scriptFile.ScriptCounts.Count > 0)
             {
@@ -123,6 +126,16 @@ namespace Gibbed.LetUsClingTogether.DisassembleScript
                 Console.WriteLine($"  unknown28 = {script.Unknown28}");
                 Console.WriteLine($"  unknown2C = {script.Unknown2C}");
 
+                if (script.Unknown18s.Count > 0)
+                {
+                    Console.Write("  unknown18s =");
+                    foreach (var value in script.Unknown18s)
+                    {
+                        Console.Write($" {value}");
+                    }
+                    Console.WriteLine();
+                }
+
                 if (script.Jumps.Count > 0)
                 {
                     Console.Write("  jump table:");
@@ -144,11 +157,12 @@ namespace Gibbed.LetUsClingTogether.DisassembleScript
 
                         Console.Write("    ");
                         Console.Write($"@{bodyIndex:D4} ");
-                        Console.Write(opcode.ToString().PadRight(28));
+                        Console.Write(opcode.ToString().PadRight(opcodePadding));
 
                         if (opcode == Opcode.Call ||
                             opcode == Opcode.CallAct ||
-                            opcode == Opcode.CallAndPopA)
+                            opcode == Opcode.CallAndPopA ||
+                            opcode == Opcode.CallActAndPopA)
                         {
                             var immediate = instruction.Immediate;
                             Console.Write($" {immediate}");
@@ -156,6 +170,18 @@ namespace Gibbed.LetUsClingTogether.DisassembleScript
                             {
                                 Console.Write($" ({targetName})");
                             }
+                        }
+                        else if (opcode == Opcode.PushIntFromTable)
+                        {
+                            var immediate = instruction.Immediate;
+                            var value = scriptFile.IntTable[immediate];
+                            Console.Write($" {value} (#{immediate})");
+                        }
+                        else if (opcode == Opcode.PushFloatFromTable)
+                        {
+                            var immediate = instruction.Immediate;
+                            var value = scriptFile.FloatTable[immediate];
+                            Console.Write($" {value} (#{immediate})");
                         }
                         else if (opcode.IsJump() == true)
                         {

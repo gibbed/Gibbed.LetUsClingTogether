@@ -95,8 +95,7 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
         Unknown53 = 53, // REQCANCEL
         // ????
 
-        // ????
-        // Some sort of state-specific temporary variables
+        // General registers
         PopInt0 = 54,
         PopInt1 = 55,
         PopInt2 = 56,
@@ -113,7 +112,6 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
         PushFloat1 = 67,
         PushFloat2 = 68,
         PushFloat3 = 69,
-        // ????
 
         Undefined70 = 70, // DVAR
         Undefined71 = 71, // LONGCODESTART

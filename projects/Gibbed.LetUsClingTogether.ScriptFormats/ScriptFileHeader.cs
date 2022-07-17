@@ -26,7 +26,7 @@ using Gibbed.IO;
 
 namespace Gibbed.LetUsClingTogether.ScriptFormats
 {
-    public struct FileHeader
+    public struct ScriptFileHeader
     {
         public const uint SignatureValue = 0x80000000u;
         public const uint SignatureMask = 0xFFFF0000u;
@@ -38,13 +38,13 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
         public uint TotalSize;
         public uint AuthorNameOffset;
         public uint SourceNameOffset;
-        public uint MaybeSourceVersionOffset;
-        public uint EventCountTableOffset;
-        public uint EventTableOffset;
+        public uint DateOffset;
+        public uint ScriptCountTableOffset;
+        public uint ScriptTableOffset;
         public uint Unknown1C;
-        public uint Unknown20Offset;
-        public uint Unknown24Offset;
-        public uint Unknown28Offset;
+        public uint IntTableOffset;
+        public uint FloatTableOffset;
+        public uint VariableTableOffset;
         public uint Unknown2COffset;
         public uint Unknown30Offset;
         public uint Unknown34;
@@ -61,7 +61,7 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
         public uint Unknown5COffset;
         public float Unknown60;
 
-        public static FileHeader Read(Stream input)
+        public static ScriptFileHeader Read(Stream input)
         {
             var magicAndVersion = input.ReadValueU32(Endian.Little);
             if ((magicAndVersion & SignatureMask) != SignatureValue &&
@@ -73,18 +73,18 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
                 ? Endian.Little
                 : Endian.Big;
 
-            FileHeader instance;
+            ScriptFileHeader instance;
             instance.Endian = endian;
             instance.TotalSize = input.ReadValueU32(endian);
             instance.AuthorNameOffset = input.ReadValueU32(endian);
             instance.SourceNameOffset = input.ReadValueU32(endian);
-            instance.MaybeSourceVersionOffset = input.ReadValueU32(endian);
-            instance.EventCountTableOffset = input.ReadValueU32(endian);
-            instance.EventTableOffset = input.ReadValueU32(endian);
+            instance.DateOffset = input.ReadValueU32(endian);
+            instance.ScriptCountTableOffset = input.ReadValueU32(endian);
+            instance.ScriptTableOffset = input.ReadValueU32(endian);
             instance.Unknown1C = input.ReadValueU32(endian);
-            instance.Unknown20Offset = input.ReadValueU32(endian);
-            instance.Unknown24Offset = input.ReadValueU32(endian);
-            instance.Unknown28Offset = input.ReadValueU32(endian);
+            instance.IntTableOffset = input.ReadValueU32(endian);
+            instance.FloatTableOffset = input.ReadValueU32(endian);
+            instance.VariableTableOffset = input.ReadValueU32(endian);
             instance.Unknown2COffset = input.ReadValueU32(endian);
             instance.Unknown30Offset = input.ReadValueU32(endian);
             instance.Unknown34 = input.ReadValueU32(endian);
