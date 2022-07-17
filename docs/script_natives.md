@@ -1,8 +1,8 @@
 1. Argument count.
-2. If the call target has a return value.
+2. If the native has a return value.
 3. ?
-4. Number of usages of the call target in all scripts in the US (`ULUS10565`) release.
-5. Number of usages of the call target in all scripts in the JP (`ULJM05753`) release. A * denotates it is the same as the US release.
+4. Number of usages of the native in all scripts in the US (`ULUS10565`) release.
+5. Number of usages of the native in all scripts in the JP (`ULJM05753`) release. A * denotates it is the same as the US release.
 
 | # | Name | Arg<sup>1</sup> | Ret<sup>2</sup> | Act<sup>3</sup> | US<sup>4</sup> | JP<sup>5</sup> |
 |:-----:|:---------------------------- |:-:|:---:|:---:| -----:| -----:|
