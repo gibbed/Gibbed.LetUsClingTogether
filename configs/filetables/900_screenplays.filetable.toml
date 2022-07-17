@@ -79,9 +79,9 @@ path = "global"
 
 7.path = "death_agony.invocation" # assumed
 8.path = "death_agony.task" # assumed
-9.path = "death_agony.scene" # assumed
+9.path = "death_agony.script" # assumed
 
 10.path = "battle_start.progress" # assumed
 11.path = "battle_start.invocation" # assumed
 12.path = "battle_start.task" # assumed
-13.path = "battle_start.scene"
+13.path = "battle_start.script"
