@@ -20,27 +20,13 @@
  *    distribution.
  */
 
-using System.IO;
-using Gibbed.IO;
-
 namespace Gibbed.LetUsClingTogether.ScriptFormats
 {
-    public struct VariableHeader
+    public enum VariableType
     {
-        public VariableFlags Flags;
-        public uint Unknown;
-
-        public static VariableHeader Read(Stream input, Endian endian)
-        {
-            VariableHeader instance;
-            instance.Flags = VariableFlags.Read(input, endian);
-            instance.Unknown = input.ReadValueU32(endian);
-            return instance;
-        }
-
-        public override string ToString()
-        {
-            return $"{this.Flags} {this.Unknown}";
-        }
+        Byte = 0,
+        SByte = 1,
+        Integer = 4,
+        Float = 5,
     }
 }

@@ -69,23 +69,12 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
             {
                 throw new NotSupportedException();
             }
-            /*if (instance.Unknown1C != 0 &&
-                instance.Unknown1C != 4 &&
-                instance.Unknown1C != 8 &&
-                instance.Unknown1C != 12 &&
-                instance.Unknown1C != 16 &&
-                instance.Unknown1C != 20 &&
-                instance.Unknown1C != 24 &&
-                instance.Unknown1C != 32)
-            {
-                throw new FormatException();
-            }*/
             return instance;
         }
 
         public override string ToString()
         {
-            return $"{Unknown1COffset}";
+            return $"{this.Unknown1COffset}";
         }
     }
 }

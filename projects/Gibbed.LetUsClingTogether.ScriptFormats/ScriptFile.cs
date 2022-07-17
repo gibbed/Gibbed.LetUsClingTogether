@@ -42,7 +42,7 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
         private readonly List<Script> _Scripts;
         private readonly List<int> _IntTable;
         private readonly List<float> _FloatTable;
-        private readonly List<VariableHeader> _Variables;
+        private readonly List<Variable> _Variables;
 
         public ScriptFile()
         {
@@ -61,7 +61,7 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
         public List<Script> Scripts { get { return this._Scripts; } }
         public List<int> IntTable {  get { return this._IntTable; } }
         public List<float> FloatTable { get { return this._FloatTable; } }
-        public List<VariableHeader> Variables { get { return this._Variables; } }
+        public List<Variable> Variables { get { return this._Variables; } }
 
         public void Serialize(Stream output)
         {
@@ -116,10 +116,41 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
 
             input.Position = header.VariableTableOffset;
             var variableCount = input.ReadValueS32(endian);
-            var variables = new VariableHeader[variableCount];
+            var variableHeaders = new VariableHeader[variableCount];
             for (int i = 0; i < variableCount; i++)
             {
-                variables[i] = VariableHeader.Read(input, endian);
+                variableHeaders[i] = VariableHeader.Read(input, endian);
+            }
+
+            var variables = new Variable[variableCount];
+            for (int i = 0; i < variableCount; i++)
+            {
+                var variableHeader = variableHeaders[i];
+                Variable variable;
+                if (variableHeader.Flags.Scope != VariableScope.Array)
+                {
+                    variable.Flags = variableHeader.Flags;
+                    variable.Unknown = variableHeader.Unknown;
+                    variable.ArrayRank = 0;
+                    variable.ArrayLengths = null;
+                    variables[i] = variable;
+                }
+                else
+                {
+                    if (variableHeader.Flags.Type != VariableType.Byte)
+                    {
+                        throw new NotSupportedException();
+                    }
+                    input.Position = variableHeader.Flags.Offset;
+                    var variableArrayHeader = VariableArrayHeader.Read(input, endian);
+                    variable.Flags = variableArrayHeader.Flags;
+                    variable.Unknown = variableHeader.Unknown;
+                    variable.ArrayRank = variableArrayHeader.Rank;
+                    variable.ArrayLengths = new int[2];
+                    variable.ArrayLengths[0] = variableArrayHeader.Lengths[0];
+                    variable.ArrayLengths[1] = variableArrayHeader.Lengths[1];
+                }
+                variables[i] = variable;
             }
 
             input.Position = header.Unknown2COffset;
@@ -172,7 +203,8 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
                 var codeOffsetsUnique = jumpOffsets
                     .Concat(functionHeaders.Select(fh => fh.CodeOffset))
                     .Distinct()
-                    .OrderBy(v => v).ToArray();
+                    .OrderBy(v => v)
+                    .ToArray();
 
                 Dictionary<uint, int> codeOffsetsToIndices = new();
                 uint codeOffset = 0;
@@ -244,7 +276,7 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
                     Name = scriptName,
                     TableIndex = scriptHeader.TableIndex,
                     Unknown06 = scriptHeader.Unknown06,
-                    Unknown1C = scriptHeader.Unknown1COffset,
+                    Unknown1COffset = scriptHeader.Unknown1COffset,
                     Unknown20 = scriptHeader.Unknown20,
                     Index = scriptHeader.Index,
                     Unknown24 = scriptHeader.Unknown24,

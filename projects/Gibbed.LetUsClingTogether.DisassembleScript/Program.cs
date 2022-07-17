@@ -119,7 +119,7 @@ namespace Gibbed.LetUsClingTogether.DisassembleScript
 
                 Console.WriteLine($"  table index = {script.TableIndex}");
                 Console.WriteLine($"  unknown06 = {script.Unknown06}");
-                Console.WriteLine($"  unknown1C = {script.Unknown1C}");
+                Console.WriteLine($"  unknown1COffset = {script.Unknown1COffset}");
                 Console.WriteLine($"  unknown20 = {script.Unknown20}");
                 Console.WriteLine($"  index = {script.Index}");
                 Console.WriteLine($"  unknown24 = {script.Unknown24}");
