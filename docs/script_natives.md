@@ -5,7 +5,7 @@
 5. Number of usages of the native in all scripts in the JP (`ULJM05753`) release. A * denotates it is the same as the US release.
 
 | # | Name | Arg<sup>1</sup> | Ret<sup>2</sup> | Act<sup>3</sup> | US<sup>4</sup> | JP<sup>5</sup> | Notes |
-|:-----:|:---------------------------- |:-:|:---:|:---:| -----:| -----:|
+|:-----:|:---------------------------- |:-:|:---:|:---:| -----:| -----:| - |
 | 0     | wait                         | 1 | No  | No  | 18686 | 18684 |
 | 1     | unknown                      | 0 | No  | No  | 2038  | *     |
 | 2     | unknown                      | 1 | No  | No  | 775   | *     |
