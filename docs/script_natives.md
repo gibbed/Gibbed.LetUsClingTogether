@@ -193,10 +193,10 @@
 | 184   | unknown                      | 2 | No  | No  | 14    | *     |
 | 185   | unknown                      | 1 | No  | No  | 90    | *     |
 | 186   | unknown                      | 0 | No  | No  | 21    | *     |
-| 187   | sound_play                   | 1 | No  | No  | 846   | *     |
-| 188   | unknown                      | 2 | No  | No  | 59    | *     |
-| 189   | unknown                      | 1 | No  | No  | 58    | *     |
-| 190   | unknown                      | 2 | No  | No  | 13    | *     |
+| 187   | sound_play_187               | 1 | No  | No  | 846   | *     |
+| 188   | sound_play_188               | 2 | No  | No  | 59    | *     |
+| 189   | sound_play_189               | 1 | No  | No  | 58    | *     |
+| 190   | sound_play_190               | 2 | No  | No  | 13    | *     |
 | 191   | unknown                      | 2 | No  | No  | 295   | *     |
 | 192   | unknown                      | 1 | No  | No  | 200   | *     |
 |_193_  |_unknown_                     |_?_|_?_  |_?_  |       |       |
