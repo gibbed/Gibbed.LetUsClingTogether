@@ -4,7 +4,7 @@
 4. Number of usages of the native in all scripts in the US (`ULUS10565`) release.
 5. Number of usages of the native in all scripts in the JP (`ULJM05753`) release. A * denotates it is the same as the US release.
 
-| # | Name | Arg<sup>1</sup> | Ret<sup>2</sup> | Act<sup>3</sup> | US<sup>4</sup> | JP<sup>5</sup> |
+| # | Name | Arg<sup>1</sup> | Ret<sup>2</sup> | Act<sup>3</sup> | US<sup>4</sup> | JP<sup>5</sup> | Notes |
 |:-----:|:---------------------------- |:-:|:---:|:---:| -----:| -----:|
 | 0     | wait                         | 1 | No  | No  | 18686 | 18684 |
 | 1     | unknown                      | 0 | No  | No  | 2038  | *     |
@@ -53,7 +53,7 @@
 | 44    | unknown                      | 0 | No  | No  | 864   | *     |
 | 45    | unknown                      | 0 | No  | No  | 277   | *     |
 | 46    | unknown                      | 0 | No  | No  | 337   | *     |
-| 47    | unknown                      | 2 | No  | No  | 2807  | 2808  |
+| 47    | unit_set_direction           | 2 | No  | No  | 2807  | 2808  |
 | 48    | unknown                      | 2 | No  | No  | 127   | *     |
 | 49    | unknown                      | 2 | No  | No  | 1009  | *     |
 | 50    | unknown                      | 3 | No  | No  | 9     | *     |
@@ -71,7 +71,7 @@
 | 62    | unknown                      | 0 | No  | No  | 11    | *     |
 | 63    | unknown                      | 0 | No  | No  | 13    | *     |
 |_64_   |_unknown_                     |_2_|_?_  |_?_  |       |       |
-| 65    | unit_set_sprite              | 2 | No  | No  | 2879  | 2878  |
+| 65    | unit_set_animation           | 2 | No  | No  | 2879  | 2878  |
 | 66    | unknown                      | 2 | No  | No  | 21    | *     |
 | 67    | unknown                      | 1 | No  | No  | 751   | *     |
 | 68    | unknown                      | 1 | No  | No  | 16    | *     |
@@ -96,10 +96,10 @@
 |_87_   |_unknown_                     |_1_|_Yes_|_?_  |       |       |
 | 88    | unknown                      | 0 | Yes | No  | 185   | *     |
 | 89    | unknown                      | 0 | Yes | No  | 11    | *     |
-| 90    | get_global_value             | 1 | Yes | No  | 401   | *     |
-| 91    | get_global_flag              | 1 | Yes | No  | 2     | *     |
-|_92_   |_unknown_                     |_?_|_?_  |_?_  |       |       |
-|_93_   |_unknown_                     |_?_|_?_  |_?_  |       |       |
+| 90    | get_global_flag              | 1 | Yes | No  | 401   | *     |
+| 91    | unknown                      | 1 | Yes | No  | 2     | *     | Returns value from unknown flag storage.
+|_92_   |_unknown_                     |_2_|_No_ |_?_  |       |       | No-op. Was probably set_global_flag.
+|_93_   |_unknown_                     |_2_|_No_ |_?_  |       |       | No-op. Was probably used to set a flag in unknown flag storage.
 | 94    | unknown                      | 2 | No  | No  | 88    | *     |
 | 95    | unknown                      | 4 | No  | No  | 864   | *     |
 | 96    | unknown                      | 4 | No  | No  | 12    | *     |
@@ -193,7 +193,7 @@
 | 184   | unknown                      | 2 | No  | No  | 14    | *     |
 | 185   | unknown                      | 1 | No  | No  | 90    | *     |
 | 186   | unknown                      | 0 | No  | No  | 21    | *     |
-| 187   | unknown                      | 1 | No  | No  | 846   | *     |
+| 187   | sound_play                   | 1 | No  | No  | 846   | *     |
 | 188   | unknown                      | 2 | No  | No  | 59    | *     |
 | 189   | unknown                      | 1 | No  | No  | 58    | *     |
 | 190   | unknown                      | 2 | No  | No  | 13    | *     |
