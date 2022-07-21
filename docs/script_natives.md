@@ -71,12 +71,12 @@
 | 62    | unknown                      | 0 | No  | No  | 11    | *     |
 | 63    | unknown                      | 0 | No  | No  | 13    | *     |
 |_64_   |_unknown_                     |_2_|_?_  |_?_  |       |       |
-| 65    | unit_set_animation           | 2 | No  | No  | 2879  | 2878  |
-| 66    | unknown                      | 2 | No  | No  | 21    | *     |
+| 65    | unit_play_animation_65       | 2 | No  | No  | 2879  | 2878  |
+| 66    | unit_play_animation_66       | 2 | No  | No  | 21    | *     |
 | 67    | unknown                      | 1 | No  | No  | 751   | *     |
 | 68    | unknown                      | 1 | No  | No  | 16    | *     |
-| 69    | unknown                      | 1 | No  | No  | 600   | *     |
-| 70    | unknown                      | 1 | No  | No  | 12    | *     |
+| 69    | unit_play_animation_69       | 1 | No  | No  | 600   | *     |
+| 70    | unit_play_animation_70       | 1 | No  | No  | 12    | *     |
 | 71    | unknown                      | 0 | No  | No  | 435   | *     |
 | 72    | unknown                      | 0 | No  | No  | 429   | *     |
 | 73    | unknown                      | 1 | No  | No  | 2733  | *     |
@@ -141,7 +141,7 @@
 | 132   | unknown                      | 0 | No  | No  | 1     | *     |
 | 133   | unknown                      | 0 | No  | No  | 1     | *     |
 | 134   | unknown                      | 0 | Yes | No  | 48    | *     |
-| 135   | unknown                      | 2 | No  | No  | 284   | *     |
+| 135   | unit_set_portrait_135        | 2 | No  | No  | 284   | *     |
 | 136   | unknown                      | 1 | No  | No  | 66    | *     |
 | 137   | unknown                      | 1 | No  | No  | 389   | 388   |
 | 138   | unknown                      | 1 | No  | No  | 4     | *     |
@@ -150,7 +150,7 @@
 | 141   | unknown                      | 3 | No  | No  | 704   | *     |
 | 142   | unknown                      | 4 | No  | No  | 151   | *     |
 | 143   | unknown                      | 4 | No  | No  | 656   | *     |
-| 144   | unknown                      | 1 | No  | No  | 26    | *     |
+| 144   | unit_set_portrait_144        | 1 | No  | No  | 26    | *     |
 | 145   | unknown                      | 0 | No  | No  | 404   | *     |
 | 146   | unknown                      | 0 | No  | No  | 826   | *     |
 |_147_  |_unknown_                     |_?_|_?_  |_?_  |       |       |
