@@ -94,7 +94,7 @@
 | 85    | unknown                      | 2 | No  | No  | 22    | *     |
 | 86    | unknown                      | 1 | No  | No  | 416   | *     |
 |_87_   |_unknown_                     |_1_|_Yes_|_?_  |       |       |
-| 88    | unknown                      | 0 | Yes | No  | 185   | *     |
+| 88    | is_replay                    | 0 | Yes | No  | 185   | *     | True if scene is being replayed via World Tarot, false otherwise.
 | 89    | unknown                      | 0 | Yes | No  | 11    | *     |
 | 90    | get_global_flag              | 1 | Yes | No  | 401   | *     |
 | 91    | unknown                      | 1 | Yes | No  | 2     | *     | Returns value from unknown flag storage.
@@ -272,7 +272,7 @@
 | 263   | unknown                      | 2 | No  | No  | 22    | *     |
 | 264   | unknown                      | 0 | No  | No  | 13    | *     |
 | 265   | unknown                      | 0 | No  | No  | 9     | *     |
-| 266   | unknown                      | 1 | No  | No  | 50    | *     |
+| 266   | system_message               | 1 | No  | No  | 50    | *     |
 | 267   | unknown                      | 1 | No  | No  | 416   | *     |
 |_268_  |_unknown_                     |_?_|_?_  |_?_  |       |       |
 |_269_  |_unknown_                     |_?_|_?_  |_?_  |       |       |
