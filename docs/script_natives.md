@@ -130,18 +130,18 @@
 | 121   | unknown                      | 2 | No  | No  | 1     | *     |
 | 122   | unknown                      | 0 | No  | No  | 547   | *     |
 | 123   | unknown                      | 3 | No  | No  | 289   | *     |
-| 124   | unknown                      | 1 | No  | No  | 44    | *     |
-| 125   | unknown                      | 1 | No  | No  | 74    | *     |
-| 126   | unknown                      | 1 | No  | No  | 1323  | *     |
-| 127   | unknown                      | 1 | No  | No  | 726   | *     |
-| 128   | unknown                      | 0 | No  | No  | 1     | *     |
-| 129   | unknown                      | 1 | No  | No  | 24    | *     |
+| 124   | bind_unknown_124             | 1 | No  | No  | 44    | *     | Binds actor by index to current script?
+| 125   | bind_unknown_125             | 1 | No  | No  | 74    | *     |
+| 126   | bind_unknown_126             | 1 | No  | No  | 1323  | *     | Binds actor by ID to current script?
+| 127   | bind_unknown_127             | 1 | No  | No  | 726   | *     | Binds unit by ID to current script?
+| 128   | bind_unknown_128             | 0 | No  | No  | 1     | *     | Binds unknown to current script?
+| 129   | bind_unknown_129             | 1 | No  | No  | 24    | *     | Binds battle? unit to current script?
 | 130   | unknown                      | 1 | No  | No  | 330   | *     |
-| 131   | unknown                      | 0 | No  | No  | 387   | *     |
+| 131   | unknown                      | 0 | No  | No  | 387   | *     | Unbinds?
 | 132   | unknown                      | 0 | No  | No  | 1     | *     |
 | 133   | unknown                      | 0 | No  | No  | 1     | *     |
 | 134   | unknown                      | 0 | Yes | No  | 48    | *     |
-| 135   | unit_set_portrait_135        | 2 | No  | No  | 284   | *     |
+| 135   | actor_set_portrait           | 2 | No  | No  | 284   | *     |
 | 136   | unknown                      | 1 | No  | No  | 66    | *     |
 | 137   | unknown                      | 1 | No  | No  | 389   | 388   |
 | 138   | unknown                      | 1 | No  | No  | 4     | *     |
@@ -150,7 +150,7 @@
 | 141   | unknown                      | 3 | No  | No  | 704   | *     |
 | 142   | unknown                      | 4 | No  | No  | 151   | *     |
 | 143   | unknown                      | 4 | No  | No  | 656   | *     |
-| 144   | unit_set_portrait_144        | 1 | No  | No  | 26    | *     |
+| 144   | current_actor_set_portrait   | 1 | No  | No  | 26    | *     | Sets portrait for actor bound to current script.
 | 145   | unknown                      | 0 | No  | No  | 404   | *     |
 | 146   | unknown                      | 0 | No  | No  | 826   | *     |
 |_147_  |_unknown_                     |_?_|_?_  |_?_  |       |       |
