@@ -71,12 +71,12 @@
 | 62    | unknown                      | 0 | No  | No  | 11    | *     |
 | 63    | unknown                      | 0 | No  | No  | 13    | *     |
 |_64_   |_unknown_                     |_2_|_?_  |_?_  |       |       |
-| 65    | unit_play_animation_65       | 2 | No  | No  | 2879  | 2878  |
-| 66    | unit_play_animation_66       | 2 | No  | No  | 21    | *     |
+| 65    | actor_play_animation_65      | 2 | No  | No  | 2879  | 2878  |
+| 66    | actor_play_animation_66      | 2 | No  | No  | 21    | *     |
 | 67    | unknown                      | 1 | No  | No  | 751   | *     |
-| 68    | unknown                      | 1 | No  | No  | 16    | *     |
-| 69    | unit_play_animation_69       | 1 | No  | No  | 600   | *     |
-| 70    | unit_play_animation_70       | 1 | No  | No  | 12    | *     |
+| 68    | unknown                      | 1 | No  | No  | 16    | *     | Current actor version of native 64.
+| 69    | current_actor_play_animation_69 | 1 | No  | No  | 600   | *     |
+| 70    | current_actor_play_animation_70 | 1 | No  | No  | 12    | *     |
 | 71    | unknown                      | 0 | No  | No  | 435   | *     |
 | 72    | unknown                      | 0 | No  | No  | 429   | *     |
 | 73    | unknown                      | 1 | No  | No  | 2733  | *     |
