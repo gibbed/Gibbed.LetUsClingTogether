@@ -53,7 +53,7 @@
 | 44    | unknown                      | 0 | No  | No  | 864   | *     |
 | 45    | unknown                      | 0 | No  | No  | 277   | *     |
 | 46    | unknown                      | 0 | No  | No  | 337   | *     |
-| 47    | unit_set_direction           | 2 | No  | No  | 2807  | 2808  |
+| 47    | actor_set_direction          | 2 | No  | No  | 2807  | 2808  |
 | 48    | unknown                      | 2 | No  | No  | 127   | *     |
 | 49    | unknown                      | 2 | No  | No  | 1009  | *     |
 | 50    | unknown                      | 3 | No  | No  | 9     | *     |
@@ -64,7 +64,7 @@
 | 55    | unknown                      | 2 | No  | No  | 5     | *     |
 | 56    | unknown                      | 4 | No  | No  | 18    | *     |
 | 57    | unknown                      | 2 | No  | No  | 130   | 128   |
-| 58    | unknown                      | 1 | No  | No  | 1731  | *     |
+| 58    | current_actor_set_direction  | 1 | No  | No  | 1731  | *     |
 | 59    | unknown                      | 1 | No  | No  | 48    | *     |
 | 60    | unknown                      | 1 | No  | No  | 106   | *     |
 | 61    | unknown                      | 2 | No  | No  | 22    | *     |
