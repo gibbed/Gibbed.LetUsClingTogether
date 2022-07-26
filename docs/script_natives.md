@@ -54,7 +54,7 @@
 | 45    | unknown                      | 0 | No  | No  | 277   | *     |
 | 46    | unknown                      | 0 | No  | No  | 337   | *     |
 | 47    | actor_set_direction          | 2 | No  | No  | 2807  | 2808  |
-| 48    | unknown                      | 2 | No  | No  | 127   | *     |
+| 48    | actor_unknown_48             | 2 | No  | No  | 127   | *     |
 | 49    | unknown                      | 2 | No  | No  | 1009  | *     |
 | 50    | unknown                      | 3 | No  | No  | 9     | *     |
 | 51    | unknown                      | 1 | No  | No  | 23    | *     |
@@ -65,7 +65,7 @@
 | 56    | unknown                      | 4 | No  | No  | 18    | *     |
 | 57    | unknown                      | 2 | No  | No  | 130   | 128   |
 | 58    | current_actor_set_direction  | 1 | No  | No  | 1731  | *     |
-| 59    | unknown                      | 1 | No  | No  | 48    | *     |
+| 59    | current_actor_unknown_48     | 1 | No  | No  | 48    | *     | Current actor version of native 48.
 | 60    | unknown                      | 1 | No  | No  | 106   | *     |
 | 61    | unknown                      | 2 | No  | No  | 22    | *     |
 | 62    | unknown                      | 0 | No  | No  | 11    | *     |
