@@ -74,9 +74,25 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                 this.DirectoryId = (ushort)((rawId >> 16) & 0xFFFFu);
             }
 
+            public PackId(ushort directoryId, ushort fileId)
+            {
+                this.DirectoryId = directoryId;
+                this.FileId = fileId;
+            }
+
+            public static PackId Create(uint rawId)
+            {
+                return new PackId(rawId);
+            }
+
             public static PackId? Create(uint? rawId)
             {
                 return rawId == null ? null : new PackId(rawId.Value);
+            }
+
+            public static PackId Create(ushort directoryId, ushort fileId)
+            {
+                return new PackId(directoryId, fileId);
             }
         }
     }
