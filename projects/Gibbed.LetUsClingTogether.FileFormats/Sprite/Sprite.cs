@@ -44,8 +44,8 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Sprite
             }
 
             var textureOffset = input.ReadValueU32(endian);
-            var palettesOffset = input.ReadValueU32(endian);
-            var unknown0COffset = input.ReadValueU32(endian);
+            var paletteBaseOffset = input.ReadValueU32(endian);
+            var paletteOffsetTableOffset = input.ReadValueU32(endian);
 
             if (textureOffset != 0x20)
             {
@@ -55,19 +55,22 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Sprite
             var paletteCount = input.ReadValueU32(endian);
             var frameWidth = input.ReadValueU32(endian);
             var frameHeight = input.ReadValueU32(endian);
-            var unknown1C = input.ReadValueU32(endian);
 
-            if (unknown1C != 0)
+            // probably padding
             {
-                throw new FormatException();
+                var zero1C = input.ReadValueU32(endian);
+                if (zero1C != 0)
+                {
+                    throw new FormatException();
+                }
             }
 
             Texture? texture;
-            if (textureOffset != palettesOffset)
+            if (textureOffset != paletteBaseOffset)
             {
                 var textureSize = input.ReadValueS32(endian);
                 input.Seek(-4, SeekOrigin.Current);
-                if (textureSize < 4 || input.Position + textureSize != basePosition + palettesOffset)
+                if (textureSize < 4 || input.Position + textureSize != basePosition + paletteBaseOffset)
                 {
                     throw new FormatException();
                 }
@@ -81,20 +84,42 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Sprite
             var palettes = new Palette[paletteCount];
             if (paletteCount != 0)
             {
+                if (paletteOffsetTableOffset == totalSize)
+                {
+                    throw new FormatException();
+                }
+
+                input.Position = basePosition + paletteOffsetTableOffset;
+                var paletteOffsets = new uint[paletteCount];
                 for (uint i = 0; i < paletteCount; i++)
                 {
-                    var paletteSize = input.ReadValueS32(endian);
-                    input.Seek(-4, SeekOrigin.Current);
-                    if (paletteSize < 4 || input.Position + paletteSize > basePosition + unknown0COffset)
+                    paletteOffsets[i] = input.ReadValueU32(endian);
+                }
+
+                for (uint i = 0; i < paletteCount; i++)
+                {
+                    var paletteOffset = paletteOffsets[i];
+                    var endOffset = i + 1 < paletteCount
+                        ? paletteBaseOffset + paletteOffsets[i + 1]
+                        : totalSize;
+                    input.Position = basePosition + paletteBaseOffset + paletteOffset;
+                    palettes[i] = Palette.Read(input, endian);
+                    if (input.Position > basePosition + endOffset)
                     {
                         throw new FormatException();
                     }
-                    palettes[i] = Palette.Read(input, endian);
                 }
             }
             else
             {
+                if (paletteBaseOffset != totalSize ||
+                    paletteOffsetTableOffset != totalSize)
+                {
+                    throw new FormatException();
+                }
+
                 Palette palette;
+                palette.GECommands = null;
                 using (var data = new MemoryStream(FileFormats.Sprite.Palettes.Default))
                 {
                     var colors = new uint[data.Length / 4];

@@ -29,6 +29,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Sprite
     public struct Palette
     {
         public uint[] Colors;
+        public GEFormats.Command[] GECommands;
 
         public static Palette Read(Stream input, Endian endian)
         {
@@ -42,18 +43,19 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Sprite
 
             var dataSize = input.ReadValueU32(endian);
             var dataOffset = input.ReadValueU32(endian);
-            var unknown0COffset = input.ReadValueU32(endian);
+            var commandOffset = input.ReadValueU32(endian);
+            const int commandSize = 32;
 
             if (dataOffset != 0x10)
             {
                 throw new FormatException();
             }
-            else if (dataOffset + dataSize != unknown0COffset)
+            else if (dataOffset + dataSize != commandOffset)
             {
                 throw new FormatException();
             }
 
-            if (dataOffset + dataSize + 32 != totalSize)
+            if (dataOffset + dataSize + commandSize != totalSize)
             {
                 throw new InvalidOperationException();
             }
@@ -69,11 +71,34 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Sprite
                 colors[i] = input.ReadValueU32(endian);
             }
 
-            var unknownTail = input.ReadBytes(32);
+            var geCommands = new GEFormats.Command[8];
+            for (int i = 0; i < geCommands.Length; i++)
+            {
+                geCommands[i] = new GEFormats.Command(input.ReadValueU32(endian));
+            }
 
             Palette instance;
             instance.Colors = colors;
+            instance.GECommands = geCommands;
+            instance.ValidateGECommands();
             return instance;
+        }
+
+        private void ValidateGECommands()
+        {
+            var cloadArgument = this.Colors.Length / 8;
+            var commands = this.GECommands;
+            if (commands[0] != new GEFormats.Command(GEFormats.Operation.CMODE, 65283) ||
+                commands[1] != new GEFormats.Command(GEFormats.Operation.CBPH, 0) ||
+                commands[2] != new GEFormats.Command(GEFormats.Operation.CBP, 0) ||
+                commands[3] != GEFormats.Operation.CLOAD || commands[3].Argument != cloadArgument ||
+                commands[4] != new GEFormats.Command(GEFormats.Operation.RET) ||
+                commands[5] != new GEFormats.Command(GEFormats.Operation.NOP) ||
+                commands[6] != new GEFormats.Command(GEFormats.Operation.NOP) ||
+                commands[7] != new GEFormats.Command(GEFormats.Operation.NOP))
+            {
+                throw new FormatException();
+            }
         }
     }
 }

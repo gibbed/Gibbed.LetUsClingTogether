@@ -39,7 +39,8 @@ namespace Gibbed.LetUsClingTogether.FileFormats
         {
             long basePosition = input.Position;
 
-            if (input.ReadValueU32(endian) != 0)
+            var unknown00 = input.ReadValueU32(endian);
+            if (unknown00 != 0)
             {
                 throw new FormatException();
             }

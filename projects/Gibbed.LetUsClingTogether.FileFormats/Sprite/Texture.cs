@@ -34,6 +34,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Sprite
         public ushort BlockHeight;
         public ushort BitsPerPixel;
         public byte[] Data;
+        public GEFormats.Command[] GECommands;
 
         public static Texture Read(Stream input, Endian endian)
         {
@@ -47,13 +48,14 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Sprite
 
             var dataSize = input.ReadValueU32(endian);
             var dataOffset = input.ReadValueU32(endian);
-            var unknown0COffset = input.ReadValueU32(endian);
+            var commandOffset = input.ReadValueU32(endian);
+            const int commandSize = 32;
 
             if (dataOffset != 0x20)
             {
                 throw new FormatException();
             }
-            else if (dataOffset + dataSize != unknown0COffset)
+            else if (dataOffset + dataSize != commandOffset)
             {
                 throw new FormatException();
             }
@@ -66,13 +68,23 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Sprite
             var unknown1A = input.ReadValueU16(endian);
             var unknown1C = input.ReadValueU32(endian);
 
-            if (dataOffset + dataSize + 32 != totalSize)
+            if (unknown1A != 0 || unknown1C != 0)
+            {
+                throw new InvalidOperationException();
+            }
+
+            if (dataOffset + dataSize + commandSize != totalSize)
             {
                 throw new InvalidOperationException();
             }
 
             var dataBytes = input.ReadBytes((int)dataSize);
-            var unknownTail = input.ReadBytes(32);
+
+            var gpuCommands = new GEFormats.Command[8];
+            for (int i = 0; i < gpuCommands.Length; i++)
+            {
+                gpuCommands[i] = new GEFormats.Command(input.ReadValueU32(endian));
+            }
 
             Texture instance;
             instance.TotalWidth = totalWidth;
@@ -81,7 +93,36 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Sprite
             instance.BlockHeight = blockHeight;
             instance.BitsPerPixel = bpp;
             instance.Data = dataBytes;
+            instance.GECommands = gpuCommands;
+            instance.ValidateGECommands();
             return instance;
+        }
+
+        private void ValidateGECommands()
+        {
+            var tpsmArgument = this.BitsPerPixel switch
+            {
+                4 => 4,
+                8 => 5,
+                _ => throw new NotSupportedException(),
+            };
+
+            int tsizeArgument = 0;
+            tsizeArgument |= (byte)Math.Log(this.TotalWidth, 2);
+            tsizeArgument |= ((byte)Math.Log(this.TotalHeight, 2)) << 8;
+
+            var commands = this.GECommands;
+            if (commands[0] != new GEFormats.Command(GEFormats.Operation.TMODE, 1) ||
+                commands[1] != GEFormats.Operation.TPSM || commands[1].Argument != tpsmArgument ||
+                commands[2] != GEFormats.Operation.TBW0 || commands[2].Argument != this.TotalWidth ||
+                commands[3] != new GEFormats.Command(GEFormats.Operation.TBP0, 0) ||
+                commands[4] != GEFormats.Operation.TSIZE0 || commands[4].Argument != tsizeArgument ||
+                commands[5] != new GEFormats.Command(GEFormats.Operation.TFLUSH) ||
+                commands[6] != new GEFormats.Command(GEFormats.Operation.RET) ||
+                commands[7] != new GEFormats.Command(GEFormats.Operation.NOP))
+            {
+                throw new FormatException();
+            }
         }
     }
 }
