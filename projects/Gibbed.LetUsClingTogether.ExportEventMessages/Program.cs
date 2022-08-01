@@ -222,7 +222,8 @@ namespace Gibbed.LetUsClingTogether.ExportSprite
             }
             else
             {
-                tomlString.Value = "\n" + s;
+                tomlString.Value = s;
+                tomlString.MultilineTrimFirstLine = true;
                 tomlString.IsMultiline = true;
                 if (s.Contains("'''") == false)
                 {
