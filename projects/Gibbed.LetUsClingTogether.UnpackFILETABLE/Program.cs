@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2021 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -198,6 +198,9 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                         });
                     }
 
+                    IFileContainer lastParent = null;
+                    List<long> sceneIds = null;
+                    List<long> eventEntryIds = null;
                     while (fileQueue.Count > 0)
                     {
                         var file = fileQueue.Dequeue();
@@ -210,23 +213,96 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                         if (file.PackRawId.HasValue == false)
                         {
                             id = file.Id;
-                            filePathBuilder.Append(_($"{file.Id}"));
+                            filePathBuilder.Append(_($"{id}"));
                         }
                         else
                         {
                             id = file.PackRawId.Value;
-                            var packId = PackId.Create(file.PackRawId).Value;
-                            filePathBuilder.Append(_($"{packId.DirectoryId}_{packId.FileId}"));
+
+                            if (string.IsNullOrEmpty(parent.PackFileType) == true)
+                            {
+                                var packId = PackId.Create(file.PackRawId).Value;
+                                filePathBuilder.Append(_($"{packId.DirectoryId}_{packId.FileId}"));
+                            }
+                            else if (parent.PackFileType == "scenario")
+                            {
+                                if (lastParent == null || lastParent != parent)
+                                {
+                                    lastParent = parent;
+                                    sceneIds = new();
+                                    eventEntryIds = new();
+                                    var sceneIdsNode = parent.Lookup["scene_ids"].AsArray;
+                                    if (sceneIdsNode != null)
+                                    {
+                                        foreach (Tommy.TomlNode sceneIdNode in sceneIdsNode)
+                                        {
+                                            sceneIds.Add(sceneIdNode.AsInteger.Value);
+                                        }
+                                    }
+                                    var eventEntryIdsNode = parent.Lookup["event_entry_ids"].AsArray;
+                                    if (eventEntryIdsNode != null)
+                                    {
+                                        foreach (Tommy.TomlNode sceneIdNode in eventEntryIdsNode)
+                                        {
+                                            eventEntryIds.Add(sceneIdNode.AsInteger.Value);
+                                        }
+                                    }
+                                }
+
+                                byte scenarioType;
+                                long scenarioId;
+                                if (sceneIds.Contains(id) == true)
+                                {
+                                    // script
+                                    scenarioType = 0;
+                                    scenarioId = id;
+                                }
+                                else if (sceneIds.Contains(id - 0x08000) == true)
+                                {
+                                    // resources
+                                    scenarioType = 1;
+                                    scenarioId = id - 0x08000;
+                                }
+                                else if (sceneIds.Contains(id - 0x10000) == true)
+                                {
+                                    // messages
+                                    scenarioType = 2;
+                                    scenarioId = id - 0x10000;
+                                }
+                                else if (eventEntryIds.Contains(id - 0x0A000) == true)
+                                {
+                                    // actors
+                                    scenarioType = 6;
+                                    scenarioId = id - 0x0A000;
+                                }
+                                else
+                                {
+                                    GetScenarioId(id, out scenarioType, out scenarioId);
+                                }
+
+                                if (scenarioId < 0 || scenarioId > ushort.MaxValue)
+                                {
+                                    throw new InvalidOperationException();
+                                }
+
+                                // override pack ID
+                                file.PackRawId = PackId.Create(scenarioType, (ushort)scenarioId).RawId;
+
+                                id = file.PackRawId.Value;
+                                filePathBuilder.Append(_($"{scenarioType}_{scenarioId}"));
+                            }
+                            else
+                            {
+                                throw new NotSupportedException();
+                            }
                         }
 
                         if (parent.IdCounts != null)
                         {
                             var idCounts = parent.IdCounts;
-                            int idCount;
-                            idCounts.TryGetValue(id, out idCount);
+                            idCounts.TryGetValue(id, out int idCount);
                             idCount++;
                             idCounts[id] = idCount;
-
                             if (idCount > 1)
                             {
                                 filePathBuilder.Append(_($"_DUP_{idCount}"));
@@ -292,6 +368,88 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             }
 
             WriteManifest(tableManifestPath, tableManifest);
+        }
+
+        private static void GetScenarioId(long id, out byte type, out long scenarioId)
+        {
+            switch (id)
+            {
+                case >= 0x08000 and <= 0x09FFF:
+                {
+                    // should have been caught already
+                    throw new NotSupportedException();
+                    /*
+                    scenarioId = id - 0x08000;
+                    type = 1;
+                    return;
+                    */
+                }
+                case >= 0x0A000 and <= 0x0AFFF:
+                {
+                    // should have been caught already
+                    throw new NotSupportedException();
+                    /*
+                    type = 6;
+                    scenarioId = id - 0x0A000;
+                    return;
+                    */
+                }
+                case >= 0x0D000 and <= 0x0DFFF:
+                {
+                    // entry unit list
+                    type = 7;
+                    scenarioId = id - 0x0D000;
+                    return;
+                }
+                case >= 0x10000 and <= 0x10FFF:
+                {
+                    // messages
+                    // should have been caught already
+                    throw new NotSupportedException();
+                    /*
+                    type = 2;
+                    scenarioId = id - 0x10000;
+                    return;
+                    */
+                }
+                case >= 0x11000 and <= 0x11FFF:
+                {
+                    // portraits
+                    type = 3;
+                    scenarioId = id - 0x11000;
+                    return;
+                }
+                case >= 0x12000 and <= 0x12FFF:
+                {
+                    // animations
+                    scenarioId = id - 0x12000;
+                    type = 4;
+                    return;
+                }
+                case >= 0x13000 and <= 0x13FFF:
+                {
+                    // sounds
+                    scenarioId = id - 0x13000;
+                    type = 8;
+                    return;
+                }
+                case >= 0x50000 and <= 0x50FFF:
+                {
+                    // units
+                    scenarioId = id - 0x50000;
+                    type = 5;
+                    return;
+                }
+            }
+            throw new NotSupportedException();
+        }
+
+        private static string GetLookupString(Tommy.TomlNode node, string key)
+        {
+            var stringNode = node[key]?.AsString;
+            return stringNode != null
+                ? stringNode.Value
+                : null;
         }
 
         private static void HandleFile(
@@ -434,6 +592,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                 BasePath = Path.Combine(parent.BasePath, path),
                 Parent = parent,
                 Lookup = lookup,
+                PackFileType = GetLookupString(lookup, "pack_file_type"),
             };
 
             var hasIds = packFile.Entries.Any(e => e.RawId != 0);
@@ -479,6 +638,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             Dictionary<long, int> IdCounts { get; }
             List<FileTableManifest.File> FileManifests { get; }
             public Tommy.TomlNode Lookup { get; }
+            public string PackFileType { get; }
         }
 
         private class TableDirectory : IFileContainer
@@ -496,6 +656,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             public Dictionary<long, int> IdCounts { get; }
             public List<FileTableManifest.File> FileManifests { get; }
             public Tommy.TomlNode Lookup { get; set; }
+            public string PackFileType { get { return null; } }
         }
 
         private class NestedPack : IFileContainer
@@ -513,6 +674,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             public Dictionary<long, int> IdCounts { get; }
             public List<FileTableManifest.File> FileManifests { get; }
             public Tommy.TomlNode Lookup { get; set; }
+            public string PackFileType { get; set; }
         }
 
         private static string CleanPathForManifest(string path)
@@ -634,6 +796,11 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             if (string.IsNullOrEmpty(language) == false)
             {
                 rootTable["language"] = language;
+            }
+
+            if (string.IsNullOrEmpty(directory.PackFileType) == false)
+            {
+                rootTable["pack_file_type"] = directory.PackFileType;
             }
 
             rootTable["files"] = fileArray;

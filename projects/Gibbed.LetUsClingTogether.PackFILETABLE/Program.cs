@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2021 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -442,8 +442,8 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
         {
             Tommy.TomlTable rootTable;
             var inputBytes = File.ReadAllBytes(path);
-            using (var input = new MemoryStream(inputBytes, false))
-            using (var reader = new StreamReader(input, true))
+            using (MemoryStream input = new(inputBytes, false))
+            using (StreamReader reader = new(input, true))
             {
                 rootTable = Tommy.TOML.Parse(reader);
             }
@@ -476,11 +476,13 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
         {
             Tommy.TomlTable rootTable;
             var inputBytes = File.ReadAllBytes(path);
-            using (var input = new MemoryStream(inputBytes, false))
-            using (var reader = new StreamReader(input, true))
+            using (MemoryStream input = new(inputBytes, false))
+            using (StreamReader reader = new(input, true))
             {
                 rootTable = Tommy.TOML.Parse(reader);
             }
+
+            var packFileType = rootTable["pack_file_type"].AsString?.Value;
 
             manifests = new List<FileTableManifest.File>();
             foreach (Tommy.TomlTable fileTable in rootTable["files"])
@@ -489,13 +491,48 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
                 manifest.Id = (int?)(fileTable["id"]?.AsInteger?.Value ?? null);
                 manifest.NameHash = (uint?)(fileTable["name_hash"]?.AsInteger?.Value ?? null);
                 manifest.Name = fileTable["name"]?.AsString?.Value;
-                manifest.PackId = ReadManifestPackId(fileTable["pack_id"]?.AsTable);
+                manifest.PackId = TranslatePackId(packFileType, ReadManifestPackId(fileTable["pack_id"]?.AsTable));
                 manifest.IsZip = fileTable["zip"]?.AsBoolean?.Value ?? false;
                 manifest.ZipName = fileTable["zip_name"]?.AsString?.Value;
                 manifest.IsPack = fileTable["pack"]?.AsBoolean?.Value ?? false;
+                //manifest.SheetFormat = fileTable["sheet_format"]?.AsString;
                 manifest.Path = fileTable["path"]?.AsString?.Value;
                 manifests.Add(manifest);
             }
+        }
+
+        private static FileTableManifest.PackId? TranslatePackId(string type, FileTableManifest.PackId? packId) => type switch
+        {
+            null => packId,
+            "scenario" => TranslateScenarioPackId(packId),
+            _ => throw new NotSupportedException(),
+        };
+
+        private static FileTableManifest.PackId? TranslateScenarioPackId(FileTableManifest.PackId? packId)
+        {
+            if (packId == null)
+            {
+                throw new ArgumentNullException(nameof(packId));
+            }
+            return TranslateScenarioPackId(packId.Value);
+        }
+
+        private static FileTableManifest.PackId TranslateScenarioPackId(FileTableManifest.PackId packId)
+        {
+            uint baseId = packId.DirectoryId switch
+            {
+                0 => 0, // scripts
+                1 => 0x08000, // resources
+                6 => 0x0A000, // actor list
+                7 => 0x0D000, // entry unit list
+                2 => 0x10000, // messages
+                3 => 0x11000, // portraits
+                4 => 0x12000, // animations
+                8 => 0x13000, // sounds
+                5 => 0x50000, // units
+                _ => throw new NotSupportedException()
+            };
+            return FileTableManifest.PackId.Create(baseId + packId.FileId);
         }
 
         private static FileTableManifest.PackId? ReadManifestPackId(Tommy.TomlTable table)
