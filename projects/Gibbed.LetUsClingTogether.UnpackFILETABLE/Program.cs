@@ -470,6 +470,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             long dataOffset = file.DataOffset;
             uint dataSize = file.DataSize;
             string zipName = null;
+            var sheetFormat = fileLookup["sheet_format"]?.AsString?.Value;
 
             if (unpackNestedZIPs == true && dataSize >= 4)
             {
@@ -526,6 +527,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                         ZipName = zipName,
                         IsPack = true,
                         PackId = PackId.Create(file.PackRawId),
+                        SheetFormat = sheetFormat,
                         Path = CleanPathForManifest(PathHelper.GetRelativePath(parent.BasePath, nestedPack.ManifestPath)),
                     });
                     return;
@@ -567,6 +569,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                 IsZip = zipName != null,
                 ZipName = zipName,
                 PackId = PackId.Create(file.PackRawId),
+                SheetFormat = sheetFormat,
                 Path = CleanPathForManifest(PathHelper.GetRelativePath(parent.BasePath, outputPath)),
             });
         }
@@ -784,6 +787,11 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                 if (fileManifest.IsPack == true)
                 {
                     fileTable["pack"] = true;
+                }
+
+                if (string.IsNullOrEmpty(fileManifest.SheetFormat) == false)
+                {
+                    fileTable["sheet_format"] = fileManifest.SheetFormat;
                 }
 
                 fileTable["path"] = fileManifest.Path;

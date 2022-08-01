@@ -58,6 +58,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             public bool IsZip { get; set; }
             public string ZipName { get; set; }
             public bool IsPack { get; set; }
+            public string SheetFormat { get; set; }
             public string Path { get; set; }
         }
 
