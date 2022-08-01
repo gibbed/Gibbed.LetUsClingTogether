@@ -68,7 +68,7 @@ namespace Gibbed.LetUsClingTogether.ExportSprite
 
             if (extras.Count < 1 || showHelp == true)
             {
-                Console.WriteLine("Usage: {0} [OPTIONS]+ input_sprite+", GetExecutableName());
+                Console.WriteLine("Usage: {0} [OPTIONS]+ input_spr+", GetExecutableName());
                 Console.WriteLine();
                 Console.WriteLine("Options:");
                 options.WriteOptionDescriptions(Console.Out);
@@ -80,7 +80,7 @@ namespace Gibbed.LetUsClingTogether.ExportSprite
             {
                 if (Directory.Exists(inputPath) == true)
                 {
-                    inputPaths.AddRange(Directory.GetFiles(inputPath, "*.sprite", SearchOption.AllDirectories));
+                    inputPaths.AddRange(Directory.GetFiles(inputPath, "*.spr", SearchOption.AllDirectories));
                     inputPaths.AddRange(Directory.GetFiles(inputPath, "*.ashg", SearchOption.AllDirectories));
                 }
                 else
