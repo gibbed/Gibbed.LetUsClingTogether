@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2021 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -106,7 +106,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                 buffer[index + 1] == 'A' &&
                 buffer[index + 2] == 'S')
             {
-                return ".sprite_animation";
+                return ".sas";
             }
             else if (
                 count >= 4 &&
@@ -123,7 +123,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                 buffer[index + 1] == 'F' &&
                 buffer[index + 2] == 'X')
             {
-                return ".effect";
+                return ".efx";
             }
             else if (
                 count >= 4 &&
@@ -132,7 +132,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                 buffer[index + 2] == 'E' &&
                 buffer[index + 3] == 'S')
             {
-                return ".event_messages";
+                return ".emes";
             }
             else if (
                 count >= 4 &&
@@ -141,7 +141,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                 buffer[index + 2] == 'X' &&
                 buffer[index + 3] == '0')
             {
-                return ".scene_resources";
+                return ".idx";
             }
             else if (
                 count >= 4 &&
@@ -150,7 +150,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                 buffer[index + 2] == 'R' &&
                 buffer[index + 3] == 'S')
             {
-                return ".screenplay_progress";
+                return ".pgrs";
             }
             else if (
                 count >= 4 &&
@@ -159,7 +159,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                 buffer[index + 2] == 'S' &&
                 buffer[index + 3] == 'K')
             {
-                return ".screenplay_task";
+                return ".task";
             }
             else if (
                 count >= 4 &&
@@ -168,7 +168,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                 buffer[index + 2] == 'V' &&
                 buffer[index + 3] == 'K')
             {
-                return ".screenplay_invocation";
+                return ".invk";
             }
             else if (
                 count >= 4 &&
@@ -207,14 +207,14 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                 BitConverter.ToUInt32(buffer, index + 0x8) == 0x00100001 &&
                 BitConverter.ToUInt32(buffer, index + 0xC) == 3)
             {
-                return ".sprite";
+                return ".spr";
             }
             else if (
                 count >= 4 &&
                 fileSize >= 100 &&
                 BitConverter.ToUInt32(buffer, index + 0x0) == 0x8000000C)
             {
-                return ".scene";
+                return ".script";
             }
 
             return ".unknown";
