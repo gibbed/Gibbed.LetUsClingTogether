@@ -17,10 +17,10 @@ path = "ui/warren_report"
 8.path = "play_guide_basics.xlc"
 9.path = "play_guide_tactics.xlc"
 
-11.path = "people.invocation"
+11.path = "people.invk"
 
-17.path = "music.invocation"
-18.path = "play_guide_tactics.invocation"
-19.path = "play_guide_basics.invocation"
+17.path = "music.invk"
+18.path = "play_guide_tactics.invk"
+19.path = "play_guide_basics.invk"
 
 #20.path = "menu.task"

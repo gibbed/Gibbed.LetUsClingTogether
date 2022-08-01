@@ -10,7 +10,7 @@ path = "common"
 
 1.path = "multiplayer_map_list.xlc"
 
-5.path = "multiplayer.progress"
+5.path = "multiplayer.pgrs"
 
 [2500.0.4]
 path = "multiplayer_map_previews"

@@ -1,4 +1,6 @@
 ﻿[0]
 path = "preload"
 
-0.path = "preload.bin"
+[0.0]
+path = "preload_data"
+blob = true

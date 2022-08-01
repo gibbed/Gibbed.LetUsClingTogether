@@ -4,84 +4,86 @@ path = "screenplays"
 [900.10]
 path = "chapter_1"
 
-0_1.path = "C1.progress"
-0_2.path = "C1.invocation"
+0_1.path = "C1.pgrs"
+0_2.path = "C1.invk"
 0_3.path = "C1.task"
-0_4.path = "C1.messages"
+0_4.path = "C1.emes"
 
 [900.11]
 path = "chapter_2/chaos"
 
-0_1.path = "C2a.progress"
-0_2.path = "C2a.invocation"
+0_1.path = "C2a.pgrs"
+0_2.path = "C2a.invk"
 0_3.path = "C2a.task"
-0_4.path = "C2a.messages"
+0_4.path = "C2a.emes"
 
 [900.12]
 path = "chapter_2/law"
 
-0_1.path = "C2b.progress"
-0_2.path = "C2b.invocation"
+0_1.path = "C2b.pgrs"
+0_2.path = "C2b.invk"
 0_3.path = "C2b.task"
-0_4.path = "C2b.messages"
+0_4.path = "C2b.emes"
 
 [900.13]
 path = "chapter_3/neutral"
 
-0_1.path = "C3a.progress"
-0_2.path = "C3a.invocation"
+0_1.path = "C3a.pgrs"
+0_2.path = "C3a.invk"
 0_3.path = "C3a.task"
 
 [900.14]
 path = "chapter_3/chaos"
 
-0_1.path = "C3b.progress"
-0_2.path = "C3b.invocation"
+0_1.path = "C3b.pgrs"
+0_2.path = "C3b.invk"
 0_3.path = "C3b.task"
 
 [900.15]
 path = "chapter_3/law"
 
-0_1.path = "C3c.progress"
-0_2.path = "C3c.invocation"
+0_1.path = "C3c.pgrs"
+0_2.path = "C3c.invk"
 0_3.path = "C3c.task"
 
 [900.16]
 path = "chapter_4"
 
-0_1.path = "C4.progress"
-0_2.path = "C4.invocation"
+0_1.path = "C4.pgrs"
+0_2.path = "C4.invk"
 0_3.path = "C4.task"
-0_4.path = "C4_0.messages"
-0_5.path = "C4_1.messages"
+0_4.path = "C4_0.emes"
+0_5.path = "C4_1.emes"
 
 [900.17]
 path = "epilogue"
 
-0_1.path = "EP.progress"
-0_2.path = "EP.invocation"
+0_1.path = "EP.pgrs"
+0_2.path = "EP.invk"
 0_3.path = "EP.task"
 
 [900.18]
 path = "dlc"
 
-0_1.path = "DLC.progress"
-0_2.path = "DLC.invocation"
+0_1.path = "DLC.pgrs"
+0_2.path = "DLC.invk"
 0_3.path = "DLC.task"
-0_4.path = "DLC_0.messages"
-0_5.path = "DLC_1.messages"
+0_4.path = "DLC_0.emes"
+0_5.path = "DLC_1.emes"
 
 [900.20]
 path = "global"
 
 3.path = "global_flags.xlc"
+4.path = "unknown_flags.xlc"
+
 6.path = "death_agony_messages.xlc"
 
-7.path = "death_agony.invocation" # assumed
+7.path = "death_agony.invk" # assumed
 8.path = "death_agony.task" # assumed
 9.path = "death_agony.script" # assumed
 
-10.path = "battle_start.progress" # assumed
-11.path = "battle_start.invocation" # assumed
+10.path = "battle_start.pgrs" # assumed
+11.path = "battle_start.invk" # assumed
 12.path = "battle_start.task" # assumed
 13.path = "battle_start.script"

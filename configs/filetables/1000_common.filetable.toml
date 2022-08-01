@@ -1,6 +1,8 @@
-[1000.1]
+[1000]
+path = "common"
 
-2.8.path = "unit_palettes.sprite"
+[1000.1]
+path = "tables"
 
 3.path = "equipment.xlc"
 
@@ -25,3 +27,20 @@
 40.path = "battle_notification_messages.xlc"
 
 42.path = "spell_sets.xlc"
+
+[1000.1.0]
+path = "unit_animations"
+
+[1000.1.1]
+path = "weapon_animations"
+
+[1000.1.2]
+path = "misc_graphics"
+
+1.path = "cursor.spr"
+
+3.path = "loot_bag.spr"
+4.path = "status_icons.spr"
+5.path = "tile_selection_border.spr"
+
+8.path = "unit_palettes.spr"

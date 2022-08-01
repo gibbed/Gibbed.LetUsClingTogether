@@ -1,0 +1,1674 @@
+# EP
+
+[908]
+path = "scenarios/epilogue"
+
+
+[908.1]
+path = "EP_ST_001"
+
+pack_file_type = "scenario"
+scene_ids = [ 24001 ]
+
+
+[908.10]
+path = "EP_ST_010"
+
+pack_file_type = "scenario"
+scene_ids = [ 24002 ]
+event_entry_ids = [ 7000 ]
+
+0_24002.path = "scene_EP_1.script"
+1_24002.path = "scene_EP_1.idx"
+2_24002.path = "scene_EP_1.emes"
+
+6_7000.path  = "actors_7000.xlc"
+3_117.path   = "portrait_117.ashg"
+3_203.path   = "portrait_203.ashg"
+3_318.path   = "portrait_318.ashg"
+3_322.path   = "portrait_322.ashg"
+3_398.path   = "portrait_398.ashg"
+3_509.path   = "portrait_509.ashg"
+3_510.path   = "portrait_510.ashg"
+3_513.path   = "portrait_513.ashg"
+3_524.path   = "portrait_524.ashg"
+3_606.path   = "portrait_606.ashg"
+3_658.path   = "portrait_658.ashg"
+3_668.path   = "portrait_668.ashg"
+4_140.path   = "animation_140"
+4_390.path   = "animation_390"
+4_520.path   = "animation_520"
+4_549.path   = "animation_549"
+5_28.path    = "unit_28"
+5_45.path    = "unit_45"
+5_64.path    = "unit_64"
+5_86.path    = "unit_86"
+5_106.path   = "unit_106"
+5_107.path   = "unit_107"
+5_108.path   = "unit_108"
+5_110.path   = "unit_110"
+5_116.path   = "unit_116"
+5_126.path   = "unit_126"
+5_127.path   = "unit_127"
+
+
+[908.20]
+path = "EP_ST_020"
+
+pack_file_type = "scenario"
+scene_ids = [ 24003 ]
+event_entry_ids = [ 7010 ]
+
+0_24003.path = "scene_EP_2.script"
+1_24003.path = "scene_EP_2.idx"
+2_24003.path = "scene_EP_2.emes"
+
+6_7010.path  = "actors_7010.xlc"
+3_119.path   = "portrait_119.ashg"
+3_318.path   = "portrait_318.ashg"
+4_21.path    = "animation_21"
+4_22.path    = "animation_22"
+4_96.path    = "animation_96"
+4_100.path   = "animation_100"
+4_102.path   = "animation_102"
+5_29.path    = "unit_29"
+5_64.path    = "unit_64"
+
+
+[908.30]
+path = "EP_ST_030"
+
+pack_file_type = "scenario"
+scene_ids = [ 24004 ]
+event_entry_ids = [ 7020 ]
+
+0_24004.path = "scene_EP_3.script"
+1_24004.path = "scene_EP_3.idx"
+2_24004.path = "scene_EP_3.emes"
+
+6_7020.path  = "actors_7020.xlc"
+3_123.path   = "portrait_123.ashg"
+3_319.path   = "portrait_319.ashg"
+3_320.path   = "portrait_320.ashg"
+4_68.path    = "animation_68"
+4_116.path   = "animation_116"
+4_117.path   = "animation_117"
+5_30.path    = "unit_30"
+5_65.path    = "unit_65"
+
+
+[908.40]
+path = "EP_ST_040"
+
+pack_file_type = "scenario"
+scene_ids = [ 24005 ]
+event_entry_ids = [ 7030 ]
+
+0_24005.path = "scene_EP_4.script"
+1_24005.path = "scene_EP_4.idx"
+2_24005.path = "scene_EP_4.emes"
+
+6_7030.path  = "actors_7030.xlc"
+3_123.path   = "portrait_123.ashg"
+3_319.path   = "portrait_319.ashg"
+3_320.path   = "portrait_320.ashg"
+4_59.path    = "animation_59"
+4_64.path    = "animation_64"
+4_117.path   = "animation_117"
+4_118.path   = "animation_118"
+5_30.path    = "unit_30"
+5_65.path    = "unit_65"
+
+
+[908.50]
+path = "EP_ST_050"
+
+pack_file_type = "scenario"
+scene_ids = [ 24006 ]
+event_entry_ids = [ 7000 ]
+
+0_24006.path = "scene_EP_5.script"
+1_24006.path = "scene_EP_5.idx"
+2_24006.path = "scene_EP_5.emes"
+
+6_7000.path  = "actors_7000.xlc"
+3_117.path   = "portrait_117.ashg"
+3_203.path   = "portrait_203.ashg"
+3_318.path   = "portrait_318.ashg"
+3_322.path   = "portrait_322.ashg"
+3_398.path   = "portrait_398.ashg"
+3_509.path   = "portrait_509.ashg"
+3_510.path   = "portrait_510.ashg"
+3_513.path   = "portrait_513.ashg"
+3_524.path   = "portrait_524.ashg"
+3_606.path   = "portrait_606.ashg"
+3_658.path   = "portrait_658.ashg"
+3_668.path   = "portrait_668.ashg"
+4_140.path   = "animation_140"
+4_390.path   = "animation_390"
+4_520.path   = "animation_520"
+4_549.path   = "animation_549"
+5_28.path    = "unit_28"
+5_45.path    = "unit_45"
+5_64.path    = "unit_64"
+5_86.path    = "unit_86"
+5_106.path   = "unit_106"
+5_107.path   = "unit_107"
+5_108.path   = "unit_108"
+5_110.path   = "unit_110"
+5_116.path   = "unit_116"
+5_126.path   = "unit_126"
+5_127.path   = "unit_127"
+
+
+[908.60]
+path = "EP_ST_060"
+
+pack_file_type = "scenario"
+scene_ids = [ 24007 ]
+event_entry_ids = [ 7040 ]
+
+0_24007.path = "scene_EP_6.script"
+1_24007.path = "scene_EP_6.idx"
+2_24007.path = "scene_EP_6.emes"
+
+6_7040.path  = "actors_7040.xlc"
+3_628.path   = "portrait_628.ashg"
+3_632.path   = "portrait_632.ashg"
+4_629.path   = "animation_629"
+4_630.path   = "animation_630"
+5_119.path   = "unit_119"
+
+
+[908.70]
+path = "EP_ST_070"
+
+pack_file_type = "scenario"
+scene_ids = [ 24008 ]
+event_entry_ids = [ 7050 ]
+
+0_24008.path = "scene_EP_7.script"
+1_24008.path = "scene_EP_7.idx"
+2_24008.path = "scene_EP_7.emes"
+
+6_7050.path  = "actors_7050.xlc"
+3_119.path   = "portrait_119.ashg"
+3_628.path   = "portrait_628.ashg"
+3_632.path   = "portrait_632.ashg"
+5_29.path    = "unit_29"
+5_119.path   = "unit_119"
+
+
+[908.80]
+path = "EP_ST_080"
+
+pack_file_type = "scenario"
+scene_ids = [ 24009 ]
+event_entry_ids = [ 7060 ]
+
+0_24009.path = "scene_EP_8.script"
+1_24009.path = "scene_EP_8.idx"
+2_24009.path = "scene_EP_8.emes"
+
+6_7060.path  = "actors_7060.xlc"
+3_119.path   = "portrait_119.ashg"
+3_318.path   = "portrait_318.ashg"
+3_628.path   = "portrait_628.ashg"
+3_632.path   = "portrait_632.ashg"
+4_11.path    = "animation_11"
+5_29.path    = "unit_29"
+5_64.path    = "unit_64"
+5_119.path   = "unit_119"
+
+
+[908.90]
+path = "EP_ST_090"
+
+pack_file_type = "scenario"
+scene_ids = [ 24010 ]
+event_entry_ids = [ 7070 ]
+
+0_24010.path = "scene_EP_9.script"
+1_24010.path = "scene_EP_9.idx"
+2_24010.path = "scene_EP_9.emes"
+
+6_7070.path  = "actors_7070.xlc"
+3_628.path   = "portrait_628.ashg"
+3_632.path   = "portrait_632.ashg"
+3_648.path   = "portrait_648.ashg"
+4_166.path   = "animation_166"
+4_167.path   = "animation_167"
+4_629.path   = "animation_629"
+4_630.path   = "animation_630"
+5_119.path   = "unit_119"
+5_125.path   = "unit_125"
+8_3045.path  = "sound_3045.scd"
+8_3046.path  = "sound_3046.scd"
+
+
+[908.100]
+path = "EP_ST_100"
+
+pack_file_type = "scenario"
+scene_ids = [ 24011 ]
+event_entry_ids = [ 7080 ]
+
+0_24011.path = "scene_EP_10.script"
+1_24011.path = "scene_EP_10.idx"
+2_24011.path = "scene_EP_10.emes"
+
+6_7080.path  = "actors_7080.xlc"
+3_452.path   = "portrait_452.ashg"
+4_327.path   = "animation_327"
+5_93.path    = "unit_93"
+8_3043.path  = "sound_3043.scd"
+8_3044.path  = "sound_3044.scd"
+
+
+[908.110]
+path = "EP_ST_110"
+
+pack_file_type = "scenario"
+scene_ids = [ 24012 ]
+event_entry_ids = [ 7090 ]
+
+0_24012.path = "scene_EP_11.script"
+1_24012.path = "scene_EP_11.idx"
+2_24012.path = "scene_EP_11.emes"
+
+6_7090.path  = "actors_7090.xlc"
+3_398.path   = "portrait_398.ashg"
+3_452.path   = "portrait_452.ashg"
+4_325.path   = "animation_325"
+5_86.path    = "unit_86"
+5_93.path    = "unit_93"
+
+
+[908.120]
+path = "EP_ST_120"
+
+pack_file_type = "scenario"
+scene_ids = [ 24013 ]
+event_entry_ids = [ 7100 ]
+
+0_24013.path = "scene_EP_12.script"
+1_24013.path = "scene_EP_12.idx"
+2_24013.path = "scene_EP_12.emes"
+
+6_7100.path  = "actors_7100.xlc"
+3_452.path   = "portrait_452.ashg"
+4_325.path   = "animation_325"
+4_327.path   = "animation_327"
+4_328.path   = "animation_328"
+5_93.path    = "unit_93"
+
+
+[908.130]
+path = "EP_ST_130"
+
+pack_file_type = "scenario"
+scene_ids = [ 24014 ]
+event_entry_ids = [ 7110 ]
+
+0_24014.path = "scene_EP_13.script"
+1_24014.path = "scene_EP_13.idx"
+
+6_7110.path  = "actors_7110.xlc"
+3_119.path   = "portrait_119.ashg"
+3_690.path   = "portrait_690.ashg"
+3_691.path   = "portrait_691.ashg"
+4_632.path   = "animation_632"
+4_709.path   = "animation_709"
+4_710.path   = "animation_710"
+4_711.path   = "animation_711"
+5_29.path    = "unit_29"
+5_129.path   = "unit_129"
+5_130.path   = "unit_130"
+8_3035.path  = "sound_3035.scd"
+
+
+[908.140]
+path = "EP_ST_140"
+
+pack_file_type = "scenario"
+scene_ids = [ 24015 ]
+event_entry_ids = [ 7120 ]
+
+0_24015.path = "scene_EP_14.script"
+1_24015.path = "scene_EP_14.idx"
+2_24015.path = "scene_EP_14.emes"
+
+6_7120.path  = "actors_7120.xlc"
+3_119.path   = "portrait_119.ashg"
+4_11.path    = "animation_11"
+5_29.path    = "unit_29"
+
+
+[908.150]
+path = "EP_ST_150"
+
+pack_file_type = "scenario"
+scene_ids = [ 24016 ]
+event_entry_ids = [ 7130 ]
+
+0_24016.path = "scene_EP_15.script"
+1_24016.path = "scene_EP_15.idx"
+2_24016.path = "scene_EP_15.emes"
+
+6_7130.path  = "actors_7130.xlc"
+3_120.path   = "portrait_120.ashg"
+3_123.path   = "portrait_123.ashg"
+3_452.path   = "portrait_452.ashg"
+3_469.path   = "portrait_469.ashg"
+3_470.path   = "portrait_470.ashg"
+4_68.path    = "animation_68"
+4_371.path   = "animation_371"
+4_372.path   = "animation_372"
+4_373.path   = "animation_373"
+4_379.path   = "animation_379"
+5_30.path    = "unit_30"
+5_93.path    = "unit_93"
+5_98.path    = "unit_98"
+
+
+[908.160]
+path = "EP_ST_160"
+
+pack_file_type = "scenario"
+scene_ids = [ 24017, 24018, 24019, 24020, 24021, 24022, 24023, 24024, 24025, 24026, 24027, 24028, 24029, 24030, 24031, 24032, 24033, 24034, 24035 ]
+event_entry_ids = [ 7120 ]
+
+0_24017.path = "scene_EP_16.script"
+1_24017.path = "scene_EP_16.idx"
+2_24017.path = "scene_EP_16.emes"
+
+0_24018.path = "scene_EP_17.script"
+1_24018.path = "scene_EP_17.idx"
+2_24018.path = "scene_EP_17.emes"
+
+0_24019.path = "scene_EP_22.script"
+1_24019.path = "scene_EP_22.idx"
+2_24019.path = "scene_EP_22.emes"
+
+0_24020.path = "scene_EP_25.script"
+1_24020.path = "scene_EP_25.idx"
+2_24020.path = "scene_EP_25.emes"
+
+0_24021.path = "scene_EP_27.script"
+1_24021.path = "scene_EP_27.idx"
+
+0_24022.path = "scene_EP_28.script"
+1_24022.path = "scene_EP_28.idx"
+2_24022.path = "scene_EP_28.emes"
+
+0_24023.path = "scene_EP_29.script"
+1_24023.path = "scene_EP_29.idx"
+2_24023.path = "scene_EP_29.emes"
+
+0_24024.path = "scene_EP_41.script"
+1_24024.path = "scene_EP_41.idx"
+
+0_24025.path = "scene_EP_42.script"
+1_24025.path = "scene_EP_42.idx"
+2_24025.path = "scene_EP_42.emes"
+
+0_24026.path = "scene_EP_31.script"
+1_24026.path = "scene_EP_31.idx"
+2_24026.path = "scene_EP_31.emes"
+
+0_24027.path = "scene_EP_33.script"
+1_24027.path = "scene_EP_33.idx"
+2_24027.path = "scene_EP_33.emes"
+
+0_24028.path = "scene_EP_35.script"
+1_24028.path = "scene_EP_35.idx"
+2_24028.path = "scene_EP_35.emes"
+
+0_24029.path = "scene_EP_37.script"
+1_24029.path = "scene_EP_37.idx"
+2_24029.path = "scene_EP_37.emes"
+
+0_24030.path = "scene_EP_39.script"
+1_24030.path = "scene_EP_39.idx"
+2_24030.path = "scene_EP_39.emes"
+
+0_24031.path = "scene_EP_72.script"
+1_24031.path = "scene_EP_72.idx"
+2_24031.path = "scene_EP_72.emes"
+
+0_24032.path = "scene_EP_75.script"
+1_24032.path = "scene_EP_75.idx"
+2_24032.path = "scene_EP_75.emes"
+
+0_24033.path = "scene_EP_79.script"
+1_24033.path = "scene_EP_79.idx"
+2_24033.path = "scene_EP_79.emes"
+
+0_24034.path = "scene_EP_81.script"
+1_24034.path = "scene_EP_81.idx"
+2_24034.path = "scene_EP_81.emes"
+
+0_24035.path = "scene_EP_69.script"
+1_24035.path = "scene_EP_69.idx"
+
+6_7120.path  = "actors_7120.xlc"
+3_119.path   = "portrait_119.ashg"
+4_11.path    = "animation_11"
+4_21.path    = "animation_21"
+4_22.path    = "animation_22"
+5_29.path    = "unit_29"
+
+
+[908.170]
+path = "EP_ST_170"
+
+pack_file_type = "scenario"
+scene_ids = [ 24036, 24037, 24038, 24039 ]
+event_entry_ids = [ 7140 ]
+
+0_24036.path = "scene_EP_18.script"
+1_24036.path = "scene_EP_18.idx"
+2_24036.path = "scene_EP_18.emes"
+
+0_24037.path = "scene_EP_19.script"
+1_24037.path = "scene_EP_19.idx"
+2_24037.path = "scene_EP_19.emes"
+
+0_24038.path = "scene_EP_20.script"
+1_24038.path = "scene_EP_20.idx"
+2_24038.path = "scene_EP_20.emes"
+
+0_24039.path = "scene_EP_21.script"
+1_24039.path = "scene_EP_21.idx"
+2_24039.path = "scene_EP_21.emes"
+
+6_7140.path  = "actors_7140.xlc"
+3_43.path    = "portrait_43.ashg"
+3_64.path    = "portrait_64.ashg"
+3_78.path    = "portrait_78.ashg"
+3_119.path   = "portrait_119.ashg"
+3_278.path   = "portrait_278.ashg"
+3_397.path   = "portrait_397.ashg"
+4_11.path    = "animation_11"
+4_17.path    = "animation_17"
+4_22.path    = "animation_22"
+4_245.path   = "animation_245"
+4_254.path   = "animation_254"
+4_257.path   = "animation_257"
+4_265.path   = "animation_265"
+4_266.path   = "animation_266"
+5_14.path    = "unit_14"
+5_16.path    = "unit_16"
+5_21.path    = "unit_21"
+5_29.path    = "unit_29"
+5_58.path    = "unit_58"
+5_84.path    = "unit_84"
+
+
+[908.190]
+path = "EP_ST_190"
+
+pack_file_type = "scenario"
+scene_ids = [ 24040, 24041 ]
+event_entry_ids = [ 7150 ]
+
+0_24040.path = "scene_EP_23.script"
+1_24040.path = "scene_EP_23.idx"
+2_24040.path = "scene_EP_23.emes"
+
+0_24041.path = "scene_EP_24.script"
+1_24041.path = "scene_EP_24.idx"
+2_24041.path = "scene_EP_24.emes"
+
+6_7150.path  = "actors_7150.xlc"
+3_43.path    = "portrait_43.ashg"
+3_64.path    = "portrait_64.ashg"
+3_78.path    = "portrait_78.ashg"
+3_119.path   = "portrait_119.ashg"
+3_278.path   = "portrait_278.ashg"
+3_397.path   = "portrait_397.ashg"
+4_11.path    = "animation_11"
+4_17.path    = "animation_17"
+4_18.path    = "animation_18"
+4_254.path   = "animation_254"
+4_264.path   = "animation_264"
+4_265.path   = "animation_265"
+4_266.path   = "animation_266"
+5_14.path    = "unit_14"
+5_16.path    = "unit_16"
+5_21.path    = "unit_21"
+5_29.path    = "unit_29"
+5_58.path    = "unit_58"
+5_84.path    = "unit_84"
+
+
+[908.210]
+path = "EP_ST_210"
+
+pack_file_type = "scenario"
+scene_ids = [ 24042 ]
+event_entry_ids = [ 7160 ]
+
+0_24042.path = "scene_EP_26.script"
+1_24042.path = "scene_EP_26.idx"
+2_24042.path = "scene_EP_26.emes"
+
+6_7160.path  = "actors_7160.xlc"
+3_43.path    = "portrait_43.ashg"
+3_64.path    = "portrait_64.ashg"
+3_78.path    = "portrait_78.ashg"
+3_119.path   = "portrait_119.ashg"
+3_278.path   = "portrait_278.ashg"
+3_397.path   = "portrait_397.ashg"
+4_11.path    = "animation_11"
+4_17.path    = "animation_17"
+4_18.path    = "animation_18"
+4_264.path   = "animation_264"
+4_265.path   = "animation_265"
+5_14.path    = "unit_14"
+5_16.path    = "unit_16"
+5_21.path    = "unit_21"
+5_29.path    = "unit_29"
+5_58.path    = "unit_58"
+5_84.path    = "unit_84"
+
+
+[908.240]
+path = "EP_ST_240"
+
+pack_file_type = "scenario"
+scene_ids = [ 24043 ]
+event_entry_ids = [ 7170 ]
+
+0_24043.path = "scene_EP_30.script"
+1_24043.path = "scene_EP_30.idx"
+2_24043.path = "scene_EP_30.emes"
+
+6_7170.path  = "actors_7170.xlc"
+3_5.path     = "portrait_5.ashg"
+3_77.path    = "portrait_77.ashg"
+3_119.path   = "portrait_119.ashg"
+3_224.path   = "portrait_224.ashg"
+3_335.path   = "portrait_335.ashg"
+4_21.path    = "animation_21"
+4_22.path    = "animation_22"
+5_6.path     = "unit_6"
+5_29.path    = "unit_29"
+5_69.path    = "unit_69"
+5_127.path   = "unit_127"
+
+
+[908.260]
+path = "EP_ST_260"
+
+pack_file_type = "scenario"
+scene_ids = [ 24044 ]
+event_entry_ids = [ 7180 ]
+
+0_24044.path = "scene_EP_32.script"
+1_24044.path = "scene_EP_32.idx"
+2_24044.path = "scene_EP_32.emes"
+
+6_7180.path  = "actors_7180.xlc"
+3_119.path   = "portrait_119.ashg"
+3_317.path   = "portrait_317.ashg"
+3_335.path   = "portrait_335.ashg"
+3_465.path   = "portrait_465.ashg"
+4_22.path    = "animation_22"
+4_34.path    = "animation_34"
+4_519.path   = "animation_519"
+5_13.path    = "unit_13"
+5_29.path    = "unit_29"
+5_45.path    = "unit_45"
+5_69.path    = "unit_69"
+
+
+[908.280]
+path = "EP_ST_280"
+
+pack_file_type = "scenario"
+scene_ids = [ 24045, 24046 ]
+event_entry_ids = [ 7190 ]
+
+0_24045.path = "scene_EP_34.script"
+1_24045.path = "scene_EP_34.idx"
+2_24045.path = "scene_EP_34.emes"
+
+0_24046.path = "scene_EP_90.script"
+1_24046.path = "scene_EP_90.idx"
+2_24046.path = "scene_EP_90.emes"
+
+6_7190.path  = "actors_7190.xlc"
+3_114.path   = "portrait_114.ashg"
+3_119.path   = "portrait_119.ashg"
+3_335.path   = "portrait_335.ashg"
+3_463.path   = "portrait_463.ashg"
+4_11.path    = "animation_11"
+4_15.path    = "animation_15"
+4_503.path   = "animation_503"
+4_510.path   = "animation_510"
+5_29.path    = "unit_29"
+5_69.path    = "unit_69"
+5_95.path    = "unit_95"
+5_115.path   = "unit_115"
+8_3068.path  = "sound_3068.scd"
+
+
+[908.300]
+path = "EP_ST_300"
+
+pack_file_type = "scenario"
+scene_ids = [ 24047 ]
+event_entry_ids = [ 7200 ]
+
+0_24047.path = "scene_EP_36.script"
+1_24047.path = "scene_EP_36.idx"
+2_24047.path = "scene_EP_36.emes"
+
+6_7200.path  = "actors_7200.xlc"
+3_119.path   = "portrait_119.ashg"
+3_309.path   = "portrait_309.ashg"
+3_335.path   = "portrait_335.ashg"
+4_22.path    = "animation_22"
+5_29.path    = "unit_29"
+5_62.path    = "unit_62"
+5_69.path    = "unit_69"
+
+
+[908.310]
+path = "EP_ST_310"
+
+pack_file_type = "scenario"
+scene_ids = [ 24048 ]
+event_entry_ids = [ 7205 ]
+
+0_24048.path = "scene_EP_38.script"
+1_24048.path = "scene_EP_38.idx"
+2_24048.path = "scene_EP_38.emes"
+
+6_7205.path  = "actors_7205.xlc"
+3_119.path   = "portrait_119.ashg"
+3_697.path   = "portrait_697.ashg"
+4_13.path    = "animation_13"
+4_578.path   = "animation_578"
+4_579.path   = "animation_579"
+4_831.path   = "animation_831"
+5_16.path    = "unit_16"
+5_29.path    = "unit_29"
+8_3068.path  = "sound_3068.scd"
+8_3081.path  = "sound_3081.scd"
+8_3095.path  = "sound_3095.scd"
+8_3096.path  = "sound_3096.scd"
+
+
+[908.340]
+path = "EP_ST_340"
+
+pack_file_type = "scenario"
+scene_ids = [ 24049 ]
+event_entry_ids = [ 7210 ]
+
+0_24049.path = "scene_EP_40.script"
+1_24049.path = "scene_EP_40.idx"
+2_24049.path = "scene_EP_40.emes"
+
+6_7210.path  = "actors_7210.xlc"
+3_119.path   = "portrait_119.ashg"
+3_471.path   = "portrait_471.ashg"
+4_11.path    = "animation_11"
+4_640.path   = "animation_640"
+4_641.path   = "animation_641"
+4_642.path   = "animation_642"
+5_23.path    = "unit_23"
+5_29.path    = "unit_29"
+
+
+[908.350]
+path = "EP_ST_350"
+
+pack_file_type = "scenario"
+scene_ids = [ 24050 ]
+event_entry_ids = [ 7480 ]
+
+0_24050.path = "scene_EP_70.script"
+1_24050.path = "scene_EP_70.idx"
+2_24050.path = "scene_EP_70.emes"
+
+6_7480.path  = "actors_7480.xlc"
+3_119.path   = "portrait_119.ashg"
+4_22.path    = "animation_22"
+4_38.path    = "animation_38"
+4_39.path    = "animation_39"
+4_40.path    = "animation_40"
+4_780.path   = "animation_780"
+4_781.path   = "animation_781"
+4_782.path   = "animation_782"
+4_785.path   = "animation_785"
+4_786.path   = "animation_786"
+4_821.path   = "animation_821"
+4_822.path   = "animation_822"
+5_29.path    = "unit_29"
+
+
+[908.360]
+path = "EP_ST_360"
+
+pack_file_type = "scenario"
+scene_ids = [ 24051 ]
+event_entry_ids = [ 7420 ]
+
+0_24051.path = "scene_EP_71.script"
+1_24051.path = "scene_EP_71.idx"
+2_24051.path = "scene_EP_71.emes"
+
+6_7420.path  = "actors_7420.xlc"
+3_28.path    = "portrait_28.ashg"
+3_29.path    = "portrait_29.ashg"
+3_119.path   = "portrait_119.ashg"
+4_12.path    = "animation_12"
+4_22.path    = "animation_22"
+4_728.path   = "animation_728"
+4_729.path   = "animation_729"
+4_730.path   = "animation_730"
+5_8.path     = "unit_8"
+5_29.path    = "unit_29"
+
+
+[908.380]
+path = "EP_ST_380"
+
+pack_file_type = "scenario"
+scene_ids = [ 24052 ]
+event_entry_ids = [ 7430 ]
+
+0_24052.path = "scene_EP_73.script"
+1_24052.path = "scene_EP_73.idx"
+2_24052.path = "scene_EP_73.emes"
+
+6_7430.path  = "actors_7430.xlc"
+3_78.path    = "portrait_78.ashg"
+3_335.path   = "portrait_335.ashg"
+3_484.path   = "portrait_484.ashg"
+4_232.path   = "animation_232"
+4_234.path   = "animation_234"
+4_244.path   = "animation_244"
+4_245.path   = "animation_245"
+4_246.path   = "animation_246"
+4_248.path   = "animation_248"
+4_293.path   = "animation_293"
+4_294.path   = "animation_294"
+4_295.path   = "animation_295"
+4_816.path   = "animation_816"
+5_21.path    = "unit_21"
+5_69.path    = "unit_69"
+5_100.path   = "unit_100"
+
+
+[908.390]
+path = "EP_ST_390"
+
+pack_file_type = "scenario"
+scene_ids = [ 24053 ]
+event_entry_ids = [ 7440 ]
+
+0_24053.path = "scene_EP_74.script"
+1_24053.path = "scene_EP_74.idx"
+2_24053.path = "scene_EP_74.emes"
+
+6_7440.path  = "actors_7440.xlc"
+3_119.path   = "portrait_119.ashg"
+3_335.path   = "portrait_335.ashg"
+3_484.path   = "portrait_484.ashg"
+4_11.path    = "animation_11"
+4_20.path    = "animation_20"
+4_22.path    = "animation_22"
+4_293.path   = "animation_293"
+4_295.path   = "animation_295"
+5_29.path    = "unit_29"
+5_69.path    = "unit_69"
+5_100.path   = "unit_100"
+
+
+[908.400]
+path = "EP_ST_400"
+
+pack_file_type = "scenario"
+scene_ids = [ 24054, 24055, 24056 ]
+event_entry_ids = [ 7450 ]
+
+0_24054.path = "scene_EP_76.script"
+1_24054.path = "scene_EP_76.idx"
+2_24054.path = "scene_EP_76.emes"
+
+0_24055.path = "scene_EP_77.script"
+1_24055.path = "scene_EP_77.idx"
+2_24055.path = "scene_EP_77.emes"
+
+0_24056.path = "scene_EP_78.script"
+1_24056.path = "scene_EP_78.idx"
+2_24056.path = "scene_EP_78.emes"
+
+6_7450.path  = "actors_7450.xlc"
+3_107.path   = "portrait_107.ashg"
+3_119.path   = "portrait_119.ashg"
+3_335.path   = "portrait_335.ashg"
+4_11.path    = "animation_11"
+4_21.path    = "animation_21"
+4_746.path   = "animation_746"
+4_749.path   = "animation_749"
+5_25.path    = "unit_25"
+5_29.path    = "unit_29"
+5_69.path    = "unit_69"
+
+
+[908.420]
+path = "EP_ST_420"
+
+pack_file_type = "scenario"
+scene_ids = [ 24057 ]
+event_entry_ids = [ 7460 ]
+
+0_24057.path = "scene_EP_80.script"
+1_24057.path = "scene_EP_80.idx"
+2_24057.path = "scene_EP_80.emes"
+
+6_7460.path  = "actors_7460.xlc"
+3_119.path   = "portrait_119.ashg"
+3_309.path   = "portrait_309.ashg"
+3_335.path   = "portrait_335.ashg"
+3_467.path   = "portrait_467.ashg"
+4_11.path    = "animation_11"
+4_480.path   = "animation_480"
+4_590.path   = "animation_590"
+5_29.path    = "unit_29"
+5_62.path    = "unit_62"
+5_69.path    = "unit_69"
+5_97.path    = "unit_97"
+
+
+[908.440]
+path = "EP_ST_440"
+
+pack_file_type = "scenario"
+scene_ids = [ 24058 ]
+event_entry_ids = [ 7470 ]
+
+0_24058.path = "scene_EP_82.script"
+1_24058.path = "scene_EP_82.idx"
+2_24058.path = "scene_EP_82.emes"
+
+6_7470.path  = "actors_7470.xlc"
+3_119.path   = "portrait_119.ashg"
+3_335.path   = "portrait_335.ashg"
+3_467.path   = "portrait_467.ashg"
+4_11.path    = "animation_11"
+4_480.path   = "animation_480"
+5_29.path    = "unit_29"
+5_69.path    = "unit_69"
+5_97.path    = "unit_97"
+
+
+[908.460]
+path = "EP_ST_460"
+
+pack_file_type = "scenario"
+scene_ids = [ 24065 ]
+event_entry_ids = [ 7220 ]
+
+0_24065.path = "scene_EP_43.script"
+1_24065.path = "scene_EP_43.idx"
+2_24065.path = "scene_EP_43.emes"
+
+6_7220.path  = "actors_7220.xlc"
+3_78.path    = "portrait_78.ashg"
+3_119.path   = "portrait_119.ashg"
+3_278.path   = "portrait_278.ashg"
+3_318.path   = "portrait_318.ashg"
+3_355.path   = "portrait_355.ashg"
+3_397.path   = "portrait_397.ashg"
+3_628.path   = "portrait_628.ashg"
+3_637.path   = "portrait_637.ashg"
+4_226.path   = "animation_226"
+4_242.path   = "animation_242"
+5_21.path    = "unit_21"
+5_29.path    = "unit_29"
+5_58.path    = "unit_58"
+5_64.path    = "unit_64"
+5_71.path    = "unit_71"
+5_84.path    = "unit_84"
+5_119.path   = "unit_119"
+5_123.path   = "unit_123"
+
+
+[908.470]
+path = "EP_ST_470"
+
+pack_file_type = "scenario"
+scene_ids = [ 24066 ]
+event_entry_ids = [ 7230 ]
+
+0_24066.path = "scene_EP_44.script"
+1_24066.path = "scene_EP_44.idx"
+2_24066.path = "scene_EP_44.emes"
+
+6_7230.path  = "actors_7230.xlc"
+3_119.path   = "portrait_119.ashg"
+3_355.path   = "portrait_355.ashg"
+4_21.path    = "animation_21"
+4_191.path   = "animation_191"
+4_193.path   = "animation_193"
+4_195.path   = "animation_195"
+4_196.path   = "animation_196"
+5_29.path    = "unit_29"
+5_71.path    = "unit_71"
+8_3068.path  = "sound_3068.scd"
+8_3076.path  = "sound_3076.scd"
+
+
+[908.480]
+path = "EP_ST_480"
+
+pack_file_type = "scenario"
+scene_ids = [ 24067 ]
+event_entry_ids = [ 7120 ]
+
+0_24067.path = "scene_EP_45.script"
+1_24067.path = "scene_EP_45.idx"
+2_24067.path = "scene_EP_45.emes"
+
+6_7120.path  = "actors_7120.xlc"
+3_119.path   = "portrait_119.ashg"
+4_18.path    = "animation_18"
+4_22.path    = "animation_22"
+5_29.path    = "unit_29"
+
+
+[908.490]
+path = "EP_ST_490"
+
+pack_file_type = "scenario"
+scene_ids = [ 24068 ]
+event_entry_ids = [ 7240 ]
+
+0_24068.path = "scene_EP_46.script"
+1_24068.path = "scene_EP_46.idx"
+2_24068.path = "scene_EP_46.emes"
+
+6_7240.path  = "actors_7240.xlc"
+3_90.path    = "portrait_90.ashg"
+3_335.path   = "portrait_335.ashg"
+3_398.path   = "portrait_398.ashg"
+3_574.path   = "portrait_574.ashg"
+3_648.path   = "portrait_648.ashg"
+3_668.path   = "portrait_668.ashg"
+4_629.path   = "animation_629"
+4_630.path   = "animation_630"
+5_23.path    = "unit_23"
+5_69.path    = "unit_69"
+5_86.path    = "unit_86"
+5_113.path   = "unit_113"
+5_125.path   = "unit_125"
+5_127.path   = "unit_127"
+8_3045.path  = "sound_3045.scd"
+8_3046.path  = "sound_3046.scd"
+
+
+[908.500]
+path = "EP_ST_500"
+
+pack_file_type = "scenario"
+scene_ids = [ 24069 ]
+event_entry_ids = [ 7250 ]
+
+0_24069.path = "scene_EP_47.script"
+1_24069.path = "scene_EP_47.idx"
+2_24069.path = "scene_EP_47.emes"
+
+6_7250.path  = "actors_7250.xlc"
+3_398.path   = "portrait_398.ashg"
+3_509.path   = "portrait_509.ashg"
+3_513.path   = "portrait_513.ashg"
+4_364.path   = "animation_364"
+4_365.path   = "animation_365"
+5_86.path    = "unit_86"
+5_106.path   = "unit_106"
+5_108.path   = "unit_108"
+
+
+[908.510]
+path = "EP_ST_510"
+
+pack_file_type = "scenario"
+scene_ids = [ 24070 ]
+event_entry_ids = [ 7260 ]
+
+0_24070.path = "scene_EP_48.script"
+1_24070.path = "scene_EP_48.idx"
+2_24070.path = "scene_EP_48.emes"
+
+6_7260.path  = "actors_7260.xlc"
+3_123.path   = "portrait_123.ashg"
+5_30.path    = "unit_30"
+
+
+[908.520]
+path = "EP_ST_520"
+
+pack_file_type = "scenario"
+scene_ids = [ 24071 ]
+event_entry_ids = [ 7270 ]
+
+0_24071.path = "scene_EP_49.script"
+1_24071.path = "scene_EP_49.idx"
+2_24071.path = "scene_EP_49.emes"
+
+6_7270.path  = "actors_7270.xlc"
+3_119.path   = "portrait_119.ashg"
+3_318.path   = "portrait_318.ashg"
+4_21.path    = "animation_21"
+4_22.path    = "animation_22"
+4_96.path    = "animation_96"
+4_100.path   = "animation_100"
+4_102.path   = "animation_102"
+5_29.path    = "unit_29"
+5_64.path    = "unit_64"
+
+
+[908.530]
+path = "EP_ST_530"
+
+pack_file_type = "scenario"
+scene_ids = [ 24072 ]
+event_entry_ids = [ 7280 ]
+
+0_24072.path = "scene_EP_50.script"
+1_24072.path = "scene_EP_50.idx"
+2_24072.path = "scene_EP_50.emes"
+
+6_7280.path  = "actors_7280.xlc"
+3_119.path   = "portrait_119.ashg"
+3_318.path   = "portrait_318.ashg"
+4_99.path    = "animation_99"
+4_100.path   = "animation_100"
+5_29.path    = "unit_29"
+5_64.path    = "unit_64"
+
+
+[908.540]
+path = "EP_ST_540"
+
+pack_file_type = "scenario"
+scene_ids = [ 24073 ]
+event_entry_ids = [ 7290 ]
+
+0_24073.path = "scene_EP_51.script"
+1_24073.path = "scene_EP_51.idx"
+2_24073.path = "scene_EP_51.emes"
+
+6_7290.path  = "actors_7290.xlc"
+3_119.path   = "portrait_119.ashg"
+3_318.path   = "portrait_318.ashg"
+4_99.path    = "animation_99"
+4_100.path   = "animation_100"
+5_29.path    = "unit_29"
+5_64.path    = "unit_64"
+
+
+[908.550]
+path = "EP_ST_550"
+
+pack_file_type = "scenario"
+scene_ids = [ 24074 ]
+event_entry_ids = [ 7300 ]
+
+0_24074.path = "scene_EP_52.script"
+1_24074.path = "scene_EP_52.idx"
+2_24074.path = "scene_EP_52.emes"
+
+6_7300.path  = "actors_7300.xlc"
+3_119.path   = "portrait_119.ashg"
+3_318.path   = "portrait_318.ashg"
+4_96.path    = "animation_96"
+4_100.path   = "animation_100"
+4_104.path   = "animation_104"
+5_29.path    = "unit_29"
+5_64.path    = "unit_64"
+
+
+[908.560]
+path = "EP_ST_560"
+
+pack_file_type = "scenario"
+scene_ids = [ 24075 ]
+event_entry_ids = [ 7310 ]
+
+0_24075.path = "scene_EP_53.script"
+1_24075.path = "scene_EP_53.idx"
+2_24075.path = "scene_EP_53.emes"
+
+6_7310.path  = "actors_7310.xlc"
+3_123.path   = "portrait_123.ashg"
+3_398.path   = "portrait_398.ashg"
+4_59.path    = "animation_59"
+5_30.path    = "unit_30"
+5_86.path    = "unit_86"
+
+
+[908.570]
+path = "EP_ST_570"
+
+pack_file_type = "scenario"
+scene_ids = [ 24076 ]
+event_entry_ids = [ 7320 ]
+
+0_24076.path = "scene_EP_54.script"
+1_24076.path = "scene_EP_54.idx"
+2_24076.path = "scene_EP_54.emes"
+
+6_7320.path  = "actors_7320.xlc"
+3_120.path   = "portrait_120.ashg"
+3_123.path   = "portrait_123.ashg"
+3_452.path   = "portrait_452.ashg"
+3_469.path   = "portrait_469.ashg"
+3_470.path   = "portrait_470.ashg"
+4_68.path    = "animation_68"
+4_371.path   = "animation_371"
+4_372.path   = "animation_372"
+4_373.path   = "animation_373"
+4_379.path   = "animation_379"
+5_30.path    = "unit_30"
+5_93.path    = "unit_93"
+5_98.path    = "unit_98"
+
+
+[908.580]
+path = "EP_ST_580"
+
+pack_file_type = "scenario"
+scene_ids = [ 24077 ]
+event_entry_ids = [ 7330 ]
+
+0_24077.path = "scene_EP_55.script"
+1_24077.path = "scene_EP_55.idx"
+
+6_7330.path  = "actors_7330.xlc"
+3_119.path   = "portrait_119.ashg"
+3_318.path   = "portrait_318.ashg"
+3_355.path   = "portrait_355.ashg"
+3_628.path   = "portrait_628.ashg"
+3_637.path   = "portrait_637.ashg"
+5_1.path     = "unit_1"
+5_2.path     = "unit_2"
+5_3.path     = "unit_3"
+5_4.path     = "unit_4"
+5_130.path   = "unit_130"
+
+
+[908.590]
+path = "EP_ST_590"
+
+pack_file_type = "scenario"
+scene_ids = [ 24078 ]
+event_entry_ids = [ 7340 ]
+
+0_24078.path = "scene_EP_56.script"
+1_24078.path = "scene_EP_56.idx"
+
+6_7340.path  = "actors_7340.xlc"
+3_1.path     = "portrait_1.ashg"
+3_2.path     = "portrait_2.ashg"
+3_3.path     = "portrait_3.ashg"
+3_4.path     = "portrait_4.ashg"
+3_90.path    = "portrait_90.ashg"
+3_690.path   = "portrait_690.ashg"
+3_691.path   = "portrait_691.ashg"
+5_1.path     = "unit_1"
+5_2.path     = "unit_2"
+5_3.path     = "unit_3"
+5_4.path     = "unit_4"
+5_23.path    = "unit_23"
+5_129.path   = "unit_129"
+5_130.path   = "unit_130"
+
+
+[908.600]
+path = "EP_ST_600"
+
+pack_file_type = "scenario"
+scene_ids = [ 24079 ]
+event_entry_ids = [ 7350 ]
+
+0_24079.path = "scene_EP_57.script"
+1_24079.path = "scene_EP_57.idx"
+
+6_7350.path  = "actors_7350.xlc"
+3_335.path   = "portrait_335.ashg"
+3_648.path   = "portrait_648.ashg"
+5_69.path    = "unit_69"
+5_125.path   = "unit_125"
+
+
+[908.610]
+path = "EP_ST_610"
+
+pack_file_type = "scenario"
+scene_ids = [ 24080 ]
+event_entry_ids = [ 7360 ]
+
+0_24080.path = "scene_EP_58.script"
+1_24080.path = "scene_EP_58.idx"
+
+6_7360.path  = "actors_7360.xlc"
+3_8.path     = "portrait_8.ashg"
+3_18.path    = "portrait_18.ashg"
+3_335.path   = "portrait_335.ashg"
+3_648.path   = "portrait_648.ashg"
+5_6.path     = "unit_6"
+5_7.path     = "unit_7"
+5_69.path    = "unit_69"
+5_125.path   = "unit_125"
+
+
+[908.620]
+path = "EP_ST_620"
+
+pack_file_type = "scenario"
+scene_ids = [ 24081, 24082 ]
+event_entry_ids = [ 7370 ]
+
+0_24081.path = "scene_EP_59.script"
+1_24081.path = "scene_EP_59.idx"
+
+0_24082.path = "scene_EP_95.script"
+1_24082.path = "scene_EP_95.idx"
+
+6_7370.path  = "actors_7370.xlc"
+3_271.path   = "portrait_271.ashg"
+5_57.path    = "unit_57"
+
+
+[908.630]
+path = "EP_ST_630"
+
+pack_file_type = "scenario"
+scene_ids = [ 24083 ]
+event_entry_ids = [ 7380 ]
+
+0_24083.path = "scene_EP_60.script"
+1_24083.path = "scene_EP_60.idx"
+
+6_7380.path  = "actors_7380.xlc"
+3_324.path   = "portrait_324.ashg"
+3_355.path   = "portrait_355.ashg"
+4_212.path   = "animation_212"
+4_217.path   = "animation_217"
+4_639.path   = "animation_639"
+5_67.path    = "unit_67"
+5_71.path    = "unit_71"
+
+
+[908.640]
+path = "EP_ST_640"
+
+pack_file_type = "scenario"
+scene_ids = [ 24084, 24085, 24086 ]
+event_entry_ids = [ 7380 ]
+
+0_24084.path = "scene_EP_61.script"
+1_24084.path = "scene_EP_61.idx"
+2_24084.path = "scene_EP_61.emes"
+
+
+[908.650]
+path = "EP_ST_650"
+
+pack_file_type = "scenario"
+scene_ids = [ 24087, 24088, 24089 ]
+event_entry_ids = [ 7380 ]
+
+0_24087.path = "scene_EP_62.script"
+1_24087.path = "scene_EP_62.idx"
+2_24087.path = "scene_EP_62.emes"
+
+
+[908.660]
+path = "EP_ST_660"
+
+pack_file_type = "scenario"
+scene_ids = [ 24090, 24091, 24092 ]
+event_entry_ids = [ 7380 ]
+
+
+[908.670]
+path = "EP_ST_670"
+
+pack_file_type = "scenario"
+scene_ids = [ 24093 ]
+event_entry_ids = [ 7390 ]
+
+0_24093.path = "scene_EP_64.script"
+1_24093.path = "scene_EP_64.idx"
+2_24093.path = "scene_EP_64.emes"
+
+6_7390.path  = "actors_7390.xlc"
+3_1.path     = "portrait_1.ashg"
+3_2.path     = "portrait_2.ashg"
+3_31.path    = "portrait_31.ashg"
+3_64.path    = "portrait_64.ashg"
+3_358.path   = "portrait_358.ashg"
+3_636.path   = "portrait_636.ashg"
+4_416.path   = "animation_416"
+4_644.path   = "animation_644"
+4_646.path   = "animation_646"
+5_1.path     = "unit_1"
+5_2.path     = "unit_2"
+5_11.path    = "unit_11"
+5_16.path    = "unit_16"
+5_73.path    = "unit_73"
+5_122.path   = "unit_122"
+8_3052.path  = "sound_3052.scd"
+8_3053.path  = "sound_3053.scd"
+8_3054.path  = "sound_3054.scd"
+8_3096.path  = "sound_3096.scd"
+
+
+[908.680]
+path = "EP_ST_680"
+
+pack_file_type = "scenario"
+scene_ids = [ 24094 ]
+event_entry_ids = [ 7400 ]
+
+0_24094.path = "scene_EP_65.script"
+1_24094.path = "scene_EP_65.idx"
+2_24094.path = "scene_EP_65.emes"
+
+6_7400.path  = "actors_7400.xlc"
+3_236.path   = "portrait_236.ashg"
+3_605.path   = "portrait_605.ashg"
+4_637.path   = "animation_637"
+4_851.path   = "animation_851"
+
+
+[908.690]
+path = "EP_ST_690"
+
+pack_file_type = "scenario"
+scene_ids = [ 24095 ]
+event_entry_ids = [ 7410 ]
+
+0_24095.path = "scene_EP_66.script"
+1_24095.path = "scene_EP_66.idx"
+2_24095.path = "scene_EP_66.emes"
+
+6_7410.path  = "actors_7410.xlc"
+3_80.path    = "portrait_80.ashg"
+3_119.path   = "portrait_119.ashg"
+3_122.path   = "portrait_122.ashg"
+3_203.path   = "portrait_203.ashg"
+3_398.path   = "portrait_398.ashg"
+3_452.path   = "portrait_452.ashg"
+3_509.path   = "portrait_509.ashg"
+3_510.path   = "portrait_510.ashg"
+3_513.path   = "portrait_513.ashg"
+3_524.path   = "portrait_524.ashg"
+3_606.path   = "portrait_606.ashg"
+3_628.path   = "portrait_628.ashg"
+3_668.path   = "portrait_668.ashg"
+4_16.path    = "animation_16"
+4_390.path   = "animation_390"
+4_520.path   = "animation_520"
+4_549.path   = "animation_549"
+5_22.path    = "unit_22"
+5_45.path    = "unit_45"
+5_69.path    = "unit_69"
+5_86.path    = "unit_86"
+5_93.path    = "unit_93"
+5_106.path   = "unit_106"
+5_107.path   = "unit_107"
+5_108.path   = "unit_108"
+5_110.path   = "unit_110"
+5_116.path   = "unit_116"
+5_119.path   = "unit_119"
+5_127.path   = "unit_127"
+
+
+[908.692]
+path = "EP_ST_692"
+
+pack_file_type = "scenario"
+scene_ids = [ 24096 ]
+event_entry_ids = [ 7410 ]
+
+0_24096.path = "scene_EP_67.script"
+1_24096.path = "scene_EP_67.idx"
+
+6_7410.path  = "actors_7410.xlc"
+3_80.path    = "portrait_80.ashg"
+3_119.path   = "portrait_119.ashg"
+3_203.path   = "portrait_203.ashg"
+3_398.path   = "portrait_398.ashg"
+3_452.path   = "portrait_452.ashg"
+3_509.path   = "portrait_509.ashg"
+3_510.path   = "portrait_510.ashg"
+3_513.path   = "portrait_513.ashg"
+3_524.path   = "portrait_524.ashg"
+3_606.path   = "portrait_606.ashg"
+3_628.path   = "portrait_628.ashg"
+3_668.path   = "portrait_668.ashg"
+4_16.path    = "animation_16"
+4_390.path   = "animation_390"
+4_520.path   = "animation_520"
+4_549.path   = "animation_549"
+5_22.path    = "unit_22"
+5_45.path    = "unit_45"
+5_69.path    = "unit_69"
+5_86.path    = "unit_86"
+5_93.path    = "unit_93"
+5_106.path   = "unit_106"
+5_107.path   = "unit_107"
+5_108.path   = "unit_108"
+5_110.path   = "unit_110"
+5_116.path   = "unit_116"
+5_119.path   = "unit_119"
+5_127.path   = "unit_127"
+
+
+[908.700]
+path = "EP_ST_700"
+
+pack_file_type = "scenario"
+scene_ids = [ 24097, 24098, 24099, 24100, 24101, 24102, 24103, 24104, 24105, 24106, 24107, 24108, 24109, 24110, 24111, 24112, 24113, 24114, 24115, 24116, 24117, 24118, 24119 ]
+event_entry_ids = [ 7410 ]
+
+
+[908.710]
+path = "EP_ST_710"
+
+pack_file_type = "scenario"
+scene_ids = [ 24059 ]
+event_entry_ids = [ 8001 ]
+
+0_24059.path = "scene_EP_83.script"
+1_24059.path = "scene_EP_83.idx"
+2_24059.path = "scene_EP_83.emes"
+
+6_8001.path  = "actors_8001.xlc"
+3_123.path   = "portrait_123.ashg"
+3_690.path   = "portrait_690.ashg"
+3_692.path   = "portrait_692.ashg"
+4_750.path   = "animation_750"
+4_751.path   = "animation_751"
+4_755.path   = "animation_755"
+4_756.path   = "animation_756"
+4_759.path   = "animation_759"
+4_761.path   = "animation_761"
+4_823.path   = "animation_823"
+4_824.path   = "animation_824"
+4_825.path   = "animation_825"
+4_826.path   = "animation_826"
+4_827.path   = "animation_827"
+4_828.path   = "animation_828"
+4_829.path   = "animation_829"
+5_1.path     = "unit_1"
+5_2.path     = "unit_2"
+5_3.path     = "unit_3"
+5_4.path     = "unit_4"
+5_17.path    = "unit_17"
+5_30.path    = "unit_30"
+5_129.path   = "unit_129"
+5_131.path   = "unit_131"
+
+
+[908.711]
+path = "EP_ST_711"
+
+pack_file_type = "scenario"
+scene_ids = [ 24060 ]
+event_entry_ids = [ 8160 ]
+
+0_24060.path = "scene_EP_85.script"
+1_24060.path = "scene_EP_85.idx"
+2_24060.path = "scene_EP_85.emes"
+
+6_8160.path  = "actors_8160.xlc"
+3_123.path   = "portrait_123.ashg"
+3_324.path   = "portrait_324.ashg"
+4_68.path    = "animation_68"
+4_69.path    = "animation_69"
+4_613.path   = "animation_613"
+4_620.path   = "animation_620"
+4_621.path   = "animation_621"
+4_644.path   = "animation_644"
+4_645.path   = "animation_645"
+4_787.path   = "animation_787"
+5_30.path    = "unit_30"
+5_67.path    = "unit_67"
+
+
+[908.712]
+path = "EP_ST_712"
+
+pack_file_type = "scenario"
+scene_ids = [ 24061 ]
+event_entry_ids = [ 8170 ]
+
+0_24061.path = "scene_EP_86.script"
+1_24061.path = "scene_EP_86.idx"
+2_24061.path = "scene_EP_86.emes"
+
+6_8170.path  = "actors_8170.xlc"
+3_123.path   = "portrait_123.ashg"
+3_355.path   = "portrait_355.ashg"
+4_205.path   = "animation_205"
+4_206.path   = "animation_206"
+4_208.path   = "animation_208"
+4_639.path   = "animation_639"
+5_30.path    = "unit_30"
+5_71.path    = "unit_71"
+8_3065.path  = "sound_3065.scd"
+
+
+[908.713]
+path = "EP_ST_713"
+
+pack_file_type = "scenario"
+scene_ids = [ 24062 ]
+event_entry_ids = [ 8240 ]
+
+0_24062.path = "scene_EP_87.script"
+1_24062.path = "scene_EP_87.idx"
+2_24062.path = "scene_EP_87.emes"
+
+6_8240.path  = "actors_8240.xlc"
+3_119.path   = "portrait_119.ashg"
+3_318.path   = "portrait_318.ashg"
+3_628.path   = "portrait_628.ashg"
+4_11.path    = "animation_11"
+4_21.path    = "animation_21"
+4_22.path    = "animation_22"
+4_102.path   = "animation_102"
+4_180.path   = "animation_180"
+4_183.path   = "animation_183"
+4_184.path   = "animation_184"
+4_799.path   = "animation_799"
+4_800.path   = "animation_800"
+4_801.path   = "animation_801"
+4_802.path   = "animation_802"
+5_29.path    = "unit_29"
+5_64.path    = "unit_64"
+5_119.path   = "unit_119"
+
+
+[908.715]
+path = "EP_ST_715"
+
+pack_file_type = "scenario"
+scene_ids = [ 24064 ]
+event_entry_ids = [ 8250 ]
+
+0_24064.path = "scene_EP_88.script"
+1_24064.path = "scene_EP_88.idx"
+2_24064.path = "scene_EP_88.emes"
+
+6_8250.path  = "actors_8250.xlc"
+3_324.path   = "portrait_324.ashg"
+4_212.path   = "animation_212"
+5_67.path    = "unit_67"
+
+
+[908.724]
+path = "EP_ST_724"
+
+pack_file_type = "scenario"
+scene_ids = [ 24063 ]
+event_entry_ids = [ 8260 ]
+
+0_24063.path = "scene_EP_84.script"
+1_24063.path = "scene_EP_84.idx"
+2_24063.path = "scene_EP_84.emes"
+
+6_8260.path  = "actors_8260.xlc"
+3_64.path    = "portrait_64.ashg"
+3_78.path    = "portrait_78.ashg"
+3_117.path   = "portrait_117.ashg"
+3_119.path   = "portrait_119.ashg"
+3_278.path   = "portrait_278.ashg"
+3_318.path   = "portrait_318.ashg"
+3_355.path   = "portrait_355.ashg"
+3_397.path   = "portrait_397.ashg"
+3_628.path   = "portrait_628.ashg"
+3_632.path   = "portrait_632.ashg"
+3_637.path   = "portrait_637.ashg"
+3_692.path   = "portrait_692.ashg"
+4_11.path    = "animation_11"
+4_17.path    = "animation_17"
+4_21.path    = "animation_21"
+4_22.path    = "animation_22"
+4_99.path    = "animation_99"
+4_142.path   = "animation_142"
+4_181.path   = "animation_181"
+4_192.path   = "animation_192"
+4_209.path   = "animation_209"
+4_232.path   = "animation_232"
+4_242.path   = "animation_242"
+4_245.path   = "animation_245"
+4_254.path   = "animation_254"
+4_265.path   = "animation_265"
+4_756.path   = "animation_756"
+4_762.path   = "animation_762"
+4_803.path   = "animation_803"
+4_806.path   = "animation_806"
+4_849.path   = "animation_849"
+5_16.path    = "unit_16"
+5_21.path    = "unit_21"
+5_28.path    = "unit_28"
+5_29.path    = "unit_29"
+5_58.path    = "unit_58"
+5_64.path    = "unit_64"
+5_71.path    = "unit_71"
+5_84.path    = "unit_84"
+5_119.path   = "unit_119"
+5_123.path   = "unit_123"
+5_131.path   = "unit_131"
+8_3068.path  = "sound_3068.scd"

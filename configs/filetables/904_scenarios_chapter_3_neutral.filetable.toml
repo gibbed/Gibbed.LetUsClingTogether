@@ -1,0 +1,1545 @@
+# C3a
+
+[904]
+path = "scenarios/chapter_3/neutral"
+
+
+[904.1]
+path = "C3a_ST_001"
+
+pack_file_type = "scenario"
+scene_ids = [ 9001 ]
+
+0_9001.path  = "scene_3a_0.script"
+1_9001.path  = "scene_3a_0.idx"
+
+
+[904.10]
+path = "C3a_ST_010"
+
+pack_file_type = "scenario"
+scene_ids = [ 9002 ]
+event_entry_ids = [ 3010 ]
+
+0_9002.path  = "scene_3a_1.script"
+1_9002.path  = "scene_3a_1.idx"
+2_9002.path  = "scene_3a_1.emes"
+
+6_3010.path  = "actors_3010.xlc"
+3_31.path    = "portrait_31.ashg"
+3_32.path    = "portrait_32.ashg"
+3_358.path   = "portrait_358.ashg"
+3_396.path   = "portrait_396.ashg"
+3_466.path   = "portrait_466.ashg"
+3_467.path   = "portrait_467.ashg"
+4_409.path   = "animation_409"
+4_410.path   = "animation_410"
+4_411.path   = "animation_411"
+4_412.path   = "animation_412"
+4_413.path   = "animation_413"
+4_414.path   = "animation_414"
+4_422.path   = "animation_422"
+4_423.path   = "animation_423"
+4_424.path   = "animation_424"
+4_429.path   = "animation_429"
+4_438.path   = "animation_438"
+4_439.path   = "animation_439"
+4_627.path   = "animation_627"
+4_628.path   = "animation_628"
+5_10.path    = "unit_10"
+5_12.path    = "unit_12"
+5_72.path    = "unit_72"
+5_81.path    = "unit_81"
+5_96.path    = "unit_96"
+5_97.path    = "unit_97"
+8_3045.path  = "sound_3045.scd"
+8_3046.path  = "sound_3046.scd"
+8_3087.path  = "sound_3087.scd"
+8_3101.path  = "sound_3101.scd"
+
+
+[904.20]
+path = "C3a_ST_020"
+
+pack_file_type = "scenario"
+scene_ids = [ 9003, 9004, 9005, 9006, 9007 ]
+event_entry_ids = [ 3020 ]
+
+0_9003.path  = "scene_3a_2.script"
+1_9003.path  = "scene_3a_2.idx"
+2_9003.path  = "scene_3a_2.emes"
+
+6_3020.path  = "actors_3020.xlc"
+7_128.path   = "entry_units_128.xlc"
+3_119.path   = "portrait_119.ashg"
+3_318.path   = "portrait_318.ashg"
+3_335.path   = "portrait_335.ashg"
+3_360.path   = "portrait_360.ashg"
+3_488.path   = "portrait_488.ashg"
+3_648.path   = "portrait_648.ashg"
+3_668.path   = "portrait_668.ashg"
+4_3.path     = "animation_3"
+4_4.path     = "animation_4"
+4_5.path     = "animation_5"
+4_9.path     = "animation_9"
+4_11.path    = "animation_11"
+4_21.path    = "animation_21"
+4_22.path    = "animation_22"
+4_91.path    = "animation_91"
+4_92.path    = "animation_92"
+4_95.path    = "animation_95"
+4_276.path   = "animation_276"
+4_307.path   = "animation_307"
+4_310.path   = "animation_310"
+4_311.path   = "animation_311"
+4_527.path   = "animation_527"
+4_528.path   = "animation_528"
+4_552.path   = "animation_552"
+4_553.path   = "animation_553"
+4_625.path   = "animation_625"
+4_626.path   = "animation_626"
+5_29.path    = "unit_29"
+5_64.path    = "unit_64"
+5_69.path    = "unit_69"
+5_74.path    = "unit_74"
+5_103.path   = "unit_103"
+5_125.path   = "unit_125"
+5_127.path   = "unit_127"
+8_3045.path  = "sound_3045.scd"
+8_3046.path  = "sound_3046.scd"
+8_3087.path  = "sound_3087.scd"
+
+
+[904.30]
+path = "C3a_ST_030"
+
+pack_file_type = "scenario"
+scene_ids = [ 9008, 9009, 9010, 9011, 9012, 9013, 9014, 9015, 9016, 9017, 9018 ]
+event_entry_ids = [ 3020 ]
+
+0_9008.path  = "scene_3a_3.script"
+1_9008.path  = "scene_3a_3.idx"
+2_9008.path  = "scene_3a_3.emes"
+
+0_9009.path  = "scene_3a_4.script"
+1_9009.path  = "scene_3a_4.idx"
+2_9009.path  = "scene_3a_4.emes"
+
+0_9010.path  = "scene_3a_160.script"
+1_9010.path  = "scene_3a_160.idx"
+
+0_9011.path  = "scene_3a_161.script"
+1_9011.path  = "scene_3a_161.idx"
+
+0_9012.path  = "scene_3a_162.script"
+1_9012.path  = "scene_3a_162.idx"
+
+0_9013.path  = "scene_3a_163.script"
+1_9013.path  = "scene_3a_163.idx"
+
+0_9014.path  = "scene_3a_164.script"
+1_9014.path  = "scene_3a_164.idx"
+
+0_9015.path  = "scene_3a_5.script"
+1_9015.path  = "scene_3a_5.idx"
+2_9015.path  = "scene_3a_5.emes"
+
+0_9016.path  = "scene_3a_6.script"
+1_9016.path  = "scene_3a_6.idx"
+2_9016.path  = "scene_3a_6.emes"
+
+0_9017.path  = "scene_3a_7.script"
+1_9017.path  = "scene_3a_7.idx"
+2_9017.path  = "scene_3a_7.emes"
+
+4_1.path     = "animation_1"
+4_11.path    = "animation_11"
+
+
+[904.40]
+path = "C3a_ST_040"
+
+pack_file_type = "scenario"
+scene_ids = [ 9019, 9020, 9021, 9022, 9023 ]
+event_entry_ids = [ 3030, 3040 ]
+
+0_9019.path  = "scene_3a_8.script"
+1_9019.path  = "scene_3a_8.idx"
+2_9019.path  = "scene_3a_8.emes"
+
+0_9021.path  = "scene_3a_9.script"
+1_9021.path  = "scene_3a_9.idx"
+2_9021.path  = "scene_3a_9.emes"
+
+6_3030.path  = "actors_3030.xlc"
+6_3040.path  = "actors_3040.xlc"
+7_128.path   = "entry_units_128.xlc"
+3_78.path    = "portrait_78.ashg"
+3_119.path   = "portrait_119.ashg"
+3_397.path   = "portrait_397.ashg"
+3_637.path   = "portrait_637.ashg"
+4_11.path    = "animation_11"
+4_12.path    = "animation_12"
+4_20.path    = "animation_20"
+4_22.path    = "animation_22"
+4_220.path   = "animation_220"
+4_245.path   = "animation_245"
+4_257.path   = "animation_257"
+5_21.path    = "unit_21"
+5_29.path    = "unit_29"
+5_84.path    = "unit_84"
+5_123.path   = "unit_123"
+8_3045.path  = "sound_3045.scd"
+8_3046.path  = "sound_3046.scd"
+
+
+[904.50]
+path = "C3a_ST_050"
+
+pack_file_type = "scenario"
+scene_ids = [ 9024, 9025, 9026, 9027, 9028, 9029, 9030, 9031, 9032, 9033, 9034, 9035, 9036, 9037, 9038, 9039, 9040, 9041, 9042 ]
+event_entry_ids = [ 3040, 3050 ]
+
+0_9026.path  = "scene_3a_10.script"
+1_9026.path  = "scene_3a_10.idx"
+2_9026.path  = "scene_3a_10.emes"
+
+0_9028.path  = "scene_3a_11.script"
+1_9028.path  = "scene_3a_11.idx"
+2_9028.path  = "scene_3a_11.emes"
+
+0_9029.path  = "scene_3a_12.script"
+1_9029.path  = "scene_3a_12.idx"
+2_9029.path  = "scene_3a_12.emes"
+
+0_9030.path  = "scene_3a_13.script"
+1_9030.path  = "scene_3a_13.idx"
+2_9030.path  = "scene_3a_13.emes"
+
+0_9031.path  = "scene_3a_14.script"
+1_9031.path  = "scene_3a_14.idx"
+2_9031.path  = "scene_3a_14.emes"
+
+0_9034.path  = "scene_3a_15.script"
+1_9034.path  = "scene_3a_15.idx"
+2_9034.path  = "scene_3a_15.emes"
+
+0_9037.path  = "scene_3a_16.script"
+1_9037.path  = "scene_3a_16.idx"
+2_9037.path  = "scene_3a_16.emes"
+
+0_9038.path  = "scene_3a_17.script"
+1_9038.path  = "scene_3a_17.idx"
+2_9038.path  = "scene_3a_17.emes"
+
+0_9039.path  = "scene_3a_18.script"
+1_9039.path  = "scene_3a_18.idx"
+2_9039.path  = "scene_3a_18.emes"
+
+0_9040.path  = "scene_3a_19.script"
+1_9040.path  = "scene_3a_19.idx"
+2_9040.path  = "scene_3a_19.emes"
+
+0_9041.path  = "scene_3a_20.script"
+1_9041.path  = "scene_3a_20.idx"
+2_9041.path  = "scene_3a_20.emes"
+
+0_9042.path  = "scene_3a_21.script"
+1_9042.path  = "scene_3a_21.idx"
+2_9042.path  = "scene_3a_21.emes"
+
+6_3050.path  = "actors_3050.xlc"
+7_132.path   = "entry_units_132.xlc"
+3_144.path   = "portrait_144.ashg"
+3_467.path   = "portrait_467.ashg"
+3_469.path   = "portrait_469.ashg"
+4_350.path   = "animation_350"
+4_367.path   = "animation_367"
+4_369.path   = "animation_369"
+4_370.path   = "animation_370"
+4_474.path   = "animation_474"
+5_33.path    = "unit_33"
+5_97.path    = "unit_97"
+5_98.path    = "unit_98"
+8_3064.path  = "sound_3064.scd"
+
+
+[904.60]
+path = "C3a_ST_060"
+
+pack_file_type = "scenario"
+scene_ids = [ 9043, 9044, 9045, 9046, 9047, 9048, 9049, 9050, 9051, 9052, 9053, 9054 ]
+event_entry_ids = [ 3060, 3070 ]
+
+0_9043.path  = "scene_3a_22.script"
+1_9043.path  = "scene_3a_22.idx"
+2_9043.path  = "scene_3a_22.emes"
+
+0_9049.path  = "scene_3a_23.script"
+1_9049.path  = "scene_3a_23.idx"
+2_9049.path  = "scene_3a_23.emes"
+
+6_3060.path  = "actors_3060.xlc"
+6_3070.path  = "actors_3070.xlc"
+3_78.path    = "portrait_78.ashg"
+3_119.path   = "portrait_119.ashg"
+3_397.path   = "portrait_397.ashg"
+3_509.path   = "portrait_509.ashg"
+3_513.path   = "portrait_513.ashg"
+4_11.path    = "animation_11"
+4_14.path    = "animation_14"
+4_255.path   = "animation_255"
+4_256.path   = "animation_256"
+4_341.path   = "animation_341"
+4_344.path   = "animation_344"
+4_345.path   = "animation_345"
+4_350.path   = "animation_350"
+4_352.path   = "animation_352"
+5_21.path    = "unit_21"
+5_29.path    = "unit_29"
+5_84.path    = "unit_84"
+5_106.path   = "unit_106"
+5_108.path   = "unit_108"
+
+
+[904.70]
+path = "C3a_ST_070"
+
+pack_file_type = "scenario"
+scene_ids = [ 9055 ]
+event_entry_ids = [ 3080 ]
+
+0_9055.path  = "scene_3a_24.script"
+1_9055.path  = "scene_3a_24.idx"
+2_9055.path  = "scene_3a_24.emes"
+
+6_3080.path  = "actors_3080.xlc"
+3_119.path   = "portrait_119.ashg"
+3_318.path   = "portrait_318.ashg"
+3_335.path   = "portrait_335.ashg"
+3_488.path   = "portrait_488.ashg"
+3_668.path   = "portrait_668.ashg"
+4_4.path     = "animation_4"
+4_8.path     = "animation_8"
+4_22.path    = "animation_22"
+4_91.path    = "animation_91"
+4_93.path    = "animation_93"
+4_307.path   = "animation_307"
+4_310.path   = "animation_310"
+4_311.path   = "animation_311"
+4_527.path   = "animation_527"
+4_552.path   = "animation_552"
+4_625.path   = "animation_625"
+4_626.path   = "animation_626"
+5_29.path    = "unit_29"
+5_64.path    = "unit_64"
+5_69.path    = "unit_69"
+5_103.path   = "unit_103"
+5_127.path   = "unit_127"
+8_3087.path  = "sound_3087.scd"
+
+
+[904.80]
+path = "C3a_ST_080"
+
+pack_file_type = "scenario"
+scene_ids = [ 9056 ]
+event_entry_ids = [ 3090 ]
+
+0_9056.path  = "scene_3a_25.script"
+1_9056.path  = "scene_3a_25.idx"
+2_9056.path  = "scene_3a_25.emes"
+
+6_3090.path  = "actors_3090.xlc"
+3_119.path   = "portrait_119.ashg"
+3_318.path   = "portrait_318.ashg"
+4_99.path    = "animation_99"
+4_100.path   = "animation_100"
+5_29.path    = "unit_29"
+5_64.path    = "unit_64"
+
+
+[904.90]
+path = "C3a_ST_090"
+
+pack_file_type = "scenario"
+scene_ids = [ 9057, 9058, 9059, 9060, 9061, 9062, 9063, 9064, 9065, 9066, 9067, 9068, 9069, 9070, 9071, 9072, 9073, 9074 ]
+event_entry_ids = [ 3090 ]
+
+0_9057.path  = "scene_3a_26.script"
+1_9057.path  = "scene_3a_26.idx"
+2_9057.path  = "scene_3a_26.emes"
+
+0_9058.path  = "scene_3a_170.script"
+1_9058.path  = "scene_3a_170.idx"
+
+0_9060.path  = "scene_3a_27.script"
+1_9060.path  = "scene_3a_27.idx"
+2_9060.path  = "scene_3a_27.emes"
+
+0_9062.path  = "scene_3a_171.script"
+1_9062.path  = "scene_3a_171.idx"
+
+0_9064.path  = "scene_3a_28.script"
+1_9064.path  = "scene_3a_28.idx"
+2_9064.path  = "scene_3a_28.emes"
+
+0_9066.path  = "scene_3a_172.script"
+1_9066.path  = "scene_3a_172.idx"
+
+0_9068.path  = "scene_3a_29.script"
+1_9068.path  = "scene_3a_29.idx"
+2_9068.path  = "scene_3a_29.emes"
+
+0_9070.path  = "scene_3a_173.script"
+1_9070.path  = "scene_3a_173.idx"
+
+0_9072.path  = "scene_3a_30.script"
+1_9072.path  = "scene_3a_30.idx"
+2_9072.path  = "scene_3a_30.emes"
+
+0_9073.path  = "scene_3a_31.script"
+1_9073.path  = "scene_3a_31.idx"
+2_9073.path  = "scene_3a_31.emes"
+
+8_3047.path  = "sound_3047.scd"
+
+
+[904.100]
+path = "C3a_ST_100"
+
+pack_file_type = "scenario"
+scene_ids = [ 9075, 9076, 9077, 9078, 9079 ]
+event_entry_ids = [ 3100 ]
+
+0_9075.path  = "scene_3a_32.script"
+1_9075.path  = "scene_3a_32.idx"
+2_9075.path  = "scene_3a_32.emes"
+
+6_3100.path  = "actors_3100.xlc"
+3_78.path    = "portrait_78.ashg"
+3_119.path   = "portrait_119.ashg"
+3_360.path   = "portrait_360.ashg"
+3_397.path   = "portrait_397.ashg"
+3_606.path   = "portrait_606.ashg"
+4_19.path    = "animation_19"
+4_21.path    = "animation_21"
+4_233.path   = "animation_233"
+4_287.path   = "animation_287"
+5_21.path    = "unit_21"
+5_29.path    = "unit_29"
+5_69.path    = "unit_69"
+5_74.path    = "unit_74"
+5_84.path    = "unit_84"
+5_116.path   = "unit_116"
+5_127.path   = "unit_127"
+
+
+[904.110]
+path = "C3a_ST_110"
+
+pack_file_type = "scenario"
+scene_ids = [ 9080, 9081, 9082, 9083, 9084, 9085, 9086, 9087, 9088, 9089, 9090, 9091, 9092, 9093, 9094, 9095, 9096 ]
+event_entry_ids = [ 3100, 3105 ]
+
+0_9084.path  = "scene_3a_33.script"
+1_9084.path  = "scene_3a_33.idx"
+2_9084.path  = "scene_3a_33.emes"
+
+0_9087.path  = "scene_3a_34.script"
+1_9087.path  = "scene_3a_34.idx"
+2_9087.path  = "scene_3a_34.emes"
+
+0_9090.path  = "scene_3a_35.script"
+1_9090.path  = "scene_3a_35.idx"
+2_9090.path  = "scene_3a_35.emes"
+
+0_9093.path  = "scene_3a_36.script"
+1_9093.path  = "scene_3a_36.idx"
+2_9093.path  = "scene_3a_36.emes"
+
+0_9095.path  = "scene_3a_37.script"
+1_9095.path  = "scene_3a_37.idx"
+2_9095.path  = "scene_3a_37.emes"
+
+0_9096.path  = "scene_3a_38.script"
+1_9096.path  = "scene_3a_38.idx"
+2_9096.path  = "scene_3a_38.emes"
+
+6_3105.path  = "actors_3105.xlc"
+7_138.path   = "entry_units_138.xlc"
+3_682.path   = "portrait_682.ashg"
+4_509.path   = "animation_509"
+4_510.path   = "animation_510"
+5_58.path    = "unit_58"
+
+
+[904.120]
+path = "C3a_ST_120"
+
+pack_file_type = "scenario"
+scene_ids = [ 9097, 9098, 9099, 9100, 9101, 9102, 9103, 9104, 9105, 9106, 9107, 9108, 9109, 9110, 9111, 9112, 9113, 9114, 9115, 9116, 9117, 9118, 9119, 9120, 9121, 9122, 9123, 9124, 9125, 9126, 9127, 9128, 9129, 9130, 9131, 9132, 9133, 9134, 9135, 9136, 9137, 9138, 9139, 9140, 9141, 9142, 9143, 9144, 9145, 9146, 9147, 9148, 9149, 9150, 9151, 9152, 9153 ]
+event_entry_ids = [ 3110, 3120, 3130 ]
+
+0_9097.path  = "scene_3a_39.script"
+1_9097.path  = "scene_3a_39.idx"
+2_9097.path  = "scene_3a_39.emes"
+
+0_9098.path  = "scene_3a_40.script"
+1_9098.path  = "scene_3a_40.idx"
+2_9098.path  = "scene_3a_40.emes"
+
+0_9109.path  = "scene_3a_41.script"
+1_9109.path  = "scene_3a_41.idx"
+2_9109.path  = "scene_3a_41.emes"
+
+0_9118.path  = "scene_3a_42.script"
+1_9118.path  = "scene_3a_42.idx"
+2_9118.path  = "scene_3a_42.emes"
+
+0_9119.path  = "scene_3a_43.script"
+1_9119.path  = "scene_3a_43.idx"
+2_9119.path  = "scene_3a_43.emes"
+
+0_9128.path  = "scene_3a_44.script"
+1_9128.path  = "scene_3a_44.idx"
+2_9128.path  = "scene_3a_44.emes"
+
+0_9136.path  = "scene_3a_45.script"
+1_9136.path  = "scene_3a_45.idx"
+2_9136.path  = "scene_3a_45.emes"
+
+0_9137.path  = "scene_3a_46.script"
+1_9137.path  = "scene_3a_46.idx"
+2_9137.path  = "scene_3a_46.emes"
+
+0_9146.path  = "scene_3a_47.script"
+1_9146.path  = "scene_3a_47.idx"
+2_9146.path  = "scene_3a_47.emes"
+
+6_3110.path  = "actors_3110.xlc"
+6_3120.path  = "actors_3120.xlc"
+6_3130.path  = "actors_3130.xlc"
+7_141.path   = "entry_units_141.xlc"
+3_78.path    = "portrait_78.ashg"
+3_114.path   = "portrait_114.ashg"
+3_119.path   = "portrait_119.ashg"
+3_397.path   = "portrait_397.ashg"
+3_463.path   = "portrait_463.ashg"
+4_11.path    = "animation_11"
+4_22.path    = "animation_22"
+4_245.path   = "animation_245"
+4_257.path   = "animation_257"
+4_504.path   = "animation_504"
+4_505.path   = "animation_505"
+4_506.path   = "animation_506"
+4_508.path   = "animation_508"
+4_509.path   = "animation_509"
+4_510.path   = "animation_510"
+5_21.path    = "unit_21"
+5_29.path    = "unit_29"
+5_84.path    = "unit_84"
+5_95.path    = "unit_95"
+5_115.path   = "unit_115"
+8_3045.path  = "sound_3045.scd"
+8_3066.path  = "sound_3066.scd"
+8_3067.path  = "sound_3067.scd"
+
+
+[904.130]
+path = "C3a_ST_130"
+
+pack_file_type = "scenario"
+scene_ids = [ 9154, 9155 ]
+event_entry_ids = [ 3135 ]
+
+0_9154.path  = "scene_3a_48.script"
+1_9154.path  = "scene_3a_48.idx"
+2_9154.path  = "scene_3a_48.emes"
+
+0_9155.path  = "scene_3a_49.script"
+1_9155.path  = "scene_3a_49.idx"
+2_9155.path  = "scene_3a_49.emes"
+
+6_3135.path  = "actors_3135.xlc"
+3_107.path   = "portrait_107.ashg"
+4_748.path   = "animation_748"
+5_25.path    = "unit_25"
+
+
+[904.140]
+path = "C3a_ST_140"
+
+pack_file_type = "scenario"
+scene_ids = [ 9156, 9157 ]
+event_entry_ids = [ 3135 ]
+
+0_9156.path  = "scene_3a_50.script"
+1_9156.path  = "scene_3a_50.idx"
+2_9156.path  = "scene_3a_50.emes"
+
+0_9157.path  = "scene_3a_51.script"
+1_9157.path  = "scene_3a_51.idx"
+2_9157.path  = "scene_3a_51.emes"
+
+
+[904.150]
+path = "C3a_ST_150"
+
+pack_file_type = "scenario"
+scene_ids = [ 9158, 9159, 9160, 9161, 9162, 9163, 9164, 9165, 9166, 9167, 9168, 9169 ]
+event_entry_ids = [ 3135 ]
+
+0_9158.path  = "scene_3a_52.script"
+1_9158.path  = "scene_3a_52.idx"
+2_9158.path  = "scene_3a_52.emes"
+
+0_9160.path  = "scene_3a_53.script"
+1_9160.path  = "scene_3a_53.idx"
+2_9160.path  = "scene_3a_53.emes"
+
+0_9161.path  = "scene_3a_54.script"
+1_9161.path  = "scene_3a_54.idx"
+2_9161.path  = "scene_3a_54.emes"
+
+0_9162.path  = "scene_3a_55.script"
+1_9162.path  = "scene_3a_55.idx"
+2_9162.path  = "scene_3a_55.emes"
+
+0_9163.path  = "scene_3a_56.script"
+1_9163.path  = "scene_3a_56.idx"
+2_9163.path  = "scene_3a_56.emes"
+
+0_9164.path  = "scene_3a_57.script"
+1_9164.path  = "scene_3a_57.idx"
+2_9164.path  = "scene_3a_57.emes"
+
+0_9165.path  = "scene_3a_58.script"
+1_9165.path  = "scene_3a_58.idx"
+2_9165.path  = "scene_3a_58.emes"
+
+0_9166.path  = "scene_3a_59.script"
+1_9166.path  = "scene_3a_59.idx"
+2_9166.path  = "scene_3a_59.emes"
+
+0_9167.path  = "scene_3a_60.script"
+1_9167.path  = "scene_3a_60.idx"
+2_9167.path  = "scene_3a_60.emes"
+
+0_9168.path  = "scene_3a_61.script"
+1_9168.path  = "scene_3a_61.idx"
+2_9168.path  = "scene_3a_61.emes"
+
+0_9169.path  = "scene_3a_62.script"
+1_9169.path  = "scene_3a_62.idx"
+2_9169.path  = "scene_3a_62.emes"
+
+4_817.path   = "animation_817"
+8_3064.path  = "sound_3064.scd"
+8_3068.path  = "sound_3068.scd"
+
+
+[904.160]
+path = "C3a_ST_160"
+
+pack_file_type = "scenario"
+scene_ids = [ 9170 ]
+event_entry_ids = [ 3140 ]
+
+0_9170.path  = "scene_3a_63.script"
+1_9170.path  = "scene_3a_63.idx"
+2_9170.path  = "scene_3a_63.emes"
+
+6_3140.path  = "actors_3140.xlc"
+3_360.path   = "portrait_360.ashg"
+3_488.path   = "portrait_488.ashg"
+4_307.path   = "animation_307"
+4_625.path   = "animation_625"
+4_626.path   = "animation_626"
+5_74.path    = "unit_74"
+5_103.path   = "unit_103"
+8_3045.path  = "sound_3045.scd"
+8_3046.path  = "sound_3046.scd"
+
+
+[904.170]
+path = "C3a_ST_170"
+
+pack_file_type = "scenario"
+scene_ids = [ 9171 ]
+event_entry_ids = [ 3150 ]
+
+0_9171.path  = "scene_3a_64.script"
+1_9171.path  = "scene_3a_64.idx"
+2_9171.path  = "scene_3a_64.emes"
+
+6_3150.path  = "actors_3150.xlc"
+3_80.path    = "portrait_80.ashg"
+3_360.path   = "portrait_360.ashg"
+5_22.path    = "unit_22"
+5_74.path    = "unit_74"
+
+
+[904.180]
+path = "C3a_ST_180"
+
+pack_file_type = "scenario"
+scene_ids = [ 9172 ]
+event_entry_ids = [ 3160 ]
+
+0_9172.path  = "scene_3a_65.script"
+1_9172.path  = "scene_3a_65.idx"
+2_9172.path  = "scene_3a_65.emes"
+
+6_3160.path  = "actors_3160.xlc"
+3_360.path   = "portrait_360.ashg"
+4_282.path   = "animation_282"
+4_287.path   = "animation_287"
+4_288.path   = "animation_288"
+5_74.path    = "unit_74"
+
+
+[904.190]
+path = "C3a_ST_190"
+
+pack_file_type = "scenario"
+scene_ids = [ 9173 ]
+event_entry_ids = [ 3160 ]
+
+0_9173.path  = "scene_3a_66.script"
+1_9173.path  = "scene_3a_66.idx"
+
+
+[904.200]
+path = "C3a_ST_200"
+
+pack_file_type = "scenario"
+scene_ids = [ 9174 ]
+event_entry_ids = [ 3160 ]
+
+0_9174.path  = "scene_3a_67.script"
+1_9174.path  = "scene_3a_67.idx"
+
+
+[904.210]
+path = "C3a_ST_210"
+
+pack_file_type = "scenario"
+scene_ids = [ 9175 ]
+event_entry_ids = [ 3190 ]
+
+0_9175.path  = "scene_3a_68.script"
+1_9175.path  = "scene_3a_68.idx"
+2_9175.path  = "scene_3a_68.emes"
+
+6_3190.path  = "actors_3190.xlc"
+3_7.path     = "portrait_7.ashg"
+3_318.path   = "portrait_318.ashg"
+3_358.path   = "portrait_358.ashg"
+3_636.path   = "portrait_636.ashg"
+4_96.path    = "animation_96"
+4_99.path    = "animation_99"
+4_100.path   = "animation_100"
+4_106.path   = "animation_106"
+5_5.path     = "unit_5"
+5_64.path    = "unit_64"
+5_72.path    = "unit_72"
+5_121.path   = "unit_121"
+8_3036.path  = "sound_3036.scd"
+8_3084.path  = "sound_3084.scd"
+
+
+[904.220]
+path = "C3a_ST_220"
+
+pack_file_type = "scenario"
+scene_ids = [ 9176, 9177 ]
+event_entry_ids = [ 3200 ]
+
+0_9176.path  = "scene_3a_69.script"
+1_9176.path  = "scene_3a_69.idx"
+2_9176.path  = "scene_3a_69.emes"
+
+6_3200.path  = "actors_3200.xlc"
+3_119.path   = "portrait_119.ashg"
+3_360.path   = "portrait_360.ashg"
+3_488.path   = "portrait_488.ashg"
+3_648.path   = "portrait_648.ashg"
+4_4.path     = "animation_4"
+4_5.path     = "animation_5"
+4_7.path     = "animation_7"
+4_276.path   = "animation_276"
+4_278.path   = "animation_278"
+4_307.path   = "animation_307"
+4_310.path   = "animation_310"
+4_625.path   = "animation_625"
+4_626.path   = "animation_626"
+5_29.path    = "unit_29"
+5_74.path    = "unit_74"
+5_103.path   = "unit_103"
+5_125.path   = "unit_125"
+8_3045.path  = "sound_3045.scd"
+8_3046.path  = "sound_3046.scd"
+
+
+[904.229]
+path = "C3a_ST_229"
+
+pack_file_type = "scenario"
+scene_ids = [ 9178 ]
+
+0_9178.path  = "scene_3a_95.script"
+1_9178.path  = "scene_3a_95.idx"
+
+
+[904.230]
+path = "C3a_ST_230"
+
+pack_file_type = "scenario"
+scene_ids = [ 9179, 9180, 9181, 9182, 9183 ]
+event_entry_ids = [ 3210 ]
+
+0_9179.path  = "scene_3a_70.script"
+1_9179.path  = "scene_3a_70.idx"
+2_9179.path  = "scene_3a_70.emes"
+
+0_9180.path  = "scene_3a_97.script"
+1_9180.path  = "scene_3a_97.idx"
+2_9180.path  = "scene_3a_97.emes"
+
+0_9181.path  = "scene_3a_98.script"
+1_9181.path  = "scene_3a_98.idx"
+2_9181.path  = "scene_3a_98.emes"
+
+0_9182.path  = "scene_3a_99.script"
+1_9182.path  = "scene_3a_99.idx"
+2_9182.path  = "scene_3a_99.emes"
+
+0_9183.path  = "scene_3a_71.script"
+1_9183.path  = "scene_3a_71.idx"
+2_9183.path  = "scene_3a_71.emes"
+
+6_3210.path  = "actors_3210.xlc"
+3_337.path   = "portrait_337.ashg"
+3_628.path   = "portrait_628.ashg"
+3_633.path   = "portrait_633.ashg"
+3_650.path   = "portrait_650.ashg"
+5_69.path    = "unit_69"
+5_119.path   = "unit_119"
+5_125.path   = "unit_125"
+8_3043.path  = "sound_3043.scd"
+8_3044.path  = "sound_3044.scd"
+8_3064.path  = "sound_3064.scd"
+8_3065.path  = "sound_3065.scd"
+8_3088.path  = "sound_3088.scd"
+
+
+[904.240]
+path = "C3a_ST_240"
+
+pack_file_type = "scenario"
+scene_ids = [ 9184, 9185, 9186, 9187, 9188 ]
+event_entry_ids = [ 3210 ]
+
+0_9184.path  = "scene_3a_72.script"
+1_9184.path  = "scene_3a_72.idx"
+2_9184.path  = "scene_3a_72.emes"
+
+0_9185.path  = "scene_3a_100.script"
+1_9185.path  = "scene_3a_100.idx"
+2_9185.path  = "scene_3a_100.emes"
+
+0_9186.path  = "scene_3a_101.script"
+1_9186.path  = "scene_3a_101.idx"
+2_9186.path  = "scene_3a_101.emes"
+
+0_9187.path  = "scene_3a_102.script"
+1_9187.path  = "scene_3a_102.idx"
+2_9187.path  = "scene_3a_102.emes"
+
+0_9188.path  = "scene_3a_73.script"
+1_9188.path  = "scene_3a_73.idx"
+2_9188.path  = "scene_3a_73.emes"
+
+
+[904.250]
+path = "C3a_ST_250"
+
+pack_file_type = "scenario"
+scene_ids = [ 9189, 9190 ]
+event_entry_ids = [ 3210 ]
+
+0_9189.path  = "scene_3a_74.script"
+1_9189.path  = "scene_3a_74.idx"
+2_9189.path  = "scene_3a_74.emes"
+
+0_9190.path  = "scene_3a_75.script"
+1_9190.path  = "scene_3a_75.idx"
+2_9190.path  = "scene_3a_75.emes"
+
+
+[904.260]
+path = "C3a_ST_260"
+
+pack_file_type = "scenario"
+scene_ids = [ 9191 ]
+event_entry_ids = [ 3220 ]
+
+0_9191.path  = "scene_3a_76.script"
+1_9191.path  = "scene_3a_76.idx"
+2_9191.path  = "scene_3a_76.emes"
+
+6_3220.path  = "actors_3220.xlc"
+3_31.path    = "portrait_31.ashg"
+3_144.path   = "portrait_144.ashg"
+3_335.path   = "portrait_335.ashg"
+3_360.path   = "portrait_360.ashg"
+3_488.path   = "portrait_488.ashg"
+4_288.path   = "animation_288"
+4_320.path   = "animation_320"
+4_322.path   = "animation_322"
+4_421.path   = "animation_421"
+4_499.path   = "animation_499"
+4_795.path   = "animation_795"
+5_10.path    = "unit_10"
+5_33.path    = "unit_33"
+5_69.path    = "unit_69"
+5_74.path    = "unit_74"
+5_103.path   = "unit_103"
+8_3045.path  = "sound_3045.scd"
+8_3046.path  = "sound_3046.scd"
+
+
+[904.270]
+path = "C3a_ST_270"
+
+pack_file_type = "scenario"
+scene_ids = [ 9192, 9193 ]
+event_entry_ids = [ 3230 ]
+
+0_9192.path  = "scene_3a_77.script"
+1_9192.path  = "scene_3a_77.idx"
+2_9192.path  = "scene_3a_77.emes"
+
+0_9193.path  = "scene_3a_78.script"
+1_9193.path  = "scene_3a_78.idx"
+2_9193.path  = "scene_3a_78.emes"
+
+6_3230.path  = "actors_3230.xlc"
+3_144.path   = "portrait_144.ashg"
+3_467.path   = "portrait_467.ashg"
+3_468.path   = "portrait_468.ashg"
+4_478.path   = "animation_478"
+5_33.path    = "unit_33"
+5_97.path    = "unit_97"
+
+
+[904.280]
+path = "C3a_ST_280"
+
+pack_file_type = "scenario"
+scene_ids = [ 9194 ]
+event_entry_ids = [ 3240 ]
+
+0_9194.path  = "scene_3a_79.script"
+1_9194.path  = "scene_3a_79.idx"
+2_9194.path  = "scene_3a_79.emes"
+
+6_3240.path  = "actors_3240.xlc"
+3_335.path   = "portrait_335.ashg"
+3_360.path   = "portrait_360.ashg"
+3_467.path   = "portrait_467.ashg"
+3_488.path   = "portrait_488.ashg"
+3_648.path   = "portrait_648.ashg"
+4_795.path   = "animation_795"
+5_69.path    = "unit_69"
+5_74.path    = "unit_74"
+5_97.path    = "unit_97"
+5_103.path   = "unit_103"
+5_125.path   = "unit_125"
+8_3045.path  = "sound_3045.scd"
+8_3046.path  = "sound_3046.scd"
+
+
+[904.290]
+path = "C3a_ST_290"
+
+pack_file_type = "scenario"
+scene_ids = [ 9195 ]
+event_entry_ids = [ 3250 ]
+
+0_9195.path  = "scene_3a_80.script"
+1_9195.path  = "scene_3a_80.idx"
+2_9195.path  = "scene_3a_80.emes"
+
+6_3250.path  = "actors_3250.xlc"
+3_335.path   = "portrait_335.ashg"
+3_360.path   = "portrait_360.ashg"
+4_291.path   = "animation_291"
+4_558.path   = "animation_558"
+5_69.path    = "unit_69"
+5_74.path    = "unit_74"
+8_3090.path  = "sound_3090.scd"
+8_3091.path  = "sound_3091.scd"
+8_3092.path  = "sound_3092.scd"
+
+
+[904.300]
+path = "C3a_ST_300"
+
+pack_file_type = "scenario"
+scene_ids = [ 9196 ]
+event_entry_ids = [ 3260 ]
+
+0_9196.path  = "scene_3a_81.script"
+1_9196.path  = "scene_3a_81.idx"
+2_9196.path  = "scene_3a_81.emes"
+
+6_3260.path  = "actors_3260.xlc"
+3_335.path   = "portrait_335.ashg"
+3_360.path   = "portrait_360.ashg"
+4_558.path   = "animation_558"
+5_69.path    = "unit_69"
+5_74.path    = "unit_74"
+8_3069.path  = "sound_3069.scd"
+
+
+[904.310]
+path = "C3a_ST_310"
+
+pack_file_type = "scenario"
+scene_ids = [ 9197, 9198 ]
+event_entry_ids = [ 3270 ]
+
+0_9197.path  = "scene_3a_82.script"
+1_9197.path  = "scene_3a_82.idx"
+2_9197.path  = "scene_3a_82.emes"
+
+6_3270.path  = "actors_3270.xlc"
+3_335.path   = "portrait_335.ashg"
+3_360.path   = "portrait_360.ashg"
+3_488.path   = "portrait_488.ashg"
+3_628.path   = "portrait_628.ashg"
+3_631.path   = "portrait_631.ashg"
+4_160.path   = "animation_160"
+4_161.path   = "animation_161"
+4_162.path   = "animation_162"
+4_163.path   = "animation_163"
+4_171.path   = "animation_171"
+4_287.path   = "animation_287"
+4_317.path   = "animation_317"
+4_319.path   = "animation_319"
+4_323.path   = "animation_323"
+4_557.path   = "animation_557"
+4_568.path   = "animation_568"
+4_569.path   = "animation_569"
+4_783.path   = "animation_783"
+4_784.path   = "animation_784"
+4_795.path   = "animation_795"
+5_69.path    = "unit_69"
+5_74.path    = "unit_74"
+5_103.path   = "unit_103"
+5_119.path   = "unit_119"
+8_3045.path  = "sound_3045.scd"
+8_3046.path  = "sound_3046.scd"
+8_3068.path  = "sound_3068.scd"
+8_3083.path  = "sound_3083.scd"
+
+
+[904.320]
+path = "C3a_ST_320"
+
+pack_file_type = "scenario"
+scene_ids = [ 9199 ]
+event_entry_ids = [ 3280 ]
+
+0_9199.path  = "scene_3a_83.script"
+1_9199.path  = "scene_3a_83.idx"
+2_9199.path  = "scene_3a_83.emes"
+
+6_3280.path  = "actors_3280.xlc"
+3_8.path     = "portrait_8.ashg"
+3_119.path   = "portrait_119.ashg"
+3_335.path   = "portrait_335.ashg"
+3_360.path   = "portrait_360.ashg"
+3_606.path   = "portrait_606.ashg"
+3_658.path   = "portrait_658.ashg"
+3_668.path   = "portrait_668.ashg"
+4_4.path     = "animation_4"
+4_10.path    = "animation_10"
+4_11.path    = "animation_11"
+4_276.path   = "animation_276"
+4_278.path   = "animation_278"
+4_279.path   = "animation_279"
+4_287.path   = "animation_287"
+4_521.path   = "animation_521"
+4_525.path   = "animation_525"
+4_527.path   = "animation_527"
+4_531.path   = "animation_531"
+4_552.path   = "animation_552"
+4_625.path   = "animation_625"
+4_626.path   = "animation_626"
+4_789.path   = "animation_789"
+4_790.path   = "animation_790"
+4_791.path   = "animation_791"
+5_6.path     = "unit_6"
+5_29.path    = "unit_29"
+5_69.path    = "unit_69"
+5_74.path    = "unit_74"
+5_116.path   = "unit_116"
+5_126.path   = "unit_126"
+5_127.path   = "unit_127"
+8_3087.path  = "sound_3087.scd"
+8_3101.path  = "sound_3101.scd"
+
+
+[904.329]
+path = "C3a_ST_329"
+
+pack_file_type = "scenario"
+scene_ids = [ 9200 ]
+
+0_9200.path  = "scene_3a_96.script"
+1_9200.path  = "scene_3a_96.idx"
+
+
+[904.330]
+path = "C3a_ST_330"
+
+pack_file_type = "scenario"
+scene_ids = [ 9201, 9202, 9203, 9204 ]
+
+0_9201.path  = "scene_3a_84.script"
+1_9201.path  = "scene_3a_84.idx"
+2_9201.path  = "scene_3a_84.emes"
+
+0_9202.path  = "scene_3a_103.script"
+1_9202.path  = "scene_3a_103.idx"
+2_9202.path  = "scene_3a_103.emes"
+
+0_9203.path  = "scene_3a_104.script"
+1_9203.path  = "scene_3a_104.idx"
+2_9203.path  = "scene_3a_104.emes"
+
+0_9204.path  = "scene_3a_85.script"
+1_9204.path  = "scene_3a_85.idx"
+2_9204.path  = "scene_3a_85.emes"
+
+8_3032.path  = "sound_3032.scd"
+
+
+[904.340]
+path = "C3a_ST_340"
+
+pack_file_type = "scenario"
+scene_ids = [ 9205, 9206, 9207, 9208 ]
+
+0_9205.path  = "scene_3a_86.script"
+1_9205.path  = "scene_3a_86.idx"
+2_9205.path  = "scene_3a_86.emes"
+
+0_9206.path  = "scene_3a_105.script"
+1_9206.path  = "scene_3a_105.idx"
+2_9206.path  = "scene_3a_105.emes"
+
+0_9207.path  = "scene_3a_106.script"
+1_9207.path  = "scene_3a_106.idx"
+2_9207.path  = "scene_3a_106.emes"
+
+0_9208.path  = "scene_3a_87.script"
+1_9208.path  = "scene_3a_87.idx"
+2_9208.path  = "scene_3a_87.emes"
+
+8_3032.path  = "sound_3032.scd"
+
+
+[904.350]
+path = "C3a_ST_350"
+
+pack_file_type = "scenario"
+scene_ids = [ 9209 ]
+event_entry_ids = [ 3290 ]
+
+0_9209.path  = "scene_3a_88.script"
+1_9209.path  = "scene_3a_88.idx"
+2_9209.path  = "scene_3a_88.emes"
+
+6_3290.path  = "actors_3290.xlc"
+3_31.path    = "portrait_31.ashg"
+3_144.path   = "portrait_144.ashg"
+3_467.path   = "portrait_467.ashg"
+3_468.path   = "portrait_468.ashg"
+4_422.path   = "animation_422"
+4_424.path   = "animation_424"
+4_429.path   = "animation_429"
+4_478.path   = "animation_478"
+4_479.path   = "animation_479"
+4_627.path   = "animation_627"
+4_628.path   = "animation_628"
+5_10.path    = "unit_10"
+5_33.path    = "unit_33"
+5_97.path    = "unit_97"
+8_3087.path  = "sound_3087.scd"
+
+
+[904.360]
+path = "C3a_ST_360"
+
+pack_file_type = "scenario"
+scene_ids = [ 9210, 9211, 9212, 9213, 9214, 9215, 9216 ]
+event_entry_ids = [ 3300 ]
+
+0_9210.path  = "scene_3a_89.script"
+1_9210.path  = "scene_3a_89.idx"
+2_9210.path  = "scene_3a_89.emes"
+
+0_9211.path  = "scene_3a_107.script"
+1_9211.path  = "scene_3a_107.idx"
+2_9211.path  = "scene_3a_107.emes"
+
+0_9212.path  = "scene_3a_108.script"
+1_9212.path  = "scene_3a_108.idx"
+2_9212.path  = "scene_3a_108.emes"
+
+0_9213.path  = "scene_3a_109.script"
+1_9213.path  = "scene_3a_109.idx"
+2_9213.path  = "scene_3a_109.emes"
+
+0_9214.path  = "scene_3a_110.script"
+1_9214.path  = "scene_3a_110.idx"
+2_9214.path  = "scene_3a_110.emes"
+
+0_9215.path  = "scene_3a_111.script"
+1_9215.path  = "scene_3a_111.idx"
+2_9215.path  = "scene_3a_111.emes"
+
+0_9216.path  = "scene_3a_90.script"
+1_9216.path  = "scene_3a_90.idx"
+2_9216.path  = "scene_3a_90.emes"
+
+6_3300.path  = "actors_3300.xlc"
+3_119.path   = "portrait_119.ashg"
+3_320.path   = "portrait_320.ashg"
+3_358.path   = "portrait_358.ashg"
+3_360.path   = "portrait_360.ashg"
+3_467.path   = "portrait_467.ashg"
+3_468.path   = "portrait_468.ashg"
+4_19.path    = "animation_19"
+4_39.path    = "animation_39"
+4_113.path   = "animation_113"
+4_283.path   = "animation_283"
+4_284.path   = "animation_284"
+4_287.path   = "animation_287"
+4_288.path   = "animation_288"
+4_290.path   = "animation_290"
+4_479.path   = "animation_479"
+5_29.path    = "unit_29"
+5_65.path    = "unit_65"
+5_72.path    = "unit_72"
+5_74.path    = "unit_74"
+8_3043.path  = "sound_3043.scd"
+8_3047.path  = "sound_3047.scd"
+8_3064.path  = "sound_3064.scd"
+8_3068.path  = "sound_3068.scd"
+8_3085.path  = "sound_3085.scd"
+
+
+[904.370]
+path = "C3a_ST_370"
+
+pack_file_type = "scenario"
+scene_ids = [ 9217 ]
+event_entry_ids = [ 3310 ]
+
+0_9217.path  = "scene_3a_91.script"
+1_9217.path  = "scene_3a_91.idx"
+
+6_3310.path  = "actors_3310.xlc"
+3_649.path   = "portrait_649.ashg"
+3_659.path   = "portrait_659.ashg"
+5_6.path     = "unit_6"
+5_125.path   = "unit_125"
+
+
+[904.380]
+path = "C3a_ST_380"
+
+pack_file_type = "scenario"
+scene_ids = [ 9218 ]
+event_entry_ids = [ 3320 ]
+
+0_9218.path  = "scene_3a_92.script"
+1_9218.path  = "scene_3a_92.idx"
+
+6_3320.path  = "actors_3320.xlc"
+3_649.path   = "portrait_649.ashg"
+3_659.path   = "portrait_659.ashg"
+5_6.path     = "unit_6"
+5_125.path   = "unit_125"
+
+
+[904.390]
+path = "C3a_ST_390"
+
+pack_file_type = "scenario"
+scene_ids = [ 9219 ]
+event_entry_ids = [ 3330 ]
+
+0_9219.path  = "scene_3a_93.script"
+1_9219.path  = "scene_3a_93.idx"
+
+6_3330.path  = "actors_3330.xlc"
+3_594.path   = "portrait_594.ashg"
+5_115.path   = "unit_115"
+
+
+[904.400]
+path = "C3a_ST_400"
+
+pack_file_type = "scenario"
+scene_ids = [ 9220, 9221, 9222, 9223 ]
+event_entry_ids = [ 3340 ]
+
+0_9220.path  = "scene_3a_94.script"
+1_9220.path  = "scene_3a_94.idx"
+2_9220.path  = "scene_3a_94.emes"
+
+6_3340.path  = "actors_3340.xlc"
+3_355.path   = "portrait_355.ashg"
+4_197.path   = "animation_197"
+5_71.path    = "unit_71"
+
+
+[904.410]
+path = "C3a_ST_410"
+
+pack_file_type = "scenario"
+scene_ids = [ 9224, 9225, 9226, 9227, 9228, 9229, 9230, 9231, 9232, 9233, 9234, 9235, 9236, 9237, 9238, 9239, 9240, 9241, 9242, 9243, 9244, 9245, 9246, 9247, 9248, 9249, 9250, 9251, 9252 ]
+event_entry_ids = [ 3340 ]
+
+0_9230.path  = "scene_3a_120.script"
+1_9230.path  = "scene_3a_120.idx"
+2_9230.path  = "scene_3a_120.emes"
+
+0_9234.path  = "scene_3a_121.script"
+1_9234.path  = "scene_3a_121.idx"
+2_9234.path  = "scene_3a_121.emes"
+
+0_9235.path  = "scene_3a_122.script"
+1_9235.path  = "scene_3a_122.idx"
+2_9235.path  = "scene_3a_122.emes"
+
+0_9236.path  = "scene_3a_123.script"
+1_9236.path  = "scene_3a_123.idx"
+2_9236.path  = "scene_3a_123.emes"
+
+0_9237.path  = "scene_3a_126.script"
+1_9237.path  = "scene_3a_126.idx"
+
+0_9239.path  = "scene_3a_127.script"
+1_9239.path  = "scene_3a_127.idx"
+
+0_9241.path  = "scene_3a_128.script"
+1_9241.path  = "scene_3a_128.idx"
+
+0_9243.path  = "scene_3a_129.script"
+1_9243.path  = "scene_3a_129.idx"
+2_9243.path  = "scene_3a_129.emes"
+
+7_141.path   = "entry_units_141.xlc"
+7_430.path   = "entry_units_430.xlc"
+
+[904.420]
+path = "C3a_ST_420"
+
+pack_file_type = "scenario"
+scene_ids = [ 9253, 9254, 9255, 9256, 9257, 9258 ]
+event_entry_ids = [ 3350 ]
+
+0_9253.path  = "scene_3a_130.script"
+1_9253.path  = "scene_3a_130.idx"
+2_9253.path  = "scene_3a_130.emes"
+
+0_9254.path  = "scene_3a_131.script"
+1_9254.path  = "scene_3a_131.idx"
+2_9254.path  = "scene_3a_131.emes"
+
+0_9255.path  = "scene_3a_132.script"
+1_9255.path  = "scene_3a_132.idx"
+2_9255.path  = "scene_3a_132.emes"
+
+0_9256.path  = "scene_3a_133.script"
+1_9256.path  = "scene_3a_133.idx"
+2_9256.path  = "scene_3a_133.emes"
+
+0_9258.path  = "scene_3a_134.script"
+1_9258.path  = "scene_3a_134.idx"
+2_9258.path  = "scene_3a_134.emes"
+
+6_3350.path  = "actors_3350.xlc"
+7_141.path   = "entry_units_141.xlc"
+3_119.path   = "portrait_119.ashg"
+3_309.path   = "portrait_309.ashg"
+3_360.path   = "portrait_360.ashg"
+4_11.path    = "animation_11"
+4_21.path    = "animation_21"
+4_22.path    = "animation_22"
+4_287.path   = "animation_287"
+4_288.path   = "animation_288"
+5_29.path    = "unit_29"
+5_62.path    = "unit_62"
+5_74.path    = "unit_74"
+
+
+[904.430]
+path = "C3a_ST_430"
+
+pack_file_type = "scenario"
+scene_ids = [ 9259, 9260 ]
+event_entry_ids = [ 3350 ]
+
+0_9259.path  = "scene_3a_140.script"
+1_9259.path  = "scene_3a_140.idx"
+2_9259.path  = "scene_3a_140.emes"
+
+0_9260.path  = "scene_3a_149.script"
+1_9260.path  = "scene_3a_149.idx"
+2_9260.path  = "scene_3a_149.emes"
+
+
+[904.440]
+path = "C3a_ST_440"
+
+pack_file_type = "scenario"
+scene_ids = [ 9261, 9262, 9263, 9264 ]
+event_entry_ids = [ 3360 ]
+
+0_9261.path  = "scene_3a_150.script"
+1_9261.path  = "scene_3a_150.idx"
+2_9261.path  = "scene_3a_150.emes"
+
+0_9262.path  = "scene_3a_151.script"
+1_9262.path  = "scene_3a_151.idx"
+2_9262.path  = "scene_3a_151.emes"
+
+0_9264.path  = "scene_3a_152.script"
+1_9264.path  = "scene_3a_152.idx"
+2_9264.path  = "scene_3a_152.emes"
+
+6_3360.path  = "actors_3360.xlc"
+7_141.path   = "entry_units_141.xlc"
+3_65.path    = "portrait_65.ashg"
+3_119.path   = "portrait_119.ashg"
+3_309.path   = "portrait_309.ashg"
+3_430.path   = "portrait_430.ashg"
+4_20.path    = "animation_20"
+4_21.path    = "animation_21"
+4_22.path    = "animation_22"
+4_574.path   = "animation_574"
+4_586.path   = "animation_586"
+4_587.path   = "animation_587"
+5_16.path    = "unit_16"
+5_29.path    = "unit_29"
+5_62.path    = "unit_62"
+5_90.path    = "unit_90"
+8_3045.path  = "sound_3045.scd"
+8_3046.path  = "sound_3046.scd"
+8_3070.path  = "sound_3070.scd"
+8_3079.path  = "sound_3079.scd"
+8_3082.path  = "sound_3082.scd"
+
+
+[904.450]
+path = "C3a_ST_450"
+
+pack_file_type = "scenario"
+scene_ids = [ 9265 ]
+event_entry_ids = [ 3360 ]
+
+
+[904.451]
+path = "C3a_ST_451"
+
+pack_file_type = "scenario"
+scene_ids = [ 9266 ]
+event_entry_ids = [ 3360 ]
+
+
+[904.452]
+path = "C3a_ST_452"
+
+pack_file_type = "scenario"
+scene_ids = [ 9267 ]
+event_entry_ids = [ 3360 ]
+
+
+[904.453]
+path = "C3a_ST_453"
+
+pack_file_type = "scenario"
+scene_ids = [ 9268 ]
+event_entry_ids = [ 3360 ]
+
+
+[904.454]
+path = "C3a_ST_454"
+
+pack_file_type = "scenario"
+scene_ids = [ 9269 ]
+event_entry_ids = [ 3360 ]
+
+
+[904.455]
+path = "C3a_ST_455"
+
+pack_file_type = "scenario"
+scene_ids = [ 9270 ]
+event_entry_ids = [ 3360 ]
+
+
+[904.456]
+path = "C3a_ST_456"
+
+pack_file_type = "scenario"
+scene_ids = [ 9271 ]
+event_entry_ids = [ 3360 ]
+
+
+[904.457]
+path = "C3a_ST_457"
+
+pack_file_type = "scenario"
+scene_ids = [ 9272 ]
+event_entry_ids = [ 3360 ]
+
+
+[904.458]
+path = "C3a_ST_458"
+
+pack_file_type = "scenario"
+scene_ids = [ 9273 ]
+event_entry_ids = [ 3360 ]
+
+
+[904.459]
+path = "C3a_ST_459"
+
+pack_file_type = "scenario"
+scene_ids = [ 9274 ]
+event_entry_ids = [ 3360 ]
+
+
+[904.460]
+path = "C3a_ST_460"
+
+pack_file_type = "scenario"
+scene_ids = [ 9275 ]
+event_entry_ids = [ 3360 ]
+
+
+[904.461]
+path = "C3a_ST_461"
+
+pack_file_type = "scenario"
+scene_ids = [ 9276 ]
+event_entry_ids = [ 3360 ]

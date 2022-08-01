@@ -5,11 +5,11 @@ path = "ui/strongholds"
 [850.101]
 path = "almorica_castle"
 
-0_16.path = "map_icons/16.sprite"
-0_28.path = "map_icons/28.sprite"
+0_16.path = "map_icons/16.spr"
+0_28.path = "map_icons/28.spr"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -17,11 +17,11 @@ path = "almorica_castle"
 [850.201]
 path = "coritanae_keep"
 
-0_17.path = "map_icons/17.sprite"
-0_32.path = "map_icons/32.sprite"
+0_17.path = "map_icons/17.spr"
+0_32.path = "map_icons/32.spr"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -29,12 +29,12 @@ path = "coritanae_keep"
 [850.301]
 path = "brigantys_castle"
 
-0_18.path = "map_icons/18.sprite"
-0_19.path = "map_icons/19.sprite"
-0_31.path = "map_icons/31.sprite"
+0_18.path = "map_icons/18.spr"
+0_19.path = "map_icons/19.spr"
+0_31.path = "map_icons/31.spr"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -42,8 +42,8 @@ path = "brigantys_castle"
 [850.401]
 path = "phidoch_castle"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -51,8 +51,8 @@ path = "phidoch_castle"
 [850.501]
 path = "barnicia_castle"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -60,8 +60,8 @@ path = "barnicia_castle"
 [850.601]
 path = "royal_city_of_heim"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -69,8 +69,8 @@ path = "royal_city_of_heim"
 [850.701]
 path = "hanging_gardens"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -78,8 +78,8 @@ path = "hanging_gardens"
 [850.801]
 path = "heart_of_the_gardens"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -87,8 +87,8 @@ path = "heart_of_the_gardens"
 [850.901]
 path = "ndamsa_fortress"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -96,8 +96,8 @@ path = "ndamsa_fortress"
 [850.1001]
 path = "gecho_fortress"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -105,8 +105,8 @@ path = "gecho_fortress"
 [850.1101]
 path = "qadriga_fortress"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -114,8 +114,8 @@ path = "qadriga_fortress"
 [850.1201]
 path = "geyld_fortress"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -123,8 +123,8 @@ path = "geyld_fortress"
 [850.1301]
 path = "boed_fortress"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -132,8 +132,8 @@ path = "boed_fortress"
 [850.1401]
 path = "lhazan_fortress"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -141,8 +141,8 @@ path = "lhazan_fortress"
 [850.1501]
 path = "phorampa_wildwood/1"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -150,8 +150,8 @@ path = "phorampa_wildwood/1"
 [850.1502]
 path = "phorampa_wildwood/2"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -159,8 +159,8 @@ path = "phorampa_wildwood/2"
 [850.1503]
 path = "phorampa_wildwood/3"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -168,8 +168,8 @@ path = "phorampa_wildwood/3"
 [850.1801]
 path = "mount_weobry"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -177,8 +177,8 @@ path = "mount_weobry"
 [850.2201]
 path = "pirates_graveyard/1"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -186,8 +186,8 @@ path = "pirates_graveyard/1"
 [850.2202]
 path = "pirates_graveyard/2"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -195,8 +195,8 @@ path = "pirates_graveyard/2"
 [850.2401]
 path = "golyat"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -204,8 +204,8 @@ path = "golyat"
 [850.2501]
 path = "arkhaiopolis_of_rime"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -213,8 +213,8 @@ path = "arkhaiopolis_of_rime"
 [850.2601]
 path = "palace_of_the_dead/2601"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -222,8 +222,8 @@ path = "palace_of_the_dead/2601"
 [850.2602]
 path = "palace_of_the_dead/2602"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -231,8 +231,8 @@ path = "palace_of_the_dead/2602"
 [850.2603]
 path = "palace_of_the_dead/2603"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -240,8 +240,8 @@ path = "palace_of_the_dead/2603"
 [850.2604]
 path = "palace_of_the_dead/2604"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -249,8 +249,8 @@ path = "palace_of_the_dead/2604"
 [850.2701]
 path = "palace_of_the_dead/2701"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -258,8 +258,8 @@ path = "palace_of_the_dead/2701"
 [850.2702]
 path = "palace_of_the_dead/2702"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -267,8 +267,8 @@ path = "palace_of_the_dead/2702"
 [850.2703]
 path = "palace_of_the_dead/2703"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -276,8 +276,8 @@ path = "palace_of_the_dead/2703"
 [850.2801]
 path = "palace_of_the_dead/2801"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -285,8 +285,8 @@ path = "palace_of_the_dead/2801"
 [850.2802]
 path = "palace_of_the_dead/2802"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -294,8 +294,8 @@ path = "palace_of_the_dead/2802"
 [850.2803]
 path = "palace_of_the_dead/2803"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -303,8 +303,8 @@ path = "palace_of_the_dead/2803"
 [850.2901]
 path = "palace_of_the_dead/2901"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -312,8 +312,8 @@ path = "palace_of_the_dead/2901"
 [850.2902]
 path = "palace_of_the_dead/2902"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -321,8 +321,8 @@ path = "palace_of_the_dead/2902"
 [850.2903]
 path = "palace_of_the_dead/2903"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -330,8 +330,8 @@ path = "palace_of_the_dead/2903"
 [850.2904]
 path = "palace_of_the_dead/2904"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -339,8 +339,8 @@ path = "palace_of_the_dead/2904"
 [850.3001]
 path = "palace_of_the_dead/3001"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -348,8 +348,8 @@ path = "palace_of_the_dead/3001"
 [850.3002]
 path = "palace_of_the_dead/3002"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -357,8 +357,8 @@ path = "palace_of_the_dead/3002"
 [850.3003]
 path = "palace_of_the_dead/3003"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -366,8 +366,8 @@ path = "palace_of_the_dead/3003"
 [850.3004]
 path = "palace_of_the_dead/3004"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -375,8 +375,8 @@ path = "palace_of_the_dead/3004"
 [850.3101]
 path = "san_bronsa_ruins/1"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -384,8 +384,8 @@ path = "san_bronsa_ruins/1"
 [850.3102]
 path = "san_bronsa_ruins/2"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -393,8 +393,8 @@ path = "san_bronsa_ruins/2"
 [850.3103]
 path = "san_bronsa_ruins/3"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -402,8 +402,8 @@ path = "san_bronsa_ruins/3"
 [850.3104]
 path = "san_bronsa_ruins/4"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -411,8 +411,8 @@ path = "san_bronsa_ruins/4"
 [850.3105]
 path = "san_bronsa_ruins/5"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"
 
@@ -420,7 +420,7 @@ path = "san_bronsa_ruins/5"
 [850.3106]
 path = "san_bronsa_ruins/6"
 
-0_24576.path = "title.sprite"
-0_24577.path = "background.sprite"
+0_24576.path = "title.spr"
+0_24577.path = "background.spr"
 
 0_32767.path = "stronghold.xlc"

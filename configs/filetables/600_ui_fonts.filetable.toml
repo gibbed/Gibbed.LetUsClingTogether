@@ -1,7 +1,7 @@
 [600]
 path = "ui/fonts"
 
-5.path = "main.font_family"
+5.path = "main.fontfam"
 8.path = "normal.font"
 9.path = "dialogue.font"
 10.path = "credits_header.font"
