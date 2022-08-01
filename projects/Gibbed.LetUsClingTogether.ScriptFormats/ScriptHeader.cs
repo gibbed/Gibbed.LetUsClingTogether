@@ -35,8 +35,8 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
         public int CodeCount;
         public uint FunctionTableOffset;
         public uint JumpTableOffset;
-        public uint Unknown18Offset;
-        public uint Unknown1COffset;
+        public uint EventTableOffset;
+        public uint FrameOffset;
         public ushort Unknown20;
         public ushort Index;
         public uint Unknown24;
@@ -53,8 +53,8 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
             instance.CodeCount = input.ReadValueS32(endian);
             instance.FunctionTableOffset = input.ReadValueU32(endian);
             instance.JumpTableOffset = input.ReadValueU32(endian);
-            instance.Unknown18Offset = input.ReadValueU32(endian);
-            instance.Unknown1COffset = input.ReadValueU32(endian);
+            instance.EventTableOffset = input.ReadValueU32(endian);
+            instance.FrameOffset = input.ReadValueU32(endian);
             instance.Unknown20 = input.ReadValueU16(endian);
             instance.Index = input.ReadValueU16(endian);
             instance.Unknown24 = input.ReadValueU32(endian);
@@ -69,12 +69,13 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
             {
                 throw new NotSupportedException();
             }
+
             return instance;
         }
 
         public override string ToString()
         {
-            return $"{this.Unknown1COffset}";
+            return $"{this.EventTableOffset}";
         }
     }
 }

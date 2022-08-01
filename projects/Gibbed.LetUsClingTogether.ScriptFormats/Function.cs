@@ -25,6 +25,7 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
     public class Function
     {
         public string Name { get; set; }
+        public int? Event { get; set; }
         public int BodyStart { get; set; }
         public int BodyEnd { get; set; }
     }

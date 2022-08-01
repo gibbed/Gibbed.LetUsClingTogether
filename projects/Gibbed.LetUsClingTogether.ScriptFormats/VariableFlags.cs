@@ -30,7 +30,7 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
     {
         public int Id;
         public VariableType Type;
-        public bool Unknown;
+        public StackType StackType;
         public VariableScope Scope;
 
         public int Offset => this.Id;
@@ -41,11 +41,15 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
 
             var id = (int)(flags & 0xFFFFFF);
             var type = (VariableType)((flags >> 28) & 0xF);
-            var unknown = ((flags >> 27) & 0x1) != 0;
+            var stackType = ((flags >> 27) & 0x1) == 0
+                ? StackType.Int
+                : StackType.Float;
             var scope = (VariableScope)((flags >> 24) & 0x7);
 
-            if (unknown == true)
+            if ((type != VariableType.Float && stackType != StackType.Int) ||
+                (type == VariableType.Float && stackType != StackType.Float))
             {
+                throw new FormatException();
             }
 
             if (IsKnown(type) == false || IsKnown(scope) == false)
@@ -56,7 +60,7 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
             VariableFlags instance;
             instance.Id = id;
             instance.Type = type;
-            instance.Unknown = unknown;
+            instance.StackType = stackType;
             instance.Scope = scope;
             return instance;
         }
@@ -80,7 +84,7 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
 
         public override string ToString()
         {
-            return $"{this.Id:X6} {this.Type} {this.Unknown} {this.Scope}";
+            return $"{this.Id:X6}, type={this.Type}, stack type={this.StackType}, scope={this.Scope}";
         }
     }
 }

@@ -20,34 +20,22 @@
  *    distribution.
  */
 
-using System.Collections.Generic;
+using System.IO;
+using Gibbed.IO;
 
 namespace Gibbed.LetUsClingTogether.ScriptFormats
 {
-    public class Script
+    public struct RequestHeader
     {
-        private readonly List<Instruction> _Code;
-        private readonly List<int> _Jumps;
-        private readonly List<Function> _Functions;
+        public short ScriptIndex;
+        public short FunctionIndex;
 
-        public Script()
+        public static RequestHeader Read(Stream input, Endian endian)
         {
-            this._Code = new List<Instruction>();
-            this._Jumps = new List<int>();
-            this._Functions = new List<Function>();
+            RequestHeader instance;
+            instance.ScriptIndex = input.ReadValueS16(endian);
+            instance.FunctionIndex = input.ReadValueS16(endian);
+            return instance;
         }
-
-        public string Name { get; set; }
-        public ushort TableIndex { get; set; }
-        public ushort Unknown06 { get; set; }
-        public List<Instruction> Code {  get { return this._Code; } }
-        public uint Unknown1C { get; set; }
-        public ushort Unknown20 { get; set; }
-        public ushort Index { get; set; }
-        public uint Unknown24 { get; set; }
-        public uint Unknown28 { get; set; }
-        public uint Unknown2C { get; set; }
-        public List<int> Jumps { get { return this._Jumps; } }
-        public List<Function> Functions { get { return this._Functions; } }
     }
 }

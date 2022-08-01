@@ -34,6 +34,7 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
 
         public const uint ExpectedVersion = 0x000C;
 
+        public ushort Version;
         public Endian Endian;
         public uint TotalSize;
         public uint AuthorNameOffset;
@@ -46,9 +47,9 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
         public uint FloatTableOffset;
         public uint VariableTableOffset;
         public uint Unknown2COffset;
-        public uint Unknown30Offset;
-        public uint Unknown34;
-        public uint Unknown38Offset;
+        public uint RequestTablesOffset;
+        public uint FrameDataSize;
+        public uint FrameDataOffset;
         public uint Unknown3C;
         public uint Unknown40Offset;
         public uint Unknown44Offset;
@@ -64,8 +65,20 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
         public static ScriptFileHeader Read(Stream input)
         {
             var magicAndVersion = input.ReadValueU32(Endian.Little);
-            if ((magicAndVersion & SignatureMask) != SignatureValue &&
-                (magicAndVersion.Swap() & SignatureMask) != SignatureValue)
+            ushort version;
+            if ((magicAndVersion & SignatureMask) == SignatureValue)
+            {
+                version = (ushort)(magicAndVersion & VersionMask);
+            }
+            else if ((magicAndVersion.Swap() & SignatureMask) == SignatureValue)
+            {
+                version = (ushort)(magicAndVersion.Swap() & VersionMask);
+            }
+            else
+            {
+                throw new FormatException();
+            }
+            if (version != ExpectedVersion)
             {
                 throw new FormatException();
             }
@@ -74,6 +87,7 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
                 : Endian.Big;
 
             ScriptFileHeader instance;
+            instance.Version = version;
             instance.Endian = endian;
             instance.TotalSize = input.ReadValueU32(endian);
             instance.AuthorNameOffset = input.ReadValueU32(endian);
@@ -86,9 +100,9 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
             instance.FloatTableOffset = input.ReadValueU32(endian);
             instance.VariableTableOffset = input.ReadValueU32(endian);
             instance.Unknown2COffset = input.ReadValueU32(endian);
-            instance.Unknown30Offset = input.ReadValueU32(endian);
-            instance.Unknown34 = input.ReadValueU32(endian);
-            instance.Unknown38Offset = input.ReadValueU32(endian);
+            instance.RequestTablesOffset = input.ReadValueU32(endian);
+            instance.FrameDataSize = input.ReadValueU32(endian);
+            instance.FrameDataOffset = input.ReadValueU32(endian);
             instance.Unknown3C = input.ReadValueU32(endian);
             instance.Unknown40Offset = input.ReadValueU32(endian);
             instance.Unknown44Offset = input.ReadValueU32(endian);
@@ -109,68 +123,24 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
             {
                 throw new FormatException();
             }
-            if (instance.Unknown34 != 0 &&
-                instance.Unknown34 != 4 &&
-                instance.Unknown34 != 8 &&
-                instance.Unknown34 != 12 &&
-                instance.Unknown34 != 20 &&
-                instance.Unknown34 != 108 &&
-                instance.Unknown34 != 124)
+
+            long expectedUnknown40Offset = instance.FrameDataOffset + instance.FrameDataSize switch
+            {
+                0 => 0x00,
+                4 => 0x40,
+                8 => 0x40,
+                12 => 0x40,
+                20 => 0x40,
+                108 => 0x80,
+                124 => 0x80,
+                _ => throw new NotSupportedException(),
+            };
+
+            if (instance.Unknown40Offset != expectedUnknown40Offset)
             {
                 throw new FormatException();
             }
-            if (instance.Unknown38Offset == 0x80)
-            {
-                if (instance.Unknown34 == 0)
-                {
-                    if (instance.Unknown40Offset != 0x80)
-                    {
-                        throw new FormatException();
-                    }
-                }
-                else if (instance.Unknown34 < 108)
-                {
-                    if (instance.Unknown40Offset != 0xC0)
-                    {
-                        throw new FormatException();
-                    }
-                }
-                else
-                {
-                    if (instance.Unknown40Offset != 0x100)
-                    {
-                        throw new FormatException();
-                    }
-                }
-            }
-            else if (instance.Unknown38Offset == 0xC0)
-            {
-                if (instance.Unknown34 == 0)
-                {
-                    if (instance.Unknown40Offset != 0xC0)
-                    {
-                        throw new FormatException();
-                    }
-                }
-                else if (instance.Unknown34 < 108)
-                {
-                    if (instance.Unknown40Offset != 0x100)
-                    {
-                        throw new FormatException();
-                    }
-                }
-                else
-                {
-                    if (instance.Unknown40Offset != 0x140)
-                    {
-                        throw new FormatException();
-                    }
-                }
-            }
-            else
-            {
-                throw new FormatException();
-            }
+
             return instance;
         }
     }

@@ -43,6 +43,7 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
         private readonly List<int> _IntTable;
         private readonly List<float> _FloatTable;
         private readonly List<Variable> _Variables;
+        private readonly List<RequestHeader[]> _RequestTables;
 
         public ScriptFile()
         {
@@ -51,6 +52,7 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
             this._IntTable = new();
             this._FloatTable = new();
             this._Variables = new();
+            this._RequestTables = new();
         }
 
         public Endian Endian { get; set; }
@@ -62,6 +64,7 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
         public List<int> IntTable {  get { return this._IntTable; } }
         public List<float> FloatTable { get { return this._FloatTable; } }
         public List<Variable> Variables { get { return this._Variables; } }
+        public List<RequestHeader[]> RequestTables { get { return this._RequestTables; } }
 
         public void Serialize(Stream output)
         {
@@ -72,6 +75,22 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
         {
             var header = ScriptFileHeader.Read(input);
             var endian = header.Endian;
+
+            if (header.Unknown5COffset == 0)
+            {
+                throw new FormatException();
+            }
+            input.Position = header.Unknown5COffset;
+            var test = input.ReadValueU32(endian);
+            if (test != 1)
+            {
+                throw new FormatException();
+            }
+            var test2 = input.ReadValueU32(endian);
+            if (test2 != 0)
+            {
+                throw new FormatException();
+            }
 
             input.Position = header.AuthorNameOffset;
             var authorName = input.ReadStringZ(SJIS);
@@ -130,7 +149,7 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
                 if (variableHeader.Flags.Scope != VariableScope.Array)
                 {
                     variable.Flags = variableHeader.Flags;
-                    variable.Unknown = variableHeader.Unknown;
+                    variable.ScopeIndex = variableHeader.Unknown;
                     variable.ArrayRank = 0;
                     variable.ArrayLengths = null;
                     variables[i] = variable;
@@ -144,7 +163,7 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
                     input.Position = variableHeader.Flags.Offset;
                     var variableArrayHeader = VariableArrayHeader.Read(input, endian);
                     variable.Flags = variableArrayHeader.Flags;
-                    variable.Unknown = variableHeader.Unknown;
+                    variable.ScopeIndex = variableHeader.Unknown;
                     variable.ArrayRank = variableArrayHeader.Rank;
                     variable.ArrayLengths = new int[2];
                     variable.ArrayLengths[0] = variableArrayHeader.Lengths[0];
@@ -160,12 +179,25 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
                 throw new NotImplementedException();
             }
 
-            input.Position = header.Unknown30Offset;
-            var unknown30Count = input.ReadValueS32(endian);
-            var unknown30Offsets = new uint[unknown30Count];
-            for (int i = 0; i < unknown30Count; i++)
+            input.Position = header.RequestTablesOffset;
+            var requestTablesCount = input.ReadValueS32(endian);
+            var requestTableOffsets = new uint[requestTablesCount];
+            for (int i = 0; i < requestTablesCount; i++)
             {
-                unknown30Offsets[i] = input.ReadValueU32(endian);
+                requestTableOffsets[i] = input.ReadValueU32(endian);
+            }
+
+            var requestTables = new RequestHeader[requestTablesCount][];
+            for (int i = 0; i < requestTablesCount; i++)
+            {
+                input.Position = requestTableOffsets[i];
+                var requestCount = input.ReadValueU32(endian);
+                var requestHeaders = new RequestHeader[requestCount];
+                for (int j = 0; j < requestCount; j++)
+                {
+                    requestHeaders[j] = RequestHeader.Read(input, endian);
+                }
+                requestTables[i] = requestHeaders;
             }
 
             var scripts = new Script[scriptCount];
@@ -192,12 +224,12 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
                     functionHeaders[i] = FunctionHeader.Read(input, endian);
                 }
 
-                input.Position = scriptHeader.Unknown18Offset;
-                var unknown18Count = input.ReadValueU16(endian);
-                var unknown18s = new short[unknown18Count];
-                for (int i = 0; i < unknown18Count; i++)
+                input.Position = scriptHeader.EventTableOffset;
+                var eventFunctionIndexCount = input.ReadValueU16(endian);
+                var eventFunctionIndices = new short[eventFunctionIndexCount];
+                for (int i = 0; i < eventFunctionIndexCount; i++)
                 {
-                    unknown18s[i] = input.ReadValueS16(endian);
+                    eventFunctionIndices[i] = input.ReadValueS16(endian);
                 }
 
                 var codeOffsetsUnique = jumpOffsets
@@ -271,12 +303,23 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
                     };
                 }
 
+                for (int i = 0; i < eventFunctionIndexCount; i++)
+                {
+                    var functionIndex = eventFunctionIndices[i];
+                    if (functionIndex == -1)
+                    {
+                        continue;
+                    }
+
+                    functions[functionIndex].Event = i;
+                }
+
                 var script = new Script()
                 {
                     Name = scriptName,
                     TableIndex = scriptHeader.TableIndex,
                     Unknown06 = scriptHeader.Unknown06,
-                    Unknown1COffset = scriptHeader.Unknown1COffset,
+                    Unknown1C = scriptHeader.FrameOffset,
                     Unknown20 = scriptHeader.Unknown20,
                     Index = scriptHeader.Index,
                     Unknown24 = scriptHeader.Unknown24,
@@ -286,7 +329,6 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
                 script.Code.AddRange(code);
                 script.Jumps.AddRange(jumps);
                 script.Functions.AddRange(functions);
-                script.Unknown18s.AddRange(unknown18s);
                 scripts[scriptIndex] = script;
             }
 
@@ -305,6 +347,7 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
             this.IntTable.AddRange(intTable);
             this.FloatTable.AddRange(floatTable);
             this.Variables.AddRange(variables);
+            this.RequestTables.AddRange(requestTables);
         }
     }
 }

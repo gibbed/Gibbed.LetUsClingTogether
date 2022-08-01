@@ -26,6 +26,8 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
     {
         Byte = 0,
         SByte = 1,
+        Short = 2,
+        UShort = 3,
         Integer = 4,
         Float = 5,
     }

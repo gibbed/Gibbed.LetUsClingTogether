@@ -65,7 +65,7 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
 
         // ????
         // These interact with a large amount of data, possibly variables/data in the script file?
-        Unknown33 = 33, // REQ, can adjust code pointer
+        Request = 33, // REQ, can adjust code pointer
         Unknown34 = 34, // FREQ, can adjust code pointer
         Unknown35 = 35, // TREQ, can adjust code pointer
         Unknown36 = 36, // REQSW, can adjust code pointer
@@ -82,17 +82,17 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
 
         Return = 45, // can adjust code pointer
         ReturnN = 46, // RETN, can adjust code pointer
-        ReturnT = 47, // RETT, can adjust code pointer
+        ReturnTo = 47, // RETT, can adjust code pointer
         ReturnTN = 48, // RETTN
 
         Undefined49 = 49, // DRET, no handler
 
         // ????
         // These interact with a large amount of data, possibly variables/data in the script file?
-        Unknown50 = 50, // REQWAIT
+        RequestWait = 50, // REQWAIT
         NoOperation51 = 51, // PREQWAIT
-        Unknown52 = 52, // REQCHG
-        Unknown53 = 53, // REQCANCEL
+        RequestChange = 52, // REQCHG
+        RequestCancel = 53, // REQCANCEL
         // ????
 
         // General registers
@@ -144,11 +144,11 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
         CallAndPopA = 93, // can adjust code pointer
         CallActAndPopA = 94, // can adjust code pointer
 
-        Unknown95 = 95, // REQALL, can adjust code pointer
+        RequestAll = 95, // REQALL, can adjust code pointer
 
         JumpInternal = 96, // same handler as Jump
 
-        Unknown97 = 97, // REQWAITALL
+        RequestWaitAll = 97, // REQWAITALL
 
         Unknown98 = 98, // INCINITTAG
         Unknown99 = 99, // REQIALL, can adjust code pointer

@@ -118,84 +118,69 @@ namespace Gibbed.LetUsClingTogether.DisassembleScript
                 Console.WriteLine($"script {script.Name}");
 
                 Console.WriteLine($"  table index = {script.TableIndex}");
-                Console.WriteLine($"  unknown06 = {script.Unknown06}");
-                Console.WriteLine($"  unknown1COffset = {script.Unknown1COffset}");
-                Console.WriteLine($"  unknown20 = {script.Unknown20}");
                 Console.WriteLine($"  index = {script.Index}");
-                Console.WriteLine($"  unknown24 = {script.Unknown24}");
-                Console.WriteLine($"  unknown28 = {script.Unknown28}");
-                Console.WriteLine($"  unknown2C = {script.Unknown2C}");
-
-                if (script.Unknown18s.Count > 0)
-                {
-                    Console.Write("  unknown18s =");
-                    foreach (var value in script.Unknown18s)
-                    {
-                        Console.Write($" {value}");
-                    }
-                    Console.WriteLine();
-                }
-
-                if (script.Jumps.Count > 0)
-                {
-                    Console.Write("  jump table:");
-                    foreach (var jump in script.Jumps)
-                    {
-                        Console.Write($" {jump}");
-                    }
-                    Console.WriteLine();
-                }
 
                 foreach (var function in script.Functions)
                 {
-                    Console.WriteLine($"  function {function.Name} ({function.BodyStart})");
-
-                    for (int bodyIndex = function.BodyStart; bodyIndex < function.BodyEnd; bodyIndex++)
+                    Console.Write($"  function {function.Name}");
+                    if (function.Event.HasValue == true)
                     {
-                        var instruction = script.Code[bodyIndex];
-                        var opcode = instruction.Opcode;
+                        Console.Write($"({function.Event.Value})");
+                    }
+                    Console.WriteLine();
 
-                        Console.Write("    ");
-                        Console.Write($"@{bodyIndex:D4} ");
-                        Console.Write(opcode.ToString().PadRight(opcodePadding));
+                    //Console.WriteLine("    ...");
+                    DumpBody(opcodePadding, targetNames, scriptFile, script, function);
+                }
+            }
+        }
 
-                        if (opcode == Opcode.Call ||
-                            opcode == Opcode.CallAct ||
-                            opcode == Opcode.CallAndPopA ||
-                            opcode == Opcode.CallActAndPopA)
-                        {
-                            var immediate = instruction.Immediate;
-                            Console.Write($" {immediate}");
-                            if (targetNames.TryGetValue(immediate, out var targetName) == true)
-                            {
-                                Console.Write($" ({targetName})");
-                            }
-                        }
-                        else if (opcode == Opcode.PushIntFromTable)
-                        {
-                            var immediate = instruction.Immediate;
-                            var value = scriptFile.IntTable[immediate];
-                            Console.Write($" {value} (#{immediate})");
-                        }
-                        else if (opcode == Opcode.PushFloatFromTable)
-                        {
-                            var immediate = instruction.Immediate;
-                            var value = scriptFile.FloatTable[immediate];
-                            Console.Write($" {value} (#{immediate})");
-                        }
-                        else if (opcode.IsJump() == true)
-                        {
-                            var immediate = instruction.Immediate;
-                            var index = script.Jumps[immediate];
-                            Console.Write($" {immediate} => @{index:D4}");
-                        }
-                        else if (opcode.HasImmediate() == true)
-                        {
-                            Console.Write($" {instruction.Immediate}");
-                        }
-                        Console.WriteLine();
+        private static void DumpBody(int opcodePadding, Dictionary<int, string> targetNames, ScriptFile scriptFile, Script script, Function function)
+        {
+            for (int bodyIndex = function.BodyStart; bodyIndex < function.BodyEnd; bodyIndex++)
+            {
+                var instruction = script.Code[bodyIndex];
+                var opcode = instruction.Opcode;
+
+                Console.Write("    ");
+                Console.Write($"@{bodyIndex:D4} ");
+                Console.Write(opcode.ToString().PadRight(opcodePadding));
+
+                if (opcode == Opcode.Call ||
+                    opcode == Opcode.CallAct ||
+                    opcode == Opcode.CallAndPopA ||
+                    opcode == Opcode.CallActAndPopA)
+                {
+                    var immediate = instruction.Immediate;
+                    Console.Write($" {immediate}");
+                    if (targetNames.TryGetValue(immediate, out var targetName) == true)
+                    {
+                        Console.Write($" ({targetName})");
                     }
                 }
+                else if (opcode == Opcode.PushIntFromTable)
+                {
+                    var immediate = instruction.Immediate;
+                    var value = scriptFile.IntTable[immediate];
+                    Console.Write($" {value} (#{immediate})");
+                }
+                else if (opcode == Opcode.PushFloatFromTable)
+                {
+                    var immediate = instruction.Immediate;
+                    var value = scriptFile.FloatTable[immediate];
+                    Console.Write($" {value} (#{immediate})");
+                }
+                else if (opcode.IsJump() == true)
+                {
+                    var immediate = instruction.Immediate;
+                    var index = script.Jumps[immediate];
+                    Console.Write($" {immediate} => @{index:D4}");
+                }
+                else if (opcode.HasImmediate() == true)
+                {
+                    Console.Write($" {instruction.Immediate}");
+                }
+                Console.WriteLine();
             }
         }
     }

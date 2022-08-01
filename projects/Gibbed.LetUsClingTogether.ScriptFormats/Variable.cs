@@ -25,7 +25,7 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
     public struct Variable
     {
         public VariableFlags Flags;
-        public uint Unknown;
+        public uint ScopeIndex;
         public int ArrayRank;
         public int[] ArrayLengths;
 
@@ -33,10 +33,10 @@ namespace Gibbed.LetUsClingTogether.ScriptFormats
         {
             return this.ArrayRank switch
             {
-                0 => $"{this.Flags} {this.Unknown}",
-                1 => $"{this.Flags} {this.Unknown} [{this.ArrayLengths[0]}]",
-                2 => $"{this.Flags} {this.Unknown} [{this.ArrayLengths[0]}, {this.ArrayLengths[1]}]",
-                _ => $"{this.Flags} {this.Unknown} [{this.ArrayRank} ???]",
+                0 => $"{this.Flags} {this.ScopeIndex}",
+                1 => $"{this.Flags} {this.ScopeIndex} [{this.ArrayLengths[0]}]",
+                2 => $"{this.Flags} {this.ScopeIndex} [{this.ArrayLengths[0]}, {this.ArrayLengths[1]}]",
+                _ => $"{this.Flags} {this.ScopeIndex} [{this.ArrayRank} ???]",
             };
         }
     }
