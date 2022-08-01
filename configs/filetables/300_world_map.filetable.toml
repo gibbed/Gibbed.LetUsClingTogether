@@ -1,0 +1,12 @@
+
+[300]
+path = "world_map"
+
+[300.0]
+path = "tables"
+
+0.path = "debug_maps.xlc"
+1.path = "maps.xlc"
+2.path = "strongpoints.xlc"
+3.path = "routes.xlc"
+#4.path = "???"

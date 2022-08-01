@@ -1,11 +1,18 @@
 [1000.1]
 
+2.8.path = "unit_palettes.sprite"
+
 3.path = "equipment.xlc"
 
+5.path = "sundries.xlc"
 6.path = "classes.xlc"
 7.path = "class_text.xlc"
-8.path = "consumables.xlc"
+8.path = "abilities.xlc"
 9.path = "map_parties.xlc" # not sure if completely accurate
+
+15.path = "racial_templates.xlc"
+
+17.path = "skills.xlc"
 
 20.path = "random_character_names.xlc"
 
@@ -16,3 +23,5 @@
 38.path = "battle_death_messages.xlc"
 39.path = "battle_skill_messages.xlc"
 40.path = "battle_notification_messages.xlc"
+
+42.path = "spell_sets.xlc"

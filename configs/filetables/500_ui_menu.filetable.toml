@@ -1,5 +1,5 @@
 ﻿[500]
-path = "menu"
+path = "ui/menu"
 
 1024.path = "MN_AT_ORGANIZE.tc01"
 1025.path = "MN_BIRTHDAY.tc01"
@@ -1028,10 +1028,18 @@ path = "menu"
 path = "common_pack" # MENU_COMMON_PACK
 
 [500.10241]
-9.path = "unit_condition_help_text.xlc"
+0.path  = "strongpoint_text.xlc"
+
+9.path  = "unit_condition_help_text.xlc"
 
 11.path = "unit_loyalty_text.xlc"
 12.path = "title_text.xlc"
+
+26.path = "shop_items.xlc"
+27.path = "shop_monster_auction.xlc"
+28.path = "shop_hireling_clans.xlc"
+
+31.path = "shop_deneb_calendar_rotation.xlc"
 
 [500.10252]
 path = "texture_misc_pack" # MENU_TEXTURE_MISC_PACK

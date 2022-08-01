@@ -1,0 +1,26 @@
+[700]
+path = "ui/warren_report"
+
+[700.0]
+
+0.path = "menu_text.xlc"
+
+2.path = "tidings_text.xlc"
+
+3.path = "people.xlc"
+
+4.path = "music_text.xlc"
+5.path = "play_guide_basics_text.xlc"
+6.path = "play_guide_tactics_text.xlc"
+
+7.path = "music.xlc"
+8.path = "play_guide_basics.xlc"
+9.path = "play_guide_tactics.xlc"
+
+11.path = "people.invocation"
+
+17.path = "music.invocation"
+18.path = "play_guide_tactics.invocation"
+19.path = "play_guide_basics.invocation"
+
+#20.path = "menu.task"
