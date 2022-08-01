@@ -47,7 +47,7 @@ namespace Gibbed.LetUsClingTogether.ExportSprite
             Default = EN,
         }
 
-        private static LanguageOption ParseEncodingOption(string v)
+        private static LanguageOption ParseLanguageOption(string v)
         {
             if (Enum.TryParse<LanguageOption>(v, out var result) == false)
             {
@@ -58,12 +58,12 @@ namespace Gibbed.LetUsClingTogether.ExportSprite
 
         public static void Main(string[] args)
         {
-            var encoding = LanguageOption.Invalid;
+            var language = LanguageOption.Invalid;
             bool showHelp = false;
 
             var options = new OptionSet()
             {
-                { "e|encoding=", "set character encoding", v => ParseEncodingOption(v) },
+                { "e|language=", "set language", v => ParseLanguageOption(v) },
                 { "h|help", "show this message and exit", v => showHelp = v != null },
             };
 
@@ -104,12 +104,26 @@ namespace Gibbed.LetUsClingTogether.ExportSprite
 
             FileFormats.Text.Formatter englishFormatter = null;
             FileFormats.Text.Formatter japaneseFormatter = null;
+
+            string lastManifestPath = null;
+            LanguageOption inputLanguage = LanguageOption.Invalid;
             foreach (var inputPath in inputPaths.OrderBy(v => v))
             {
-                var inputEncoding = encoding != LanguageOption.Invalid
-                    ? encoding
-                    : GetLanguageFromManifest(inputPath);
-                var formatter = encoding switch
+                if (language != LanguageOption.Invalid)
+                {
+                    inputLanguage = language;
+                }
+                else
+                {
+                    var manifestPath = GetManifestPath(inputPath);
+                    if (string.IsNullOrEmpty(manifestPath) == false &&
+                        lastManifestPath != manifestPath)
+                    {
+                        lastManifestPath = manifestPath;
+                        inputLanguage = GetLanguageFromManifest(manifestPath);
+                    }
+                }
+                var formatter = inputLanguage switch
                 {
                     LanguageOption.EN => englishFormatter ??= FileFormats.Text.Formatter.ForEN(),
                     LanguageOption.JP => japaneseFormatter ??= FileFormats.Text.Formatter.ForJP(),
@@ -123,25 +137,21 @@ namespace Gibbed.LetUsClingTogether.ExportSprite
                 }
 
                 string outputPath = Path.ChangeExtension(inputPath, null) + ".emsg.toml";
-                Export(messages, encoding, outputPath);
+                Export(messages, inputLanguage, outputPath);
             }
+        }
+
+        private static string GetManifestPath(string path)
+        {
+            var parentPath = Path.GetDirectoryName(path);
+            return string.IsNullOrEmpty(parentPath) == false
+                ? Path.Combine(parentPath, "@manifest.toml")
+                : null;
         }
 
         private static LanguageOption GetLanguageFromManifest(string path)
         {
             const LanguageOption defaultValue = LanguageOption.Default;
-
-            var parentPath = Path.GetDirectoryName(path);
-            if (string.IsNullOrEmpty(parentPath) == false)
-            {
-                return defaultValue;
-            }
-
-            var manifestPath = Path.Combine(parentPath, "@manifest.toml");
-            if (File.Exists(manifestPath) == false)
-            {
-                return defaultValue;
-            }
 
             Tommy.TomlTable rootTable;
             var inputBytes = File.ReadAllBytes(path);
@@ -186,10 +196,6 @@ namespace Gibbed.LetUsClingTogether.ExportSprite
             if (language != LanguageOption.Default)
             {
                 rootTable["language"] = language.ToString().ToLowerInvariant();
-            }
-            else
-            {
-                throw new NotSupportedException();
             }
 
             rootTable["message"] = messagesArray;
