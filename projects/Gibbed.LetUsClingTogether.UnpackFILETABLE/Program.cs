@@ -142,6 +142,18 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                     isInstallDataCounts[1] > isInstallDataCounts[0],
             };
 
+            string language = table.TitleId1 switch
+            {
+                "ULJM05753" => "jp",
+                "ULUS10565" => "en",
+                "ULES10500" => "en",
+                _ => null,
+            };
+            if (string.IsNullOrEmpty(language) == true)
+            {
+                Console.WriteLine($"Warning: unknown language for {table.TitleId1}.");
+            }
+
             foreach (var directory in table.Directories)
             {
                 var directoryPath = _($"{directory.Id}");
@@ -266,7 +278,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
 
                 foreach (var fileContainer in fileContainers)
                 {
-                    WriteManifest(fileContainer.ManifestPath, fileContainer);
+                    WriteManifest(fileContainer.ManifestPath, fileContainer, language);
                 }
 
                 tableManifest.Directories.Add(new FileTableManifest.Directory()
@@ -562,7 +574,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             File.WriteAllText(path, sb.ToString(), Encoding.UTF8);
         }
 
-        private static void WriteManifest(string path, IFileContainer directory)
+        private static void WriteManifest(string path, IFileContainer directory, string language)
         {
             var fileArray = new Tommy.TomlArray()
             {
@@ -617,10 +629,14 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                 fileArray.Add(fileTable);
             }
 
-            var rootTable = new Tommy.TomlTable()
+            var rootTable = new Tommy.TomlTable();
+
+            if (string.IsNullOrEmpty(language) == false)
             {
-                ["files"] = fileArray,
-            };
+                rootTable["language"] = language;
+            }
+
+            rootTable["files"] = fileArray;
 
             var sb = new StringBuilder();
             using (var writer = new StringWriter(sb))
