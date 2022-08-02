@@ -33,7 +33,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
             {
                 if (array.Length > maximumCount)
                 {
-                    throw new InvalidOperationException("too many " + nameof(T) + " to write");
+                    throw new InvalidOperationException($"too many {nameof(T)} to write");
                 }
 
                 var count = Math.Min(array.Length, maximumCount);

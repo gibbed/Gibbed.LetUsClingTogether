@@ -52,8 +52,8 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Text
 
             var encoding = this._Encoding;
 
-            var output = new StringBuilder();
-            var pendingBytes = new List<byte>();
+            StringBuilder output = new();
+            List<byte> pendingBytes = new();
 
             for (; ;)
             {
@@ -366,12 +366,12 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Text
 
         public static Formatter ForEN()
         {
-            return new Formatter(new EnglishEncoding());
+            return new(new EnglishEncoding());
         }
 
         public static Formatter ForJP()
         {
-            return new Formatter(new JapaneseEncoding());
+            return new(new JapaneseEncoding());
         }
     }
 }

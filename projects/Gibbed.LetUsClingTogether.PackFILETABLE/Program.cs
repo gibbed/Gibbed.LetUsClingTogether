@@ -45,7 +45,7 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
             bool verbose = false;
             bool showHelp = false;
 
-            var options = new OptionSet()
+            OptionSet options = new()
             {
                 { "v|verbose", "be verbose", v => verbose = v != null },
                 { "h|help", "show this message and exit",  v => showHelp = v != null },
@@ -89,10 +89,9 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
 
             string outputBasePath = extras.Count > 1 ? extras[1] : baseManifestInputPath + "_packed";
 
-            FileTableManifest tableManifest;
-            ReadManifest(tableManifestPath, out tableManifest);
+            ReadManifest(tableManifestPath, out FileTableManifest tableManifest);
 
-            var table = new FileTableFile()
+            FileTableFile table = new()
             {
                 Endian = tableManifest.Endian,
                 TitleId1 = tableManifest.TitleId1,
@@ -120,7 +119,7 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
                     Directory.CreateDirectory(outputParentPath);
                 }
 
-                var directory = new FileTable.DirectoryEntry()
+                FileTable.DirectoryEntry directory = new()
                 {
                     Id = directoryManifest.Id,
                     DataBaseOffset = 0,
@@ -142,19 +141,17 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
                         output.Position = dataBlockOffset * dataBlockSize;
 
                         uint dataSize;
-                        using (var temp = new MemoryStream())
+                        using (MemoryStream temp = new())
                         {
                             if (fileManifest.IsPack == false)
                             {
-                                using (var input = File.OpenRead(inputPath))
+                                using var input = File.OpenRead(inputPath);
+                                if (input.Length > uint.MaxValue)
                                 {
-                                    if (input.Length > uint.MaxValue)
-                                    {
-                                        throw new InvalidOperationException("file too large");
-                                    }
-                                    dataSize = (uint)input.Length;
-                                    temp.WriteFromStream(input, dataSize);
+                                    throw new InvalidOperationException("file too large");
                                 }
+                                dataSize = (uint)input.Length;
+                                temp.WriteFromStream(input, dataSize);
                             }
                             else
                             {
@@ -172,7 +169,7 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
                             }
                         }
 
-                        var file = new FileTable.FileEntry()
+                        FileTable.FileEntry file = new()
                         {
                             Id = (ushort)fileManifest.Id,
                             NameHash = fileManifest.Name != null ? fileManifest.Name.HashFNV32() : fileManifest.NameHash,
@@ -202,7 +199,7 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
             }
 
             byte[] tableBytes;
-            using (var output = new MemoryStream())
+            using (MemoryStream output = new())
             {
                 table.Serialize(output);
                 output.Flush();
@@ -217,8 +214,8 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
             Stream output,
             Endian endian)
         {
-            var opStack = new Stack<PackOperation>();
-            opStack.Push(new PackOperation()
+            Stack<PackOperation> opStack = new();
+            opStack.Push(new()
             {
                 Type = PackOperationType.File,
                 Path = rootFileManifestPath,
@@ -243,7 +240,7 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
 
                     var nestedPack = op.Parent;
 
-                    var packFile = new PackFile()
+                    PackFile packFile = new()
                     {
                         Endian = endian,
                     };
@@ -256,7 +253,7 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
                     {
                         var entry = nestedPack.Entries[i];
                         var entryOffset = (uint)(entry.Position - nestedPack.HeaderPosition);
-                        packFile.Entries.Add(new PackFile.Entry(entry.RawId ?? 0, entryOffset));
+                        packFile.Entries.Add(new(entry.RawId ?? 0, entryOffset));
 
                         if (i + 1 < count)
                         {
@@ -292,7 +289,7 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
                     if (nestedPack.Parent != null)
                     {
                         var previousParentEntry = nestedPack.Parent.Entries[nestedPack.ParentIndex];
-                        nestedPack.Parent.Entries[nestedPack.ParentIndex] = new NestedPackEntry(
+                        nestedPack.Parent.Entries[nestedPack.ParentIndex] = new(
                             nestedPack.HeaderPosition,
                             packFile.TotalSize + 16 /* padding */,
                             previousParentEntry.RawId);
@@ -320,13 +317,12 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
                         dataSize = (uint)input.Length;
                         output.WriteFromStream(input, dataSize);
                     }
-                    op.Parent.Entries.Add(new NestedPackEntry(dataPosition, dataSize, op.PackId));
+                    op.Parent.Entries.Add(new(dataPosition, dataSize, op.PackId));
                 }
                 else
                 {
                     var basePath = Path.GetDirectoryName(op.Path);
-                    List<FileTableManifest.File> fileManifests;
-                    ReadManifest(op.Path, out fileManifests);
+                    ReadManifest(op.Path, out List<FileTableManifest.File> fileManifests);
 
                     var headerPosition = output.Position;
 
@@ -336,7 +332,7 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
 
                     var dataPosition = output.Position;
 
-                    var nestedPack = new NestedPack()
+                    NestedPack nestedPack = new()
                     {
                         HeaderPosition = headerPosition,
                         DataPosition = dataPosition,
@@ -346,10 +342,10 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
                     {
                         nestedPack.Parent = op.Parent;
                         nestedPack.ParentIndex = op.Parent.Entries.Count;
-                        op.Parent.Entries.Add(new NestedPackEntry(-1, 0, op.PackId));
+                        op.Parent.Entries.Add(new(-1, 0, op.PackId));
                     }
 
-                    opStack.Push(new PackOperation()
+                    opStack.Push(new()
                     {
                         Type = PackOperationType.Header,
                         Parent = nestedPack,
@@ -357,7 +353,7 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
 
                     if (op.Parent != null)
                     {
-                        opStack.Push(new PackOperation()
+                        opStack.Push(new()
                         {
                             Type = PackOperationType.Pad,
                             Parent = nestedPack,
@@ -366,7 +362,7 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
 
                     foreach (var fileManifest in fileManifests.AsEnumerable().Reverse())
                     {
-                        opStack.Push(new PackOperation()
+                        opStack.Push(new()
                         {
                             Type = PackOperationType.File,
                             Parent = nestedPack,
@@ -463,7 +459,7 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
             manifest.IsInInstallDataDefault = rootTable["is_in_install_data_default"]?.AsBoolean?.Value ?? throw new FormatException();
             foreach (Tommy.TomlTable directoryTable in rootTable["directories"])
             {
-                var directory = new FileTableManifest.Directory();
+                FileTableManifest.Directory directory = new();
                 directory.Id = (ushort)(directoryTable["id"]?.AsInteger?.Value ?? throw new FormatException());
                 directory.DataBlockSize = (byte)(directoryTable["data_block_size"]?.AsInteger?.Value ?? 4);
                 directory.IsInInstallData = directoryTable["is_in_install_data"]?.AsBoolean?.Value ?? manifest.IsInInstallDataDefault;
@@ -487,7 +483,7 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
             manifests = new List<FileTableManifest.File>();
             foreach (Tommy.TomlTable fileTable in rootTable["files"])
             {
-                var manifest = new FileTableManifest.File();
+                FileTableManifest.File manifest = new();
                 manifest.Id = (int?)(fileTable["id"]?.AsInteger?.Value ?? null);
                 manifest.NameHash = (uint?)(fileTable["name_hash"]?.AsInteger?.Value ?? null);
                 manifest.Name = fileTable["name"]?.AsString?.Value;

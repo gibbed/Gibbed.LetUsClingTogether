@@ -31,14 +31,16 @@ namespace Gibbed.LetUsClingTogether.FileFormats
     {
         public const uint Signature = 0x53454D45; // 'EMES'
 
-        public Endian Endian { get; set; }
-        public Dictionary<ushort, Entry> Entries { get; }
+        private readonly Dictionary<ushort, Entry> _Entries;
 
         public EventMessagesFile()
         {
             this.Endian = Endian.Little;
-            this.Entries = new Dictionary<ushort, Entry>();
+            this._Entries = new();
         }
+
+        public Endian Endian { get; set; }
+        public Dictionary<ushort, Entry> Entries => this._Entries;
 
         public void Serialize(Stream output, Text.Formatter formatter)
         {
@@ -57,7 +59,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
 
             var entryPositions = new long[count];
             byte[] data;
-            using (var temp = new MemoryStream())
+            using (MemoryStream temp = new())
             {
                 int i = 0;
                 foreach (var entry in this.Entries.Values)
@@ -133,13 +135,13 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                 offsets[i] = input.ReadValueU32(endian);
             }
 
-            var entries = new Dictionary<ushort, Entry>();
+            Dictionary<ushort, Entry> entries = new();
             for (int i = 0; i < count; i++)
             {
                 input.Position = offsets[i];
                 var nameId = input.ReadValueU16(endian);
                 var text = formatter.Decode(input, endian/*, includeTags*/);
-                entries.Add(ids[i], new Entry(nameId, text));
+                entries.Add(ids[i], new(nameId, text));
             }
 
             this.Endian = endian;
@@ -175,7 +177,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
 
             public static implicit operator Entry((ushort nameId, string text) value)
             {
-                return new Entry(value.nameId, value.text);
+                return new(value.nameId, value.text);
             }
             #endregion
             #region Equals, IEquatable & equality operators

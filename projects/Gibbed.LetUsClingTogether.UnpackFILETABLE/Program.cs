@@ -47,7 +47,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             bool verbose = false;
             bool showHelp = false;
 
-            var options = new OptionSet()
+            OptionSet options = new()
             {
                 { "np|dont-unpack-nested-packs", "don't unpack nested .pack files", v => unpackNestedPacks = v == null },
                 { "nz|dont-unpack-zips", "don't unpack nested .zip files", v => unpackNestedZIPs = v == null },
@@ -129,7 +129,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                 .ToArray();
 
             var tableManifestPath = Path.Combine(outputBasePath, "@manifest.toml");
-            var tableManifest = new FileTableManifest()
+            FileTableManifest tableManifest = new()
             {
                 Endian = table.Endian,
                 TitleId1 = table.TitleId1,
@@ -165,14 +165,14 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                     directoryPath = directoryLookupPath.Replace('/', Path.DirectorySeparatorChar);
                 }
 
-                var tableDirectory = new TableDirectory()
+                TableDirectory tableDirectory = new()
                 {
                     Id = directory.Id,
                     BasePath = Path.Combine(outputBasePath, directoryPath),
                     Lookup = directoryLookup,
                 };
 
-                var fileContainers = new List<IFileContainer>()
+                List<IFileContainer> fileContainers = new()
                 {
                     tableDirectory,
                 };
@@ -180,14 +180,14 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                 var binPath = Path.Combine(inputBasePath, _($"{directory.Id:X4}.BIN"));
                 using (var input = File.OpenRead(binPath))
                 {
-                    var fileQueue = new Queue<QueuedFile>();
+                    Queue<QueuedFile> fileQueue = new();
                     foreach (var file in directory.Files)
                     {
                         long dataOffset;
                         dataOffset = directory.DataBaseOffset;
                         dataOffset += (file.DataBlockOffset << directory.DataBlockSize) * FileTableFile.BaseDataBlockSize;
 
-                        fileQueue.Enqueue(new QueuedFile()
+                        fileQueue.Enqueue(new()
                         {
                             Id = file.Id,
                             Parent = tableDirectory,
@@ -208,7 +208,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
 
                         long id;
 
-                        var filePathBuilder = new StringBuilder();
+                        StringBuilder filePathBuilder = new();
 
                         if (file.PackRawId.HasValue == false)
                         {
@@ -357,7 +357,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                     WriteManifest(fileContainer.ManifestPath, fileContainer, language);
                 }
 
-                tableManifest.Directories.Add(new FileTableManifest.Directory()
+                tableManifest.Directories.Add(new()
                 {
                     Id = directory.Id,
                     DataBlockSize = directory.DataBlockSize,
@@ -479,7 +479,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                 if (fileMagic == 0x04034B50) // 'PK\x03\x04'
                 {
                     input.Position = dataOffset;
-                    using (var zip = new ICSharpCode.SharpZipLib.Zip.ZipInputStream(input))
+                    using (ICSharpCode.SharpZipLib.Zip.ZipInputStream zip = new(input))
                     {
                         zip.IsStreamOwner = false;
 
@@ -518,7 +518,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                     input.Position = dataOffset;
                     var nestedPack = HandleNestedPack(input, fileQueue, file.Id, filePath, fileLookup, parent);
                     fileContainers.Add(nestedPack);
-                    parent.FileManifests.Add(new FileTableManifest.File()
+                    parent.FileManifests.Add(new()
                     {
                         Id = file.Id,
                         NameHash = file.NameHash,
@@ -561,7 +561,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                 output.WriteFromStream(input, dataSize);
             }
 
-            parent.FileManifests.Add(new FileTableManifest.File()
+            parent.FileManifests.Add(new()
             {
                 Id = file.Id,
                 NameHash = file.NameHash,
@@ -586,10 +586,10 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
 
             path = Path.ChangeExtension(path, null);
 
-            var packFile = new PackFile();
+            PackFile packFile = new();
             packFile.Deserialize(input);
 
-            var container = new NestedPack()
+            NestedPack container = new()
             {
                 Id = id,
                 BasePath = Path.Combine(parent.BasePath, path),
@@ -607,7 +607,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                     ? packFile.Entries[i + 1].Offset
                     : packFile.TotalSize;
                 uint entrySize = nextEntryOffset - entry.Offset;
-                fileQueue.Enqueue(new QueuedFile()
+                fileQueue.Enqueue(new()
                 {
                     Id = i,
                     Parent = container,
@@ -688,14 +688,14 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
 
         private static void WriteManifest(string path, FileTableManifest manifest)
         {
-            var directoryArray = new Tommy.TomlArray()
+            Tommy.TomlArray directoryArray = new()
             {
                 IsMultiline = true,
             };
 
             foreach (var directory in manifest.Directories)
             {
-                var directoryTable = new Tommy.TomlTable()
+                Tommy.TomlTable directoryTable = new()
                 {
                     IsInline = true,
                     ["id"] = directory.Id,
@@ -712,7 +712,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                 directoryArray.Add(directoryTable);
             }
 
-            var rootTable = new Tommy.TomlTable()
+            Tommy.TomlTable rootTable = new()
             {
                 ["endian"] = _($"{manifest.Endian}"),
                 ["title_id_1"] = manifest.TitleId1,
@@ -724,8 +724,8 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                 ["directories"] = directoryArray,
             };
 
-            var sb = new StringBuilder();
-            using (var writer = new StringWriter(sb))
+            StringBuilder sb = new();
+            using (StringWriter writer = new(sb))
             {
                 rootTable.WriteTo(writer);
             }
@@ -741,14 +741,14 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
 
         private static void WriteManifest(string path, IFileContainer directory, string language)
         {
-            var fileArray = new Tommy.TomlArray()
+            Tommy.TomlArray fileArray = new()
             {
                 IsMultiline = true,
             };
 
             foreach (var fileManifest in directory.FileManifests)
             {
-                var fileTable = new Tommy.TomlTable()
+                Tommy.TomlTable fileTable = new()
                 {
                     IsInline = true,
                 };
@@ -799,7 +799,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                 fileArray.Add(fileTable);
             }
 
-            var rootTable = new Tommy.TomlTable();
+            Tommy.TomlTable rootTable = new();
 
             if (string.IsNullOrEmpty(language) == false)
             {
@@ -813,8 +813,8 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
 
             rootTable["files"] = fileArray;
 
-            var sb = new StringBuilder();
-            using (var writer = new StringWriter(sb))
+            StringBuilder sb = new();
+            using (StringWriter writer = new(sb))
             {
                 rootTable.WriteTo(writer);
             }

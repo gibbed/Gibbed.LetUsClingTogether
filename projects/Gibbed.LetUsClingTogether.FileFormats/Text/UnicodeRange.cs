@@ -76,7 +76,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Text
 
         public static implicit operator UnicodeRange((char start, char end) value)
         {
-            return new UnicodeRange(value.start, value.end);
+            return new(value.start, value.end);
         }
 
         public static implicit operator (char start, char end, bool fallback)(UnicodeRange value)
@@ -86,7 +86,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Text
 
         public static implicit operator UnicodeRange((char start, char end, bool fallback) value)
         {
-            return new UnicodeRange(value.start, value.end, value.fallback);
+            return new(value.start, value.end, value.fallback);
         }
         #endregion
         #region Equals, IEquatable & equality operators

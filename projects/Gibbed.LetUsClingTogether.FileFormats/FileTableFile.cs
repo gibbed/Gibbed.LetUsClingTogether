@@ -32,27 +32,6 @@ namespace Gibbed.LetUsClingTogether.FileFormats
 {
     public class FileTableFile
     {
-        public const ushort Signature = 0x1EF1;
-
-        public const int BaseDataBlockSize = 0x800;
-
-        public Endian Endian { get; set; }
-        public string TitleId1 { get; set; }
-        public string TitleId2 { get; set; }
-        public byte Unknown32 { get; set; }
-
-        // This value is used by the game when writing save data. PARENTAL_LEVEL in SFO.
-        public byte ParentalLevel { get; set; }
-
-        public byte[] InstallDataCryptoKey { get; set; }
-
-        public List<DirectoryEntry> Directories { get; }
-
-        public FileTableFile()
-        {
-            this.Directories = new List<DirectoryEntry>();
-        }
-
         private delegate FileHeader ReadFileHeader(Stream input, Endian endian);
         private delegate void WriteFileHeader(Stream input, FileHeader instance, Endian endian);
 
@@ -83,19 +62,39 @@ namespace Gibbed.LetUsClingTogether.FileFormats
             };
         }
 
+        public const ushort Signature = 0x1EF1;
+        public const int BaseDataBlockSize = 0x800;
+
+        private readonly List<DirectoryEntry> _Directories;
+
+        public FileTableFile()
+        {
+            this._Directories = new();
+        }
+
+        public Endian Endian { get; set; }
+        public string TitleId1 { get; set; }
+        public string TitleId2 { get; set; }
+        public byte Unknown32 { get; set; }
+
+        // This value is used by the game when writing save data. PARENTAL_LEVEL in SFO.
+        public byte ParentalLevel { get; set; }
+
+        public byte[] InstallDataCryptoKey { get; set; }
+
+        public List<DirectoryEntry> Directories => this._Directories;
+
         private static IEnumerable<int> ToBatchCounts<T>(IEnumerable<T> source, Func<T, int> predicate)
         {
-            using (var e = source.GetEnumerator())
+            using var e = source.GetEnumerator();
+            for (bool hasMore = e.MoveNext(); hasMore == true;)
             {
-                for (bool hasMore = e.MoveNext(); hasMore == true;)
+                int first = predicate(e.Current), last = first, next;
+                while ((hasMore = e.MoveNext()) && (next = predicate(e.Current)) > last && next - last == 1)
                 {
-                    int first = predicate(e.Current), last = first, next;
-                    while ((hasMore = e.MoveNext()) && (next = predicate(e.Current)) > last && next - last == 1)
-                    {
-                        last = next;
-                    }
-                    yield return last - first + 1;
+                    last = next;
                 }
+                yield return last - first + 1;
             }
         }
 
@@ -103,12 +102,12 @@ namespace Gibbed.LetUsClingTogether.FileFormats
         {
             var endian = this.Endian;
 
-            var directoryHeaders = new List<DirectoryHeader>();
-            var nameHeaders = new List<NameHeader>();
-            var batchHeaders = new List<BatchHeader>();
+            List<DirectoryHeader> directoryHeaders = new();
+            List<NameHeader> nameHeaders = new();
+            List<BatchHeader> batchHeaders = new();
 
             byte[] fileTableBytes;
-            using (var fileTable = new MemoryStream())
+            using (MemoryStream fileTable = new())
             {
                 foreach (var directory in this.Directories.OrderBy(d => d.Id))
                 {
@@ -181,7 +180,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                             var file = files[o];
                             if (file.NameHash != null)
                             {
-                                nameHeaders.Add(new NameHeader()
+                                nameHeaders.Add(new()
                                 {
                                     NameHash = file.NameHash.Value,
                                     DirectoryId = directory.Id,
@@ -346,14 +345,14 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                 throw new InvalidOperationException();
             }
 
-            var directories = new List<DirectoryEntry>();
+            List<DirectoryEntry> directories = new();
             using (var data = input.ReadToMemoryStream(fileTableSize))
             {
                 foreach (var directoryHeader in directoryHeaders)
                 {
                     var batchIndexBase = directoryHeader.BatchTableOffset / 8;
 
-                    var directory = new DirectoryEntry()
+                    DirectoryEntry directory = new()
                     {
                         Id = directoryHeader.Id,
                         DataBlockSize = directoryHeader.DataBlockSize,

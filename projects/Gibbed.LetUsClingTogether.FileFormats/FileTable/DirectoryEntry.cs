@@ -26,17 +26,19 @@ namespace Gibbed.LetUsClingTogether.FileFormats.FileTable
 {
     public class DirectoryEntry
     {
+        private readonly List<FileEntry> _Files;
+
+        public DirectoryEntry()
+        {
+            this._Files = new();
+        }
+
         public ushort Id { get; set; }
         public byte DataBlockSize { get; set; }
         public uint DataBaseOffset { get; set; }
         public bool IsInInstallData { get; set; }
         public uint DataInstallBaseOffset { get; set; }
-        public List<FileEntry> Files { get; }
-
-        public DirectoryEntry()
-        {
-            this.Files = new List<FileEntry>();
-        }
+        public List<FileEntry> Files => this._Files;
 
         public override string ToString()
         {

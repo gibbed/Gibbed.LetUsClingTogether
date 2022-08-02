@@ -46,8 +46,8 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Text
             }
 
             // build mapping tables
-            this._UnicodeToEncodedCodepoint = new Dictionary<char, ushort>(count);
-            this._EncodedCodepointToUnicode = new Dictionary<ushort, char>(count);
+            this._UnicodeToEncodedCodepoint = new(count);
+            this._EncodedCodepointToUnicode = new(count);
             ushort codepoint = 0;
             for (int i = 0; i < ranges.Length; i++)
             {

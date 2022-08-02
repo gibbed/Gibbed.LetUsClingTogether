@@ -32,13 +32,15 @@ namespace Gibbed.LetUsClingTogether.FileFormats
     {
         public const uint Signature = 0x646B6170; // 'pakd'
 
+        private readonly List<Entry> _Entries;
+
         public PackFile()
         {
-            this.Entries = new List<Entry>();
+            this._Entries = new();
         }
 
         public Endian Endian { get; set; }
-        public List<Entry> Entries { get; }
+        public List<Entry> Entries => this._Entries;
         public uint TotalSize { get; set; }
 
         public static int GetHeaderSize(int count, bool hasIds)
@@ -132,7 +134,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
             this.Entries.Clear();
             for (int i = 0; i < entryCount; i++)
             {
-                this.Entries.Add(new Entry(entryIds[i], entryOffsets[i]));
+                this.Entries.Add(new(entryIds[i], entryOffsets[i]));
             }
             this.TotalSize = totalSize;
         }

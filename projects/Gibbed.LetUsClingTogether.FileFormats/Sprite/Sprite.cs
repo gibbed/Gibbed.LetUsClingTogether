@@ -120,7 +120,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Sprite
 
                 Palette palette;
                 palette.GECommands = null;
-                using (var data = new MemoryStream(FileFormats.Sprite.Palettes.Default))
+                using (MemoryStream data = new(FileFormats.Sprite.Palettes.Default))
                 {
                     var colors = new uint[data.Length / 4];
                     for (int i = 0, o = 0; o < data.Length; i++, o += 4)
