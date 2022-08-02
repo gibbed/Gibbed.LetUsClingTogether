@@ -11,6 +11,7 @@ Intended to work with all available regional versions of the game, though only t
 * JP (`ULJM05753`): タクティクスオウガ　運命の輪
     * Tactics Ogre: Unmei no Wa
     * Tactics Ogre: Wheel of Fortune
+    * Tactics Ogre: Wheel of Fate
 * US (`ULUS10565`): Tactics Ogre: Let Us Cling Together
 * EU/AU (`ULES10500`): Tactics Ogre: Let Us Cling Together
 
@@ -18,12 +19,42 @@ Intended to work with all available regional versions of the game, though only t
 
 *Experimental!*
 
-* `UnpackFILETABLE`: Unpacker for `FILETABLE.BIN` (and corresponding `.BIN` files).
-* `PackFILETABLE`: Packer for `FILETABLE.BIN` (and corresponding `.BIN` files).
-* `LookupFILETABLE`: Translates offsets in `.BIN` files to their corresponding file entries.
-* `ExportSprite`: Exporter for sprite data (`*.sprite`)— incomplete, still needs work.
+# Tools
 
-## TODO
+## FILETABLE / Archives
+
+* [`PackFILETABLE`](projects/Gibbed.LetUsClingTogether.PackFILETABLE): Packer for `FILETABLE.BIN` (and corresponding `.BIN` files).
+* [`LookupFILETABLE`](projects/Gibbed.LetUsClingTogether.LookupFILETABLE): Translates offsets in `.BIN` files to their corresponding file entries.
+* [`UnpackFILETABLE`](projects/Gibbed.LetUsClingTogether.UnpackFILETABLE): Unpacker for `FILETABLE.BIN` (and corresponding `.BIN` files).
+
+_`UnpackFILETABLE` takes advantage of [filetable definitions](configs/filetables) to identify & describe files within the ID-based filesystem._
+
+## Assets
+
+### Spreadsheets / Tables
+
+* `ExportSheet`: Exporter for compiled spreadsheet files (`*.xlc`).
+
+_Requires corresponding sheet format files that describe the various spreadsheet data formats._
+
+### Scenarios / Screenplays
+
+* [`DisassembleScript`](projects/Gibbed.LetUsClingTogether.DisassembleScript): A cutscene script disassembler (`*.script`). For research purposes.
+* [`ExportEventMessages`](projects/Gibbed.LetUsClingTogether.ExportEventMessages): Exporter for event message files (`*.emes`).
+* `ExportScreenplayInvocation`: Exporter for screenplay invocation files (`*.invk`).
+* `ExportScreenplayProgress`: Exporter for screenplay progress files (`*.pgrs`).
+* `ExportScreenplayTask`: Exporter for screenplay progress files (`*.task`).
+* [`ImportEventMessages`](projects/Gibbed.LetUsClingTogether.ImportEventMessages): Importer for event message files (`*.emes`)— incomplete, still needs work.
+
+### Graphics
+
+* [`ExportSprite`](projects/Gibbed.LetUsClingTogether.ExportSprite): Exporter for sprite files (`*.spr`, `.ashg`)— incomplete, still needs work.
+
+### Sounds
+
+* [`ExportSound`](projects/Gibbed.LetUsClingTogether.ExportSound): Exporter for sound data (`*.scd`)— incomplete, still needs work.
+
+# TODO
 
 * Everything.
 
