@@ -1,23 +1,22 @@
 # Gibbed's Let Us Cling Together Tools
 
-Tools for modding the PSP remake of [Tactics Ogre: Let Us Cling Together](https://en.wikipedia.org/wiki/Tactics_Ogre%3A_Let_Us_Cling_Together_%282010_video_game%29).
+Tools for modding the PSP remake of Tactics Ogre: Let Us Cling Together.
 
 [![Build status](https://ci.appveyor.com/api/projects/status/9cl2i5x0j2rlwgih/branch/main?svg=true)](https://ci.appveyor.com/project/gibbed/gibbed-letusclingtogether/branch/main)
 
 # Targets
 
-## Tactics Ogre: Let Us Cling Together (2011)
-
-### PlayStation Portable (PSP)
+## [Tactics Ogre: Let Us Cling Together (2010)](https://en.wikipedia.org/wiki/Tactics_Ogre%3A_Let_Us_Cling_Together_%282010_video_game%29)
 
 Intended to work with all available regional versions of the game, though only the following have been tested:
 
-* JP (`ULJM05753`): タクティクスオウガ　運命の輪
-    * Tactics Ogre: Unmei no Wa
-    * Tactics Ogre: Wheel of Fortune
-    * Tactics Ogre: Wheel of Fate
-* US (`ULUS10565`): Tactics Ogre: Let Us Cling Together
-* EU/AU (`ULES10500`): Tactics Ogre: Let Us Cling Together
+* PlayStation Portable (PSP)
+    * JP (`ULJM05753`): タクティクスオウガ　運命の輪
+        * Tactics Ogre: Unmei no Wa
+        * Tactics Ogre: Wheel of Fortune
+        * Tactics Ogre: Wheel of Fate
+    * US (`ULUS10565`): Tactics Ogre: Let Us Cling Together
+    * EU/AU (`ULES10500`): Tactics Ogre: Let Us Cling Together
 
 # What?
 
