@@ -48,7 +48,7 @@ _Requires corresponding sheet format files that describe the various spreadsheet
 
 ### Graphics
 
-* [`ExportSprite`](projects/Gibbed.LetUsClingTogether.ExportSprite): Exporter for sprite files (`*.spr`, `.ashg`)— incomplete, still needs work.
+* [`ExportSprite`](projects/Gibbed.LetUsClingTogether.ExportSprite): Exporter for sprite files (`*.spr`, `*.ashg`)— incomplete, still needs work.
 
 ### Sounds
 
