@@ -4,7 +4,11 @@ Tools for modding the PSP remake of [Tactics Ogre: Let Us Cling Together](https:
 
 [![Build status](https://ci.appveyor.com/api/projects/status/9cl2i5x0j2rlwgih/branch/main?svg=true)](https://ci.appveyor.com/project/gibbed/gibbed-letusclingtogether/branch/main)
 
-## Targets
+# Targets
+
+## Tactics Ogre: Let Us Cling Together (2011)
+
+### PlayStation Portable (PSP)
 
 Intended to work with all available regional versions of the game, though only the following have been tested:
 
@@ -15,7 +19,7 @@ Intended to work with all available regional versions of the game, though only t
 * US (`ULUS10565`): Tactics Ogre: Let Us Cling Together
 * EU/AU (`ULES10500`): Tactics Ogre: Let Us Cling Together
 
-## What?
+# What?
 
 *Experimental!*
 
