@@ -42,11 +42,13 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
 
         public static void Main(string[] args)
         {
+            bool packNestedZIPs = true;
             bool verbose = false;
             bool showHelp = false;
 
             OptionSet options = new()
             {
+                { "nz|dont-pack-zips", "don't pack nested .zip files", v => packNestedZIPs = v == null },
                 { "v|verbose", "be verbose", v => verbose = v != null },
                 { "h|help", "show this message and exit",  v => showHelp = v != null },
             };
@@ -140,34 +142,7 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
 
                         output.Position = dataBlockOffset * dataBlockSize;
 
-                        uint dataSize;
-                        using (MemoryStream temp = new())
-                        {
-                            if (fileManifest.IsPack == false)
-                            {
-                                using var input = File.OpenRead(inputPath);
-                                if (input.Length > uint.MaxValue)
-                                {
-                                    throw new InvalidOperationException("file too large");
-                                }
-                                dataSize = (uint)input.Length;
-                                temp.WriteFromStream(input, dataSize);
-                            }
-                            else
-                            {
-                                dataSize = HandleNestedPack(inputPath, temp, endian);
-                            }
-
-                            if (fileManifest.IsZip == false)
-                            {
-                                temp.Position = 0;
-                                output.WriteFromStream(temp, dataSize);
-                            }
-                            else
-                            {
-                                throw new NotImplementedException();
-                            }
-                        }
+                        uint dataSize = HandleFile(fileManifest, inputPath, output, endian, packNestedZIPs);
 
                         FileTable.FileEntry file = new()
                         {
@@ -207,6 +182,74 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
             }
 
             File.WriteAllBytes(tablePath, tableBytes);
+        }
+
+        private static uint HandleFile(
+            FileTableManifest.File fileManifest,
+            string inputPath,
+            Stream output,
+            Endian endian,
+            bool packNestedZIPs)
+        {
+            Stream input;
+
+            uint dataSize;
+            if (fileManifest.IsPack == false)
+            {
+                input = File.OpenRead(inputPath);
+                if (input.Length > uint.MaxValue)
+                {
+                    throw new InvalidOperationException("file too large");
+                }
+                dataSize = (uint)input.Length;
+            }
+            else
+            {
+                input = new MemoryStream();
+                dataSize = HandleNestedPack(inputPath, input, endian);
+                input.Position = 0;
+            }
+
+            using (input)
+            {
+                if (fileManifest.IsZip == true && packNestedZIPs == true)
+                {
+                    if (string.IsNullOrEmpty(fileManifest.ZipName) == true)
+                    {
+                        throw new InvalidOperationException();
+                    }
+
+                    using MemoryStream compressedStream = new();
+                    using ICSharpCode.SharpZipLib.Zip.ZipOutputStream zip = new(compressedStream);
+                    zip.UseZip64 = ICSharpCode.SharpZipLib.Zip.UseZip64.Off;
+                    zip.SetLevel(9);
+
+                    ICSharpCode.SharpZipLib.Zip.ZipEntry zipEntry = new(fileManifest.ZipName);
+                    zipEntry.CompressionMethod = ICSharpCode.SharpZipLib.Zip.CompressionMethod.Deflated;
+
+                    if (zipEntry.Version != 20)
+                    {
+                        throw new InvalidOperationException();
+                    }
+
+                    zip.PutNextEntry(zipEntry);
+
+                    zip.WriteFromStream(input, dataSize);
+                    zip.Finish();
+                    compressedStream.Flush();
+
+                    dataSize = (uint)compressedStream.Length;
+
+                    compressedStream.Position = 0;
+                    output.WriteFromStream(compressedStream, dataSize);
+                }
+                else
+                {
+                    output.WriteFromStream(input, dataSize);
+                }
+            }
+
+            return dataSize;
         }
 
         private static uint HandleNestedPack(
