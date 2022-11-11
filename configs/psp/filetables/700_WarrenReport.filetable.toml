@@ -1,7 +1,8 @@
 [700]
-path = "ui/warren_report"
+path = "WarrenReport"
 
 [700.0]
+path = "WarrenReport"
 
 0.path = "menu_text.xlc"
 
@@ -24,3 +25,6 @@ path = "ui/warren_report"
 19.path = "play_guide_basics.invk"
 
 #20.path = "menu.task"
+
+[700.1]
+path = "WarrenReportText"

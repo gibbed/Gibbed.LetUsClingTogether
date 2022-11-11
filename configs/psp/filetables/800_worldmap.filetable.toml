@@ -1,7 +1,9 @@
 [800]
-path = "ui/world_map"
+path = "worldmap"
 
 [800.0]
+path = "Worldmap"
+
 0_0.path  = "sprites/strongpoint_icons.spr"
 0_1.path  = "sprites/strongpoint_icons_small.spr"
 0_2.path  = "sprites/cleared_flag.spr"
@@ -28,6 +30,6 @@ path = "ui/world_map"
 path = "world_atlas.gmo"
 
 [800.256]
-path = "strongholds"
+path = "worldmap_data"
 
 0_0.path = "stronghold_global_flags.xlc"

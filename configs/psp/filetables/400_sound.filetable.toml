@@ -1,5 +1,5 @@
 [400]
-path = "sounds"
+path = "sound"
 
 1.path  = "bgm/bgm_1.scd"
 2.path  = "bgm/bgm_2.scd"

@@ -1,8 +1,8 @@
 [1000]
-path = "common"
+path = "battle"
 
 [1000.1]
-path = "tables"
+path = "battle_data_release"
 
 3.path = "equipment.xlc"
 

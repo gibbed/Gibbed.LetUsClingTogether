@@ -1,5 +1,5 @@
 [900]
-path = "screenplays"
+path = "event/chapter"
 
 [900.10]
 path = "chapter_1"
@@ -10,7 +10,7 @@ path = "chapter_1"
 0_4.path = "C1.emes"
 
 [900.11]
-path = "chapter_2/chaos"
+path = "chapter_2/chaos" # chapter_2a
 
 0_1.path = "C2a.pgrs"
 0_2.path = "C2a.invk"
@@ -18,7 +18,7 @@ path = "chapter_2/chaos"
 0_4.path = "C2a.emes"
 
 [900.12]
-path = "chapter_2/law"
+path = "chapter_2/law" # chapter_2b
 
 0_1.path = "C2b.pgrs"
 0_2.path = "C2b.invk"
@@ -26,21 +26,21 @@ path = "chapter_2/law"
 0_4.path = "C2b.emes"
 
 [900.13]
-path = "chapter_3/neutral"
+path = "chapter_3/neutral" # chapter_3a
 
 0_1.path = "C3a.pgrs"
 0_2.path = "C3a.invk"
 0_3.path = "C3a.task"
 
 [900.14]
-path = "chapter_3/chaos"
+path = "chapter_3/chaos" # chapter_3b
 
 0_1.path = "C3b.pgrs"
 0_2.path = "C3b.invk"
 0_3.path = "C3b.task"
 
 [900.15]
-path = "chapter_3/law"
+path = "chapter_3/law" # chapter_3c
 
 0_1.path = "C3c.pgrs"
 0_2.path = "C3c.invk"
@@ -56,14 +56,14 @@ path = "chapter_4"
 0_5.path = "C4_1.emes"
 
 [900.17]
-path = "epilogue"
+path = "chapter_ep"
 
 0_1.path = "EP.pgrs"
 0_2.path = "EP.invk"
 0_3.path = "EP.task"
 
 [900.18]
-path = "dlc"
+path = "chapter_dlc"
 
 0_1.path = "DLC.pgrs"
 0_2.path = "DLC.invk"
@@ -72,7 +72,7 @@ path = "dlc"
 0_5.path = "DLC_1.emes"
 
 [900.20]
-path = "global"
+path = "event_data"
 
 3.path = "global_flags.xlc"
 4.path = "unknown_flags.xlc"

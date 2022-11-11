@@ -1,5 +1,5 @@
 [600]
-path = "ui/fonts"
+path = "Font"
 
 5.path = "main.fontfam"
 8.path = "normal.font"

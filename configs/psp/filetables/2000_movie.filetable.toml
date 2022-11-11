@@ -1,0 +1,12 @@
+[2000]
+path = "movie"
+
+1.name = "prologue"
+2.name = "chapter1"
+3.name = "chapter2a"
+4.name = "chapter2b"
+5.name = "chapter3a"
+6.name = "chapter3b"
+7.name = "chapter3c"
+8.name = "chapter4"
+9.name = "trailer"

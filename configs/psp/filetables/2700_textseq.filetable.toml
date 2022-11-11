@@ -1,8 +1,8 @@
 [2700]
-path = "ending"
+path = "textseq"
 
 [2700.0]
-path = "staffroll"
+path = "textseq_credit"
 
 0.path = "staffroll_text.xlc"
 1.path = "staffroll_order.xlc"

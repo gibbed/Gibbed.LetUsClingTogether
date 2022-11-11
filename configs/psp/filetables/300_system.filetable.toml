@@ -1,9 +1,9 @@
 
 [300]
-path = "world_map"
+path = "system"
 
 [300.0]
-path = "tables"
+path = "system_data"
 
 0.path = "debug_maps.xlc"
 1.path = "maps.xlc"
