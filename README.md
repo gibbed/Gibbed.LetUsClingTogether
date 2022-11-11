@@ -1,6 +1,6 @@
 # Gibbed's Let Us Cling Together Tools
 
-Tools for modding the PSP remake of Tactics Ogre: Let Us Cling Together and its multi-platform remaster Tactics Ogre: Reborn.
+Tools for modding the PSP remake of **_Tactics Ogre: Let Us Cling Together_** and its multi-platform remaster **_Tactics Ogre: Reborn_**.
 
 [![Build status](https://ci.appveyor.com/api/projects/status/9cl2i5x0j2rlwgih/branch/main?svg=true)](https://ci.appveyor.com/project/gibbed/gibbed-letusclingtogether/branch/main)
 
