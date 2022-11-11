@@ -36,11 +36,13 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             return Path.GetFullPath(path);
         }
 
-        public static TomlTable Load()
+        public static TomlTable Load(string subdirectory)
         {
             var executablePath = GetExecutablePath();
             var binPath = Path.GetDirectoryName(executablePath);
-            var filetablesPath = Path.Combine(binPath, "..", "configs", "filetables");
+            var filetablesPath = subdirectory == null
+                ? Path.Combine(binPath, "..", "configs", "filetables")
+                : Path.Combine(binPath, "..", "configs", subdirectory, "filetables");
 
             var root = new TomlTable();
             if (Directory.Exists(filetablesPath) == false)

@@ -81,14 +81,14 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             string inputPath = extras[0];
             string outputBasePath = extras.Count > 1 ? extras[1] : Path.ChangeExtension(inputPath, null) + "_unpacked";
 
-            var rootLookup = Lookup.Load();
-
             FileTableFile table;
             using (var input = File.OpenRead(inputPath))
             {
                 table = new FileTableFile();
                 table.Deserialize(input);
             }
+
+            var rootLookup = Lookup.Load(table.IsReborn == false ? "psp" : "reborn");
 
             var inputBasePath = Path.GetDirectoryName(inputPath);
 

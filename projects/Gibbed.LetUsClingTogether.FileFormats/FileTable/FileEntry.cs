@@ -28,10 +28,13 @@ namespace Gibbed.LetUsClingTogether.FileFormats.FileTable
         public uint? NameHash;
         public uint DataBlockOffset;
         public uint DataSize;
+        public string ExternalPath;
 
         public override string ToString()
         {
-            return $"{this.Id} @ {this.DataBlockOffset} : {this.DataSize}";
+            return string.IsNullOrEmpty(this.ExternalPath) == true
+                ? $"{this.Id} @ {this.DataBlockOffset} : {this.DataSize}"
+                : $"{this.Id} @ {this.ExternalPath} : {this.DataSize}";
         }
     }
 }

@@ -66,8 +66,8 @@ namespace Gibbed.LetUsClingTogether.FileFormats.FileTable
         public override string ToString()
         {
             return this.Flags == BatchFlags.None
-                ? $"{this.BaseFileId} => {this.BaseFileId + this.FileCount - 1}"
-                : $"{this.BaseFileId} => {this.BaseFileId + this.FileCount - 1} | {this.Flags}";
+                ? $"@{this.FileTableOffset:X8} {this.BaseFileId} => {this.BaseFileId + this.FileCount - 1}"
+                : $"@{this.FileTableOffset:X8} {this.BaseFileId} => {this.BaseFileId + this.FileCount - 1} | {this.Flags}";
         }
     }
 }
