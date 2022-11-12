@@ -875,7 +875,10 @@ namespace Gibbed.LetUsClingTogether.UnpackFileTable
                     fileTable["external_path"] = fileManifest.ExternalPath;
                 }
 
-                fileTable["path"] = fileManifest.Path;
+                if (string.IsNullOrEmpty(fileManifest.Path) == false)
+                {
+                    fileTable["path"] = fileManifest.Path;
+                }
 
                 fileArray.Add(fileTable);
             }
