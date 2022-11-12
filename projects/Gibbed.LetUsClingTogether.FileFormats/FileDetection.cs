@@ -117,6 +117,15 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                 return ".sas";
             }
             else if (
+              count >= 4 &&
+              buffer[index + 0] == 't' &&
+              buffer[index + 1] == 'x' &&
+              buffer[index + 2] == 't' &&
+              buffer[index + 3] == 'e')
+            {
+                return ".etxt";
+            }
+            else if (
                 count >= 4 &&
                 buffer[index + 0] == 'T' &&
                 buffer[index + 1] == 'C' &&

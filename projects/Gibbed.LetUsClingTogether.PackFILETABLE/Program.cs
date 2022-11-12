@@ -130,7 +130,7 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
                 FileTable.DirectoryEntry directory = new()
                 {
                     Id = directoryManifest.Id,
-                    Unknown02 = directoryManifest.Unknown02,
+                    IsEncrypted = directoryManifest.IsEncrypted,
                     DataBaseOffset = 0,
                     DataBlockSize = directoryManifest.DataBlockSize,
                     // TODO(gibbed): don't currently support building install data
@@ -515,7 +515,7 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
             {
                 FileTableManifest.Directory directory = new();
                 directory.Id = (ushort)(directoryTable["id"]?.AsInteger?.Value ?? throw new FormatException());
-                directory.Unknown02 = (byte)(directoryTable["unknown02"]?.AsInteger?.Value ?? 4);
+                directory.IsEncrypted = directoryTable["encrypted"]?.AsBoolean?.Value ?? false;
                 directory.DataBlockSize = (byte)(directoryTable["data_block_size"]?.AsInteger?.Value ?? 4);
                 directory.IsInInstallData = directoryTable["is_in_install_data"]?.AsBoolean?.Value ?? manifest.IsInInstallDataDefault;
                 directory.FileManifest = directoryTable["file_manifest"]?.AsString?.Value ?? throw new FormatException();
@@ -547,7 +547,9 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
                 manifest.ZipName = fileTable["zip_name"]?.AsString?.Value;
                 manifest.IsRLE = fileTable["rle"]?.AsBoolean?.Value ?? false;
                 manifest.IsPack = fileTable["pack"]?.AsBoolean?.Value ?? false;
+                manifest.IsEmpty = fileTable["empty"]?.AsBoolean?.Value ?? false;
                 //manifest.SheetFormat = fileTable["sheet_format"]?.AsString;
+                manifest.ExternalPath = fileTable["external_path"]?.AsString?.Value;
                 manifest.Path = fileTable["path"]?.AsString?.Value;
                 manifests.Add(manifest);
             }

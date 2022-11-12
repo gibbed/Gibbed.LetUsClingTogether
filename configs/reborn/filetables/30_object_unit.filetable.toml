@@ -2,6 +2,7 @@
 
 [30]
 path = "object/unit"
+obfuscated = true
 
 1.path = "Adult_f00"
 2.path = "Adult_m00"

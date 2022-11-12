@@ -28,7 +28,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats.FileTable
     internal struct DirectoryHeader
     {
         public ushort Id;
-        public byte Unknown02;
+        public bool IsEncrypted;
         public byte DataBlockSize;
         public uint DataBaseOffset;
         public byte Unknown08;
@@ -43,7 +43,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats.FileTable
         {
             DirectoryHeader instance;
             instance.Id = input.ReadValueU16(endian);
-            instance.Unknown02 = input.ReadValueU8();
+            instance.IsEncrypted = input.ReadValueB8();
             instance.DataBlockSize = input.ReadValueU8();
             instance.DataBaseOffset = input.ReadValueU32(endian);
             instance.Unknown08 = input.ReadValueU8();
@@ -59,7 +59,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats.FileTable
         public static void Write(Stream output, DirectoryHeader instance, Endian endian)
         {
             output.WriteValueU16(instance.Id, endian);
-            output.WriteValueU8(instance.Unknown02);
+            output.WriteValueB8(instance.IsEncrypted);
             output.WriteValueU8(instance.DataBlockSize);
             output.WriteValueU32(instance.DataBaseOffset, endian);
             output.WriteValueU8(instance.Unknown08);

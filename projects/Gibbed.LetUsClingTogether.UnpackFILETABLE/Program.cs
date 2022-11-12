@@ -188,7 +188,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                 tableManifest.Directories.Add(new()
                 {
                     Id = directory.Id,
-                    Unknown02 = directory.Unknown02,
+                    IsEncrypted = directory.IsEncrypted,
                     DataBlockSize = directory.DataBlockSize,
                     IsInInstallData = directory.IsInInstallData,
                     FileManifest = directoryManifestPath,
@@ -336,6 +336,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                 Id = directory.Id,
                 BasePath = Path.Combine(outputBasePath, directoryPath),
                 Lookup = directoryLookup,
+                IsObfuscated = directoryLookup["obfuscated"]?.AsBoolean?.Value ?? false,
             };
 
             List<IFileContainer> fileContainers = new()
@@ -351,12 +352,29 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
 
                 if (File.Exists(inputPath) == false)
                 {
-                    Console.WriteLine($"!! {rootFile.ExternalPath}");
+                    if (rootFile.DataBlockOffset != 0 ||
+                        rootFile.DataSize != 0)
+                    {
+                        throw new InvalidOperationException();
+                    }
+
+                    tableDirectory.FileManifests.Add(new()
+                    {
+                        Id = rootFile.Id,
+                        NameHash = rootFile.NameHash,
+                        IsEmpty = true,
+                        ExternalPath = rootFile.ExternalPath,
+                    });
                     continue;
                 }
 
                 var inputBytes = File.ReadAllBytes(inputPath);
-                Reborn.FileFormats.BogoCrypt.Deobfuscate(inputBytes, 0, inputBytes.Length);
+
+                if (tableDirectory.IsObfuscated == true)
+                {
+                    Reborn.FileFormats.BogoCrypt.Deobfuscate(inputBytes, 0, inputBytes.Length);
+                }
+
                 using (var input = new MemoryStream(inputBytes, false))
                 {
                     fileQueue.Enqueue(new()
@@ -738,9 +756,9 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                     IsInline = true,
                     ["id"] = directory.Id,
                 };
-                if (directory.Unknown02 != 0)
+                if (directory.IsEncrypted == true)
                 {
-                    directoryTable["unknown02"] = directory.Unknown02;
+                    directoryTable["encrypted"] = directory.IsEncrypted;
                 }
                 if (directory.DataBlockSize != 4)
                 {
@@ -840,6 +858,11 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
                 if (fileManifest.IsPack == true)
                 {
                     fileTable["pack"] = true;
+                }
+
+                if (fileManifest.IsEmpty == true)
+                {
+                    fileTable["empty"] = true;
                 }
 
                 if (string.IsNullOrEmpty(fileManifest.SheetFormat) == false)

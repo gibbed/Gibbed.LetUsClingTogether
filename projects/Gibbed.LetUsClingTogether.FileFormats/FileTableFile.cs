@@ -212,7 +212,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
 
                     DirectoryHeader directoryHeader;
                     directoryHeader.Id = directory.Id;
-                    directoryHeader.Unknown02 = directory.Unknown02;
+                    directoryHeader.IsEncrypted = directory.IsEncrypted;
                     directoryHeader.DataBaseOffset = directory.DataBaseOffset;
                     directoryHeader.DataBlockSize = directory.DataBlockSize;
                     directoryHeader.Unknown08 = 0;
@@ -314,8 +314,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
             for (int i = 0; i < directoryCount; i++)
             {
                 var directoryHeader = directoryHeaders[i] = DirectoryHeader.Read(input, endian);
-                if ((directoryHeader.Unknown02 != 0 && directoryHeader.Unknown02 != 1) ||
-                    directoryHeader.Unknown08 != 0)
+                if (directoryHeader.Unknown08 != 0)
                 {
                     throw new FormatException();
                 }
@@ -363,7 +362,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                     DirectoryEntry directory = new()
                     {
                         Id = directoryHeader.Id,
-                        Unknown02 = directoryHeader.Unknown02,
+                        IsEncrypted = directoryHeader.IsEncrypted,
                         DataBlockSize = directoryHeader.DataBlockSize,
                         DataBaseOffset = directoryHeader.DataBaseOffset,
                         IsInInstallData = directoryHeader.IsInInstallData,

@@ -21,6 +21,7 @@
  */
 
 using System.Collections.Generic;
+using System.Text;
 
 namespace Gibbed.LetUsClingTogether.FileFormats.FileTable
 {
@@ -34,7 +35,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats.FileTable
         }
 
         public ushort Id { get; set; }
-        public byte Unknown02 { get; set; }
+        public bool IsEncrypted { get; set; }
         public byte DataBlockSize { get; set; }
         public uint DataBaseOffset { get; set; }
         public bool IsInInstallData { get; set; }
@@ -43,7 +44,17 @@ namespace Gibbed.LetUsClingTogether.FileFormats.FileTable
 
         public override string ToString()
         {
-            return $"{this.Id}";
+            StringBuilder sb = new();
+            sb.Append($"{this.Id}");
+            if (this.IsEncrypted == true)
+            {
+                sb.Append($", ENCRYPTED");
+            }
+            if (this.IsInInstallData == true)
+            {
+                sb.Append($", INSTALLABLE");
+            }
+            return sb.ToString();
         }
     }
 }

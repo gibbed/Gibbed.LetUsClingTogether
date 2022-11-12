@@ -45,7 +45,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
         public class Directory
         {
             public ushort Id { get; set; }
-            public byte Unknown02 { get; set; }
+            public bool IsEncrypted { get; set; }
             public byte DataBlockSize { get; set; }
             public bool IsInInstallData { get; set; }
             public string FileManifest { get; set; }
@@ -61,6 +61,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             public string ZipName { get; set; }
             public bool IsRLE { get; set; }
             public bool IsPack { get; set; }
+            public bool IsEmpty { get; set; }
             public string SheetFormat { get; set; }
             public string Path { get; set; }
             public string ExternalPath { get; set; }

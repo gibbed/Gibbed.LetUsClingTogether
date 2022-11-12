@@ -40,6 +40,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
         public Dictionary<long, int> IdCounts { get; }
         public List<FileTableManifest.File> FileManifests { get; }
         public Tommy.TomlNode Lookup { get; set; }
+        public bool IsObfuscated { get; set; }
         public string PackFileType { get { return null; } }
     }
 }
