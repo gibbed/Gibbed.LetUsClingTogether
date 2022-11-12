@@ -20,19 +20,27 @@
  *    distribution.
  */
 
+using System.Collections.Generic;
 using System.IO;
 
-namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
+namespace Gibbed.LetUsClingTogether.UnpackFileTable
 {
-    internal class QueuedFile
+    internal class NestedPack : IFileContainer
     {
+        public NestedPack()
+        {
+            this.IdCounts = new();
+            this.FileManifests = new();
+        }
+
         public int Id { get; set; }
+        public string BasePath { get; set; }
+        public string ManifestPath { get { return Path.Combine(this.BasePath, "@manifest.toml"); } }
         public IFileContainer Parent { get; set; }
-        public uint? NameHash { get; set; }
-        public uint? PackRawId { get; set; }
-        public Stream DataStream { get; set; }
-        public long DataOffset { get; set; }
-        public uint DataSize { get; set; }
-        public string ExternalPath { get; set; }
+        public Dictionary<long, int> IdCounts { get; }
+        public List<FileTableManifest.File> FileManifests { get; }
+        public Tommy.TomlNode Lookup { get; set; }
+        public bool IsObfuscated { get { return false; } }
+        public string PackFileType { get; set; }
     }
 }

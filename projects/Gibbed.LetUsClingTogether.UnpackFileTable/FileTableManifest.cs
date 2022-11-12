@@ -23,7 +23,7 @@
 using System.Collections.Generic;
 using Gibbed.IO;
 
-namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
+namespace Gibbed.LetUsClingTogether.UnpackFileTable
 {
     public class FileTableManifest
     {

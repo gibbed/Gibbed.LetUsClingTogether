@@ -20,20 +20,19 @@
  *    distribution.
  */
 
-using System.Collections.Generic;
+using System.IO;
 
-namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
+namespace Gibbed.LetUsClingTogether.UnpackFileTable
 {
-    internal interface IFileContainer
+    internal class QueuedFile
     {
-        int Id { get; }
-        string BasePath { get; }
-        string ManifestPath { get; }
-        IFileContainer Parent { get; }
-        Dictionary<long, int> IdCounts { get; }
-        List<FileTableManifest.File> FileManifests { get; }
-        public Tommy.TomlNode Lookup { get; }
-        public bool IsObfuscated { get; }
-        public string PackFileType { get; }
+        public int Id { get; set; }
+        public IFileContainer Parent { get; set; }
+        public uint? NameHash { get; set; }
+        public uint? PackRawId { get; set; }
+        public Stream DataStream { get; set; }
+        public long DataOffset { get; set; }
+        public uint DataSize { get; set; }
+        public string ExternalPath { get; set; }
     }
 }

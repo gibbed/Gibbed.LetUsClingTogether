@@ -29,9 +29,9 @@ using Gibbed.LetUsClingTogether.FileFormats;
 using NDesk.Options;
 using static Gibbed.LetUsClingTogether.FileFormats.InvariantShorthand;
 using FileTable = Gibbed.LetUsClingTogether.FileFormats.FileTable;
-using FileTableManifest = Gibbed.LetUsClingTogether.UnpackFILETABLE.FileTableManifest;
+using FileTableManifest = Gibbed.LetUsClingTogether.UnpackFileTable.FileTableManifest;
 
-namespace Gibbed.LetUsClingTogether.PackFILETABLE
+namespace Gibbed.LetUsClingTogether.PackFileTable
 {
     internal class Program
     {

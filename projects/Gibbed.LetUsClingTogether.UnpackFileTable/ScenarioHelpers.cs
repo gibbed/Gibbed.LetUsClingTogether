@@ -23,7 +23,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
+namespace Gibbed.LetUsClingTogether.UnpackFileTable
 {
     internal static class ScenarioHelpers
     {

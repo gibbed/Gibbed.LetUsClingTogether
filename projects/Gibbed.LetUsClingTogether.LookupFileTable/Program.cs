@@ -28,7 +28,7 @@ using Gibbed.IO;
 using Gibbed.LetUsClingTogether.FileFormats;
 using NDesk.Options;
 
-namespace Gibbed.LetUsClingTogether.LookupFILETABLE
+namespace Gibbed.LetUsClingTogether.LookupFileTable
 {
     internal class Program
     {
@@ -63,7 +63,7 @@ namespace Gibbed.LetUsClingTogether.LookupFILETABLE
                 ParseArgument(extras[1], out uint directoryId) == false ||
                 ParseArgument(extras[2], out long offset) == false)
             {
-                Console.WriteLine("Usage: {0} [OPTIONS]+ input_FILETABLE <dir> <offset>", GetExecutableName());
+                Console.WriteLine("Usage: {0} [OPTIONS]+ input_FileTable <dir> <offset>", GetExecutableName());
                 Console.WriteLine();
                 Console.WriteLine("Options:");
                 options.WriteOptionDescriptions(Console.Out);

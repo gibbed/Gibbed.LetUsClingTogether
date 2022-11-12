@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NDesk.Options", "projects\N
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.IO", "projects\Gibbed.IO\Gibbed.IO.csproj", "{5162A9FB-4DE1-4BBF-B7A2-5E8116AB0D26}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.LetUsClingTogether.UnpackFILETABLE", "projects\Gibbed.LetUsClingTogether.UnpackFILETABLE\Gibbed.LetUsClingTogether.UnpackFILETABLE.csproj", "{7FAC7FC1-12DD-44C2-B925-DEB93F5A8AB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.LetUsClingTogether.UnpackFileTable", "projects\Gibbed.LetUsClingTogether.UnpackFileTable\Gibbed.LetUsClingTogether.UnpackFileTable.csproj", "{7FAC7FC1-12DD-44C2-B925-DEB93F5A8AB3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.LetUsClingTogether.ExportSprite", "projects\Gibbed.LetUsClingTogether.ExportSprite\Gibbed.LetUsClingTogether.ExportSprite.csproj", "{DA4A102E-D1EF-439C-842B-FDFB74D6D628}"
 EndProject
@@ -19,13 +19,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.LetUsClingTogether.U
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{5AA38539-796A-48A3-9AE5-C68836014669}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.LetUsClingTogether.PackFILETABLE", "projects\Gibbed.LetUsClingTogether.PackFILETABLE\Gibbed.LetUsClingTogether.PackFILETABLE.csproj", "{6E02586A-213D-4492-91A7-55ACE72450E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.LetUsClingTogether.PackFileTable", "projects\Gibbed.LetUsClingTogether.PackFileTable\Gibbed.LetUsClingTogether.PackFileTable.csproj", "{6E02586A-213D-4492-91A7-55ACE72450E1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.LetUsClingTogether.LookupFILETABLE", "projects\Gibbed.LetUsClingTogether.LookupFILETABLE\Gibbed.LetUsClingTogether.LookupFILETABLE.csproj", "{D4BF3379-E041-4F75-8243-934FED691A2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.LetUsClingTogether.LookupFileTable", "projects\Gibbed.LetUsClingTogether.LookupFileTable\Gibbed.LetUsClingTogether.LookupFileTable.csproj", "{D4BF3379-E041-4F75-8243-934FED691A2D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{0D395521-06B9-4E59-867C-0CBCCA4DE001}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FILETABLE", "FILETABLE", "{B0E9DED9-537C-43B8-BE69-309C967DF189}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "File Table", "File Table", "{B0E9DED9-537C-43B8-BE69-309C967DF189}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Archives", "Archives", "{3742DA58-0B92-4D2F-95DB-E780487C8C7E}"
 EndProject

@@ -23,7 +23,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
+namespace Gibbed.LetUsClingTogether.UnpackFileTable
 {
     internal class TableDirectory : IFileContainer
     {

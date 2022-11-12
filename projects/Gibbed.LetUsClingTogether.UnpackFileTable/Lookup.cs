@@ -25,7 +25,7 @@ using System.IO;
 using Tommy;
 using Tommy.Extensions;
 
-namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
+namespace Gibbed.LetUsClingTogether.UnpackFileTable
 {
     internal class Lookup
     {

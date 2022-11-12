@@ -29,9 +29,9 @@ using Gibbed.IO;
 using Gibbed.LetUsClingTogether.FileFormats;
 using NDesk.Options;
 using static Gibbed.LetUsClingTogether.FileFormats.InvariantShorthand;
-using PackId = Gibbed.LetUsClingTogether.UnpackFILETABLE.FileTableManifest.PackId;
+using PackId = Gibbed.LetUsClingTogether.UnpackFileTable.FileTableManifest.PackId;
 
-namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
+namespace Gibbed.LetUsClingTogether.UnpackFileTable
 {
     internal class Program
     {
@@ -68,7 +68,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
 
             if (extras.Count < 1 || extras.Count > 2 || showHelp == true)
             {
-                Console.WriteLine("Usage: {0} [OPTIONS]+ input_FILETABLE [output_directory]", GetExecutableName());
+                Console.WriteLine("Usage: {0} [OPTIONS]+ input_FileTable [output_directory]", GetExecutableName());
                 Console.WriteLine("Unpack specified archive.");
                 Console.WriteLine();
                 Console.WriteLine("Options:");

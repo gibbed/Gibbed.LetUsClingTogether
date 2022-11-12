@@ -20,13 +20,20 @@
  *    distribution.
  */
 
-namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
+using System.Collections.Generic;
+
+namespace Gibbed.LetUsClingTogether.UnpackFileTable
 {
-    internal class Settings
+    internal interface IFileContainer
     {
-        public bool UnpackNestedPacks { get; set; } = true;
-        public bool UnpackNestedZIPs { get; set; } = true;
-        public bool UnpackNestedRLE { get; set; } = true;
-        public bool Verbose { get; set; } = false;
+        int Id { get; }
+        string BasePath { get; }
+        string ManifestPath { get; }
+        IFileContainer Parent { get; }
+        Dictionary<long, int> IdCounts { get; }
+        List<FileTableManifest.File> FileManifests { get; }
+        public Tommy.TomlNode Lookup { get; }
+        public bool IsObfuscated { get; }
+        public string PackFileType { get; }
     }
 }
