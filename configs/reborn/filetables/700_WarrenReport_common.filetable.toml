@@ -1,0 +1,9 @@
+[700]
+path = "WarrenReport/common"
+obfuscated = true
+
+[700.0]
+path = "WarrenReport"
+
+[700.1]
+path = "WarrenReportText"

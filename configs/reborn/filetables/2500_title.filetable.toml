@@ -1,0 +1,10 @@
+[2500]
+path = "title"
+obfuscated = true
+
+[2500.0]
+path = "title"
+
+0.path = "tarot_cards.xlc"
+# game expects sheet to be 44 entries
+0.expandable = false

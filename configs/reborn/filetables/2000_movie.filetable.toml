@@ -1,0 +1,21 @@
+[2000]
+path = "movie"
+
+1.name = "prologue"
+2.name = "chapter1"
+3.name = "chapter2a"
+4.name = "chapter2b"
+5.name = "chapter3a"
+6.name = "chapter3b"
+7.name = "chapter3c"
+8.name = "chapter4"
+9.name = "trailer"
+
+10.name = "title_ja-jp"
+11.name = "title_en-us"
+12.name = "title_fr-fr"
+13.name = "title_de-de"
+14.name = "title_es-es"
+15.name = "title_zh-cn"
+16.name = "title_zh-tw"
+17.name = "title_ko-kr"

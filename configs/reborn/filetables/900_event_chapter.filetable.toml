@@ -1,0 +1,90 @@
+[900]
+path = "event/chapter"
+obfuscated = true
+
+[900.10]
+path = "chapter_1"
+
+0_1.path = "C1.pgrs"
+0_2.path = "C1.invk"
+0_3.path = "C1.task"
+0_4.path = "C1.emes"
+
+[900.11]
+path = "chapter_2/chaos" # chapter_2a
+
+0_1.path = "C2a.pgrs"
+0_2.path = "C2a.invk"
+0_3.path = "C2a.task"
+0_4.path = "C2a.emes"
+
+[900.12]
+path = "chapter_2/law" # chapter_2b
+
+0_1.path = "C2b.pgrs"
+0_2.path = "C2b.invk"
+0_3.path = "C2b.task"
+0_4.path = "C2b.emes"
+
+[900.13]
+path = "chapter_3/neutral" # chapter_3a
+
+0_1.path = "C3a.pgrs"
+0_2.path = "C3a.invk"
+0_3.path = "C3a.task"
+
+[900.14]
+path = "chapter_3/chaos" # chapter_3b
+
+0_1.path = "C3b.pgrs"
+0_2.path = "C3b.invk"
+0_3.path = "C3b.task"
+
+[900.15]
+path = "chapter_3/law" # chapter_3c
+
+0_1.path = "C3c.pgrs"
+0_2.path = "C3c.invk"
+0_3.path = "C3c.task"
+
+[900.16]
+path = "chapter_4"
+
+0_1.path = "C4.pgrs"
+0_2.path = "C4.invk"
+0_3.path = "C4.task"
+0_4.path = "C4_0.emes"
+0_5.path = "C4_1.emes"
+
+[900.17]
+path = "chapter_ep"
+
+0_1.path = "EP.pgrs"
+0_2.path = "EP.invk"
+0_3.path = "EP.task"
+
+[900.18]
+path = "chapter_dlc"
+
+0_1.path = "DLC.pgrs"
+0_2.path = "DLC.invk"
+0_3.path = "DLC.task"
+0_4.path = "DLC_0.emes"
+0_5.path = "DLC_1.emes"
+
+[900.20]
+path = "event_data"
+
+3.path = "global_flags.xlc"
+4.path = "unknown_flags.xlc"
+
+6.path = "death_agony_messages.xlc"
+
+7.path = "death_agony.invk" # assumed
+8.path = "death_agony.task" # assumed
+9.path = "death_agony.script" # assumed
+
+10.path = "battle_start.pgrs" # assumed
+11.path = "battle_start.invk" # assumed
+12.path = "battle_start.task" # assumed
+13.path = "battle_start.script"
