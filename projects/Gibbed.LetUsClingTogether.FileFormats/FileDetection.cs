@@ -101,6 +101,14 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                 return ".gmo";
             }
             else if (
+               count >= 3 &&
+               buffer[index + 0] == 'b' &&
+               buffer[index + 1] == 't' &&
+               buffer[index + 2] == 'x')
+            {
+                return ".btx";
+            }
+            else if (
                 count >= 3 &&
                 buffer[index + 0] == 'S' &&
                 buffer[index + 1] == 'A' &&

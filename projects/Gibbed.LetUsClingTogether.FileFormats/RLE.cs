@@ -26,6 +26,8 @@ namespace Gibbed.LetUsClingTogether.FileFormats
 {
     public static class RLE
     {
+        public const uint Signature = 0x67687361u; // 'ashg'
+
         public static byte[] Decompress(byte[] inputBuffer, int inputIndex, int inputCount)
         {
             var uncompressedSize = BitConverter.ToInt32(inputBuffer, inputIndex + 8);

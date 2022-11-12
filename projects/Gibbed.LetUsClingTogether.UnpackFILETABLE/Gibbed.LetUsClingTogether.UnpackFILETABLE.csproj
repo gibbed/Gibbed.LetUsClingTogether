@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Gibbed.IO\Gibbed.IO.csproj" />
     <ProjectReference Include="..\Gibbed.LetUsClingTogether.FileFormats\Gibbed.LetUsClingTogether.FileFormats.csproj" />
+    <ProjectReference Include="..\Gibbed.Reborn.FileFormats\Gibbed.Reborn.FileFormats.csproj" />
     <ProjectReference Include="..\NDesk.Options\NDesk.Options.csproj" />
     <ProjectReference Include="..\Tommy\Tommy\Tommy.csproj" />
     <ProjectReference Include="..\Tommy\Tommy.Extensions\Tommy.Extensions.csproj" />

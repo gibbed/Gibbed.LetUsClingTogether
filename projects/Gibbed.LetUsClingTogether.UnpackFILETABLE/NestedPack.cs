@@ -21,29 +21,25 @@
  */
 
 using System.Collections.Generic;
+using System.IO;
 
-namespace Gibbed.LetUsClingTogether.FileFormats.FileTable
+namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
 {
-    public class DirectoryEntry
+    internal class NestedPack : IFileContainer
     {
-        private readonly List<FileEntry> _Files;
-
-        public DirectoryEntry()
+        public NestedPack()
         {
-            this._Files = new();
+            this.IdCounts = new();
+            this.FileManifests = new();
         }
 
-        public ushort Id { get; set; }
-        public byte Unknown02 { get; set; }
-        public byte DataBlockSize { get; set; }
-        public uint DataBaseOffset { get; set; }
-        public bool IsInInstallData { get; set; }
-        public uint DataInstallBaseOffset { get; set; }
-        public List<FileEntry> Files => this._Files;
-
-        public override string ToString()
-        {
-            return $"{this.Id}";
-        }
+        public int Id { get; set; }
+        public string BasePath { get; set; }
+        public string ManifestPath { get { return Path.Combine(this.BasePath, "@manifest.toml"); } }
+        public IFileContainer Parent { get; set; }
+        public Dictionary<long, int> IdCounts { get; }
+        public List<FileTableManifest.File> FileManifests { get; }
+        public Tommy.TomlNode Lookup { get; set; }
+        public string PackFileType { get; set; }
     }
 }

@@ -22,28 +22,17 @@
 
 using System.Collections.Generic;
 
-namespace Gibbed.LetUsClingTogether.FileFormats.FileTable
+namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
 {
-    public class DirectoryEntry
+    internal interface IFileContainer
     {
-        private readonly List<FileEntry> _Files;
-
-        public DirectoryEntry()
-        {
-            this._Files = new();
-        }
-
-        public ushort Id { get; set; }
-        public byte Unknown02 { get; set; }
-        public byte DataBlockSize { get; set; }
-        public uint DataBaseOffset { get; set; }
-        public bool IsInInstallData { get; set; }
-        public uint DataInstallBaseOffset { get; set; }
-        public List<FileEntry> Files => this._Files;
-
-        public override string ToString()
-        {
-            return $"{this.Id}";
-        }
+        int Id { get; }
+        string BasePath { get; }
+        string ManifestPath { get; }
+        IFileContainer Parent { get; }
+        Dictionary<long, int> IdCounts { get; }
+        List<FileTableManifest.File> FileManifests { get; }
+        public Tommy.TomlNode Lookup { get; }
+        public string PackFileType { get; }
     }
 }

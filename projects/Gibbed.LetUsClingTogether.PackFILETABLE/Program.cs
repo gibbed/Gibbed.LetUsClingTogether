@@ -93,9 +93,15 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
 
             ReadManifest(tableManifestPath, out FileTableManifest tableManifest);
 
+            if (tableManifest.IsReborn == true)
+            {
+                throw new NotSupportedException("cannot pack Reborn file table yet");
+            }
+
             FileTableFile table = new()
             {
                 Endian = tableManifest.Endian,
+                IsReborn = tableManifest.IsReborn,
                 TitleId1 = tableManifest.TitleId1,
                 TitleId2 = tableManifest.TitleId2,
                 Unknown32 = tableManifest.Unknown32,
@@ -124,6 +130,7 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
                 FileTable.DirectoryEntry directory = new()
                 {
                     Id = directoryManifest.Id,
+                    Unknown02 = directoryManifest.Unknown02,
                     DataBaseOffset = 0,
                     DataBlockSize = directoryManifest.DataBlockSize,
                     // TODO(gibbed): don't currently support building install data
@@ -165,12 +172,15 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
                 table.Directories.Add(directory);
             }
 
-            var tablePath = Path.Combine(outputBasePath, "FILETABLE.BIN");
+            var outputTableName = tableManifest.IsReborn == false
+                ? "FILETABLE.BIN"
+                : "FileTable.bin";
+            var outputTablePath = Path.Combine(outputBasePath, outputTableName);
 
-            var tableParentPath = Path.GetDirectoryName(tablePath);
-            if (string.IsNullOrEmpty(tableParentPath) == false)
+            var outputTableParentPath = Path.GetDirectoryName(outputTablePath);
+            if (string.IsNullOrEmpty(outputTableParentPath) == false)
             {
-                Directory.CreateDirectory(tableParentPath);
+                Directory.CreateDirectory(outputTableParentPath);
             }
 
             byte[] tableBytes;
@@ -181,7 +191,7 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
                 tableBytes = output.ToArray();
             }
 
-            File.WriteAllBytes(tablePath, tableBytes);
+            File.WriteAllBytes(outputTablePath, tableBytes);
         }
 
         private static uint HandleFile(
@@ -494,6 +504,7 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
 
             manifest = new FileTableManifest();
             manifest.Endian = endian;
+            manifest.IsReborn = rootTable["is_reborn"]?.AsBoolean?.Value ?? false;
             manifest.TitleId1 = rootTable["title_id_1"]?.AsString?.Value ?? throw new FormatException();
             manifest.TitleId2 = rootTable["title_id_2"]?.AsString?.Value ?? throw new FormatException();
             manifest.Unknown32 = (byte)(rootTable["unknown32"]?.AsInteger?.Value ?? throw new FormatException());
@@ -504,6 +515,7 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
             {
                 FileTableManifest.Directory directory = new();
                 directory.Id = (ushort)(directoryTable["id"]?.AsInteger?.Value ?? throw new FormatException());
+                directory.Unknown02 = (byte)(directoryTable["unknown02"]?.AsInteger?.Value ?? 4);
                 directory.DataBlockSize = (byte)(directoryTable["data_block_size"]?.AsInteger?.Value ?? 4);
                 directory.IsInInstallData = directoryTable["is_in_install_data"]?.AsBoolean?.Value ?? manifest.IsInInstallDataDefault;
                 directory.FileManifest = directoryTable["file_manifest"]?.AsString?.Value ?? throw new FormatException();
@@ -533,6 +545,7 @@ namespace Gibbed.LetUsClingTogether.PackFILETABLE
                 manifest.PackId = TranslatePackId(packFileType, ReadManifestPackId(fileTable["pack_id"]?.AsTable));
                 manifest.IsZip = fileTable["zip"]?.AsBoolean?.Value ?? false;
                 manifest.ZipName = fileTable["zip_name"]?.AsString?.Value;
+                manifest.IsRLE = fileTable["rle"]?.AsBoolean?.Value ?? false;
                 manifest.IsPack = fileTable["pack"]?.AsBoolean?.Value ?? false;
                 //manifest.SheetFormat = fileTable["sheet_format"]?.AsString;
                 manifest.Path = fileTable["path"]?.AsString?.Value;

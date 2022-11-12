@@ -106,7 +106,7 @@ namespace Gibbed.LetUsClingTogether.ExportSprite
         {
             var inputBytes = File.ReadAllBytes(inputPath);
 
-            if (BitConverter.ToUInt32(inputBytes, 0) == 0x67687361) // 'ashg'
+            if (BitConverter.ToUInt32(inputBytes, 0) == RLE.Signature)
             {
                 inputBytes = RLE.Decompress(inputBytes, 0, inputBytes.Length);
             }

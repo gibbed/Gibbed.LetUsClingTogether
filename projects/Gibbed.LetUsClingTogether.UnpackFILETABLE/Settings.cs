@@ -20,30 +20,13 @@
  *    distribution.
  */
 
-using System.Collections.Generic;
-
-namespace Gibbed.LetUsClingTogether.FileFormats.FileTable
+namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
 {
-    public class DirectoryEntry
+    internal class Settings
     {
-        private readonly List<FileEntry> _Files;
-
-        public DirectoryEntry()
-        {
-            this._Files = new();
-        }
-
-        public ushort Id { get; set; }
-        public byte Unknown02 { get; set; }
-        public byte DataBlockSize { get; set; }
-        public uint DataBaseOffset { get; set; }
-        public bool IsInInstallData { get; set; }
-        public uint DataInstallBaseOffset { get; set; }
-        public List<FileEntry> Files => this._Files;
-
-        public override string ToString()
-        {
-            return $"{this.Id}";
-        }
+        public bool UnpackNestedPacks { get; set; } = true;
+        public bool UnpackNestedZIPs { get; set; } = true;
+        public bool UnpackNestedRLE { get; set; } = true;
+        public bool Verbose { get; set; } = false;
     }
 }

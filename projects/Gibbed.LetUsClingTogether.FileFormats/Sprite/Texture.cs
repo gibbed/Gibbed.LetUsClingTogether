@@ -51,7 +51,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Sprite
             var commandOffset = input.ReadValueU32(endian);
             const int commandSize = 32;
 
-            if (dataOffset != 0x20)
+            if (dataOffset != 0x20 && dataOffset != 0x30)
             {
                 throw new FormatException();
             }

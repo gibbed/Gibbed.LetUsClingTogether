@@ -75,7 +75,14 @@ namespace Gibbed.LetUsClingTogether.UnpackPack
 
             Directory.CreateDirectory(outputBasePath);
 
-            using (var input = File.OpenRead(inputPath))
+            var inputBytes = File.ReadAllBytes(inputPath);
+
+            if (BitConverter.ToUInt32(inputBytes, 0) == 0x67687361) // 'ashg'
+            {
+                inputBytes = RLE.Decompress(inputBytes, 0, inputBytes.Length);
+            }
+
+            using (var input = new MemoryStream(inputBytes, false))
             {
                 var header = new PackFile();
                 header.Deserialize(input);

@@ -20,30 +20,19 @@
  *    distribution.
  */
 
-using System.Collections.Generic;
+using System.IO;
 
-namespace Gibbed.LetUsClingTogether.FileFormats.FileTable
+namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
 {
-    public class DirectoryEntry
+    internal class QueuedFile
     {
-        private readonly List<FileEntry> _Files;
-
-        public DirectoryEntry()
-        {
-            this._Files = new();
-        }
-
-        public ushort Id { get; set; }
-        public byte Unknown02 { get; set; }
-        public byte DataBlockSize { get; set; }
-        public uint DataBaseOffset { get; set; }
-        public bool IsInInstallData { get; set; }
-        public uint DataInstallBaseOffset { get; set; }
-        public List<FileEntry> Files => this._Files;
-
-        public override string ToString()
-        {
-            return $"{this.Id}";
-        }
+        public int Id { get; set; }
+        public IFileContainer Parent { get; set; }
+        public uint? NameHash { get; set; }
+        public uint? PackRawId { get; set; }
+        public Stream DataStream { get; set; }
+        public long DataOffset { get; set; }
+        public uint DataSize { get; set; }
+        public string ExternalPath { get; set; }
     }
 }

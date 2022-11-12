@@ -29,10 +29,11 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
     {
         public FileTableManifest()
         {
-            this.Directories = new List<Directory>();
+            this.Directories = new();
         }
 
         public Endian Endian { get; set; }
+        public bool IsReborn { get; set; }
         public string TitleId1 { get; set; }
         public string TitleId2 { get; set; }
         public byte Unknown32 { get; set; }
@@ -44,6 +45,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
         public class Directory
         {
             public ushort Id { get; set; }
+            public byte Unknown02 { get; set; }
             public byte DataBlockSize { get; set; }
             public bool IsInInstallData { get; set; }
             public string FileManifest { get; set; }
@@ -57,9 +59,11 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
             public PackId? PackId { get; set; }
             public bool IsZip { get; set; }
             public string ZipName { get; set; }
+            public bool IsRLE { get; set; }
             public bool IsPack { get; set; }
             public string SheetFormat { get; set; }
             public string Path { get; set; }
+            public string ExternalPath { get; set; }
         }
 
         public struct PackId
@@ -83,17 +87,17 @@ namespace Gibbed.LetUsClingTogether.UnpackFILETABLE
 
             public static PackId Create(uint rawId)
             {
-                return new PackId(rawId);
+                return new(rawId);
             }
 
             public static PackId? Create(uint? rawId)
             {
-                return rawId == null ? null : new PackId(rawId.Value);
+                return rawId == null ? null : new(rawId.Value);
             }
 
             public static PackId Create(ushort directoryId, ushort fileId)
             {
-                return new PackId(directoryId, fileId);
+                return new(directoryId, fileId);
             }
         }
     }
