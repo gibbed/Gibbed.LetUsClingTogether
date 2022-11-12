@@ -31,11 +31,11 @@ Intended to work with all available regional versions of the game, though only t
 
 ## FILETABLE / Archives
 
-* [`PackFILETABLE`](projects/Gibbed.LetUsClingTogether.PackFILETABLE): Packer for `FILETABLE.BIN` (and corresponding `.BIN` files).
-* [`LookupFILETABLE`](projects/Gibbed.LetUsClingTogether.LookupFILETABLE): Translates offsets in `.BIN` files to their corresponding file entries.
-* [`UnpackFILETABLE`](projects/Gibbed.LetUsClingTogether.UnpackFILETABLE): Unpacker for `FILETABLE.BIN` (and corresponding `.BIN` files).
+* [`PackFileTable`](projects/Gibbed.LetUsClingTogether.PackFileTable): Packer for `FILETABLE.BIN` / `FileTable.bin` (and corresponding `.BIN` files).
+* [`LookupFileTable`](projects/Gibbed.LetUsClingTogether.LookupFileTable): Translates offsets in `.BIN` files to their corresponding file entries.
+* [`UnpackFileTable`](projects/Gibbed.LetUsClingTogether.UnpackFileTable): Unpacker for `FILETABLE.BIN` / `FileTable.bin` (and corresponding `.BIN` files).
 
-_`UnpackFILETABLE` takes advantage of [filetable definitions](configs/filetables) to identify & describe files within the ID-based filesystem._
+_`UnpackFileTable` takes advantage of [filetable definitions](configs) to identify & describe files within the ID-based filesystem._
 
 ## Assets
 
