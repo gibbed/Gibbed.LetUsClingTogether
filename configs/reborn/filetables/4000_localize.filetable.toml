@@ -1,3 +1,12 @@
 [4000]
 path = "localize"
 obfuscated = true
+
+0.path = "ja-jp"
+1.path = "en-us"
+2.path = "fr-fr"
+3.path = "de-de"
+4.path = "es-es"
+5.path = "zh-cn"
+6.path = "zh-tw"
+7.path = "ko-kr"
