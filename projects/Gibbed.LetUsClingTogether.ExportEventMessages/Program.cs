@@ -28,7 +28,7 @@ using System.Text;
 using Gibbed.LetUsClingTogether.FileFormats;
 using NDesk.Options;
 
-namespace Gibbed.LetUsClingTogether.ExportSprite
+namespace Gibbed.LetUsClingTogether.ExportEventMessages
 {
     internal class Program
     {
