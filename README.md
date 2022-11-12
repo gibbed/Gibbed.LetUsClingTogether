@@ -20,6 +20,9 @@ Intended to work with all available regional versions of the game, though only t
 
 ## Tactics Ogre: Reborn
 
+* [Steam (PC)](https://store.steampowered.com/agecheck/app/1451090/)
+* [Switch](https://www.nintendo.com/store/products/tactics-ogre-reborn-switch/)
+
 # What?
 
 *Experimental!*
