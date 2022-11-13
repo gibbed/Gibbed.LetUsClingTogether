@@ -148,7 +148,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Screenplay
         AndAndAndAndAndOr = 110, // 6E  A && B && C && D && E && (F || G)
         AndAndAndAndAndAndOrAnd = 111, // 6F  A && B && C && D && E && F && (G || H) && I
 
-        [Reborn] Unknown112 = 112,
-        [Reborn] Unknown113 = 113,
+        [Reborn] AndAndAndAndAndAndAndOr = 112, // 70  A && B && C && D && E && F && G && (H || I)
+        [Reborn] AndAndAndAndOrOrOr = 113, // 71  A && B && C && D && (E || F || G || H)
     }
 }

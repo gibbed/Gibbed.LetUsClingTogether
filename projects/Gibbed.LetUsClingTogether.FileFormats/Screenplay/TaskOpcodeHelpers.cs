@@ -140,8 +140,8 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Screenplay
             TaskOpcode.AndAndAndOrOrOr => true,
             TaskOpcode.AndAndAndAndAndOr => true,
             TaskOpcode.AndAndAndAndAndAndOrAnd => true,
-            TaskOpcode.Unknown112 => true, // Reborn
-            TaskOpcode.Unknown113 => true, // Reborn
+            TaskOpcode.AndAndAndAndAndAndAndOr => true, // Reborn
+            TaskOpcode.AndAndAndAndOrOrOr => true, // Reborn
             _ => throw new ArgumentOutOfRangeException(nameof(opcode)),
         };
 
@@ -259,8 +259,8 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Screenplay
             TaskOpcode.AndAndAndOrOrOr => TaskType.Expression,
             TaskOpcode.AndAndAndAndAndOr => TaskType.Expression,
             TaskOpcode.AndAndAndAndAndAndOrAnd => TaskType.Expression,
-            TaskOpcode.Unknown112 => TaskType.Expression, // Reborn
-            TaskOpcode.Unknown113 => TaskType.Expression, // Reborn
+            TaskOpcode.AndAndAndAndAndAndAndOr => TaskType.Expression, // Reborn
+            TaskOpcode.AndAndAndAndOrOrOr => TaskType.Expression, // Reborn
             _ => throw new ArgumentOutOfRangeException(nameof(opcode)),
         };
 
@@ -378,8 +378,8 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Screenplay
             TaskOpcode.AndAndAndOrOrOr => 1,
             TaskOpcode.AndAndAndAndAndOr => 1,
             TaskOpcode.AndAndAndAndAndAndOrAnd => 1,
-            TaskOpcode.Unknown112 => 1, // Reborn
-            TaskOpcode.Unknown113 => 1, // Reborn
+            TaskOpcode.AndAndAndAndAndAndAndOr => 1, // Reborn
+            TaskOpcode.AndAndAndAndOrOrOr => 1, // Reborn
             _ => throw new ArgumentOutOfRangeException(nameof(opcode)),
         };
 
@@ -458,12 +458,13 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Screenplay
             TaskOpcode.CompareBattlePartyIsThreeUnits => (TargetType.None, ValueType.UInt8),
             TaskOpcode.CompareHasItem => (TargetType.UnknownUInt16, ValueType.None),
             TaskOpcode.Unknown4F => (TargetType.UnknownUInt8, ValueType.None),
-
             TaskOpcode.Unknown50 => (TargetType.None, ValueType.UInt16),
             TaskOpcode.Unknown51 => (TargetType.None, ValueType.UInt16),
             TaskOpcode.Unknown52 => (TargetType.None, ValueType.UInt8),
             TaskOpcode.CompareHasCharacter => (TargetType.UnknownUInt16, ValueType.None),
-
+            TaskOpcode.Unknown54 => (TargetType.None, ValueType.UInt8), // Reborn
+            TaskOpcode.Unknown55 => (TargetType.UnknownUInt16, ValueType.UInt8), // Reborn
+            TaskOpcode.Unknown56 => (TargetType.None, ValueType.UInt8), // Reborn
             _ => throw new NotSupportedException(),
         };
 
