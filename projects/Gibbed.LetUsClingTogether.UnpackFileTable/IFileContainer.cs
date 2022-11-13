@@ -33,7 +33,6 @@ namespace Gibbed.LetUsClingTogether.UnpackFileTable
         Dictionary<long, int> IdCounts { get; }
         List<FileTableManifest.File> FileManifests { get; }
         public Tommy.TomlNode Lookup { get; }
-        public bool IsObfuscated { get; }
         public string PackFileType { get; }
     }
 }

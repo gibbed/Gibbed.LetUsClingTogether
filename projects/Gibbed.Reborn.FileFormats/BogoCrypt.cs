@@ -20,6 +20,8 @@
  *    distribution.
  */
 
+using System;
+
 namespace Gibbed.Reborn.FileFormats
 {
     public static class BogoCrypt
@@ -54,11 +56,23 @@ namespace Gibbed.Reborn.FileFormats
             };
         }
 
-        public static void Deobfuscate(byte[] bytes, int offset, int count)
+        public static void Decrypt(byte[] bytes, int offset, int count)
         {
+            if (bytes == null)
+            {
+                throw new ArgumentNullException(nameof(bytes));
+            }
             if (count == 0)
             {
                 return;
+            }
+            if (offset < 0 || offset > bytes.Length)
+            {
+                throw new ArgumentOutOfRangeException(nameof(offset));
+            }
+            if (count < 16 || offset + count > bytes.Length)
+            {
+                throw new ArgumentOutOfRangeException(nameof(count));
             }
             Pass1(bytes, offset, count, 3);
             Pass2(bytes, offset, count, 8, Table2);

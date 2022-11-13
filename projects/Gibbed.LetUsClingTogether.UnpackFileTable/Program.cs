@@ -336,7 +336,6 @@ namespace Gibbed.LetUsClingTogether.UnpackFileTable
                 Id = directory.Id,
                 BasePath = Path.Combine(outputBasePath, directoryPath),
                 Lookup = directoryLookup,
-                IsObfuscated = directoryLookup["obfuscated"]?.AsBoolean?.Value ?? false,
             };
 
             List<IFileContainer> fileContainers = new()
@@ -370,9 +369,9 @@ namespace Gibbed.LetUsClingTogether.UnpackFileTable
 
                 var inputBytes = File.ReadAllBytes(inputPath);
 
-                if (tableDirectory.IsObfuscated == true)
+                if (inputPath.EndsWith(".dat", StringComparison.InvariantCultureIgnoreCase) == true)
                 {
-                    Reborn.FileFormats.BogoCrypt.Deobfuscate(inputBytes, 0, inputBytes.Length);
+                    Reborn.FileFormats.BogoCrypt.Decrypt(inputBytes, 0, inputBytes.Length);
                 }
 
                 using (var input = new MemoryStream(inputBytes, false))
