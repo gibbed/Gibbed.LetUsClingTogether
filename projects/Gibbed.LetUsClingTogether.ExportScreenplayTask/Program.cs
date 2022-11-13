@@ -100,7 +100,6 @@ namespace Gibbed.LetUsClingTogether.ExportScreenplayTask
                 {
                     Tommy.TomlTable instructionTable = new();
                     instructionTable["op"] = _($"{instruction.Opcode}");
-
                     var opcodeInfo = instruction.Opcode.GetArguments();
                     if (opcodeInfo.targetType != TargetType.None)
                     {
