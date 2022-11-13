@@ -2,5 +2,22 @@
 path = "system"
 obfuscated = true
 
+4.path = "s2_data.btx"
+
 [300.0]
 path = "system_data"
+
+[300.6]
+
+
+0.path = "icon_preset_01.btx"
+1.path = "icon_preset_02.btx"
+2.path = "icon_preset_03.btx"
+3.path = "icon_preset_04.btx"
+4.path = "icon_preset_05.btx"
+5.path = "icon_preset_06.btx"
+6.path = "icon_preset_07.btx"
+7.path = "icon_preset_08.btx"
+8.path = "icon_preset_09.btx"
+9.path = "icon_preset_10.btx"
+10.path = "icon_preset_11.btx"

@@ -4,3 +4,5 @@ obfuscated = true
 
 [1000.1]
 path = "battle_data_release"
+
+23 = "racial_templates"

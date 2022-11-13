@@ -8,3 +8,39 @@ path = "title"
 0.path = "tarot_cards.xlc"
 # game expects sheet to be 44 entries
 0.expandable = false
+
+1.path = "multiplayer_map_list.xlc"
+
+4.path = "multiplayer.pgrs"
+
+6.path = "3008_NewGameStart.sab"
+7.path = "3009_CMake_cursor.sab"
+8.path = "3010_CMake_decide.sab"
+9.path = "3011_CMake_cardappear.sab"
+10.path = "3012_CMake_Accept.sab"
+
+[2500.0.3]
+path = "multiplayer_map_previews"
+
+0_3.path = "bg000_03.btx"
+0_6.path = "bg000_11.btx"
+0_12.path = "bg002_02.btx"
+0_18.path = "bg005_01.btx"
+0_20.path = "bg006_01.btx"
+0_23.path = "bg007_02.btx"
+0_24.path = "bg008_01.btx"
+0_36.path = "bg013_02.btx"
+0_58.path = "bg014_18.btx"
+0_64.path = "bg015_01.btx"
+0_66.path = "bg015_02.btx"
+0_71.path = "bg016_03.btx"
+0_76.path = "bg016_09.btx"
+0_78.path = "bg017_02.btx"
+0_80.path = "bg115_02.btx"
+0_81.path = "bg130_01.btx"
+0_82.path = "bg135_01.btx"
+0_83.path = "bg140_01.btx"
+0_85.path = "bg151_01.btx"
+0_125.path = "bg018_02.btx"
+0_138.path = "bg105_03.btx"
+0_211.path = "bg020_03.btx"
