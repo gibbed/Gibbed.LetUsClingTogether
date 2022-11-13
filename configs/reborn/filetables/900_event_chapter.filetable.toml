@@ -1,6 +1,5 @@
 [900]
 path = "event/chapter"
-obfuscated = true
 
 [900.10]
 path = "chapter_1"

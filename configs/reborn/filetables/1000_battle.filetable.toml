@@ -1,6 +1,5 @@
 [1000]
 path = "battle"
-obfuscated = true
 
 [1000.1]
 path = "battle_data_release"

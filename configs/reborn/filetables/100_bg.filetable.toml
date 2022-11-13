@@ -1,6 +1,5 @@
 ﻿[100]
 path = "bg"
-obfuscated = true
 
 999.path = "bg_common"
 1000.path = "bg000_01_c1_t00"

@@ -1,6 +1,5 @@
 [800]
 path = "worldmap"
-obfuscated = true
 
 [800.0]
 path = "Worldmap"

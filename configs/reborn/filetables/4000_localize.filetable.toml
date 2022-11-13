@@ -1,6 +1,5 @@
 [4000]
 path = "localize"
-obfuscated = true
 
 0.path = "ja-jp"
 1.path = "en-us"

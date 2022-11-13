@@ -2,7 +2,6 @@
 
 [20]
 path = "object/actor"
-obfuscated = true
 
 1.path = "Adult_f"
 2.path = "Adult_m"

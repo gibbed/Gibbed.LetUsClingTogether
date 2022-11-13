@@ -1,6 +1,5 @@
 [700]
 path = "WarrenReport/common"
-obfuscated = true
 
 [700.0]
 path = "WarrenReport"

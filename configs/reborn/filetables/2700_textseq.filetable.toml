@@ -1,6 +1,5 @@
 [2700]
 path = "textseq"
-obfuscated = true
 
 [2700.0]
 path = "textseq_credit"

@@ -1,6 +1,5 @@
 ﻿[500]
 path = "menu"
-obfuscated = true
 
 2048.path = "face/shop_f00"
 2049.path = "face/shop_m00"

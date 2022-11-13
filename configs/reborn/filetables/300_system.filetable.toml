@@ -1,6 +1,5 @@
 [300]
 path = "system"
-obfuscated = true
 
 4.path = "s2_data.btx"
 
