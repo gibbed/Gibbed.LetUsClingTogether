@@ -25,8 +25,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Gibbed.LetUsClingTogether.FileFormats;
+using Gibbed.LetUsClingTogether.FileFormats.Screenplay;
 using NDesk.Options;
 using static Gibbed.LetUsClingTogether.FileFormats.InvariantShorthand;
+using ValueType = Gibbed.LetUsClingTogether.FileFormats.Screenplay.ValueType;
 
 namespace Gibbed.LetUsClingTogether.ExportScreenplayTask
 {
@@ -98,8 +100,16 @@ namespace Gibbed.LetUsClingTogether.ExportScreenplayTask
                 {
                     Tommy.TomlTable instructionTable = new();
                     instructionTable["op"] = _($"{instruction.Opcode}");
-                    instructionTable["target"] = instruction.Target;
-                    instructionTable["value"] = instruction.Value;
+
+                    var opcodeInfo = instruction.Opcode.GetArguments();
+                    if (opcodeInfo.targetType != TargetType.None)
+                    {
+                        instructionTable["target"] = instruction.Target;
+                    }
+                    if (opcodeInfo.valueType != ValueType.None)
+                    {
+                        instructionTable["value"] = instruction.Value;
+                    }
                     instructionsArray.Add(instructionTable);
                 }
 
