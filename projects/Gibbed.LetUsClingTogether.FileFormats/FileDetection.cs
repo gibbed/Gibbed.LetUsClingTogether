@@ -85,6 +85,15 @@ namespace Gibbed.LetUsClingTogether.FileFormats
             }
             else if (
                 count >= 4 &&
+                buffer[index + 0] == 'A' &&
+                buffer[index + 1] == 'R' &&
+                buffer[index + 2] == 'C' &&
+                buffer[index + 3] == 0)
+            {
+                return ".pac";
+            }
+            else if (
+                count >= 4 &&
                 buffer[index + 0] == 'P' &&
                 buffer[index + 1] == 'S' &&
                 buffer[index + 2] == 'M' &&
@@ -115,6 +124,15 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                 buffer[index + 2] == 'S')
             {
                 return ".sas";
+            }
+            else if (
+                count >= 4 &&
+                buffer[index + 0] == 'S' &&
+                buffer[index + 1] == 'A' &&
+                buffer[index + 2] == 'B' &&
+                buffer[index + 3] == 'F')
+            {
+                return ".sab";
             }
             else if (
               count >= 4 &&
