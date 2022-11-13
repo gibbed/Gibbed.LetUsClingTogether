@@ -65,10 +65,10 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Screenplay
             TaskOpcode.Unknown22 => true,
             TaskOpcode.Unknown23 => true,
             TaskOpcode.Unknown24 => true,
-            TaskOpcode.NoOperation37 => false,
-            TaskOpcode.NoOperation38 => false,
-            TaskOpcode.NoOperation39 => false,
-            TaskOpcode.NoOperation40 => false,
+            TaskOpcode.SetUnionLevel => true, // Reborn
+            TaskOpcode.Unknown26 => true, // Reborn
+            TaskOpcode.Unknown27 => true, // Reborn
+            TaskOpcode.Unknown28 => true, // Reborn
             TaskOpcode.NoOperation41 => false,
             TaskOpcode.NoOperation42 => false,
             TaskOpcode.NoOperation43 => false,
@@ -112,9 +112,9 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Screenplay
             TaskOpcode.Unknown51 => true,
             TaskOpcode.Unknown52 => true,
             TaskOpcode.CompareHasCharacter => true,
-            TaskOpcode.NoOperation84 => false,
-            TaskOpcode.NoOperation85 => false,
-            TaskOpcode.NoOperation86 => false,
+            TaskOpcode.Unknown54 => true, // Reborn
+            TaskOpcode.Unknown55 => true, // Reborn
+            TaskOpcode.Unknown56 => true, // Reborn
             TaskOpcode.NoOperation87 => false,
             TaskOpcode.NoOperation88 => false,
             TaskOpcode.NoOperation89 => false,
@@ -140,6 +140,8 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Screenplay
             TaskOpcode.AndAndAndOrOrOr => true,
             TaskOpcode.AndAndAndAndAndOr => true,
             TaskOpcode.AndAndAndAndAndAndOrAnd => true,
+            TaskOpcode.Unknown112 => true, // Reborn
+            TaskOpcode.Unknown113 => true, // Reborn
             _ => throw new ArgumentOutOfRangeException(nameof(opcode)),
         };
 
@@ -182,10 +184,10 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Screenplay
             TaskOpcode.Unknown22 => TaskType.ProcessingTask,
             TaskOpcode.Unknown23 => TaskType.ProcessingTask,
             TaskOpcode.Unknown24 => TaskType.ProcessingTask,
-            TaskOpcode.NoOperation37 => TaskType.ProcessingTask,
-            TaskOpcode.NoOperation38 => TaskType.ProcessingTask,
-            TaskOpcode.NoOperation39 => TaskType.ProcessingTask,
-            TaskOpcode.NoOperation40 => TaskType.ProcessingTask,
+            TaskOpcode.SetUnionLevel => TaskType.ProcessingTask,
+            TaskOpcode.Unknown26 => TaskType.ProcessingTask,
+            TaskOpcode.Unknown27 => TaskType.ProcessingTask,
+            TaskOpcode.Unknown28 => TaskType.ProcessingTask,
             TaskOpcode.NoOperation41 => TaskType.ProcessingTask,
             TaskOpcode.NoOperation42 => TaskType.ProcessingTask,
             TaskOpcode.NoOperation43 => TaskType.ProcessingTask,
@@ -229,9 +231,9 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Screenplay
             TaskOpcode.Unknown51 => TaskType.Invocation,
             TaskOpcode.Unknown52 => TaskType.Invocation,
             TaskOpcode.CompareHasCharacter => TaskType.Invocation,
-            TaskOpcode.NoOperation84 => TaskType.Invocation,
-            TaskOpcode.NoOperation85 => TaskType.Invocation,
-            TaskOpcode.NoOperation86 => TaskType.Invocation,
+            TaskOpcode.Unknown54 => TaskType.Invocation,
+            TaskOpcode.Unknown55 => TaskType.Invocation,
+            TaskOpcode.Unknown56 => TaskType.Invocation,
             TaskOpcode.NoOperation87 => TaskType.Invocation,
             TaskOpcode.NoOperation88 => TaskType.Invocation,
             TaskOpcode.NoOperation89 => TaskType.Invocation,
@@ -257,6 +259,8 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Screenplay
             TaskOpcode.AndAndAndOrOrOr => TaskType.Expression,
             TaskOpcode.AndAndAndAndAndOr => TaskType.Expression,
             TaskOpcode.AndAndAndAndAndAndOrAnd => TaskType.Expression,
+            TaskOpcode.Unknown112 => TaskType.Expression, // Reborn
+            TaskOpcode.Unknown113 => TaskType.Expression, // Reborn
             _ => throw new ArgumentOutOfRangeException(nameof(opcode)),
         };
 
@@ -299,10 +303,10 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Screenplay
             TaskOpcode.Unknown22 => 1,
             TaskOpcode.Unknown23 => 2,
             TaskOpcode.Unknown24 => 2,
-            TaskOpcode.NoOperation37 => 0,
-            TaskOpcode.NoOperation38 => 0,
-            TaskOpcode.NoOperation39 => 0,
-            TaskOpcode.NoOperation40 => 0,
+            TaskOpcode.SetUnionLevel => 1, // Reborn
+            TaskOpcode.Unknown26 => 1, // Reborn
+            TaskOpcode.Unknown27 => 3, // Reborn
+            TaskOpcode.Unknown28 => 3, // Reborn
             TaskOpcode.NoOperation41 => 0,
             TaskOpcode.NoOperation42 => 0,
             TaskOpcode.NoOperation43 => 0,
@@ -346,9 +350,9 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Screenplay
             TaskOpcode.Unknown51 => 3,
             TaskOpcode.Unknown52 => 2,
             TaskOpcode.CompareHasCharacter => 3,
-            TaskOpcode.NoOperation84 => 0,
-            TaskOpcode.NoOperation85 => 0,
-            TaskOpcode.NoOperation86 => 0,
+            TaskOpcode.Unknown54 => 2, // Reborn
+            TaskOpcode.Unknown55 => 4, // Reborn
+            TaskOpcode.Unknown56 => 2, // Reborn
             TaskOpcode.NoOperation87 => 0,
             TaskOpcode.NoOperation88 => 0,
             TaskOpcode.NoOperation89 => 0,
@@ -374,6 +378,8 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Screenplay
             TaskOpcode.AndAndAndOrOrOr => 1,
             TaskOpcode.AndAndAndAndAndOr => 1,
             TaskOpcode.AndAndAndAndAndAndOrAnd => 1,
+            TaskOpcode.Unknown112 => 1, // Reborn
+            TaskOpcode.Unknown113 => 1, // Reborn
             _ => throw new ArgumentOutOfRangeException(nameof(opcode)),
         };
 
@@ -415,6 +421,10 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Screenplay
             TaskOpcode.Unknown22 => (TargetType.None, ValueType.Int8),
             TaskOpcode.Unknown23 => (TargetType.UnknownUInt16, ValueType.None),
             TaskOpcode.Unknown24 => (TargetType.UnknownUInt16, ValueType.None),
+            TaskOpcode.SetUnionLevel => (TargetType.None, ValueType.UInt8), // Reborn
+            TaskOpcode.Unknown26 => (TargetType.None, ValueType.UInt8), // Reborn
+            TaskOpcode.Unknown27 => (TargetType.UnknownUInt16, ValueType.UInt8), // Reborn
+            TaskOpcode.Unknown28 => (TargetType.UnknownUInt16, ValueType.UInt8), // Reborn
 
             TaskOpcode.CompareGlobalFlag => (TargetType.GlobalFlag, ValueType.UInt8),
             TaskOpcode.CompareLocalFlag => (TargetType.LocalFlag, ValueType.UInt8),
@@ -525,10 +535,10 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Screenplay
             TaskOpcode.Unknown22 => 0x088B7C60,
             TaskOpcode.Unknown23 => 0x088B7C98,
             TaskOpcode.Unknown24 => 0x088B7910,
-            TaskOpcode.NoOperation37 => 0x088B6C08,
-            TaskOpcode.NoOperation38 => 0x088B6C08,
-            TaskOpcode.NoOperation39 => 0x088B6C08,
-            TaskOpcode.NoOperation40 => 0x088B6C08,
+            TaskOpcode.SetUnionLevel => 0x088B6C08,
+            TaskOpcode.Unknown26 => 0x088B6C08,
+            TaskOpcode.Unknown27 => 0x088B6C08,
+            TaskOpcode.Unknown28 => 0x088B6C08,
             TaskOpcode.NoOperation41 => 0x088B6C08,
             TaskOpcode.NoOperation42 => 0x088B6C08,
             TaskOpcode.NoOperation43 => 0x088B6C08,
@@ -572,9 +582,9 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Screenplay
             TaskOpcode.Unknown51 => 0x088B8EF8,
             TaskOpcode.Unknown52 => 0x088B8F88,
             TaskOpcode.CompareHasCharacter => 0x088B9078,
-            TaskOpcode.NoOperation84 => 0x088B6C08,
-            TaskOpcode.NoOperation85 => 0x088B6C08,
-            TaskOpcode.NoOperation86 => 0x088B6C08,
+            TaskOpcode.Unknown54 => 0x088B6C08,
+            TaskOpcode.Unknown55 => 0x088B6C08,
+            TaskOpcode.Unknown56 => 0x088B6C08,
             TaskOpcode.NoOperation87 => 0x088B6C08,
             TaskOpcode.NoOperation88 => 0x088B6C08,
             TaskOpcode.NoOperation89 => 0x088B6C08,

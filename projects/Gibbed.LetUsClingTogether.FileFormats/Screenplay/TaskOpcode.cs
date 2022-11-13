@@ -25,7 +25,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Screenplay
     public enum TaskOpcode : ushort
     {
         End = 0xFFFF,
-        
+
         // Processing tasks
         NoOperation0 = 0, // 00
         SetGlobalFlag = 1, // 01
@@ -65,10 +65,11 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Screenplay
         Unknown23 = 35, // 23  sets 0x800000 to flags2 on specified character
         Unknown24 = 36, // 24
 
-        NoOperation37 = 37, // 25
-        NoOperation38 = 38, // 26
-        NoOperation39 = 39, // 27
-        NoOperation40 = 40, // 28
+        [Reborn] SetUnionLevel = 37, // 25
+        [Reborn] Unknown26 = 38, // 26
+        [Reborn] Unknown27 = 39, // 27
+        [Reborn] Unknown28 = 40, // 28
+
         NoOperation41 = 41, // 29
         NoOperation42 = 42, // 2A
         NoOperation43 = 43, // 2B
@@ -115,9 +116,10 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Screenplay
         Unknown52 = 82,
         CompareHasCharacter = 83, // 53
 
-        NoOperation84 = 84, // 54
-        NoOperation85 = 85, // 55
-        NoOperation86 = 86, // 56
+        [Reborn] Unknown54 = 84, // 54
+        [Reborn] Unknown55 = 85, // 55
+        [Reborn] Unknown56 = 86, // 56
+
         NoOperation87 = 87, // 57
         NoOperation88 = 88, // 58
         NoOperation89 = 89, // 59
@@ -145,5 +147,8 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Screenplay
         AndAndAndOrOrOr = 109, // 6D  A && B && C && (D || E || F || G)
         AndAndAndAndAndOr = 110, // 6E  A && B && C && D && E && (F || G)
         AndAndAndAndAndAndOrAnd = 111, // 6F  A && B && C && D && E && F && (G || H) && I
+
+        [Reborn] Unknown112 = 112,
+        [Reborn] Unknown113 = 113,
     }
 }
