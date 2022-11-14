@@ -1,2 +1,13 @@
 [600]
 path = "Font"
+
+0.path = "FontAllFilePackage"
+
+20.path = "packages/ja-jp"
+21.path = "packages/en-us"
+22.path = "packages/fr-fr"
+23.path = "packages/de-de"
+24.path = "packages/es-es"
+25.path = "packages/zh-cn"
+26.path = "packages/zh-tw"
+27.path = "packages/ko-kr"

@@ -5,3 +5,14 @@ path = "battle"
 path = "battle_data_release"
 
 23 = "racial_templates"
+
+[1000.1.0]
+path = "unit_animations"
+
+[1000.1.1]
+path = "weapon_animations"
+
+[1000.1.2]
+path = "misc_graphics"
+
+10.path = "unit_palettes.spr"
