@@ -20,15 +20,17 @@
  *    distribution.
  */
 
-namespace Gibbed.LetUsClingTogether.UnpackFileTable
+using System.Collections.Generic;
+using System.IO;
+using Gibbed.IO;
+
+namespace Gibbed.LetUsClingTogether.SheetFormats
 {
-    internal class Settings
+    public interface IDescriptor
     {
-        public bool IsReborn { get; set; }
-        public string Language { get; set; }
-        public bool UnpackNestedPacks { get; set; } = true;
-        public bool UnpackNestedZIPs { get; set; } = true;
-        public bool UnpackNestedRLE { get; set; } = true;
-        public bool Verbose { get; set; } = false;
+        int EntrySize { get; }
+        bool HasStrings { get; }
+
+        Tommy.TomlNode Export(Stream stream, Endian endian, Dictionary<uint, List<Tommy.TomlString>> strings);
     }
 }

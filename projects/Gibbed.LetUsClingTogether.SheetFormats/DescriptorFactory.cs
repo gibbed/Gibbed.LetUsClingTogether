@@ -20,15 +20,38 @@
  *    distribution.
  */
 
-namespace Gibbed.LetUsClingTogether.UnpackFileTable
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Gibbed.LetUsClingTogether.SheetFormats
 {
-    internal class Settings
-    {
-        public bool IsReborn { get; set; }
-        public string Language { get; set; }
-        public bool UnpackNestedPacks { get; set; } = true;
-        public bool UnpackNestedZIPs { get; set; } = true;
-        public bool UnpackNestedRLE { get; set; } = true;
-        public bool Verbose { get; set; } = false;
-    }
+	public class DescriptorFactory
+	{
+		private readonly Dictionary<string, DescriptorInfo> _Lookup;
+
+		public DescriptorFactory()
+		{
+			this._Lookup = new();
+		}
+
+		public void Add(string name, DescriptorInfo info)
+        {
+			this._Lookup.Add(name, info);
+        }
+
+		public bool TryGet(string name, out DescriptorInfo info)
+		{
+			if (string.IsNullOrEmpty(name) == true)
+			{
+				throw new ArgumentNullException(nameof(name));
+			}
+			return this._Lookup.TryGetValue(name, out info);
+		}
+
+		public IEnumerable<KeyValuePair<string, DescriptorInfo>> Get(int entrySize, bool hasStrings)
+			=> this._Lookup
+				.Where(kv => kv.Value.EntrySize == entrySize && kv.Value.HasStrings == hasStrings)
+				.Select(kv => kv);
+	}
 }

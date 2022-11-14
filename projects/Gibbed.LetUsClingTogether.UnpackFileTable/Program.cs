@@ -153,6 +153,9 @@ namespace Gibbed.LetUsClingTogether.UnpackFileTable
                 Console.WriteLine($"Warning: unknown language for {table.TitleId1}.");
             }
 
+            settings.IsReborn = table.IsReborn;
+            settings.Language = language;
+
             foreach (var directory in table.Directories)
             {
                 string directoryManifestPath;
@@ -163,7 +166,6 @@ namespace Gibbed.LetUsClingTogether.UnpackFileTable
                         inputBasePath,
                         outputBasePath,
                         settings,
-                        language,
                         rootLookup,
                         nameHashLookup);
                 }
@@ -174,7 +176,6 @@ namespace Gibbed.LetUsClingTogether.UnpackFileTable
                         inputBasePath,
                         outputBasePath,
                         settings,
-                        language,
                         rootLookup,
                         nameHashLookup);
                 }
@@ -203,7 +204,6 @@ namespace Gibbed.LetUsClingTogether.UnpackFileTable
             string inputBasePath,
             string outputBasePath,
             Settings settings,
-            string language,
             Tommy.TomlTable rootLookup,
             Dictionary<uint, string> nameHashLookup)
         {
@@ -307,7 +307,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFileTable
 
             foreach (var fileContainer in fileContainers)
             {
-                WriteManifest(fileContainer.ManifestPath, fileContainer, language);
+                WriteManifest(fileContainer.ManifestPath, fileContainer, settings);
             }
 
             return tableDirectory.ManifestPath;
@@ -318,7 +318,6 @@ namespace Gibbed.LetUsClingTogether.UnpackFileTable
             string inputBasePath,
             string outputBasePath,
             Settings settings,
-            string language,
             Tommy.TomlTable rootLookup,
             Dictionary<uint, string> nameHashLookup)
         {
@@ -446,7 +445,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFileTable
 
             foreach (var fileContainer in fileContainers)
             {
-                WriteManifest(fileContainer.ManifestPath, fileContainer, language);
+                WriteManifest(fileContainer.ManifestPath, fileContainer, settings);
             }
 
             return tableDirectory.ManifestPath;
@@ -804,7 +803,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFileTable
             File.WriteAllText(path, sb.ToString(), Encoding.UTF8);
         }
 
-        private static void WriteManifest(string path, IFileContainer directory, string language)
+        private static void WriteManifest(string path, IFileContainer directory, Settings settings)
         {
             Tommy.TomlArray fileArray = new()
             {
@@ -884,9 +883,14 @@ namespace Gibbed.LetUsClingTogether.UnpackFileTable
 
             Tommy.TomlTable rootTable = new();
 
-            if (string.IsNullOrEmpty(language) == false)
+            if (settings.IsReborn == true)
             {
-                rootTable["language"] = language;
+                rootTable["reborn"] = true;
+            }
+
+            if (string.IsNullOrEmpty(settings.Language) == false)
+            {
+                rootTable["language"] = settings.Language;
             }
 
             if (string.IsNullOrEmpty(directory.PackFileType) == false)

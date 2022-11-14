@@ -20,15 +20,19 @@
  *    distribution.
  */
 
-namespace Gibbed.LetUsClingTogether.UnpackFileTable
+namespace Gibbed.LetUsClingTogether.SheetFormats
 {
-    internal class Settings
-    {
-        public bool IsReborn { get; set; }
-        public string Language { get; set; }
-        public bool UnpackNestedPacks { get; set; } = true;
-        public bool UnpackNestedZIPs { get; set; } = true;
-        public bool UnpackNestedRLE { get; set; } = true;
-        public bool Verbose { get; set; } = false;
-    }
+	public enum PrimitiveType
+	{
+		Invalid = 0,
+		Boolean,
+		UInt8,
+		Int8,
+		UInt16,
+		Int16,
+		UInt32,
+		Int32,
+		Float32,
+		String,
+	}
 }

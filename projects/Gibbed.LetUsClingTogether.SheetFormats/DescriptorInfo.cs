@@ -20,15 +20,28 @@
  *    distribution.
  */
 
-namespace Gibbed.LetUsClingTogether.UnpackFileTable
+using System;
+
+namespace Gibbed.LetUsClingTogether.SheetFormats
 {
-    internal class Settings
+    public struct DescriptorInfo
     {
-        public bool IsReborn { get; set; }
-        public string Language { get; set; }
-        public bool UnpackNestedPacks { get; set; } = true;
-        public bool UnpackNestedZIPs { get; set; } = true;
-        public bool UnpackNestedRLE { get; set; } = true;
-        public bool Verbose { get; set; } = false;
+        public readonly int EntrySize;
+        public readonly bool HasStrings;
+        public readonly bool RowsAsTableArray;
+        public Func<IDescriptor> Instantiate;
+
+        public DescriptorInfo(int entrySize, bool hasStrings, bool rowsAsTableArray, Func<IDescriptor> instantiate)
+        {
+            if (instantiate == null)
+            {
+                throw new ArgumentNullException(nameof(instantiate));
+            }
+
+            this.EntrySize = entrySize;
+            this.HasStrings = hasStrings;
+            this.RowsAsTableArray = rowsAsTableArray;
+            this.Instantiate = instantiate;
+        }
     }
 }
