@@ -20,7 +20,7 @@
  *    distribution.
  */
 
-namespace Gibbed.LetUsClingTogether.GEFormats
+namespace Gibbed.PSP.GEFormats
 {
     public enum Operation : byte
     {

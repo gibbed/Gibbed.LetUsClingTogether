@@ -23,6 +23,7 @@
 using System;
 using System.IO;
 using Gibbed.IO;
+using GEFormats = Gibbed.PSP.GEFormats;
 
 namespace Gibbed.LetUsClingTogether.FileFormats.Sprite
 {

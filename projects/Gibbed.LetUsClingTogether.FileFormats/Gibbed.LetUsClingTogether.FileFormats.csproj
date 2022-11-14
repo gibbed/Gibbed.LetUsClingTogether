@@ -12,6 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gibbed.IO\Gibbed.IO.csproj" />
-    <ProjectReference Include="..\Gibbed.LetUsClingTogether.GEFormats\Gibbed.LetUsClingTogether.GEFormats.csproj" />
+    <ProjectReference Include="..\Gibbed.PSP.GEFormats\Gibbed.PSP.GEFormats.csproj" />
   </ItemGroup>
 </Project>

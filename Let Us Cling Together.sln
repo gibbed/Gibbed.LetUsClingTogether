@@ -59,7 +59,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sounds", "Sounds", "{6C85AB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.LetUsClingTogether.ExportSound", "projects\Gibbed.LetUsClingTogether.ExportSound\Gibbed.LetUsClingTogether.ExportSound.csproj", "{87DF94BB-F94E-4AD9-8A89-4222B7AB8C67}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.LetUsClingTogether.GEFormats", "projects\Gibbed.LetUsClingTogether.GEFormats\Gibbed.LetUsClingTogether.GEFormats.csproj", "{646F617D-C361-42FA-AFC2-C86204641EC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.PSP.GEFormats", "projects\Gibbed.PSP.GEFormats\Gibbed.PSP.GEFormats.csproj", "{646F617D-C361-42FA-AFC2-C86204641EC9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.LetUsClingTogether.DumpSceneNames", "projects\Gibbed.LetUsClingTogether.DumpSceneNames\Gibbed.LetUsClingTogether.DumpSceneNames.csproj", "{5D5917F4-D643-4663-B101-66D6AC6846A0}"
 EndProject

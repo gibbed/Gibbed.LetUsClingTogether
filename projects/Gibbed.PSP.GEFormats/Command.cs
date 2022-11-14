@@ -22,7 +22,7 @@
 
 using System;
 
-namespace Gibbed.LetUsClingTogether.GEFormats
+namespace Gibbed.PSP.GEFormats
 {
     public struct Command : IEquatable<Command>, IEquatable<Operation>
     {
