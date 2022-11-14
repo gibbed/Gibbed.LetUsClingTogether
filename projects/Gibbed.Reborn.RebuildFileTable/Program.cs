@@ -27,9 +27,7 @@ using System.Linq;
 using Gibbed.IO;
 using Gibbed.LetUsClingTogether.FileFormats;
 using NDesk.Options;
-using static Gibbed.LetUsClingTogether.FileFormats.InvariantShorthand;
 using FileTable = Gibbed.LetUsClingTogether.FileFormats.FileTable;
-using FileTableManifest = Gibbed.LetUsClingTogether.UnpackFileTable.FileTableManifest;
 
 namespace Gibbed.Reborn.RebuildFileTable
 {
@@ -181,7 +179,7 @@ namespace Gibbed.Reborn.RebuildFileTable
             else
             {
                 Console.WriteLine("[warning] Not updating any specific paths.");
-                Console.WriteLine("[warning] Checking everything. This will take longer.");
+                Console.WriteLine("[warning] Checking everything. This might take longer.");
                 foreach (var targetDirectory in table.Directories)
                 {
                     for (int i = 0; i < targetDirectory.Files.Count; i++)
