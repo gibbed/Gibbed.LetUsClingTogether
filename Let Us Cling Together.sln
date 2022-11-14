@@ -77,6 +77,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.Reborn.DecryptData",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.Reborn.EncryptData", "projects\Gibbed.Reborn.EncryptData\Gibbed.Reborn.EncryptData.csproj", "{1B653D1B-5EE1-4153-853D-5CA432BF7EE3}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.Reborn.RebuildFileTable", "projects\Gibbed.Reborn.RebuildFileTable\Gibbed.Reborn.RebuildFileTable.csproj", "{D7AB198B-93A8-40BF-8D38-DCF8DA8CF774}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -191,6 +193,10 @@ Global
 		{1B653D1B-5EE1-4153-853D-5CA432BF7EE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B653D1B-5EE1-4153-853D-5CA432BF7EE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B653D1B-5EE1-4153-853D-5CA432BF7EE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7AB198B-93A8-40BF-8D38-DCF8DA8CF774}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7AB198B-93A8-40BF-8D38-DCF8DA8CF774}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7AB198B-93A8-40BF-8D38-DCF8DA8CF774}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7AB198B-93A8-40BF-8D38-DCF8DA8CF774}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -226,6 +232,7 @@ Global
 		{9C33002A-24C9-48EE-BC85-C97736F69924} = {0D395521-06B9-4E59-867C-0CBCCA4DE001}
 		{F78688AD-7804-42C8-9DEE-01C93809F46E} = {9C33002A-24C9-48EE-BC85-C97736F69924}
 		{1B653D1B-5EE1-4153-853D-5CA432BF7EE3} = {9C33002A-24C9-48EE-BC85-C97736F69924}
+		{D7AB198B-93A8-40BF-8D38-DCF8DA8CF774} = {B0E9DED9-537C-43B8-BE69-309C967DF189}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F24A83F3-AE58-4185-81BD-A9746C5D5775}
