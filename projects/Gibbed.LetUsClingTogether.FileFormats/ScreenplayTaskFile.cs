@@ -96,8 +96,9 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                         var (targetType, valueType) = taskOpcode.GetArguments();
                         task.Target = ReadTaskTarget(targetType, extra, endian);
                         task.Value = ReadTaskValue(valueType, extra, endian);
-                        if (taskOpcode == TaskOpcode.Unknown15)
+                        if (taskOpcode == TaskOpcode.SetActionStrategyForBattleUnit)
                         {
+                            // SetActionStrategyForBattleUnit has an extra unused byte
                             if (extra.Position + 1 != extra.Length)
                             {
                                 throw new FormatException();
