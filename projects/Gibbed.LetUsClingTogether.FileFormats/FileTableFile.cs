@@ -220,7 +220,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                     directoryHeader.BatchCount = (ushort)batchFileCounts.Count;
                     directoryHeader.NameTableCount = nameCount;
                     directoryHeader.NameTableIndex = nameCount > 0 ? nameIndex : ushort.MaxValue;
-                    directoryHeader.BatchTableOffset = (ushort)(batchIndex * 8);
+                    directoryHeader.BatchTableOffset = (uint)(batchIndex * 8);
                     directoryHeader.DataInstallBaseOffset = directory.DataInstallBaseOffset;
                     directoryHeaders.Add(directoryHeader);
                 }
@@ -366,6 +366,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                         DataBlockSize = directoryHeader.DataBlockSize,
                         DataBaseOffset = directoryHeader.DataBaseOffset,
                         IsInInstallData = directoryHeader.IsInInstallData,
+                        DataInstallBaseOffset = directoryHeader.DataInstallBaseOffset,
                     };
 
                     for (int i = 0; i < directoryHeader.BatchCount; i++)
