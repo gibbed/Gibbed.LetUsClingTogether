@@ -69,6 +69,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.LetUsClingTogether.E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.Reborn.FileFormats", "projects\Gibbed.Reborn.FileFormats\Gibbed.Reborn.FileFormats.csproj", "{77AF33FD-2502-4159-AF08-834B55A44DC7}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.Squish", "projects\Gibbed.Squish\Gibbed.Squish.csproj", "{36D335C5-0AF9-42FC-A4F5-0772C36442A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -171,6 +173,10 @@ Global
 		{77AF33FD-2502-4159-AF08-834B55A44DC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77AF33FD-2502-4159-AF08-834B55A44DC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77AF33FD-2502-4159-AF08-834B55A44DC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36D335C5-0AF9-42FC-A4F5-0772C36442A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36D335C5-0AF9-42FC-A4F5-0772C36442A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36D335C5-0AF9-42FC-A4F5-0772C36442A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36D335C5-0AF9-42FC-A4F5-0772C36442A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -202,6 +208,7 @@ Global
 		{87DF94BB-F94E-4AD9-8A89-4222B7AB8C67} = {6C85AB50-716D-481D-9B6C-C04C12A497C6}
 		{5D5917F4-D643-4663-B101-66D6AC6846A0} = {9980F9DC-5CF1-4430-AF5C-0589D7F44C8C}
 		{E18EE6D0-A5CC-4555-9F1B-4635FD210EEE} = {B0A971C2-92C1-4931-BAFE-0B504260AF79}
+		{36D335C5-0AF9-42FC-A4F5-0772C36442A5} = {5AA38539-796A-48A3-9AE5-C68836014669}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F24A83F3-AE58-4185-81BD-A9746C5D5775}
