@@ -370,7 +370,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFileTable
 
                 if (inputPath.EndsWith(".dat", StringComparison.InvariantCultureIgnoreCase) == true)
                 {
-                    Reborn.FileFormats.BogoCrypt.Decrypt(inputBytes, 0, inputBytes.Length);
+                    Reborn.FileFormats.DataBogoCrypt.Decrypt(inputBytes, 0, inputBytes.Length);
                 }
 
                 using (var input = new MemoryStream(inputBytes, false))

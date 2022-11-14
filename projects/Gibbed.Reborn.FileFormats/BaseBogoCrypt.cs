@@ -20,16 +20,14 @@
  *    distribution.
  */
 
-using System;
-
 namespace Gibbed.Reborn.FileFormats
 {
-    public static class BogoCrypt
+    public abstract class BaseBogoCrypt
     {
-        private static readonly byte[] Table2;
-        private static readonly byte[] Table3;
+        protected static readonly byte[] Table2;
+        protected static readonly byte[] Table3;
 
-        static BogoCrypt()
+        static BaseBogoCrypt()
         {
             Table2 = new byte[]
             {
@@ -56,30 +54,23 @@ namespace Gibbed.Reborn.FileFormats
             };
         }
 
-        public static void Decrypt(byte[] bytes, int offset, int count)
+        protected static void Enshift(byte[] bytes, int offset, int count, int shift)
         {
-            if (bytes == null)
-            {
-                throw new ArgumentNullException(nameof(bytes));
-            }
-            if (count == 0)
+            if (count <= 0)
             {
                 return;
             }
-            if (offset < 0 || offset > bytes.Length)
+            var lastByte = bytes[offset + count - 1];
+            int leftShift = 8 - shift;
+            int o = offset + count - 1;
+            for (int i = count - 1; i > 0; i--, o--)
             {
-                throw new ArgumentOutOfRangeException(nameof(offset));
+                bytes[o] = (byte)((bytes[o - 1] << leftShift) | (bytes[o] >> shift));
             }
-            if (count < 16 || offset + count > bytes.Length)
-            {
-                throw new ArgumentOutOfRangeException(nameof(count));
-            }
-            Pass1(bytes, offset, count, 3);
-            Pass2(bytes, offset, count, 8, Table2);
-            Pass2(bytes, offset + 16, count - 16, bytes[offset + 15] & 0x7F, Table3);
+            bytes[o] = (byte)((lastByte << leftShift) | (bytes[o] >> shift));
         }
 
-        private static void Pass1(byte[] bytes, int offset, int count, int shift)
+        protected static void Deshift(byte[] bytes, int offset, int count, int shift)
         {
             if (count <= 0)
             {
@@ -95,7 +86,7 @@ namespace Gibbed.Reborn.FileFormats
             bytes[o] = (byte)((bytes[o] << shift) | (firstByte >> rightShift));
         }
 
-        private static void Pass2(byte[] bytes, int offset, int count, int seed, byte[] table)
+        protected static void XorWithTable(byte[] bytes, int offset, int count, int seed, byte[] table)
         {
             if (count <= 0)
             {
