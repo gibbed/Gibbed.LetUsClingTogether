@@ -41,7 +41,7 @@ _`UnpackFileTable` takes advantage of [filetable definitions](configs) to identi
 
 ### Spreadsheets / Tables
 
-* `ExportSheet`: Exporter for compiled spreadsheet files (`*.xlc`).
+* [`ExportSheet`](projects/Gibbed.LetUsClingTogether.ExportSheet): Exporter for compiled spreadsheet files (`*.xlc`).
 
 _Requires corresponding sheet format files that describe the various spreadsheet data formats._
 
@@ -49,9 +49,9 @@ _Requires corresponding sheet format files that describe the various spreadsheet
 
 * [`DisassembleScript`](projects/Gibbed.LetUsClingTogether.DisassembleScript): A cutscene script disassembler (`*.script`). For research purposes.
 * [`ExportEventMessages`](projects/Gibbed.LetUsClingTogether.ExportEventMessages): Exporter for event message files (`*.emes`).
-* `ExportScreenplayInvocation`: Exporter for screenplay invocation files (`*.invk`).
+* [`ExportScreenplayInvocation`](projects/Gibbed.LetUsClingTogether.ExportScreenplayInvocation): Exporter for screenplay invocation files (`*.invk`).
 * `ExportScreenplayProgress`: Exporter for screenplay progress files (`*.pgrs`).
-* `ExportScreenplayTask`: Exporter for screenplay progress files (`*.task`).
+* [`ExportScreenplayTask`](projects/Gibbed.LetUsClingTogether.ExportScreenplayTask): Exporter for screenplay progress files (`*.task`).
 * [`ImportEventMessages`](projects/Gibbed.LetUsClingTogether.ImportEventMessages): Importer for event message files (`*.emes`)— incomplete, still needs work.
 
 ### Graphics
