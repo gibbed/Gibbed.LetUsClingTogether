@@ -118,9 +118,13 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Sprite
                     throw new FormatException();
                 }
 
+                // TODO(gibbed): remove this and make any tools using this
+                // set up a default palette.
                 Palette palette;
                 palette.GECommands = null;
-                using (MemoryStream data = new(FileFormats.Sprite.Palettes.Default))
+                using (MemoryStream data = new(texture?.IsReborn == false
+                    ? FileFormats.Sprite.Palettes.DefaultPSP
+                    : FileFormats.Sprite.Palettes.DefaultReborn))
                 {
                     var colors = new uint[data.Length / 4];
                     for (int i = 0, o = 0; o < data.Length; i++, o += 4)

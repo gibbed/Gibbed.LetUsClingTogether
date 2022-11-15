@@ -29,6 +29,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Sprite
 {
     public struct Texture
     {
+        public bool IsReborn;
         public ushort TotalWidth;
         public ushort TotalHeight;
         public ushort BlockWidth;
@@ -61,6 +62,8 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Sprite
                 throw new FormatException();
             }
 
+            var isReborn = dataOffset == 0x30 ? true : false;
+
             var blockWidth = input.ReadValueU16(endian);
             var blockHeight = input.ReadValueU16(endian);
             var totalWidth = input.ReadValueU16(endian);
@@ -69,12 +72,29 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Sprite
             var unknown1A = input.ReadValueU16(endian);
             var unknown1C = input.ReadValueU32(endian);
 
+            byte[] unknown20;
+            if (isReborn == true)
+            {
+                // TODO(gibbed): seems to be extended texture info
+                // first byte matches texture format seen in .btx files
+                unknown20 = input.ReadBytes(16);
+            }
+            else
+            {
+                unknown20 = null;
+            }
+
             if (unknown1A != 0 || unknown1C != 0)
             {
                 throw new InvalidOperationException();
             }
 
             if (dataOffset + dataSize + commandSize != totalSize)
+            {
+                throw new InvalidOperationException();
+            }
+
+            if (input.Position != basePosition + dataOffset)
             {
                 throw new InvalidOperationException();
             }
@@ -88,6 +108,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Sprite
             }
 
             Texture instance;
+            instance.IsReborn = isReborn;
             instance.TotalWidth = totalWidth;
             instance.TotalHeight = totalHeight;
             instance.BlockWidth = blockWidth;
@@ -101,12 +122,25 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Sprite
 
         private void ValidateGECommands()
         {
+            if (ValidateGECommandsPSP() == false &&
+                ValidateGECommandsReborn() == false)
+            {
+                throw new FormatException();
+            }
+        }
+
+        private bool ValidateGECommandsPSP()
+        {
             var tpsmArgument = this.BitsPerPixel switch
             {
                 4 => 4,
                 8 => 5,
-                _ => throw new NotSupportedException(),
+                _ => 0,
             };
+            if (tpsmArgument == 0)
+            {
+                return false;
+            }
 
             int tsizeArgument = 0;
             tsizeArgument |= (byte)Math.Log(this.TotalWidth, 2);
@@ -122,8 +156,26 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Sprite
                 commands[6] != new GEFormats.Command(GEFormats.Operation.RET) ||
                 commands[7] != new GEFormats.Command(GEFormats.Operation.NOP))
             {
-                throw new FormatException();
+                return false;
             }
+            return true;
+        }
+
+        private bool ValidateGECommandsReborn()
+        {
+            var commands = this.GECommands;
+            if (commands[0] != new GEFormats.Command(GEFormats.Operation.TMODE) ||
+                commands[1] != new GEFormats.Command(GEFormats.Operation.NOP) ||
+                commands[2] != new GEFormats.Command(GEFormats.Operation.NOP) ||
+                commands[3] != new GEFormats.Command(GEFormats.Operation.NOP) ||
+                commands[4] != new GEFormats.Command(GEFormats.Operation.NOP) ||
+                commands[5] != new GEFormats.Command(GEFormats.Operation.NOP) ||
+                commands[6] != new GEFormats.Command(GEFormats.Operation.NOP) ||
+                commands[7] != new GEFormats.Command(GEFormats.Operation.NOP))
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

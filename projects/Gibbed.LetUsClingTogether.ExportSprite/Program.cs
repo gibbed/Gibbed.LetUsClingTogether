@@ -125,7 +125,7 @@ namespace Gibbed.LetUsClingTogether.ExportSprite
                 if (sprite.Palettes.Length == 1)
                 {
                     var bitmapPath = Path.ChangeExtension(outputPath, ".png");
-                    var data = ExportPalettized(texture, sprite.Palettes[0]);
+                    var data = ExportPalettized(texture);
                     var bitmap = MakeBitmapPalettized(
                         texture.TotalWidth, texture.TotalHeight,
                         data,
@@ -141,7 +141,7 @@ namespace Gibbed.LetUsClingTogether.ExportSprite
                     foreach (var palette in sprite.Palettes)
                     {
                         var bitmapPath = Path.ChangeExtension($"{outputPath}_{i}", ".png");
-                        var data = ExportPalettized(texture, palette);
+                        var data = ExportPalettized(texture);
                         var bitmap = MakeBitmapPalettized(
                             texture.TotalWidth, texture.TotalHeight,
                             data,
@@ -156,200 +156,55 @@ namespace Gibbed.LetUsClingTogether.ExportSprite
             }
         }
 
-        private static byte[] ExportARGB(Texture texture, Palette palette)
+        private static byte[] ExportPalettized(Texture texture)
         {
             if (texture.BitsPerPixel != 4 && texture.BitsPerPixel != 8)
             {
                 throw new NotSupportedException();
             }
-
-            var data = new byte[texture.TotalWidth * texture.TotalHeight * 4];
-
-            int x = 0;
-            int y = 0;
-
-            int blockLength = (int)(texture.BlockWidth * texture.BlockHeight * (texture.BitsPerPixel / 8.0f));
-            for (int i = 0; i < texture.Data.Length; i += blockLength)
+            byte[] data = texture.IsReborn == false
+                ? Deblock(texture)
+                : texture.Data;
+            if (texture.BitsPerPixel == 8)
             {
-                var block = new byte[blockLength];
-                Array.Copy(texture.Data, i, block, 0, Math.Min(blockLength, texture.Data.Length - i));
-
-                int rx = 0;
-                int ry = 0;
-                for (int j = 0; j < block.Length; j++)
-                {
-                    if (texture.BitsPerPixel == 8)
-                    {
-                        if (ry >= texture.BlockHeight)
-                        {
-                            throw new InvalidOperationException();
-                        }
-
-                        var abgr = palette.Colors[block[j]];
-                        int o = (((y + ry) * texture.TotalWidth) + (x + rx)) * 4;
-
-                        data[o + 0] = (byte)((abgr & 0x00FF0000) >> 16);
-                        data[o + 1] = (byte)((abgr & 0x0000FF00) >> 8);
-                        data[o + 2] = (byte)((abgr & 0x000000FF) >> 0);
-                        data[o + 3] = (byte)((abgr & 0xFF000000) >> 24);
-
-                        rx++;
-                        if (rx >= texture.BlockWidth)
-                        {
-                            rx = 0;
-                            ry++;
-                        }
-                    }
-                    else if (texture.BitsPerPixel == 4)
-                    {
-                        // a
-                        {
-                            if (ry >= texture.BlockHeight)
-                            {
-                                throw new InvalidOperationException();
-                            }
-
-                            var abgr = palette.Colors[(block[j] & 0x0F) >> 0];
-                            int o = (((y + ry) * texture.TotalWidth) + (x + rx)) * 4;
-
-                            data[o + 0] = (byte)((abgr & 0x00FF0000) >> 16);
-                            data[o + 1] = (byte)((abgr & 0x0000FF00) >> 8);
-                            data[o + 2] = (byte)((abgr & 0x000000FF) >> 0);
-                            data[o + 3] = (byte)((abgr & 0xFF000000) >> 24);
-
-                            rx++;
-                            if (rx >= texture.BlockWidth)
-                            {
-                                rx = 0;
-                                ry++;
-                            }
-                        }
-
-                        // b
-                        {
-                            if (ry >= texture.BlockHeight)
-                            {
-                                throw new InvalidOperationException();
-                            }
-
-                            var abgr = palette.Colors[(block[j] & 0xF0) >> 4];
-                            int o = (((y + ry) * texture.TotalWidth) + (x + rx)) * 4;
-
-                            data[o + 0] = (byte)((abgr & 0x00FF0000) >> 16);
-                            data[o + 1] = (byte)((abgr & 0x0000FF00) >> 8);
-                            data[o + 2] = (byte)((abgr & 0x000000FF) >> 0);
-                            data[o + 3] = (byte)((abgr & 0xFF000000) >> 24);
-
-                            rx++;
-                            if (rx >= texture.BlockWidth)
-                            {
-                                rx = 0;
-                                ry++;
-                            }
-                        }
-                    }
-                }
-
-                x += texture.BlockWidth;
-                if (x >= texture.TotalWidth)
-                {
-                    x = 0;
-                    y += texture.BlockHeight;
-                }
+                return data;
             }
-
-            return data;
+            byte[] newData = new byte[texture.TotalWidth * texture.TotalHeight];
+            for (int i = 0, o = 0; i < data.Length; i++, o += 2)
+            {
+                var b = data[i];
+                newData[o + 0] = (byte)((b & 0x0F) >> 0);
+                newData[o + 1] = (byte)((b & 0xF0) >> 4);
+            }
+            return newData;
         }
 
-        private static byte[] ExportPalettized(Texture texture, Palette palette)
+        private static byte[] Deblock(Texture texture)
         {
-            if (texture.BitsPerPixel != 4 && texture.BitsPerPixel != 8)
-            {
-                throw new NotSupportedException();
-            }
-
-            var data = new byte[texture.TotalWidth * texture.TotalHeight * 4];
-
-            int x = 0;
-            int y = 0;
-
-            int blockLength = (int)(texture.BlockWidth * texture.BlockHeight * (texture.BitsPerPixel / 8.0f));
+            int outputPitch = (int)(texture.TotalWidth * (texture.BitsPerPixel / 8.0f));
+            var data = new byte[texture.TotalHeight * outputPitch];
+            int blockPitch = (int)(texture.BlockWidth * (texture.BitsPerPixel / 8.0f));
+            int blockLength = texture.BlockHeight * blockPitch;
+            int x = 0, bx = 0, y = 0;
             for (int i = 0; i < texture.Data.Length; i += blockLength)
             {
-                var block = new byte[blockLength];
-                Array.Copy(texture.Data, i, block, 0, Math.Min(blockLength, texture.Data.Length - i));
-
-                int rx = 0;
-                int ry = 0;
-                for (int j = 0; j < block.Length; j++)
+                int outputOffset = y * outputPitch;
+                outputOffset += bx;
+                for (int j = 0, inputOffset = i; inputOffset < texture.Data.Length && j < texture.BlockHeight; j++)
                 {
-                    if (texture.BitsPerPixel == 8)
-                    {
-                        if (ry >= texture.BlockHeight)
-                        {
-                            throw new InvalidOperationException();
-                        }
-
-                        int o = ((y + ry) * texture.TotalWidth) + (x + rx);
-                        data[o] = block[j];
-
-                        rx++;
-                        if (rx >= texture.BlockWidth)
-                        {
-                            rx = 0;
-                            ry++;
-                        }
-                    }
-                    else if (texture.BitsPerPixel == 4)
-                    {
-                        // a
-                        {
-                            if (ry >= texture.BlockHeight)
-                            {
-                                throw new InvalidOperationException();
-                            }
-
-                            int o = ((y + ry) * texture.TotalWidth) + (x + rx);
-
-                            data[o] = (byte)((block[j] & 0x0F) >> 0);
-
-                            rx++;
-                            if (rx >= texture.BlockWidth)
-                            {
-                                rx = 0;
-                                ry++;
-                            }
-                        }
-
-                        // b
-                        {
-                            if (ry >= texture.BlockHeight)
-                            {
-                                throw new InvalidOperationException();
-                            }
-
-                            int o = ((y + ry) * texture.TotalWidth) + (x + rx);
-
-                            data[o] = (byte)((block[j] & 0xF0) >> 4);
-
-                            rx++;
-                            if (rx >= texture.BlockWidth)
-                            {
-                                rx = 0;
-                                ry++;
-                            }
-                        }
-                    }
+                    Array.Copy(texture.Data, inputOffset, data, outputOffset, blockPitch);
+                    inputOffset += blockPitch;
+                    outputOffset += outputPitch;
                 }
-
                 x += texture.BlockWidth;
+                bx += blockPitch;
                 if (x >= texture.TotalWidth)
                 {
                     x = 0;
+                    bx = 0;
                     y += texture.BlockHeight;
                 }
             }
-
             return data;
         }
 
