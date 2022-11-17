@@ -19,7 +19,7 @@ path = "battle_data_release"
 20.path = "random_character_names.xlc"
 
 27.path = "battle_text.xlc"
-28.path = "factions.xlc"
+28.path = "unions.xlc" # factions
 
 37.path = "map_spawn_coordinates.xlc"
 38.path = "battle_death_messages.xlc"

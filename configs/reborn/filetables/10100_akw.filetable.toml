@@ -1,2 +1,16 @@
+# text input censorship data
+
 [10100]
 path = "akw"
+
+[10100.1]
+path = "awk_data"
+
+0.path = "ja-jp.awk"
+1.path = "en-us.awk"
+2.path = "fr-fr.awk"
+3.path = "de-de.awk"
+4.path = "es-es.awk"
+5.path = "zh-cn.awk"
+6.path = "zh-tw.awk"
+7.path = "ko-kr.awk"

@@ -4,7 +4,46 @@ path = "battle"
 [1000.1]
 path = "battle_data_release"
 
-23 = "racial_templates"
+11.path = "equipment.xlc"
+
+13.path = "sundries.xlc"
+14.path = "classes.xlc"
+15.path = "class_text.xlc"
+16.path = "effects.xlc"
+17.path = "map_parties.xlc" # not sure if completely accurate
+
+#20.path = "???" # possibly related to unions
+#21.path = "???" # possibly related to chapters
+#22.path = "???" # possibly related to chapters
+23.path = "racial_templates.xlc"
+
+25.path = "skills.xlc"
+#26.path = "???" # related to arms
+
+28.path = "random_character_names.xlc"
+
+#33.path = "???" # related to 45?
+
+35.path = "battle_text.xlc"
+36.path = "unions.xlc" # factions
+
+45.path = "map_spawn_coordinates.xlc" # maybe also related to 36, 37
+46.path = "battle_death_messages.xlc"
+47.path = "battle_skill_messages.xlc"
+48.path = "battle_notification_messages.xlc"
+
+#50.path = "???" # possibly related to chapters
+51.path = "spell_sets.xlc"
+
+52.path = "int_tweak_variables.xlc"
+52.sheet_format = "int_tweak_variables"
+
+74.path = "object_actors.xlc"
+
+#76.path = "???" # some sort of table into 75
+#77.path = "???" # possibly related to units
+
+83.path = "buff_cards.xlc"
 
 [1000.1.0]
 path = "unit_animations"
