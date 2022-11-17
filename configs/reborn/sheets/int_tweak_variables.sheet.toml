@@ -1,0 +1,5 @@
+name = "int_tweak_variables"
+
+columns = [
+  { name = "value", type = "int32" }
+]
