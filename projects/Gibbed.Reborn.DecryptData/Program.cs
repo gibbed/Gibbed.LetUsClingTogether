@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System.IO;
 using Gibbed.Reborn.FileFormats;
 using NDesk.Options;
+using FileDetection = Gibbed.LetUsClingTogether.FileFormats.FileDetection;
 
 namespace Gibbed.Reborn.DecryptData
 {
@@ -69,12 +70,21 @@ namespace Gibbed.Reborn.DecryptData
             }
 
             var inputPath = Path.GetFullPath(extras[0]);
-            string outputPath = extras.Count > 1
-                ? Path.GetFullPath(extras[1])
-                : inputPath + ".dec";
 
             var bytes = File.ReadAllBytes(inputPath);
             DataBogoCrypt.Decrypt(bytes, 0, bytes.Length);
+
+            string outputPath;
+            if (extras.Count > 1)
+            {
+                outputPath = Path.GetFullPath(extras[1]);
+            }
+            else
+            {
+                var extension = FileDetection.Guess(bytes, 0, bytes.Length, bytes.Length);
+                outputPath = Path.ChangeExtension(inputPath, null);
+                outputPath = $"{outputPath}_dec{extension}";
+            }
             File.WriteAllBytes(outputPath, bytes);
         }
     }
