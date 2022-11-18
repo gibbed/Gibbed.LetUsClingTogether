@@ -89,7 +89,7 @@ columns = [
   { name = "skill_bonus", columns = [
     { name = "index",                  type = "uint16",                  width = 2 },
     { name = "levels",                 type = "uint8",                   width = 2 }
-  },
+  ] },
   { name = "u4F",                      type = "undefined8",              width = 0 },
   { name = "u50",                      type = "uint8",                   width = 0 },
   { name = "u51",                      type = "uint8",                   width = 0 },
