@@ -8,8 +8,8 @@ Codepoints index into a font family present in the game data, which can be found
 
 There are two known versions of the font family:
 
-* [`JP`](text_encoding_codepoints_JP.md) has 2682 available codepoints/characters.
-* [`EN`](text_encoding_codepoints_EN.md) has 267 available codepoints/characters.
+* [`JP`](psp_codepoints_JP.md) has 2682 available codepoints/characters.
+* [`EN`](psp_codepoints_EN.md) has 267 available codepoints/characters.
 
 The used font family depends on the release region:
 
