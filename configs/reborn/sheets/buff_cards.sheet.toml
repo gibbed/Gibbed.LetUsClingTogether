@@ -1,0 +1,7 @@
+name = "buff_cards"
+
+columns = [
+  { name = "ability_index", type = "uint16", width = 3 },
+  { name = "u02",           type = "uint16", width = 4 },
+  { name = "u04",           type = "uint16" }
+]
