@@ -136,19 +136,20 @@ namespace Gibbed.Reborn.RebuildFileTable
                         .Replace(Path.DirectorySeparatorChar, '/')
                         .Replace(Path.AltDirectorySeparatorChar, '/');
 
-                    FileTable.DirectoryEntry targetDirectory = null;
-                    int targetIndex = -1;
-                    foreach (var candidate in table.Directories)
+                    List<(FileTable.DirectoryEntry directory, int index)> targets = new();
+                    foreach (var candidateDirectory in table.Directories)
                     {
-                        targetIndex = candidate.Files.FindIndex(f => f.ExternalPath == externalPath);
-                        if (targetIndex >= 0)
+                        var candidateIndex = candidateDirectory.Files
+                            .FindIndex(f => f.ExternalPath == externalPath);
+                        while (candidateIndex >= 0)
                         {
-                            targetDirectory = candidate;
-                            break;
+                            targets.Add((candidateDirectory, candidateIndex));
+                            candidateIndex = candidateDirectory.Files
+                                .FindIndex(candidateIndex + 1, f => f.ExternalPath == externalPath);
                         }
                     }
 
-                    if (targetIndex < 0)
+                    if (targets.Count == 0)
                     {
                         Console.WriteLine($"[error] External path does not exist in file table: {externalPath}");
                         return -4;
@@ -171,9 +172,12 @@ namespace Gibbed.Reborn.RebuildFileTable
                         fileSize = (uint)fileInfo.Length;
                     }
 
-                    var targetFile = targetDirectory.Files[targetIndex];
-                    targetFile.DataSize = fileSize;
-                    targetDirectory.Files[targetIndex] = targetFile;
+                    foreach (var (targetDirectory, targetIndex) in targets)
+                    {
+                        var targetFile = targetDirectory.Files[targetIndex];
+                        targetFile.DataSize = fileSize;
+                        targetDirectory.Files[targetIndex] = targetFile;
+                    }
                 }
             }
             else
