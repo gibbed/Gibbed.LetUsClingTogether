@@ -61,7 +61,26 @@ namespace Gibbed.LetUsClingTogether.SheetFormats
 
         public void Add(string name, PrimitiveType type, int minimumWidth)
         {
-            this.Add(name, new PrimitiveDescriptor(type, minimumWidth, null));
+            if (type == PrimitiveType.String)
+            {
+                this.Add(name, new StringDescriptor(minimumWidth));
+            }
+            else if (type.IsInteger() == true)
+            {
+                this.Add(name, new IntegerDescriptor(type, IntegerBase.Decimal, minimumWidth, null));
+            }
+            else if (type.IsFloat() == true)
+            {
+                this.Add(name, new FloatDescriptor(type, minimumWidth));
+            }
+            else if (type.IsUndefined() == true)
+            {
+                this.Add(name, new UndefinedDescriptor(type, minimumWidth));
+            }
+            else
+            {
+                throw new NotSupportedException();
+            }
         }
 
         public void Add(string name, IDescriptor descriptor)

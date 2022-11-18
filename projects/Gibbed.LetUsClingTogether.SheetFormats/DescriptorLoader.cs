@@ -89,22 +89,45 @@ namespace Gibbed.LetUsClingTogether.SheetFormats
             {
                 var minimumWidth = table["width"]?.AsInteger?.Value ?? 0;
 
-                var enumName = table["enum"]?.AsString;
-                TomlNode enumNode;
-                if (enumName != null)
+                if (type == PrimitiveType.String)
                 {
-                    enumNode = rootTable["types"][enumName.Value];
-                    if (enumNode == null)
+                    descriptor = new StringDescriptor((int)minimumWidth);
+                }
+                else if (type.IsInteger() == true)
+                {
+                    var enumName = table["enum"]?.AsString;
+                    TomlNode enumNode;
+                    if (enumName != null)
                     {
-                        throw new InvalidOperationException();
+                        enumNode = rootTable["types"][enumName.Value];
+                        if (enumNode == null)
+                        {
+                            throw new InvalidOperationException();
+                        }
                     }
+                    else
+                    {
+                        enumNode = table["enum"];
+                    }
+                    IntegerBase integerBase;
+                    if (TryParseEnum(table["base"], out integerBase) == false)
+                    {
+                        integerBase = IntegerBase.Decimal;
+                    }
+                    descriptor = new IntegerDescriptor(type, integerBase, (int)minimumWidth, ParseEnum(enumNode));
+                }
+                else if (type.IsFloat() == true)
+                {
+                    descriptor = new FloatDescriptor(type, (int)minimumWidth);
+                }
+                else if (type.IsUndefined() == true)
+                {
+                    descriptor = new UndefinedDescriptor(type, (int)minimumWidth);
                 }
                 else
                 {
-                    enumNode = table["enum"];
+                    throw new InvalidOperationException();
                 }
-
-                descriptor = new PrimitiveDescriptor(type, (int)minimumWidth, ParseEnum(enumNode));
             }
             else
             {
@@ -192,8 +215,7 @@ namespace Gibbed.LetUsClingTogether.SheetFormats
             }
             if (Enum.TryParse(s, true, out value) == false)
             {
-                value = default;
-                return false;
+                throw new InvalidOperationException($"unknown name '{value}' for enum {nameof(T)}");
             }
             return true;
         }

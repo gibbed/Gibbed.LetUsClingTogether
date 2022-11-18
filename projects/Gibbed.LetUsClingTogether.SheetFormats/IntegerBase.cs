@@ -22,23 +22,15 @@
 
 namespace Gibbed.LetUsClingTogether.SheetFormats
 {
-	public enum PrimitiveType
-	{
-		Invalid = 0,
-		Boolean,
-		UInt8,
-		Int8,
-		UInt16,
-		Int16,
-		UInt32,
-		Int32,
-		UInt64,
-		Int64,
-		Float32,
-		String,
-		Undefined8,
-		Undefined16,
-		Undefined32,
-		Undefined64,
-	}
+    public enum IntegerBase
+    {
+        Binary,
+        Bin = Binary,
+        Octal,
+        Oct = Octal,
+        Decimal,
+        Dec = Decimal,
+        Hexadecimal,
+        Hex = Hexadecimal,
+    }
 }

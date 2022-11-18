@@ -22,23 +22,34 @@
 
 namespace Gibbed.LetUsClingTogether.SheetFormats
 {
-	public enum PrimitiveType
-	{
-		Invalid = 0,
-		Boolean,
-		UInt8,
-		Int8,
-		UInt16,
-		Int16,
-		UInt32,
-		Int32,
-		UInt64,
-		Int64,
-		Float32,
-		String,
-		Undefined8,
-		Undefined16,
-		Undefined32,
-		Undefined64,
-	}
+    internal static class PrimitiveTypeHelpers
+    {
+        public static bool IsInteger(this PrimitiveType type) => type switch
+        {
+            PrimitiveType.Int8 => true,
+            PrimitiveType.UInt8 => true,
+            PrimitiveType.Int16 => true,
+            PrimitiveType.UInt16 => true,
+            PrimitiveType.Int32 => true,
+            PrimitiveType.UInt32 => true,
+            PrimitiveType.Int64 => true,
+            PrimitiveType.UInt64 => true,
+            _ => false,
+        };
+
+        public static bool IsFloat(this PrimitiveType type) => type switch
+        {
+            PrimitiveType.Float32 => true,
+            _ => false,
+        };
+
+        public static bool IsUndefined(this PrimitiveType type) => type switch
+        {
+            PrimitiveType.Undefined8 => true,
+            PrimitiveType.Undefined16 => true,
+            PrimitiveType.Undefined32 => true,
+            PrimitiveType.Undefined64 => true,
+            _ => false,
+        };
+    }
 }
