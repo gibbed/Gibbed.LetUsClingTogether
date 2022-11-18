@@ -1,0 +1,28 @@
+name = "tarot_cards"
+
+columns = [
+  { name = "u00",           type = "uint8",  width = 2                  },
+  { name = "u01",           type = "uint8",  width = 2                  },
+  { name = "item_id",       type = "uint16"                             }, # appears to be unsupported/ignored in Reborn
+  { name = "u04",           type = "uint16", width = 2                  }, # effect id
+  { name = "u06",           type = "uint8",  width = 3                  }, # effect id
+  { name = "u07",           type = "uint8",  width = 3                  }, # effect id
+  { name = "u08",           type = "uint8",  width = 3                  }, # effect id
+  { name = "stat_hp",       type = "uint8",             array_count = 3 },
+  { name = "stat_mp",       type = "uint8",             array_count = 3 },
+  { name = "stat_str",      type = "uint8",             array_count = 3 },
+  { name = "stat_vit",      type = "uint8",             array_count = 3 },
+  { name = "stat_dex",      type = "uint8",             array_count = 3 },
+  { name = "stat_agi",      type = "uint8",             array_count = 3 },
+  { name = "stat_avd",      type = "uint8",             array_count = 3 },
+  { name = "stat_int",      type = "uint8",             array_count = 3 },
+  { name = "stat_mnd",      type = "uint8",             array_count = 3 },
+  { name = "stat_res",      type = "uint8",             array_count = 3 },
+  { name = "elem_vyce",     type = "uint8",             array_count = 3 },
+  { name = "elem_catiua",   type = "uint8",             array_count = 3 },
+  { name = "elem_donnalto", type = "uint8",             array_count = 3 },
+  { name = "elem_sara",     type = "uint8",             array_count = 3 },
+  { name = "elem_voltare",  type = "uint8",             array_count = 3 },
+  { name = "elem_felicia",  type = "uint8",             array_count = 3 },
+  { name = "__padding",     type = "uint8"                              },
+]
