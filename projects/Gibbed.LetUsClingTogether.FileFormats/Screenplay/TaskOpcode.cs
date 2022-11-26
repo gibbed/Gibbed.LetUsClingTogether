@@ -67,8 +67,8 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Screenplay
 
         [Reborn] SetUnionLevel = 37, // 25
         [Reborn] SetChariotTurnLimit = 38, // 26
-        [Reborn] Unknown27 = 39, // 27
-        [Reborn] Unknown28 = 40, // 28
+        [Reborn] SetSystemSaveFlag = 39, // 27
+        [Reborn] SetGlobalFlagIfLower = 40, // 28
 
         NoOperation41 = 41, // 29
         NoOperation42 = 42, // 2A
@@ -111,14 +111,14 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Screenplay
         CompareBattlePartyIsThreeUnits = 77, // 4D
         CompareHasItem = 78, // 4E
         CompareCurrentShop = 79, // 4F
-        CompareOverallDeceasedUnitsCount = 80, // 50
-        CompareOverallIncapacitatedUnitsCount = 81, // 51
+        CompareAlliesSlainCount = 80, // 50
+        CompareAlliesIncapacitatedCount = 81, // 51
         CompareOverallChariotAndRetreatingNotUsed = 82, // 52
         CompareHasCharacter = 83, // 53
 
         [Reborn] Unknown54 = 84, // 54
-        [Reborn] Unknown55 = 85, // 55
-        [Reborn] Unknown56 = 86, // 56
+        [Reborn] CompareSystemSaveFlag = 85, // 55
+        [Reborn] CompareSystemPlatform = 86, // 56  0 = PC/Steam, 1 = Switch, 2 = PS4, 3 = PS5 (refer to RebornPlatform enum)
 
         NoOperation87 = 87, // 57
         NoOperation88 = 88, // 58
