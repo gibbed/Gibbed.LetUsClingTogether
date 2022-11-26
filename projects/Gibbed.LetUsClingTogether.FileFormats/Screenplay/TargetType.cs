@@ -27,7 +27,10 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Screenplay
         None,
         GlobalFlag,
         LocalFlag,
+        DungeonFlag,
+        SystemSaveFlag,
         ApprovalRate,
+        SystemPlatform,
         UnknownUInt8,
         UnknownUInt16,
     }

@@ -111,12 +111,12 @@ namespace Gibbed.LetUsClingTogether.ExportScreenplayInvocation
                         else
                         {
                             var opcodeInfo = instruction.Opcode.GetArguments();
-                            if (opcodeInfo.targetType != TargetType.None)
+                            if (opcodeInfo.TargetType != TargetType.None)
                             {
                                 instructionTable["target"] = instruction.Target;
                             }
                             instructionTable["expr"] = _($"{instruction.Expression}");
-                            if (opcodeInfo.valueType != ValueType.None)
+                            if (opcodeInfo.ValueType != ValueType.None)
                             {
                                 instructionTable["value"] = instruction.Value;
                             }

@@ -101,11 +101,11 @@ namespace Gibbed.LetUsClingTogether.ExportScreenplayTask
                     Tommy.TomlTable instructionTable = new();
                     instructionTable["op"] = _($"{instruction.Opcode}");
                     var opcodeInfo = instruction.Opcode.GetArguments();
-                    if (opcodeInfo.targetType != TargetType.None)
+                    if (opcodeInfo.TargetType != TargetType.None)
                     {
                         instructionTable["target"] = instruction.Target;
                     }
-                    if (opcodeInfo.valueType != ValueType.None)
+                    if (opcodeInfo.ValueType != ValueType.None)
                     {
                         instructionTable["value"] = instruction.Value;
                     }

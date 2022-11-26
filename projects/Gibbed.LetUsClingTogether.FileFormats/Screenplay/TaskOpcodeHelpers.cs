@@ -383,7 +383,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Screenplay
             _ => throw new ArgumentOutOfRangeException(nameof(opcode)),
         };
 
-        public static (TargetType targetType, ValueType valueType) GetArguments(this TaskOpcode opcode) => opcode switch
+        public static TaskOpcodeArguments GetArguments(this TaskOpcode opcode) => opcode switch
         {
             TaskOpcode.SetGlobalFlag => (TargetType.GlobalFlag, ValueType.Int8),
             TaskOpcode.SetLocalFlag => (TargetType.LocalFlag, ValueType.Bool),
@@ -423,15 +423,13 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Screenplay
             TaskOpcode.RemoveConsumableFromBattleParty => (TargetType.UnknownUInt16, ValueType.None),
             TaskOpcode.SetUnionLevel => (TargetType.None, ValueType.UInt8), // Reborn
             TaskOpcode.SetChariotTurnLimit => (TargetType.None, ValueType.UInt8), // Reborn
-            TaskOpcode.SetSystemSaveFlag => (TargetType.UnknownUInt16, ValueType.UInt8), // Reborn
-            TaskOpcode.SetGlobalFlagIfLower => (TargetType.UnknownUInt16, ValueType.UInt8), // Reborn
+            TaskOpcode.SetSystemSaveFlag => (TargetType.SystemSaveFlag, ValueType.UInt8), // Reborn
+            TaskOpcode.SetGlobalFlagIfLower => (TargetType.GlobalFlag, ValueType.UInt8), // Reborn
 
             TaskOpcode.CompareGlobalFlag => (TargetType.GlobalFlag, ValueType.UInt8),
             TaskOpcode.CompareLocalFlag => (TargetType.LocalFlag, ValueType.UInt8),
             TaskOpcode.CompareStrongpoint => (TargetType.None, ValueType.Int8),
-
             TaskOpcode.CompareBattleActiveCharacter => (TargetType.None, ValueType.UInt16),
-
             TaskOpcode.ComparePrimaryEnemyCount => (TargetType.None, ValueType.Int8),
             TaskOpcode.ComparePrimaryEnemyCountLessThanOrEqualExcept => (TargetType.UnknownUInt16, ValueType.Int8),
             TaskOpcode.ComparePrimaryEnemyCountGreaterThanOrEqualExcept => (TargetType.UnknownUInt16, ValueType.Int8),
@@ -447,7 +445,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Screenplay
             TaskOpcode.CompareBattleCharacterHeartCountGreaterThanOrEqual => (TargetType.UnknownUInt16, ValueType.UInt8),
             TaskOpcode.CompareBattleCharacterHeartCountLessThanOrEqual => (TargetType.UnknownUInt16, ValueType.UInt8),
             TaskOpcode.CompareBattleUnitAtPositionCharacterEqual => (TargetType.UnknownUInt16, ValueType.Int8),
-            TaskOpcode.CompareDungeonFlag => (TargetType.UnknownUInt16, ValueType.Int8),
+            TaskOpcode.CompareDungeonFlag => (TargetType.DungeonFlag, ValueType.Int8),
             TaskOpcode.CompareWeather => (TargetType.None, ValueType.Int8),
             TaskOpcode.CompareBattleUnitAtPositionIsEntryUnit => (TargetType.UnknownUInt8, ValueType.Int8),
             TaskOpcode.CompareApproval => (TargetType.ApprovalRate, ValueType.UInt8),
@@ -463,8 +461,8 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Screenplay
             TaskOpcode.CompareOverallChariotAndRetreatingNotUsed => (TargetType.None, ValueType.UInt8),
             TaskOpcode.CompareHasCharacter => (TargetType.UnknownUInt16, ValueType.None),
             TaskOpcode.Unknown54 => (TargetType.None, ValueType.UInt8), // Reborn
-            TaskOpcode.CompareSystemSaveFlag => (TargetType.UnknownUInt16, ValueType.UInt8), // Reborn
-            TaskOpcode.CompareSystemPlatform => (TargetType.None, ValueType.UInt8), // Reborn
+            TaskOpcode.CompareSystemSaveFlag => (TargetType.SystemSaveFlag, ValueType.UInt8), // Reborn
+            TaskOpcode.CompareSystemPlatform => (TargetType.SystemPlatform, ValueType.None), // Reborn
             _ => throw new NotSupportedException(),
         };
 
@@ -494,6 +492,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats.Screenplay
 
             TaskOpcode.CompareHasCharacter => InvocationArgumentOrder.ValueExpressionTarget,
 
+            TaskOpcode.CompareSystemPlatform => InvocationArgumentOrder.ValueExpressionTarget,
             _ => InvocationArgumentOrder.TargetExpressionValue,
         };
 
