@@ -15,7 +15,7 @@ max_jobs: 1
 
 image: Visual Studio 2019
 
-clone_folder: c:\projects\gibbed-luct
+clone_folder: c:\projects\gibbed-tacticsogre
 
 cache:
   - packages -> **\packages.config
@@ -38,7 +38,7 @@ dotnet_csproj:
   informational_version: '{version}'
 
 build:
-  project: Let Us Cling Together.sln
+  project: Tactics Ogre.sln
   parallel: true
   verbosity: minimal
 
@@ -48,8 +48,8 @@ before_build:
 after_build:
   - set TZ=GMT
   - git log . > git-log.txt
-  - 7z a -r -tzip -mx=9 -x!*/LICENSE.txt luct_%APPVEYOR_BUILD_VERSION%.zip                    ./LICENSE.txt ./README.txt git-log.txt configs bin/Gibbed.*.exe bin/*.dll
-  - 7z a -r -tzip -mx=9 -x!*/LICENSE.txt luct_%APPVEYOR_BUILD_VERSION%_with-debug-symbols.zip ./LICENSE.txt ./README.txt git-log.txt configs bin/Gibbed.*.exe bin/*.dll bin/Gibbed.*.pdb NDesk.Options.pdb Tommy*.pdb
+  - 7z a -r -tzip -mx=9 -x!*/LICENSE.txt taco_%APPVEYOR_BUILD_VERSION%.zip                    ./LICENSE.txt ./README.txt git-log.txt configs bin/Gibbed.*.exe bin/*.dll
+  - 7z a -r -tzip -mx=9 -x!*/LICENSE.txt taco_%APPVEYOR_BUILD_VERSION%_with-debug-symbols.zip ./LICENSE.txt ./README.txt git-log.txt configs bin/Gibbed.*.exe bin/*.dll bin/Gibbed.*.pdb NDesk.Options.pdb Tommy*.pdb
 
 artifacts:
   - path: '*.zip'
