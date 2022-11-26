@@ -41,22 +41,22 @@ _`UnpackFileTable` takes advantage of [filetable definitions](configs) to identi
 
 ### Spreadsheets / Tables
 
-* [`ExportSheet`](projects/Gibbed.LetUsClingTogether.ExportSheet): Exporter for compiled spreadsheet files (`*.xlc`).
+* [`ExportSheet`](projects/Gibbed.TacticsOgre.ExportSheet): Exporter for compiled spreadsheet files (`*.xlc`).
 
 _Requires corresponding sheet format files that describe the various spreadsheet data formats._
 
 ### Scenarios / Screenplays
 
-* [`DisassembleScript`](projects/Gibbed.LetUsClingTogether.DisassembleScript): A cutscene script disassembler (`*.script`). For research purposes.
+* [`DisassembleScript`](projects/Gibbed.TacticsOgre.DisassembleScript): A cutscene script disassembler (`*.script`). For research purposes.
 * [`ExportEventMessages`](projects/Gibbed.LetUsClingTogether.ExportEventMessages): Exporter for event message files (`*.emes`).
-* [`ExportScreenplayInvocation`](projects/Gibbed.LetUsClingTogether.ExportScreenplayInvocation): Exporter for screenplay invocation files (`*.invk`).
+* [`ExportScreenplayInvocation`](projects/Gibbed.TacticsOgre.ExportScreenplayInvocation): Exporter for screenplay invocation files (`*.invk`).
 * `ExportScreenplayProgress`: Exporter for screenplay progress files (`*.pgrs`).
-* [`ExportScreenplayTask`](projects/Gibbed.LetUsClingTogether.ExportScreenplayTask): Exporter for screenplay progress files (`*.task`).
+* [`ExportScreenplayTask`](projects/Gibbed.TacticsOgre.ExportScreenplayTask): Exporter for screenplay progress files (`*.task`).
 * [`ImportEventMessages`](projects/Gibbed.LetUsClingTogether.ImportEventMessages): Importer for event message files (`*.emes`)— incomplete, still needs work.
 
 ### Graphics
 
-* [`ExportSprite`](projects/Gibbed.LetUsClingTogether.ExportSprite): Exporter for sprite files (`*.spr`, `*.ashg`)— incomplete, still needs work.
+* [`ExportSprite`](projects/Gibbed.TacticsOgre.ExportSprite): Exporter for sprite files (`*.spr`, `*.ashg`)— incomplete, still needs work.
 
 ### Sounds
 

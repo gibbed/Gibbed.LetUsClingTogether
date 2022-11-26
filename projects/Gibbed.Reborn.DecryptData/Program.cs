@@ -25,7 +25,7 @@ using System.Collections.Generic;
 using System.IO;
 using Gibbed.Reborn.FileFormats;
 using NDesk.Options;
-using FileDetection = Gibbed.LetUsClingTogether.FileFormats.FileDetection;
+using FileDetection = Gibbed.TacticsOgre.FileFormats.FileDetection;
 
 namespace Gibbed.Reborn.DecryptData
 {

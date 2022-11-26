@@ -26,9 +26,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Gibbed.IO;
-using Gibbed.LetUsClingTogether.FileFormats;
+using Gibbed.TacticsOgre.FileFormats;
 using NDesk.Options;
-using static Gibbed.LetUsClingTogether.FileFormats.InvariantShorthand;
+using static Gibbed.TacticsOgre.FileFormats.InvariantShorthand;
+using FileTable = Gibbed.TacticsOgre.FileFormats.FileTable;
 using PackId = Gibbed.LetUsClingTogether.UnpackFileTable.FileTableManifest.PackId;
 
 namespace Gibbed.LetUsClingTogether.UnpackFileTable
@@ -200,7 +201,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFileTable
         }
 
         private static string HandleDirectoryOriginal(
-            FileFormats.FileTable.DirectoryEntry directory,
+            FileTable.DirectoryEntry directory,
             string inputBasePath,
             string outputBasePath,
             Settings settings,
@@ -314,7 +315,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFileTable
         }
 
         private static string HandleDirectoryReborn(
-            FileFormats.FileTable.DirectoryEntry directory,
+            FileTable.DirectoryEntry directory,
             string inputBasePath,
             string outputBasePath,
             Settings settings,

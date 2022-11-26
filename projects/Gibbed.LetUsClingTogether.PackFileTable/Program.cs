@@ -25,10 +25,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Gibbed.IO;
-using Gibbed.LetUsClingTogether.FileFormats;
+using Gibbed.TacticsOgre.FileFormats;
 using NDesk.Options;
-using static Gibbed.LetUsClingTogether.FileFormats.InvariantShorthand;
-using FileTable = Gibbed.LetUsClingTogether.FileFormats.FileTable;
+using static Gibbed.TacticsOgre.FileFormats.InvariantShorthand;
+using FileTable = Gibbed.TacticsOgre.FileFormats.FileTable;
 using FileTableManifest = Gibbed.LetUsClingTogether.UnpackFileTable.FileTableManifest;
 
 namespace Gibbed.LetUsClingTogether.PackFileTable

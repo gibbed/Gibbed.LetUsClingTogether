@@ -23,8 +23,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Gibbed.LetUsClingTogether.FileFormats;
+using Gibbed.TacticsOgre.FileFormats;
 using NDesk.Options;
+using FileFormats = Gibbed.TacticsOgre.FileFormats;
 
 namespace Gibbed.LetUsClingTogether.ExportEventMessages
 {

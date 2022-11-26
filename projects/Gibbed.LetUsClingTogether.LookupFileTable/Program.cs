@@ -25,7 +25,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using Gibbed.IO;
-using Gibbed.LetUsClingTogether.FileFormats;
+using Gibbed.TacticsOgre.FileFormats;
 using NDesk.Options;
 
 namespace Gibbed.LetUsClingTogether.LookupFileTable

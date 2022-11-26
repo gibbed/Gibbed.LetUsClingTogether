@@ -25,8 +25,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Gibbed.LetUsClingTogether.FileFormats;
+using Gibbed.TacticsOgre.FileFormats;
 using NDesk.Options;
+using FileFormats = Gibbed.TacticsOgre.FileFormats;
 
 namespace Gibbed.LetUsClingTogether.ExportEventMessages
 {

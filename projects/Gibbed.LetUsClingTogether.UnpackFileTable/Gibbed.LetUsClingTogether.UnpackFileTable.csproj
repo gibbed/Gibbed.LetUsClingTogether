@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <Company>Gibbed</Company>
+    <Authors>Gibbed</Authors>
+    <Description>http://gib.me/</Description>
+    <Copyright>Copyright © Gibbed 2022</Copyright>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\bin\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="SharpZipLib" Version="1.3.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Gibbed.IO\Gibbed.IO.csproj" />
+    <ProjectReference Include="..\Gibbed.TacticsOgre.FileFormats\Gibbed.TacticsOgre.FileFormats.csproj" />
+    <ProjectReference Include="..\Gibbed.Reborn.FileFormats\Gibbed.Reborn.FileFormats.csproj" />
+    <ProjectReference Include="..\NDesk.Options\NDesk.Options.csproj" />
+    <ProjectReference Include="..\Tommy\Tommy\Tommy.csproj" />
+    <ProjectReference Include="..\Tommy\Tommy.Extensions\Tommy.Extensions.csproj" />
+  </ItemGroup>
+</Project>

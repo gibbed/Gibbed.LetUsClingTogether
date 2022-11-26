@@ -25,9 +25,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Gibbed.IO;
-using Gibbed.LetUsClingTogether.FileFormats;
+using Gibbed.TacticsOgre.FileFormats;
 using NDesk.Options;
-using FileTable = Gibbed.LetUsClingTogether.FileFormats.FileTable;
+using FileTable = Gibbed.TacticsOgre.FileFormats.FileTable;
 
 namespace Gibbed.Reborn.RebuildFileTable
 {
