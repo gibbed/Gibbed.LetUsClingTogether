@@ -23,36 +23,38 @@
 using System.IO;
 using Gibbed.IO;
 
-namespace Gibbed.TacticsOgre.FileFormats.ChallengeParty
+namespace Gibbed.LetUsClingTogether.FileFormats.ChallengeParty
 {
-    public struct UnitAssignedSkill
+    public struct UnitPoints
     {
-        public ushort Id;
-        public byte Rank;
-        public byte Unknown;
-        public ushort Experience;
+        public ushort Health;
+        public ushort Magic;
+        public ushort Tactical;
 
-        public static UnitAssignedSkill Read(Stream input, Endian endian)
+        public static UnitPoints Read(Stream input, Endian endian)
         {
-            UnitAssignedSkill instance;
-            instance.Id = input.ReadValueU16(endian);
-            instance.Rank = input.ReadValueU8();
-            instance.Unknown = input.ReadValueU8();
-            instance.Experience = input.ReadValueU16(endian);
+            UnitPoints instance;
+            instance.Health = input.ReadValueU16(endian);
+            instance.Magic = input.ReadValueU16(endian);
+            instance.Tactical = input.ReadValueU16(endian);
             return instance;
         }
 
-        public static void Write(Stream output, UnitAssignedSkill instance, Endian endian)
+        public static void Write(Stream output, UnitPoints instance, Endian endian)
         {
-            output.WriteValueU16(instance.Id, endian);
-            output.WriteValueU8(instance.Rank);
-            output.WriteValueU8(instance.Unknown);
-            output.WriteValueU16(instance.Experience, endian);
+            output.WriteValueU16(instance.Health, endian);
+            output.WriteValueU16(instance.Magic, endian);
+            output.WriteValueU16(instance.Tactical, endian);
         }
 
         public void Write(Stream output, Endian endian)
         {
             Write(output, this, endian);
+        }
+
+        public override string ToString()
+        {
+            return $"hp={Health} mp={Magic} tp={Tactical}";
         }
     }
 }

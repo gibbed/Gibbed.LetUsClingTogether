@@ -23,7 +23,7 @@
 using System.IO;
 using Gibbed.IO;
 
-namespace Gibbed.TacticsOgre.FileFormats.ChallengeParty
+namespace Gibbed.LetUsClingTogether.FileFormats.ChallengeParty
 {
     public struct UnitStats
     {

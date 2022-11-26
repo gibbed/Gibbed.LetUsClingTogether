@@ -23,9 +23,9 @@
 using System;
 using System.IO;
 using Gibbed.IO;
-using Gibbed.TacticsOgre.FileFormats.ChallengeParty;
+using Gibbed.LetUsClingTogether.FileFormats.ChallengeParty;
 
-namespace Gibbed.TacticsOgre.FileFormats
+namespace Gibbed.LetUsClingTogether.FileFormats
 {
     public class ChallengePartyFile
     {

@@ -24,8 +24,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Gibbed.IO;
+using Text = Gibbed.TacticsOgre.FileFormats.Text;
 
-namespace Gibbed.TacticsOgre.FileFormats
+namespace Gibbed.LetUsClingTogether.FileFormats
 {
     public class EventMessagesFile
     {

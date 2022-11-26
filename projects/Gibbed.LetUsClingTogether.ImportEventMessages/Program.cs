@@ -23,9 +23,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Gibbed.TacticsOgre.FileFormats;
+using Gibbed.LetUsClingTogether.FileFormats;
 using NDesk.Options;
-using FileFormats = Gibbed.TacticsOgre.FileFormats;
+using Text = Gibbed.TacticsOgre.FileFormats.Text;
 
 namespace Gibbed.LetUsClingTogether.ExportEventMessages
 {
@@ -140,8 +140,8 @@ namespace Gibbed.LetUsClingTogether.ExportEventMessages
 
             var formatter = language switch
             {
-                LanguageOption.EN => FileFormats.Text.Formatter.ForEN(),
-                LanguageOption.JP => FileFormats.Text.Formatter.ForJP(),
+                LanguageOption.EN => Text.Formatter.ForEN(),
+                LanguageOption.JP => Text.Formatter.ForJP(),
                 _ => throw new NotSupportedException(),
             };
             using (var output = File.Create(outputPath))

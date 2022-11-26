@@ -25,9 +25,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Gibbed.TacticsOgre.FileFormats;
+using Gibbed.LetUsClingTogether.FileFormats;
 using NDesk.Options;
-using FileFormats = Gibbed.TacticsOgre.FileFormats;
+using Text = Gibbed.TacticsOgre.FileFormats.Text;
 
 namespace Gibbed.LetUsClingTogether.ExportEventMessages
 {
@@ -103,8 +103,8 @@ namespace Gibbed.LetUsClingTogether.ExportEventMessages
                 }
             }
 
-            FileFormats.Text.Formatter englishFormatter = null;
-            FileFormats.Text.Formatter japaneseFormatter = null;
+            Text.Formatter englishFormatter = null;
+            Text.Formatter japaneseFormatter = null;
 
             string lastManifestPath = null;
             LanguageOption inputLanguage = LanguageOption.Invalid;
@@ -126,8 +126,8 @@ namespace Gibbed.LetUsClingTogether.ExportEventMessages
                 }
                 var formatter = inputLanguage switch
                 {
-                    LanguageOption.EN => englishFormatter ??= FileFormats.Text.Formatter.ForEN(),
-                    LanguageOption.JP => japaneseFormatter ??= FileFormats.Text.Formatter.ForJP(),
+                    LanguageOption.EN => englishFormatter ??= Text.Formatter.ForEN(),
+                    LanguageOption.JP => japaneseFormatter ??= Text.Formatter.ForJP(),
                     _ => throw new NotSupportedException(),
                 };
 

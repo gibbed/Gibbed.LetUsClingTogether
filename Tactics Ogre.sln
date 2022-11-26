@@ -31,6 +31,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.LetUsClingTogether.E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.LetUsClingTogether.ExportSound", "projects\Gibbed.LetUsClingTogether.ExportSound\Gibbed.LetUsClingTogether.ExportSound.csproj", "{87DF94BB-F94E-4AD9-8A89-4222B7AB8C67}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.LetUsClingTogether.FileFormats", "projects\Gibbed.LetUsClingTogether.FileFormats\Gibbed.LetUsClingTogether.FileFormats.csproj", "{52EE0F67-C289-4D5C-A4AC-18492041FA02}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.LetUsClingTogether.ImportEventMessages", "projects\Gibbed.LetUsClingTogether.ImportEventMessages\Gibbed.LetUsClingTogether.ImportEventMessages.csproj", "{22E032D0-A903-43FB-BA73-802204B6B564}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.LetUsClingTogether.LookupFileTable", "projects\Gibbed.LetUsClingTogether.LookupFileTable\Gibbed.LetUsClingTogether.LookupFileTable.csproj", "{D4BF3379-E041-4F75-8243-934FED691A2D}"
@@ -113,10 +115,18 @@ Global
 		{5162A9FB-4DE1-4BBF-B7A2-5E8116AB0D26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5162A9FB-4DE1-4BBF-B7A2-5E8116AB0D26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5162A9FB-4DE1-4BBF-B7A2-5E8116AB0D26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52EE0F67-C289-4D5C-A4AC-18492041FA02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52EE0F67-C289-4D5C-A4AC-18492041FA02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52EE0F67-C289-4D5C-A4AC-18492041FA02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52EE0F67-C289-4D5C-A4AC-18492041FA02}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5D5917F4-D643-4663-B101-66D6AC6846A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5D5917F4-D643-4663-B101-66D6AC6846A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D5917F4-D643-4663-B101-66D6AC6846A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D5917F4-D643-4663-B101-66D6AC6846A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E29EFAD-18B2-463B-A373-C87FCA0ED18F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E29EFAD-18B2-463B-A373-C87FCA0ED18F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E29EFAD-18B2-463B-A373-C87FCA0ED18F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E29EFAD-18B2-463B-A373-C87FCA0ED18F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5EC48666-F81C-4A02-962C-AB5E74458E56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5EC48666-F81C-4A02-962C-AB5E74458E56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5EC48666-F81C-4A02-962C-AB5E74458E56}.Release|Any CPU.ActiveCfg = Release|Any CPU
