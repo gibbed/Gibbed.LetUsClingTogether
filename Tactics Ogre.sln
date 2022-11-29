@@ -69,6 +69,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.ScriptFo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.SheetFormats", "projects\Gibbed.TacticsOgre.SheetFormats\Gibbed.TacticsOgre.SheetFormats.csproj", "{E1086EA5-4FD5-443B-8226-CFAC3B2B13A5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.SpriteAnimationFormats", "projects\Gibbed.TacticsOgre.SpriteAnimationFormats\Gibbed.TacticsOgre.SpriteAnimationFormats.csproj", "{6BD41052-CF7E-423D-BC55-0D98C18FB94C}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.UnpackBlob", "projects\Gibbed.TacticsOgre.UnpackBlob\Gibbed.TacticsOgre.UnpackBlob.csproj", "{5EC48666-F81C-4A02-962C-AB5E74458E56}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.UnpackPack", "projects\Gibbed.TacticsOgre.UnpackPack\Gibbed.TacticsOgre.UnpackPack.csproj", "{DB4D1378-7F7E-4F39-8A74-7E49EE58115A}"
@@ -135,6 +137,10 @@ Global
 		{646F617D-C361-42FA-AFC2-C86204641EC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{646F617D-C361-42FA-AFC2-C86204641EC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{646F617D-C361-42FA-AFC2-C86204641EC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BD41052-CF7E-423D-BC55-0D98C18FB94C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BD41052-CF7E-423D-BC55-0D98C18FB94C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BD41052-CF7E-423D-BC55-0D98C18FB94C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BD41052-CF7E-423D-BC55-0D98C18FB94C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6D3E7917-C9CE-4F94-99C7-8487F1BE4C9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6D3E7917-C9CE-4F94-99C7-8487F1BE4C9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D3E7917-C9CE-4F94-99C7-8487F1BE4C9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
