@@ -40,7 +40,7 @@ namespace Gibbed.TacticsOgre.ScriptFormats
         public string Name { get; set; }
         public ushort TableIndex { get; set; }
         public ushort Unknown06 { get; set; }
-        public List<Instruction> Code {  get { return this._Code; } }
+        public List<Instruction> Code { get { return this._Code; } }
         public uint Unknown1C { get; set; }
         public ushort Unknown20 { get; set; }
         public ushort Index { get; set; }

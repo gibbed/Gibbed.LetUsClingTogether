@@ -33,7 +33,7 @@ namespace Gibbed.TacticsOgre.SpriteAnimationFormats
             this._Frames = new();
         }
 
-        public List<IFrame> Frames {  get { return this._Frames; } }
+        public List<IFrame> Frames { get { return this._Frames; } }
         public ushort TotalFrameCount { get; set; }
     }
 }

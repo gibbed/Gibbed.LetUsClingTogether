@@ -61,7 +61,7 @@ namespace Gibbed.TacticsOgre.ScriptFormats
         public string Date { get; set; }
         public List<ushort> ScriptCounts { get { return this._ScriptCounts; } }
         public List<Script> Scripts { get { return this._Scripts; } }
-        public List<int> IntTable {  get { return this._IntTable; } }
+        public List<int> IntTable { get { return this._IntTable; } }
         public List<float> FloatTable { get { return this._FloatTable; } }
         public List<Variable> Variables { get { return this._Variables; } }
         public List<RequestHeader[]> RequestTables { get { return this._RequestTables; } }
