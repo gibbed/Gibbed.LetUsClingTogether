@@ -26,6 +26,7 @@ using System.IO;
 using System.Linq;
 using Gibbed.IO;
 using Gibbed.Reborn.FileFormats;
+using Gibbed.TacticsOgre.FileFormats;
 using NDesk.Options;
 
 namespace Gibbed.Reborn.ExportTexture
@@ -97,6 +98,11 @@ namespace Gibbed.Reborn.ExportTexture
         private static void Export(string inputPath, string outputPath)
         {
             var inputBytes = File.ReadAllBytes(inputPath);
+
+            if (BitConverter.ToUInt32(inputBytes, 0) == RLE.Signature)
+            {
+                inputBytes = RLE.Decompress(inputBytes, 0, inputBytes.Length);
+            }
 
             var texture = new TextureFile();
             using (var input = new MemoryStream(inputBytes, false))
