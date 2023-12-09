@@ -214,6 +214,7 @@ namespace Gibbed.Reborn.RebuildFileTable
                             fileSize = (uint)fileInfo.Length;
                         }
 
+                        targetFile.DataSize = fileSize;
                         targetDirectory.Files[i] = targetFile;
                     }
                 }
