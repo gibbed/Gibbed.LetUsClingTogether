@@ -51,7 +51,7 @@ namespace Gibbed.TacticsOgre.ExportSheet
 
         private static LanguageOption ParseLanguageOption(string v)
         {
-            if (Enum.TryParse<LanguageOption>(v, out var result) == false)
+            if (Enum.TryParse<LanguageOption>(v, true, out var result) == false)
             {
                 result = LanguageOption.Invalid;
             }
@@ -70,7 +70,7 @@ namespace Gibbed.TacticsOgre.ExportSheet
             var options = new OptionSet()
             {
                 { "r|reborn", "set is reborn", v => isReborn = v != null },
-                { "e|language=", "set language", v => ParseLanguageOption(v) },
+                { "e|language=", "set language", v => language = ParseLanguageOption(v) },
                 { "s|serializer=", "specify serializer to use", v => serializerName = v },
                 { "v|verbose", "be verbose", v => verbose = v != null },
                 { "h|help", "show this message and exit", v => showHelp = v != null },
