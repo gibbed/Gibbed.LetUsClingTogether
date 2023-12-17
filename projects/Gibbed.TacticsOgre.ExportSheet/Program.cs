@@ -106,7 +106,8 @@ namespace Gibbed.TacticsOgre.ExportSheet
             if (isReborn == null || language == LanguageOption.Invalid)
             {
                 var manifestPath = GetManifestPath(inputPath);
-                if (string.IsNullOrEmpty(manifestPath) == false)
+                if (string.IsNullOrEmpty(manifestPath) == false &&
+                    File.Exists(manifestPath) == true)
                 {
                     var (manifestIsReborn, manifestLanguage) = GetOptionsFromManifest(manifestPath);
                     if (isReborn == null)
