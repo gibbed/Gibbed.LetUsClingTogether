@@ -103,13 +103,16 @@ namespace Gibbed.TacticsOgre.ExportSheet
                 ? Path.GetFullPath(extras[1])
                 : Path.ChangeExtension(inputPath, ".xlc.toml");
 
-            if (isReborn == null || language == LanguageOption.Invalid)
+            if (isReborn == null || language == LanguageOption.Invalid || serializerName == null)
             {
                 var manifestPath = GetManifestPath(inputPath);
                 if (string.IsNullOrEmpty(manifestPath) == false &&
                     File.Exists(manifestPath) == true)
                 {
-                    var (manifestIsReborn, manifestLanguage) = GetOptionsFromManifest(manifestPath);
+                    var inputName = Path.GetFileName(inputPath);
+                    var (manifestIsReborn, manifestLanguage, manifestSheetFormat) = GetOptionsFromManifest(
+                        manifestPath,
+                        inputName);
                     if (isReborn == null)
                     {
                         isReborn = manifestIsReborn;
@@ -117,6 +120,10 @@ namespace Gibbed.TacticsOgre.ExportSheet
                     if (language == LanguageOption.Invalid)
                     {
                         language = manifestLanguage;
+                    }
+                    if (serializerName == null)
+                    {
+                        serializerName = manifestSheetFormat;
                     }
                 }
             }
@@ -269,7 +276,9 @@ namespace Gibbed.TacticsOgre.ExportSheet
                 : null;
         }
 
-        private static (bool isReborn, LanguageOption language) GetOptionsFromManifest(string path)
+        private static (bool isReborn, LanguageOption language, string sheetFormat) GetOptionsFromManifest(
+            string path,
+            string name)
         {
             const bool isRebornDefault = false;
             const LanguageOption languageDefault = LanguageOption.Default;
@@ -289,7 +298,18 @@ namespace Gibbed.TacticsOgre.ExportSheet
             {
                 language = languageDefault;
             }
-            return (isReborn, language);
+
+            string sheetFormat = null;
+            Tommy.TomlArray filesArray = rootTable["files"].AsArray;
+            foreach (Tommy.TomlTable fileTable in filesArray)
+            {
+                if (fileTable["path"] == name)
+                {
+                    sheetFormat = fileTable["sheet_format"].AsString?.Value;
+                }
+            }
+
+            return (isReborn, language, sheetFormat);
         }
     }
 }
