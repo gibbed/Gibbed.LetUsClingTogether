@@ -149,8 +149,8 @@ namespace Gibbed.TacticsOgre.FileFormats.Sprite
             var commands = this.GECommands;
             if (commands[0] != new GEFormats.Command(GEFormats.Operation.TMODE, 1) ||
                 commands[1] != GEFormats.Operation.TPSM || commands[1].Argument != tpsmArgument ||
-                commands[2] != GEFormats.Operation.TBW0 || commands[2].Argument != this.TotalWidth ||
-                commands[3] != new GEFormats.Command(GEFormats.Operation.TBP0, 0) ||
+                commands[2] != GEFormats.Operation.TBW0 || //commands[2].Argument != this.TotalWidth ||
+                commands[3] != GEFormats.Operation.TBP0 ||
                 commands[4] != GEFormats.Operation.TSIZE0 || commands[4].Argument != tsizeArgument ||
                 commands[5] != new GEFormats.Command(GEFormats.Operation.TFLUSH) ||
                 commands[6] != new GEFormats.Command(GEFormats.Operation.RET) ||

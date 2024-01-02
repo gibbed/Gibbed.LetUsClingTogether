@@ -90,8 +90,8 @@ namespace Gibbed.TacticsOgre.FileFormats.Sprite
             var cloadArgument = this.Colors.Length / 8;
             var commands = this.GECommands;
             if (commands[0] != new GEFormats.Command(GEFormats.Operation.CMODE, 65283) ||
-                commands[1] != new GEFormats.Command(GEFormats.Operation.CBPH, 0) ||
-                commands[2] != new GEFormats.Command(GEFormats.Operation.CBP, 0) ||
+                commands[1] != GEFormats.Operation.CBPH ||
+                commands[2] != GEFormats.Operation.CBP ||
                 commands[3] != GEFormats.Operation.CLOAD || commands[3].Argument != cloadArgument ||
                 commands[4] != new GEFormats.Command(GEFormats.Operation.RET) ||
                 commands[5] != new GEFormats.Command(GEFormats.Operation.NOP) ||

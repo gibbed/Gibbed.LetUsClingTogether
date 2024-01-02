@@ -47,6 +47,16 @@ namespace Gibbed.PSP.GEFormats
             this.Argument = (int)((value >> 0) & 0xFFFFFF);
         }
 
+        public uint Value
+        {
+            get
+            {
+                uint value = (uint)(this.Argument & 0xFFFFFF);
+                value |= (((uint)this.Operation) & 0xFF) << 24;
+                return value;
+            }
+        }
+
         public override bool Equals(object obj)
         {
             return
@@ -106,8 +116,8 @@ namespace Gibbed.PSP.GEFormats
         public override string ToString()
         {
             return this.Argument != 0
-                ? $"{this.Operation} {this.Argument}"
-                : $"{this.Operation}";
+                ? $"({this.Value:X8}) {this.Operation} {this.Argument}"
+                : $"({this.Value:X8}) {this.Operation}";
         }
     }
 }
