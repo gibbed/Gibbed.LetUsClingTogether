@@ -39,6 +39,7 @@ _`UnpackFileTable` takes advantage of [filetable definitions](configs) to identi
 
 ## Archives
 
+* [`UnpackPAC`](projects/Gibbed.Reborn.UnpackPAC): Unpacker for Reborn `.PAC` archives.
 * [`UnpackPAKD`](projects/Gibbed.TacticsOgre.UnpackPAKD): Unpacker for `.PAKD` archives.
 
 ## Assets
@@ -54,7 +55,7 @@ _Requires corresponding sheet format files that describe the various spreadsheet
 * [`DisassembleScript`](projects/Gibbed.TacticsOgre.DisassembleScript): A cutscene script disassembler (`*.script`). For research purposes.
 * [`ExportEventMessages`](projects/Gibbed.LetUsClingTogether.ExportEventMessages): Exporter for event message files (`*.emes`).
 * [`ExportScreenplayInvocation`](projects/Gibbed.TacticsOgre.ExportScreenplayInvocation): Exporter for screenplay invocation files (`*.invk`).
-* `ExportScreenplayProgress`: Exporter for screenplay progress files (`*.pgrs`).
+* [`ExportScreenplayProgress`](projects/Gibbed.TacticsOgre.ExportScreenplayProgress): Exporter for screenplay progress files (`*.pgrs`).
 * [`ExportScreenplayTask`](projects/Gibbed.TacticsOgre.ExportScreenplayTask): Exporter for screenplay progress files (`*.task`).
 * [`ImportEventMessages`](projects/Gibbed.LetUsClingTogether.ImportEventMessages): Importer for event message files (`*.emes`)— incomplete, still needs work.
 
