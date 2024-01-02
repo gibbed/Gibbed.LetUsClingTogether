@@ -81,7 +81,7 @@ namespace Gibbed.TacticsOgre.FileFormats
                 buffer[index + 2] == 'k' &&
                 buffer[index + 3] == 'd')
             {
-                return ".pack";
+                return ".pakd"; // probably "packed archive"
             }
             else if (
                 count >= 4 &&
@@ -90,7 +90,7 @@ namespace Gibbed.TacticsOgre.FileFormats
                 buffer[index + 2] == 'C' &&
                 buffer[index + 3] == 0)
             {
-                return ".pac";
+                return ".pac"; // Reborn UI archive
             }
             else if (
                 count >= 4 &&

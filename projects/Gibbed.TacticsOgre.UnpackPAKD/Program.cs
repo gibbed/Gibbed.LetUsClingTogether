@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -27,7 +27,7 @@ using Gibbed.IO;
 using Gibbed.TacticsOgre.FileFormats;
 using NDesk.Options;
 
-namespace Gibbed.TacticsOgre.UnpackPack
+namespace Gibbed.TacticsOgre.UnpackPAKD
 {
     internal class Program
     {
@@ -62,7 +62,7 @@ namespace Gibbed.TacticsOgre.UnpackPack
 
             if (extras.Count < 1 || extras.Count > 2 || showHelp == true)
             {
-                Console.WriteLine("Usage: {0} [OPTIONS]+ input_pack [output_directory]", GetExecutableName());
+                Console.WriteLine("Usage: {0} [OPTIONS]+ input_pakd [output_directory]", GetExecutableName());
                 Console.WriteLine("Unpack specified archive.");
                 Console.WriteLine();
                 Console.WriteLine("Options:");

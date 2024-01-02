@@ -48,7 +48,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFileTable
 
             OptionSet options = new()
             {
-                { "np|dont-unpack-nested-packs", "don't unpack nested .pack files", v => settings.UnpackNestedPacks = v == null },
+                { "np|dont-unpack-nested-packs", "don't unpack nested .pakd files", v => settings.UnpackNestedPacks = v == null },
                 { "nz|dont-unpack-zips", "don't unpack nested .zip files", v => settings.UnpackNestedZIPs = v == null },
                 { "v|verbose", "be verbose", v => settings.Verbose = v != null },
                 { "h|help", "show this message and exit",  v => showHelp = v != null },

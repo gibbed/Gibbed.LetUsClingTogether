@@ -29,13 +29,17 @@ Intended to work with all available regional versions of the game, though only t
 
 # Tools
 
-## FILETABLE / Archives
+## File Table (FILETABLE.BIN / FileTable.bin)
 
 * [`PackFileTable`](projects/Gibbed.LetUsClingTogether.PackFileTable): Packer for `FILETABLE.BIN` / `FileTable.bin` (and corresponding `.BIN` files).
 * [`LookupFileTable`](projects/Gibbed.LetUsClingTogether.LookupFileTable): Translates offsets in `.BIN` files to their corresponding file entries.
 * [`UnpackFileTable`](projects/Gibbed.LetUsClingTogether.UnpackFileTable): Unpacker for `FILETABLE.BIN` / `FileTable.bin` (and corresponding `.BIN` files).
 
 _`UnpackFileTable` takes advantage of [filetable definitions](configs) to identify & describe files within the ID-based filesystem._
+
+## Archives
+
+* [`UnpackPAKD`](projects/Gibbed.TacticsOgre.UnpackPAKD): Unpacker for `.PAKD` archives.
 
 ## Assets
 
