@@ -141,7 +141,7 @@ namespace Gibbed.TacticsOgre.FileFormats
               buffer[index + 2] == 't' &&
               buffer[index + 3] == 'e')
             {
-                return ".etxt";
+                return ".etxt"; // Reborn event text
             }
             else if (
                 count >= 4 &&
