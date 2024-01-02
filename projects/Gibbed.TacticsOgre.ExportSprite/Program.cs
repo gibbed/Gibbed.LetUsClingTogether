@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -46,9 +46,14 @@ namespace Gibbed.TacticsOgre.ExportSprite
         {
             bool verbose = false;
             bool showHelp = false;
+            string palettePath = null;
+            int paletteIndex = 0;
+
 
             var options = new OptionSet()
             {
+                { "p|palette=", "set palette path", v => palettePath = v },
+                { "i|palette-index=", "set palette index", v => paletteIndex = int.Parse(v) },
                 { "v|verbose", "be verbose", v => verbose = v != null },
                 { "h|help", "show this message and exit", v => showHelp = v != null },
             };
@@ -89,6 +94,26 @@ namespace Gibbed.TacticsOgre.ExportSprite
                 }
             }
 
+            Palette? palette;
+            if (string.IsNullOrEmpty(palettePath) == true)
+            {
+                palette = null;
+            }
+            else
+            {
+                using (var input = File.OpenRead(palettePath))
+                {
+                    SpriteFile paletteFile = new();
+                    paletteFile.Deserialize(input, Endian.Little);
+                    if (paletteIndex < 0 || paletteIndex >= paletteFile.Sprite.Palettes.Length)
+                    {
+                        Console.WriteLine("Invalid palette index.");
+                        return;
+                    }
+                    palette = paletteFile.Sprite.Palettes[paletteIndex];
+                }
+            }
+
             foreach (var inputPath in inputPaths.OrderBy(v => v))
             {
                 string outputPath = Path.ChangeExtension(inputPath, null);
@@ -98,11 +123,11 @@ namespace Gibbed.TacticsOgre.ExportSprite
                     Console.WriteLine(inputPath);
                 }
 
-                Export(inputPath, outputPath);
+                Export(inputPath, palette, outputPath);
             }
         }
 
-        private static void Export(string inputPath, string outputPath)
+        private static void Export(string inputPath, Palette? palette, string outputPath)
         {
             var inputBytes = File.ReadAllBytes(inputPath);
 
@@ -111,18 +136,30 @@ namespace Gibbed.TacticsOgre.ExportSprite
                 inputBytes = RLE.Decompress(inputBytes, 0, inputBytes.Length);
             }
 
-            var file = new SpriteFile();
+            SpriteFile file = new();
             using (var input = new MemoryStream(inputBytes, false))
             {
                 file.Deserialize(input, Endian.Little);
             }
 
             var sprite = file.Sprite;
-
             if (sprite.Texture != null)
             {
                 var texture = sprite.Texture.Value;
-                if (sprite.Palettes.Length == 1)
+                if (palette != null)
+                {
+                    var bitmapPath = Path.ChangeExtension(outputPath, ".png");
+                    var data = ExportPalettized(texture);
+                    var bitmap = MakeBitmapPalettized(
+                        texture.TotalWidth, texture.TotalHeight,
+                        data,
+                        palette.Value);
+                    using (bitmap)
+                    {
+                        bitmap.Save(bitmapPath, ImageFormat.Png);
+                    }
+                }
+                else if (sprite.Palettes.Length == 1)
                 {
                     var bitmapPath = Path.ChangeExtension(outputPath, ".png");
                     var data = ExportPalettized(texture);
@@ -138,14 +175,14 @@ namespace Gibbed.TacticsOgre.ExportSprite
                 else
                 {
                     int i = 0;
-                    foreach (var palette in sprite.Palettes)
+                    foreach (var palette2 in sprite.Palettes)
                     {
                         var bitmapPath = Path.ChangeExtension($"{outputPath}_{i}", ".png");
                         var data = ExportPalettized(texture);
                         var bitmap = MakeBitmapPalettized(
                             texture.TotalWidth, texture.TotalHeight,
                             data,
-                            palette);
+                            palette2);
                         using (bitmap)
                         {
                             bitmap.Save(bitmapPath, ImageFormat.Png);
