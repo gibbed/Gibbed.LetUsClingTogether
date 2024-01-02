@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Archives", "Archives", "{3742DA58-0B92-4D2F-95DB-E780487C8C7E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Event Messages (EMES)", "Event Messages (EMES)", "{699BCE03-FFB9-4F52-9E10-9AC848AE8BAC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Event Text (emes, etxt)", "Event Text (emes, etxt)", "{699BCE03-FFB9-4F52-9E10-9AC848AE8BAC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "File Table", "File Table", "{B0E9DED9-537C-43B8-BE69-309C967DF189}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fonts", "Fonts", "{63608CC6-1FFC-4B9F-8411-753754D41D8E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Graphics", "Graphics", "{72FAC50E-21C8-4639-AFDA-30E43C339446}"
 EndProject

@@ -50,7 +50,7 @@ namespace Gibbed.LetUsClingTogether.ExportEventMessages
 
         private static LanguageOption ParseLanguageOption(string v)
         {
-            if (Enum.TryParse<LanguageOption>(v, out var result) == false)
+            if (Enum.TryParse<LanguageOption>(v, true, out var result) == false)
             {
                 result = LanguageOption.Invalid;
             }
@@ -64,7 +64,7 @@ namespace Gibbed.LetUsClingTogether.ExportEventMessages
 
             var options = new OptionSet()
             {
-                { "e|language=", "set language", v => ParseLanguageOption(v) },
+                { "e|language=", "set language", v => language = ParseLanguageOption(v) },
                 { "h|help", "show this message and exit", v => showHelp = v != null },
             };
 
