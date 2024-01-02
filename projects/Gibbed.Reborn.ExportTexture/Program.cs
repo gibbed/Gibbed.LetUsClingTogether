@@ -31,7 +31,7 @@ using NDesk.Options;
 
 namespace Gibbed.Reborn.ExportTexture
 {
-    internal class Program
+    public class Program
     {
         private static string GetExecutableName()
         {
@@ -64,7 +64,7 @@ namespace Gibbed.Reborn.ExportTexture
 
             if (extras.Count < 1 || showHelp == true)
             {
-                Console.WriteLine("Usage: {0} [OPTIONS]+ input_btx+", GetExecutableName());
+                Console.WriteLine("Usage: {0} [OPTIONS]+ input_tex+", GetExecutableName());
                 Console.WriteLine();
                 Console.WriteLine("Options:");
                 options.WriteOptionDescriptions(Console.Out);
@@ -77,6 +77,7 @@ namespace Gibbed.Reborn.ExportTexture
                 if (Directory.Exists(inputPath) == true)
                 {
                     inputPaths.AddRange(Directory.GetFiles(inputPath, "*.btx", SearchOption.AllDirectories));
+                    inputPaths.AddRange(Directory.GetFiles(inputPath, "*.tex", SearchOption.AllDirectories));
                 }
                 else
                 {
@@ -118,7 +119,7 @@ namespace Gibbed.Reborn.ExportTexture
             }
         }
 
-        private static void WriteDDSHeader(TextureFile texture, FileStream output, Endian endian)
+        public static void WriteDDSHeader(TextureFile texture, FileStream output, Endian endian)
         {
             output.WriteValueU32(0x20534444, endian); // 'DDS '
             output.WriteValueU32(124, endian); // size

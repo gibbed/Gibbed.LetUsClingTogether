@@ -115,7 +115,7 @@ namespace Gibbed.TacticsOgre.FileFormats
                buffer[index + 1] == 't' &&
                buffer[index + 2] == 'x')
             {
-                return ".btx";
+                return ".tex"; // Reborn texture
             }
             else if (
                 count >= 3 &&
