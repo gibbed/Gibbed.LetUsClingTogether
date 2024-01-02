@@ -1,2 +1,6 @@
 [200]
 path = "effect"
+
+0.path = "EffectMaterialData"
+1.path = "common/indices"
+2.path = "common/c_all"

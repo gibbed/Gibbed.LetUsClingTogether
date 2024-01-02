@@ -1,2 +1,2093 @@
-﻿[20]
+﻿[30]
 path = "object/unit"
+
+[30.1]
+path = "Adult_f00"
+
+[30.2]
+path = "Adult_m00"
+
+[30.3]
+path = "Aged_f00"
+
+[30.4]
+path = "Aged_m00"
+
+[30.5]
+path = "Aloser00"
+
+[30.6]
+path = "Aloser01"
+
+[30.7]
+path = "Andoras00"
+
+[30.8]
+path = "Archer_f00"
+
+[30.9]
+path = "Archer_f01"
+
+[30.10]
+path = "Archer_f02"
+
+[30.11]
+path = "Archer_f03"
+
+[30.12]
+path = "Archer_f04"
+
+[30.13]
+path = "Archer_f05"
+
+[30.14]
+path = "Archer_f06"
+
+[30.15]
+path = "Archer_f08"
+
+[30.16]
+path = "Archer_f09"
+
+[30.17]
+path = "Archer_f13"
+
+[30.18]
+path = "Archer_m00"
+
+[30.19]
+path = "Archer_m01"
+
+[30.20]
+path = "Archer_m02"
+
+[30.21]
+path = "Archer_m03"
+
+[30.22]
+path = "Archer_m04"
+
+[30.23]
+path = "Archer_m05"
+
+[30.24]
+path = "Archer_m06"
+
+[30.25]
+path = "Archer_m08"
+
+[30.26]
+path = "Archer_m09"
+
+[30.27]
+path = "Archer_m13"
+
+[30.28]
+path = "Athelstan00"
+
+[30.29]
+path = "AthelstanCool00"
+
+[30.30]
+path = "Balbatos00"
+
+[30.31]
+path = "Balzepho00"
+
+[30.32]
+path = "Barnas00"
+
+[30.33]
+path = "BeastTamer_f00"
+
+[30.34]
+path = "BeastTamer_f01"
+
+[30.35]
+path = "BeastTamer_f02"
+
+[30.36]
+path = "BeastTamer_f03"
+
+[30.37]
+path = "BeastTamer_f04"
+
+[30.38]
+path = "BeastTamer_f05"
+
+[30.39]
+path = "BeastTamer_f06"
+
+[30.40]
+path = "BeastTamer_f08"
+
+[30.41]
+path = "BeastTamer_f09"
+
+[30.42]
+path = "BeastTamer_f13"
+
+[30.43]
+path = "BeastTamer_m00"
+
+[30.44]
+path = "BeastTamer_m01"
+
+[30.45]
+path = "BeastTamer_m02"
+
+[30.46]
+path = "BeastTamer_m03"
+
+[30.47]
+path = "BeastTamer_m04"
+
+[30.48]
+path = "BeastTamer_m05"
+
+[30.49]
+path = "BeastTamer_m06"
+
+[30.50]
+path = "BeastTamer_m08"
+
+[30.51]
+path = "BeastTamer_m09"
+
+[30.52]
+path = "BeastTamer_m13"
+
+[30.53]
+path = "Belzebuth00"
+
+[30.54]
+path = "Berserker_f00"
+
+[30.55]
+path = "Berserker_f01"
+
+[30.56]
+path = "Berserker_f02"
+
+[30.57]
+path = "Berserker_f03"
+
+[30.58]
+path = "Berserker_f04"
+
+[30.59]
+path = "Berserker_f05"
+
+[30.60]
+path = "Berserker_f06"
+
+[30.61]
+path = "Berserker_f08"
+
+[30.62]
+path = "Berserker_f09"
+
+[30.63]
+path = "Berserker_f13"
+
+[30.64]
+path = "Berserker_m00"
+
+[30.65]
+path = "Berserker_m01"
+
+[30.66]
+path = "Berserker_m02"
+
+[30.67]
+path = "Berserker_m03"
+
+[30.68]
+path = "Berserker_m04"
+
+[30.69]
+path = "Berserker_m05"
+
+[30.70]
+path = "Berserker_m06"
+
+[30.71]
+path = "Berserker_m08"
+
+[30.72]
+path = "Berserker_m09"
+
+[30.73]
+path = "Berserker_m13"
+
+[30.74]
+path = "Boy_m00"
+
+[30.75]
+path = "Boy2_m00"
+
+[30.76]
+path = "Branta00"
+
+[30.77]
+path = "Byan00"
+
+[30.78]
+path = "Canopus00"
+
+[30.79]
+path = "Clemont00"
+
+[30.80]
+path = "Cleric_f00"
+
+[30.81]
+path = "Cleric_f01"
+
+[30.82]
+path = "Cleric_f02"
+
+[30.83]
+path = "Cleric_f03"
+
+[30.84]
+path = "Cleric_f04"
+
+[30.85]
+path = "Cleric_f05"
+
+[30.86]
+path = "Cleric_f06"
+
+[30.87]
+path = "Cleric_f08"
+
+[30.88]
+path = "Cleric_f09"
+
+[30.89]
+path = "Cleric_f13"
+
+[30.90]
+path = "Cleric_m00"
+
+[30.91]
+path = "Cleric_m01"
+
+[30.92]
+path = "Cleric_m02"
+
+[30.93]
+path = "Cleric_m03"
+
+[30.94]
+path = "Cleric_m04"
+
+[30.95]
+path = "Cleric_m05"
+
+[30.96]
+path = "Cleric_m06"
+
+[30.97]
+path = "Cleric_m08"
+
+[30.98]
+path = "Cleric_m09"
+
+[30.99]
+path = "Cleric_m13"
+
+[30.100]
+path = "Cockatrice00"
+
+[30.101]
+path = "Cockatrice02"
+
+[30.102]
+path = "Cockatrice05"
+
+[30.103]
+path = "Cockatrice06"
+
+[30.104]
+path = "Cockatrice08"
+
+[30.105]
+path = "Cockatrice09"
+
+[30.106]
+path = "Cockatrice13"
+
+[30.107]
+path = "Cressida00"
+
+[30.108]
+path = "Cyclops00"
+
+[30.109]
+path = "Cyclops06"
+
+[30.110]
+path = "Cyclops08"
+
+[30.111]
+path = "Cyclops09"
+
+[30.112]
+path = "Cyclops10"
+
+[30.113]
+path = "Cyclops13"
+
+[30.114]
+path = "Debordes00"
+
+[30.115]
+path = "Delilah00"
+
+[30.116]
+path = "DelilahEx00"
+
+[30.117]
+path = "Deneb00"
+
+[30.118]
+path = "Deneb01"
+
+[30.119]
+path = "Denim00"
+
+[30.120]
+path = "DenimCry00"
+
+[30.121]
+path = "DenimEnemy00"
+
+[30.122]
+path = "DenimKing00"
+
+[30.123]
+path = "DenimLord00"
+
+[30.124]
+path = "DivineKnight_f00"
+
+[30.125]
+path = "DivineKnight_f01"
+
+[30.126]
+path = "DivineKnight_f02"
+
+[30.127]
+path = "DivineKnight_f03"
+
+[30.128]
+path = "DivineKnight_f04"
+
+[30.129]
+path = "DivineKnight_f05"
+
+[30.130]
+path = "DivineKnight_f06"
+
+[30.131]
+path = "DivineKnight_f08"
+
+[30.132]
+path = "DivineKnight_f09"
+
+[30.133]
+path = "DivineKnight_f13"
+
+[30.134]
+path = "DivineKnight_m00"
+
+[30.135]
+path = "DivineKnight_m01"
+
+[30.136]
+path = "DivineKnight_m02"
+
+[30.137]
+path = "DivineKnight_m03"
+
+[30.138]
+path = "DivineKnight_m04"
+
+[30.139]
+path = "DivineKnight_m05"
+
+[30.140]
+path = "DivineKnight_m06"
+
+[30.141]
+path = "DivineKnight_m08"
+
+[30.142]
+path = "DivineKnight_m09"
+
+[30.143]
+path = "DivineKnight_m13"
+
+[30.144]
+path = "Dknight00"
+
+[30.145]
+path = "Dknight01"
+
+[30.146]
+path = "Dknight02"
+
+[30.147]
+path = "Dknight03"
+
+[30.148]
+path = "Dknight04"
+
+[30.149]
+path = "Dknight05"
+
+[30.150]
+path = "Dknight06"
+
+[30.151]
+path = "Dknight13"
+
+[30.152]
+path = "Dorgalua00"
+
+[30.153]
+path = "DorgaluaBefore00"
+
+[30.154]
+path = "DorgaluaXL00"
+
+[30.155]
+path = "Dra_Ark00"
+
+[30.156]
+path = "Dra_Ark01"
+
+[30.157]
+path = "Dra_Ark02"
+
+[30.158]
+path = "Dra_Ark03"
+
+[30.159]
+path = "Dra_Ark04"
+
+[30.160]
+path = "Dra_Ark05"
+
+[30.161]
+path = "Dra_Ark06"
+
+[30.162]
+path = "Dra_Ark08"
+
+[30.163]
+path = "Dra_Ark09"
+
+[30.164]
+path = "Dra_Ark10"
+
+[30.165]
+path = "Dra_Ark11"
+
+[30.166]
+path = "Dra_Ark12"
+
+[30.167]
+path = "Dra_Ark13"
+
+[30.168]
+path = "Dra_Cloud00"
+
+[30.169]
+path = "Dra_Cloud01"
+
+[30.170]
+path = "Dra_Cloud02"
+
+[30.171]
+path = "Dra_Cloud03"
+
+[30.172]
+path = "Dra_Cloud04"
+
+[30.173]
+path = "Dra_Cloud05"
+
+[30.174]
+path = "Dra_Cloud06"
+
+[30.175]
+path = "Dra_Cloud08"
+
+[30.176]
+path = "Dra_Cloud09"
+
+[30.177]
+path = "Dra_Cloud13"
+
+[30.178]
+path = "Dra_Dark00"
+
+[30.179]
+path = "Dra_Dark01"
+
+[30.180]
+path = "Dra_Dark02"
+
+[30.181]
+path = "Dra_Dark03"
+
+[30.182]
+path = "Dra_Dark04"
+
+[30.183]
+path = "Dra_Dark05"
+
+[30.184]
+path = "Dra_Dark06"
+
+[30.185]
+path = "Dra_Dark08"
+
+[30.186]
+path = "Dra_Dark09"
+
+[30.187]
+path = "Dra_Dark13"
+
+[30.188]
+path = "Dra_Earth00"
+
+[30.189]
+path = "Dra_Flame00"
+
+[30.190]
+path = "Dra_Flood00"
+
+[30.191]
+path = "Dra_Frost00"
+
+[30.192]
+path = "Dra_Thunder00"
+
+[30.193]
+path = "Dragoon_f00"
+
+[30.194]
+path = "Dragoon_f01"
+
+[30.195]
+path = "Dragoon_f02"
+
+[30.196]
+path = "Dragoon_f03"
+
+[30.197]
+path = "Dragoon_f04"
+
+[30.198]
+path = "Dragoon_f05"
+
+[30.199]
+path = "Dragoon_f06"
+
+[30.200]
+path = "Dragoon_f08"
+
+[30.201]
+path = "Dragoon_f09"
+
+[30.202]
+path = "Dragoon_f13"
+
+[30.203]
+path = "Dragoon_m00"
+
+[30.204]
+path = "Dragoon_m01"
+
+[30.205]
+path = "Dragoon_m02"
+
+[30.206]
+path = "Dragoon_m03"
+
+[30.207]
+path = "Dragoon_m04"
+
+[30.208]
+path = "Dragoon_m05"
+
+[30.209]
+path = "Dragoon_m06"
+
+[30.210]
+path = "Dragoon_m08"
+
+[30.211]
+path = "Dragoon_m09"
+
+[30.212]
+path = "Dragoon_m13"
+
+[30.213]
+path = "Fairy00"
+
+[30.214]
+path = "Fairy01"
+
+[30.215]
+path = "Fairy02"
+
+[30.216]
+path = "Fairy03"
+
+[30.217]
+path = "Fairy04"
+
+[30.218]
+path = "Fairy05"
+
+[30.219]
+path = "Fairy06"
+
+[30.220]
+path = "Fairy08"
+
+[30.221]
+path = "Fairy09"
+
+[30.222]
+path = "Fairy13"
+
+[30.223]
+path = "Farfadets00"
+
+[30.224]
+path = "Forcas00"
+
+[30.225]
+path = "Ganb00"
+
+[30.226]
+path = "Ghost00"
+
+[30.227]
+path = "Ghost01"
+
+[30.228]
+path = "Ghost02"
+
+[30.229]
+path = "Ghost03"
+
+[30.230]
+path = "Ghost04"
+
+[30.231]
+path = "Ghost05"
+
+[30.232]
+path = "Ghost06"
+
+[30.233]
+path = "Ghost08"
+
+[30.234]
+path = "Ghost09"
+
+[30.235]
+path = "Ghost13"
+
+[30.236]
+path = "Gilbert00"
+
+[30.237]
+path = "Girl2_f00"
+
+[30.238]
+path = "Gol_Clay00"
+
+[30.239]
+path = "Gol_Clay01"
+
+[30.240]
+path = "Gol_Clay02"
+
+[30.241]
+path = "Gol_Clay03"
+
+[30.242]
+path = "Gol_Clay04"
+
+[30.243]
+path = "Gol_Clay05"
+
+[30.244]
+path = "Gol_Clay06"
+
+[30.245]
+path = "Gol_Clay07"
+
+[30.246]
+path = "Gol_Clay08"
+
+[30.247]
+path = "Gol_Clay09"
+
+[30.248]
+path = "Gol_Clay13"
+
+[30.249]
+path = "Gol_Iron00"
+
+[30.250]
+path = "Gol_Iron01"
+
+[30.251]
+path = "Gol_Iron02"
+
+[30.252]
+path = "Gol_Iron03"
+
+[30.253]
+path = "Gol_Stone00"
+
+[30.254]
+path = "Gol_Stone01"
+
+[30.255]
+path = "Gol_Stone02"
+
+[30.256]
+path = "Gol_Stone03"
+
+[30.257]
+path = "Gol_Vulder00"
+
+[30.258]
+path = "Gol_Vulder01"
+
+[30.259]
+path = "Gol_Vulder02"
+
+[30.260]
+path = "Gol_Vulder03"
+
+[30.261]
+path = "Gremlin00"
+
+[30.262]
+path = "Gremlin01"
+
+[30.263]
+path = "Gremlin02"
+
+[30.264]
+path = "Gremlin03"
+
+[30.265]
+path = "Gremlin04"
+
+[30.266]
+path = "Gremlin05"
+
+[30.267]
+path = "Gremlin06"
+
+[30.268]
+path = "Gremlin08"
+
+[30.269]
+path = "Gremlin09"
+
+[30.270]
+path = "Gremlin13"
+
+[30.271]
+path = "Gryphon00"
+
+[30.272]
+path = "Gryphon08"
+
+[30.273]
+path = "Gryphon09"
+
+[30.274]
+path = "Gryphon10"
+
+[30.275]
+path = "Gryphon11"
+
+[30.276]
+path = "Gryphon12"
+
+[30.277]
+path = "Gryphon13"
+
+[30.278]
+path = "Guildus00"
+
+[30.279]
+path = "Gunner_f00"
+
+[30.280]
+path = "Gunner_f01"
+
+[30.281]
+path = "Gunner_f02"
+
+[30.282]
+path = "Gunner_f03"
+
+[30.283]
+path = "Gunner_f04"
+
+[30.284]
+path = "Gunner_f05"
+
+[30.285]
+path = "Gunner_f06"
+
+[30.286]
+path = "Gunner_f08"
+
+[30.287]
+path = "Gunner_f09"
+
+[30.288]
+path = "Gunner_f13"
+
+[30.289]
+path = "Gunner_m00"
+
+[30.290]
+path = "Gunner_m01"
+
+[30.291]
+path = "Gunner_m02"
+
+[30.292]
+path = "Gunner_m03"
+
+[30.293]
+path = "Gunner_m04"
+
+[30.294]
+path = "Gunner_m05"
+
+[30.295]
+path = "Gunner_m06"
+
+[30.296]
+path = "Gunner_m08"
+
+[30.297]
+path = "Gunner_m09"
+
+[30.298]
+path = "Gunner_m13"
+
+[30.299]
+path = "Hawkman00"
+
+[30.300]
+path = "Hawkman01"
+
+[30.301]
+path = "Hawkman02"
+
+[30.302]
+path = "Hawkman03"
+
+[30.303]
+path = "Hawkman04"
+
+[30.304]
+path = "Hawkman05"
+
+[30.305]
+path = "Hawkman06"
+
+[30.306]
+path = "Hawkman08"
+
+[30.307]
+path = "Hawkman09"
+
+[30.308]
+path = "Hawkman13"
+
+[30.309]
+path = "Hobyrim00"
+
+[30.310]
+path = "HobyrimYoung00"
+
+[30.311]
+path = "Hydra00"
+
+[30.312]
+path = "Hydra01"
+
+[30.313]
+path = "Hydra04"
+
+[30.314]
+path = "Hydra08"
+
+[30.315]
+path = "Hydra09"
+
+[30.316]
+path = "Hydra13"
+
+[30.317]
+path = "Jenounes00"
+
+[30.318]
+path = "Kachua00"
+
+[30.319]
+path = "KachuaCry00"
+
+[30.320]
+path = "Kachuadark00"
+
+[30.321]
+path = "Kachuaprincess00"
+
+[30.322]
+path = "KachuaQueen00"
+
+[30.323]
+path = "KachuaShout00"
+
+[30.324]
+path = "Klaire00"
+
+[30.325]
+path = "Knight_f00"
+
+[30.326]
+path = "Knight_f01"
+
+[30.327]
+path = "Knight_f02"
+
+[30.328]
+path = "Knight_f03"
+
+[30.329]
+path = "Knight_f04"
+
+[30.330]
+path = "Knight_f05"
+
+[30.331]
+path = "Knight_f06"
+
+[30.332]
+path = "Knight_f08"
+
+[30.333]
+path = "Knight_f09"
+
+[30.334]
+path = "Knight_f13"
+
+[30.335]
+path = "Knight_m00"
+
+[30.336]
+path = "Knight_m01"
+
+[30.337]
+path = "Knight_m02"
+
+[30.338]
+path = "Knight_m03"
+
+[30.339]
+path = "Knight_m04"
+
+[30.340]
+path = "Knight_m05"
+
+[30.341]
+path = "Knight_m06"
+
+[30.342]
+path = "Knight_m08"
+
+[30.343]
+path = "Knight_m09"
+
+[30.344]
+path = "Knight_m13"
+
+[30.345]
+path = "Lamia00"
+
+[30.346]
+path = "Lamia01"
+
+[30.347]
+path = "Lamia02"
+
+[30.348]
+path = "Lamia03"
+
+[30.349]
+path = "Lamia04"
+
+[30.350]
+path = "Lamia05"
+
+[30.351]
+path = "Lamia06"
+
+[30.352]
+path = "Lamia08"
+
+[30.353]
+path = "Lamia09"
+
+[30.354]
+path = "Lamia13"
+
+[30.355]
+path = "LansHami00"
+
+[30.356]
+path = "LansHamiDisabled00"
+
+[30.357]
+path = "LansHamiPrison00"
+
+[30.358]
+path = "LansTar00"
+
+[30.359]
+path = "Lemonica00"
+
+[30.360]
+path = "Leonard00"
+
+[30.361]
+path = "Lich_f00"
+
+[30.362]
+path = "Lich_f01"
+
+[30.363]
+path = "Lich_f02"
+
+[30.364]
+path = "Lich_f03"
+
+[30.365]
+path = "Lich_f04"
+
+[30.366]
+path = "Lich_f05"
+
+[30.367]
+path = "Lich_f06"
+
+[30.368]
+path = "Lich_f08"
+
+[30.369]
+path = "Lich_f09"
+
+[30.370]
+path = "Lich_f13"
+
+[30.371]
+path = "Lich_m00"
+
+[30.372]
+path = "Lich_m01"
+
+[30.373]
+path = "Lich_m02"
+
+[30.374]
+path = "Lich_m03"
+
+[30.375]
+path = "Lich_m04"
+
+[30.376]
+path = "Lich_m05"
+
+[30.377]
+path = "Lich_m06"
+
+[30.378]
+path = "Lich_m08"
+
+[30.379]
+path = "Lich_m09"
+
+[30.380]
+path = "Lich_m13"
+
+[30.381]
+path = "Lindl00"
+
+[30.382]
+path = "Lizardman00"
+
+[30.383]
+path = "Lizardman01"
+
+[30.384]
+path = "Lizardman02"
+
+[30.385]
+path = "Lizardman03"
+
+[30.386]
+path = "Lizardman04"
+
+[30.387]
+path = "Lizardman05"
+
+[30.388]
+path = "Lizardman06"
+
+[30.389]
+path = "Lizardman08"
+
+[30.390]
+path = "Lizardman09"
+
+[30.391]
+path = "Lizardman13"
+
+[30.392]
+path = "Lukkam00"
+
+[30.393]
+path = "Luxian00"
+
+[30.394]
+path = "LuxianEx00"
+
+[30.395]
+path = "Mannaflora00"
+
+[30.396]
+path = "Martym00"
+
+[30.397]
+path = "Mildain00"
+
+[30.398]
+path = "Mreuva00"
+
+[30.399]
+path = "Necromancer_f00"
+
+[30.400]
+path = "Necromancer_f01"
+
+[30.401]
+path = "Necromancer_f02"
+
+[30.402]
+path = "Necromancer_f03"
+
+[30.403]
+path = "Necromancer_f04"
+
+[30.404]
+path = "Necromancer_f05"
+
+[30.405]
+path = "Necromancer_f06"
+
+[30.406]
+path = "Necromancer_f08"
+
+[30.407]
+path = "Necromancer_f09"
+
+[30.408]
+path = "Necromancer_f13"
+
+[30.409]
+path = "Necromancer_m00"
+
+[30.410]
+path = "Necromancer_m01"
+
+[30.411]
+path = "Necromancer_m02"
+
+[30.412]
+path = "Necromancer_m03"
+
+[30.413]
+path = "Necromancer_m04"
+
+[30.414]
+path = "Necromancer_m05"
+
+[30.415]
+path = "Necromancer_m06"
+
+[30.416]
+path = "Necromancer_m08"
+
+[30.417]
+path = "Necromancer_m09"
+
+[30.418]
+path = "Necromancer_m13"
+
+[30.419]
+path = "Ninja_f00"
+
+[30.420]
+path = "Ninja_f01"
+
+[30.421]
+path = "Ninja_f02"
+
+[30.422]
+path = "Ninja_f03"
+
+[30.423]
+path = "Ninja_f04"
+
+[30.424]
+path = "Ninja_f05"
+
+[30.425]
+path = "Ninja_f06"
+
+[30.426]
+path = "Ninja_f08"
+
+[30.427]
+path = "Ninja_f09"
+
+[30.428]
+path = "Ninja_f13"
+
+[30.429]
+path = "Ninja_m00"
+
+[30.430]
+path = "Ninja_m01"
+
+[30.431]
+path = "Ninja_m02"
+
+[30.432]
+path = "Ninja_m03"
+
+[30.433]
+path = "Ninja_m04"
+
+[30.434]
+path = "Ninja_m05"
+
+[30.435]
+path = "Ninja_m06"
+
+[30.436]
+path = "Ninja_m08"
+
+[30.437]
+path = "Ninja_m09"
+
+[30.438]
+path = "Ninja_m13"
+
+[30.439]
+path = "NiseYulia00"
+
+[30.440]
+path = "Nybbas00"
+
+[30.441]
+path = "NybbasLich00"
+
+[30.442]
+path = "Octopus00"
+
+[30.443]
+path = "Octopus01"
+
+[30.444]
+path = "Octopus02"
+
+[30.445]
+path = "Octopus03"
+
+[30.446]
+path = "Octopus04"
+
+[30.447]
+path = "Octopus05"
+
+[30.448]
+path = "Octopus06"
+
+[30.449]
+path = "Octopus08"
+
+[30.450]
+path = "Octopus09"
+
+[30.451]
+path = "Octopus13"
+
+[30.452]
+path = "Olivia00"
+
+[30.453]
+path = "Orc00"
+
+[30.454]
+path = "Orc01"
+
+[30.455]
+path = "Orc02"
+
+[30.456]
+path = "Orc03"
+
+[30.457]
+path = "Orc04"
+
+[30.458]
+path = "Orc05"
+
+[30.459]
+path = "Orc06"
+
+[30.460]
+path = "Orc08"
+
+[30.461]
+path = "Orc09"
+
+[30.462]
+path = "Orc13"
+
+[30.463]
+path = "Orias00"
+
+[30.464]
+path = "Orlandu00"
+
+[30.465]
+path = "Oxyones00"
+
+[30.466]
+path = "Oz00"
+
+[30.467]
+path = "Ozma00"
+
+[30.468]
+path = "OzmaCool00"
+
+[30.469]
+path = "Prancet00"
+
+[30.470]
+path = "PrancetFilaha00"
+
+[30.471]
+path = "Presence00"
+
+[30.472]
+path = "Pumpkin00"
+
+[30.473]
+path = "Pumpkin01"
+
+[30.474]
+path = "Pumpkin02"
+
+[30.475]
+path = "Pumpkin03"
+
+[30.476]
+path = "Pumpkin04"
+
+[30.477]
+path = "Pumpkin05"
+
+[30.478]
+path = "Pumpkin06"
+
+[30.479]
+path = "Pumpkin07"
+
+[30.480]
+path = "Pumpkin08"
+
+[30.481]
+path = "Pumpkin09"
+
+[30.482]
+path = "Pumpkin13"
+
+[30.483]
+path = "Radlum00"
+
+[30.484]
+path = "Ravness00"
+
+[30.485]
+path = "RavnessBed00"
+
+[30.486]
+path = "Rodrick00"
+
+[30.487]
+path = "RodrickBefore00"
+
+[30.488]
+path = "Ronwey00"
+
+[30.489]
+path = "Rouge_f00"
+
+[30.490]
+path = "Rouge_f01"
+
+[30.491]
+path = "Rouge_f02"
+
+[30.492]
+path = "Rouge_f03"
+
+[30.493]
+path = "Rouge_f04"
+
+[30.494]
+path = "Rouge_f05"
+
+[30.495]
+path = "Rouge_f06"
+
+[30.496]
+path = "Rouge_f08"
+
+[30.497]
+path = "Rouge_f09"
+
+[30.498]
+path = "Rouge_f13"
+
+[30.499]
+path = "Rouge_m00"
+
+[30.500]
+path = "Rouge_m01"
+
+[30.501]
+path = "Rouge_m02"
+
+[30.502]
+path = "Rouge_m03"
+
+[30.503]
+path = "Rouge_m04"
+
+[30.504]
+path = "Rouge_m05"
+
+[30.505]
+path = "Rouge_m06"
+
+[30.506]
+path = "Rouge_m08"
+
+[30.507]
+path = "Rouge_m09"
+
+[30.508]
+path = "Rouge_m13"
+
+[30.509]
+path = "Selye00"
+
+[30.510]
+path = "Shelley00"
+
+[30.511]
+path = "ShelleyDisabled00"
+
+[30.512]
+path = "ShopMaster00"
+
+[30.513]
+path = "Sisteena00"
+
+[30.514]
+path = "Skeleton00"
+
+[30.515]
+path = "Skeleton01"
+
+[30.516]
+path = "Skeleton02"
+
+[30.517]
+path = "Skeleton03"
+
+[30.518]
+path = "Skeleton04"
+
+[30.519]
+path = "Skeleton05"
+
+[30.520]
+path = "Skeleton06"
+
+[30.521]
+path = "Skeleton08"
+
+[30.522]
+path = "Skeleton09"
+
+[30.523]
+path = "Skeleton13"
+
+[30.524]
+path = "Sorcerer_f00"
+
+[30.525]
+path = "Sorcerer_f01"
+
+[30.526]
+path = "Sorcerer_f02"
+
+[30.527]
+path = "Sorcerer_f03"
+
+[30.528]
+path = "Sorcerer_f04"
+
+[30.529]
+path = "Sorcerer_f05"
+
+[30.530]
+path = "Sorcerer_f06"
+
+[30.531]
+path = "Sorcerer_f08"
+
+[30.532]
+path = "Sorcerer_f09"
+
+[30.533]
+path = "Sorcerer_f13"
+
+[30.534]
+path = "Sorcerer_m00"
+
+[30.535]
+path = "Sorcerer_m01"
+
+[30.536]
+path = "Sorcerer_m02"
+
+[30.537]
+path = "Sorcerer_m03"
+
+[30.538]
+path = "Sorcerer_m04"
+
+[30.539]
+path = "Sorcerer_m05"
+
+[30.540]
+path = "Sorcerer_m06"
+
+[30.541]
+path = "Sorcerer_m08"
+
+[30.542]
+path = "Sorcerer_m09"
+
+[30.543]
+path = "Sorcerer_m13"
+
+[30.544]
+path = "Sorcerer00"
+
+[30.545]
+path = "Sorcerer01"
+
+[30.546]
+path = "Sorcerer02"
+
+[30.547]
+path = "Sorcerer03"
+
+[30.548]
+path = "Sorcerer04"
+
+[30.549]
+path = "Sorcerer05"
+
+[30.550]
+path = "Sorcerer06"
+
+[30.551]
+path = "Sorcerer08"
+
+[30.552]
+path = "Sorcerer09"
+
+[30.553]
+path = "Sorcerer13"
+
+[30.554]
+path = "Summoner00"
+
+[30.555]
+path = "Summoner01"
+
+[30.556]
+path = "Summoner02"
+
+[30.557]
+path = "Summoner03"
+
+[30.558]
+path = "Summoner04"
+
+[30.559]
+path = "Summoner05"
+
+[30.560]
+path = "Summoner06"
+
+[30.561]
+path = "Summoner08"
+
+[30.562]
+path = "Summoner09"
+
+[30.563]
+path = "Summoner13"
+
+[30.564]
+path = "SwordMaster_f00"
+
+[30.565]
+path = "SwordMaster_f01"
+
+[30.566]
+path = "SwordMaster_f02"
+
+[30.567]
+path = "SwordMaster_f03"
+
+[30.568]
+path = "SwordMaster_f04"
+
+[30.569]
+path = "SwordMaster_f05"
+
+[30.570]
+path = "SwordMaster_f06"
+
+[30.571]
+path = "SwordMaster_f08"
+
+[30.572]
+path = "SwordMaster_f09"
+
+[30.573]
+path = "SwordMaster_f13"
+
+[30.574]
+path = "SwordMaster_m00"
+
+[30.575]
+path = "SwordMaster_m01"
+
+[30.576]
+path = "SwordMaster_m02"
+
+[30.577]
+path = "SwordMaster_m03"
+
+[30.578]
+path = "SwordMaster_m04"
+
+[30.579]
+path = "SwordMaster_m05"
+
+[30.580]
+path = "SwordMaster_m06"
+
+[30.581]
+path = "SwordMaster_m08"
+
+[30.582]
+path = "SwordMaster_m09"
+
+[30.583]
+path = "SwordMaster_m13"
+
+[30.584]
+path = "TerrorKnight_f00"
+
+[30.585]
+path = "TerrorKnight_f01"
+
+[30.586]
+path = "TerrorKnight_f02"
+
+[30.587]
+path = "TerrorKnight_f03"
+
+[30.588]
+path = "TerrorKnight_f04"
+
+[30.589]
+path = "TerrorKnight_f05"
+
+[30.590]
+path = "TerrorKnight_f06"
+
+[30.591]
+path = "TerrorKnight_f08"
+
+[30.592]
+path = "TerrorKnight_f09"
+
+[30.593]
+path = "TerrorKnight_f13"
+
+[30.594]
+path = "TerrorKnight_m00"
+
+[30.595]
+path = "TerrorKnight_m01"
+
+[30.596]
+path = "TerrorKnight_m02"
+
+[30.597]
+path = "TerrorKnight_m03"
+
+[30.598]
+path = "TerrorKnight_m04"
+
+[30.599]
+path = "TerrorKnight_m05"
+
+[30.600]
+path = "TerrorKnight_m06"
+
+[30.601]
+path = "TerrorKnight_m08"
+
+[30.602]
+path = "TerrorKnight_m09"
+
+[30.603]
+path = "TerrorKnight_m13"
+
+[30.604]
+path = "Tiger00"
+
+[30.605]
+path = "Tristan00"
+
+[30.606]
+path = "Valkyrie_f00"
+
+[30.607]
+path = "Valkyrie_f01"
+
+[30.608]
+path = "Valkyrie_f02"
+
+[30.609]
+path = "Valkyrie_f03"
+
+[30.610]
+path = "Valkyrie_f04"
+
+[30.611]
+path = "Valkyrie_f05"
+
+[30.612]
+path = "Valkyrie_f06"
+
+[30.613]
+path = "Valkyrie_f08"
+
+[30.614]
+path = "Valkyrie_f09"
+
+[30.615]
+path = "Valkyrie_f13"
+
+[30.616]
+path = "Valkyrie_m00"
+
+[30.617]
+path = "Valkyrie_m01"
+
+[30.618]
+path = "Valkyrie_m02"
+
+[30.619]
+path = "Valkyrie_m03"
+
+[30.620]
+path = "Valkyrie_m04"
+
+[30.621]
+path = "Valkyrie_m05"
+
+[30.622]
+path = "Valkyrie_m06"
+
+[30.623]
+path = "Valkyrie_m08"
+
+[30.624]
+path = "Valkyrie_m09"
+
+[30.625]
+path = "Valkyrie_m13"
+
+[30.626]
+path = "Vepar00"
+
+[30.627]
+path = "Vernotta00"
+
+[30.628]
+path = "Vice00"
+
+[30.629]
+path = "ViceDead00"
+
+[30.630]
+path = "ViceFather00"
+
+[30.631]
+path = "ViceHostage00"
+
+[30.632]
+path = "ViceL00"
+
+[30.633]
+path = "ViceNC00"
+
+[30.634]
+path = "ViceNCMouth00"
+
+[30.635]
+path = "Vogras00"
+
+[30.636]
+path = "Volac00"
+
+[30.637]
+path = "Warren00"
+
+[30.638]
+path = "Warrior_f00"
+
+[30.639]
+path = "Warrior_f01"
+
+[30.640]
+path = "Warrior_f02"
+
+[30.641]
+path = "Warrior_f03"
+
+[30.642]
+path = "Warrior_f04"
+
+[30.643]
+path = "Warrior_f05"
+
+[30.644]
+path = "Warrior_f06"
+
+[30.645]
+path = "Warrior_f08"
+
+[30.646]
+path = "Warrior_f09"
+
+[30.647]
+path = "Warrior_f13"
+
+[30.648]
+path = "Warrior_m00"
+
+[30.649]
+path = "Warrior_m01"
+
+[30.650]
+path = "Warrior_m02"
+
+[30.651]
+path = "Warrior_m03"
+
+[30.652]
+path = "Warrior_m04"
+
+[30.653]
+path = "Warrior_m05"
+
+[30.654]
+path = "Warrior_m06"
+
+[30.655]
+path = "Warrior_m08"
+
+[30.656]
+path = "Warrior_m09"
+
+[30.657]
+path = "Warrior_m13"
+
+[30.658]
+path = "Wizard_f00"
+
+[30.659]
+path = "Wizard_f01"
+
+[30.660]
+path = "Wizard_f02"
+
+[30.661]
+path = "Wizard_f03"
+
+[30.662]
+path = "Wizard_f04"
+
+[30.663]
+path = "Wizard_f05"
+
+[30.664]
+path = "Wizard_f06"
+
+[30.665]
+path = "Wizard_f08"
+
+[30.666]
+path = "Wizard_f09"
+
+[30.667]
+path = "Wizard_f13"
+
+[30.668]
+path = "Wizard_m00"
+
+[30.669]
+path = "Wizard_m01"
+
+[30.670]
+path = "Wizard_m02"
+
+[30.671]
+path = "Wizard_m03"
+
+[30.672]
+path = "Wizard_m04"
+
+[30.673]
+path = "Wizard_m05"
+
+[30.674]
+path = "Wizard_m06"
+
+[30.675]
+path = "Wizard_m08"
+
+[30.676]
+path = "Wizard_m09"
+
+[30.677]
+path = "Wizard_m13"
+
+[30.678]
+path = "XXapan00"
+
+[30.679]
+path = "Yobikao00"
+
+[30.680]
+path = "Yobikao01"
+
+[30.681]
+path = "Yobikao02"
+
+[30.682]
+path = "Yobikao03"
+
+[30.683]
+path = "Yobikao04"
+
+[30.684]
+path = "Yobikao05"
+
+[30.685]
+path = "Yobikao06"
+
+[30.686]
+path = "Yobikao07"
+
+[30.687]
+path = "Yobikao08"
+
+[30.688]
+path = "Yobikao09"
+
+[30.689]
+path = "Yobikao10"
+
+[30.690]
+path = "Young_f00"
+
+[30.691]
+path = "Young_m00"
+
+[30.692]
+path = "Yulia00"
+
+[30.693]
+path = "Yulia05"
+
+[30.694]
+path = "Zaebos_death00"
+
+[30.695]
+path = "Zaebos_fop00"
+
+[30.696]
+path = "Zaebos00"
+
+[30.697]
+path = "Zapan00"

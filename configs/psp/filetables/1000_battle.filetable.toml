@@ -13,7 +13,7 @@ path = "battle_data_release"
 9.path = "map_parties.xlc" # not sure if completely accurate
 
 15.path = "racial_templates.xlc"
-
+16.path = "map_blocks.xlc"
 17.path = "skills.xlc"
 
 20.path = "random_character_names.xlc"
