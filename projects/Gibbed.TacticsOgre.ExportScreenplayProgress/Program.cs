@@ -23,14 +23,13 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using Gibbed.IO;
 using Gibbed.TacticsOgre.FileFormats.Text;
 using Gibbed.TacticsOgre.SheetFormats;
 using NDesk.Options;
 
-namespace Gibbed.TacticsOgre.ExportSheet
+namespace Gibbed.TacticsOgre.ExportScreenplayProgress
 {
     internal class Program
     {
@@ -60,18 +59,15 @@ namespace Gibbed.TacticsOgre.ExportSheet
 
         public static void Main(string[] args)
         {
-            var endian = Endian.Little;
+            bool verbose = false;
             bool? isReborn = null;
             var language = LanguageOption.Invalid;
-            string serializerName = null;
-            bool verbose = false;
             bool showHelp = false;
 
             OptionSet options = new()
             {
                 { "r|reborn", "set is reborn", v => isReborn = v != null },
                 { "e|language=", "set language", v => language = ParseLanguageOption(v) },
-                { "s|serializer=", "specify serializer to use", v => serializerName = v },
                 { "v|verbose", "be verbose", v => verbose = v != null },
                 { "h|help", "show this message and exit", v => showHelp = v != null },
             };
@@ -91,17 +87,19 @@ namespace Gibbed.TacticsOgre.ExportSheet
 
             if (extras.Count < 1 || showHelp == true)
             {
-                Console.WriteLine("Usage: {0} [OPTIONS]+ input_xlc [output_toml]", GetExecutableName());
+                Console.WriteLine("Usage: {0} [OPTIONS]+ input_pgrs [output_toml]", GetExecutableName());
                 Console.WriteLine();
                 Console.WriteLine("Options:");
                 options.WriteOptionDescriptions(Console.Out);
                 return;
             }
 
+            const string serializerName = "screenplay_progress";
+
             var inputPath = Path.GetFullPath(extras[0]);
             string outputPath = extras.Count > 1
                 ? Path.GetFullPath(extras[1])
-                : Path.ChangeExtension(inputPath, ".xlc.toml");
+                : Path.ChangeExtension(inputPath, ".progress.toml");
 
             if (isReborn == null || language == LanguageOption.Invalid || serializerName == null)
             {
@@ -110,7 +108,7 @@ namespace Gibbed.TacticsOgre.ExportSheet
                     File.Exists(manifestPath) == true)
                 {
                     var inputName = Path.GetFileName(inputPath);
-                    var (manifestIsReborn, manifestLanguage, manifestSheetFormat) = GetOptionsFromManifest(
+                    var (manifestIsReborn, manifestLanguage) = GetOptionsFromManifest(
                         manifestPath,
                         inputName);
                     if (isReborn == null)
@@ -120,10 +118,6 @@ namespace Gibbed.TacticsOgre.ExportSheet
                     if (language == LanguageOption.Invalid)
                     {
                         language = manifestLanguage;
-                    }
-                    if (serializerName == null)
-                    {
-                        serializerName = manifestSheetFormat;
                     }
                 }
             }
@@ -137,114 +131,45 @@ namespace Gibbed.TacticsOgre.ExportSheet
 
             var descriptorFactory = DescriptorLoader.Load(isReborn == false ? "psp" : "reborn");
 
-            Tommy.TomlArray rowsArray;
+            if (descriptorFactory.TryGet(serializerName, out var serializerInfo) == false)
+            {
+                Console.WriteLine($"Failed to get descriptor for '{serializerName}'!");
+                return;
+            }
+
+            Tommy.TomlArray rowsArray = new()
+            {
+                IsMultiline = true,
+            };
 
             var inputBytes = File.ReadAllBytes(inputPath);
             using (MemoryStream input = new(inputBytes, false))
             {
                 var basePosition = input.Position;
 
-                var signature = new byte[] { 0x78, 0x6C, 0x63 }; // 'xlc'
-                var magic = input.ReadBytes(3);
-                if (magic.SequenceEqual(signature) == false)
+                uint signature = 0x53524750; // 'PGRS'
+                var magic = input.ReadValueU32(Endian.Little);
+                if (magic != signature && magic.Swap() != signature)
                 {
                     throw new FormatException();
                 }
-                
-                var version = input.ReadValueU8();
-                if (version != 101)
+                var endian = magic == signature ? Endian.Little : Endian.Big;
+
+                var entrySize = input.ReadValueU16(endian);
+                if (entrySize != serializerInfo.EntrySize)
                 {
-                    throw new FormatException();
+                    Console.WriteLine("Expected size {0}, got {1}??", serializerInfo.EntrySize, entrySize);
+                    //return;
                 }
 
-                var entryCount = input.ReadValueS32(endian);
-                var dataOffset = input.ReadValueS32(endian);
-                var entrySize = input.ReadValueS32(endian);
-
-                if (entryCount < 0)
-                {
-                    throw new FormatException();
-                }
-
-                if (dataOffset != 16)
-                {
-                    throw new FormatException();
-                }
-
-                if (entrySize < 0)
-                {
-                    throw new FormatException();
-                }
-
-                var totalEntrySize = entrySize * entryCount;
-                var totalHeaderSize = (dataOffset + totalEntrySize).Align(16);
-                var totalFileSize = input.Length - basePosition;
-                var hasExtraData = totalFileSize > totalHeaderSize + 16;
-
-                DescriptorInfo serializerInfo;
-                if (string.IsNullOrEmpty(serializerName) == true)
-                {
-                    var serializerInfos = descriptorFactory.Get(entrySize, hasExtraData).ToArray();
-                    if (serializerInfos.Length == 0)
-                    {
-                        Console.WriteLine($"No serializer possible for this file found. Size = {entrySize}, extra data = {hasExtraData}.");
-                        return;
-                    }
-                    else if (serializerInfos.Length >= 2)
-                    {
-                        Console.WriteLine("There are multiple serializers possible for this file:");
-                        foreach (var kv in serializerInfos)
-                        {
-                            Console.WriteLine($" {kv.Key}");
-                        }
-                        Console.WriteLine("Please specify one with -s.");
-                        return;
-                    }
-                    serializerName = serializerInfos[0].Key;
-                    serializerInfo = serializerInfos[0].Value;
-                }
-                else
-                {
-                    if (descriptorFactory.TryGet(serializerName, out serializerInfo) == false)
-                    {
-                        Console.WriteLine($"Specified serializer '{serializerName}' not found.");
-                        return;
-                    }
-
-                    if (serializerInfo.EntrySize != entrySize)
-                    {
-                        Console.WriteLine($"Serializer size = {serializerInfo.EntrySize} does not match file size = {entrySize}.");
-                        return;
-                    }
-                }
+                var entryCount = input.ReadValueU16(endian);
 
                 var serializer = serializerInfo.Instantiate();
-
-                rowsArray = new()
-                {
-                    IsMultiline = true,
-                    IsTableArray = serializerInfo.RowsAsTableArray,
-                };
-
-                Dictionary<uint, List<Tommy.TomlString>> pendingStrings = new();
-                using (MemoryStream data = new(inputBytes, dataOffset, totalEntrySize, false))
+                using (MemoryStream data = new(inputBytes, 8, serializerInfo.EntrySize * entryCount, false))
                 {
                     for (int i = 0; i < entryCount; i++)
                     {
-                        rowsArray.Add(serializer.Export(data, endian, pendingStrings));
-                    }
-                }
-
-                using (MemoryStream data = new(inputBytes, (int)basePosition, (int)totalFileSize, false))
-                {
-                    foreach (var kv in pendingStrings)
-                    {
-                        data.Position = kv.Key;
-                        var value = formatter.Decode(data, endian);
-                        foreach (var node in kv.Value)
-                        {
-                            node.Value = value;
-                        }
+                        rowsArray.Add(serializer.Export(data, endian, null));
                     }
                 }
             }
@@ -276,7 +201,7 @@ namespace Gibbed.TacticsOgre.ExportSheet
                 : null;
         }
 
-        private static (bool isReborn, LanguageOption language, string sheetFormat) GetOptionsFromManifest(
+        private static (bool isReborn, LanguageOption language) GetOptionsFromManifest(
             string path,
             string name)
         {
@@ -299,17 +224,7 @@ namespace Gibbed.TacticsOgre.ExportSheet
                 language = languageDefault;
             }
 
-            string sheetFormat = null;
-            Tommy.TomlArray filesArray = rootTable["files"].AsArray;
-            foreach (Tommy.TomlTable fileTable in filesArray)
-            {
-                if (fileTable["path"] == name)
-                {
-                    sheetFormat = fileTable["sheet_format"].AsString?.Value;
-                }
-            }
-
-            return (isReborn, language, sheetFormat);
+            return (isReborn, language);
         }
     }
 }

@@ -65,6 +65,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.Disassem
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.ExportScreenplayInvocation", "projects\Gibbed.TacticsOgre.ExportScreenplayInvocation\Gibbed.TacticsOgre.ExportScreenplayInvocation.csproj", "{9243A0D2-1753-4651-BDF1-76790895C48A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.ExportScreenplayProgress", "projects\Gibbed.TacticsOgre.ExportScreenplayProgress\Gibbed.TacticsOgre.ExportScreenplayProgress.csproj", "{5E29EFAD-18B2-463B-A373-C87FCA0ED18F}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.ExportScreenplayTask", "projects\Gibbed.TacticsOgre.ExportScreenplayTask\Gibbed.TacticsOgre.ExportScreenplayTask.csproj", "{E18EE6D0-A5CC-4555-9F1B-4635FD210EEE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.ExportSheet", "projects\Gibbed.TacticsOgre.ExportSheet\Gibbed.TacticsOgre.ExportSheet.csproj", "{4F831181-4A65-45A9-8BCC-481B9662B1DC}"
@@ -243,6 +245,7 @@ Global
 		{4F831181-4A65-45A9-8BCC-481B9662B1DC} = {B0A971C2-92C1-4931-BAFE-0B504260AF79}
 		{5162A9FB-4DE1-4BBF-B7A2-5E8116AB0D26} = {5AA38539-796A-48A3-9AE5-C68836014669}
 		{5D5917F4-D643-4663-B101-66D6AC6846A0} = {9980F9DC-5CF1-4430-AF5C-0589D7F44C8C}
+		{5E29EFAD-18B2-463B-A373-C87FCA0ED18F} = {B0A971C2-92C1-4931-BAFE-0B504260AF79}
 		{5EC48666-F81C-4A02-962C-AB5E74458E56} = {3742DA58-0B92-4D2F-95DB-E780487C8C7E}
 		{699BCE03-FFB9-4F52-9E10-9AC848AE8BAC} = {0D395521-06B9-4E59-867C-0CBCCA4DE001}
 		{6C85AB50-716D-481D-9B6C-C04C12A497C6} = {0D395521-06B9-4E59-867C-0CBCCA4DE001}

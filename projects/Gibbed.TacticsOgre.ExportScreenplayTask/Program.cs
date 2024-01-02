@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -44,7 +44,7 @@ namespace Gibbed.TacticsOgre.ExportScreenplayTask
             bool verbose = false;
             bool showHelp = false;
 
-            var options = new OptionSet()
+            OptionSet options = new()
             {
                 { "v|verbose", "be verbose", v => verbose = v != null },
                 { "h|help", "show this message and exit", v => showHelp = v != null },
