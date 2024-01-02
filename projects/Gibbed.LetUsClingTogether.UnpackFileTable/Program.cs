@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -29,6 +29,7 @@ using Gibbed.IO;
 using Gibbed.TacticsOgre.FileFormats;
 using NDesk.Options;
 using static Gibbed.TacticsOgre.FileFormats.InvariantShorthand;
+using DataBogoCrypt = Gibbed.Reborn.FileFormats.Crypt.DataBogoCrypt;
 using FileTable = Gibbed.TacticsOgre.FileFormats.FileTable;
 using PackId = Gibbed.LetUsClingTogether.UnpackFileTable.FileTableManifest.PackId;
 
@@ -371,7 +372,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFileTable
 
                 if (inputPath.EndsWith(".dat", StringComparison.InvariantCultureIgnoreCase) == true)
                 {
-                    Reborn.FileFormats.DataBogoCrypt.Decrypt(inputBytes, 0, inputBytes.Length);
+                    DataBogoCrypt.Decrypt(inputBytes, 0, inputBytes.Length);
                 }
 
                 using (var input = new MemoryStream(inputBytes, false))

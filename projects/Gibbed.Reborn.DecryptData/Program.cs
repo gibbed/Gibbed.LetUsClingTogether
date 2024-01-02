@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -23,7 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Gibbed.Reborn.FileFormats;
+using Gibbed.Reborn.FileFormats.Crypt;
 using NDesk.Options;
 using FileDetection = Gibbed.TacticsOgre.FileFormats.FileDetection;
 
