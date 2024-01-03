@@ -102,12 +102,9 @@ namespace Gibbed.Reborn.UnpackPAC
                     }
 
                     input.Position = entry.Offset;
+                    var dataHeader = ArcDataHeader.Read(input, endian);
 
-                    var dataSize = input.ReadValueU32(endian);
-                    var dataOffset = input.ReadValueU16(endian);
-                    var dataUnknown = input.ReadValueU8();
-
-                    input.Position = entry.Offset + dataOffset;
+                    input.Position = entry.Offset + dataHeader.Offset;
 
                     var outputParentPath = Path.GetDirectoryName(outputPath);
                     if (string.IsNullOrEmpty(outputParentPath) == false)
@@ -117,7 +114,7 @@ namespace Gibbed.Reborn.UnpackPAC
 
                     using (var output = File.Create(outputPath))
                     {
-                        output.WriteFromStream(input, dataSize);
+                        output.WriteFromStream(input, dataHeader.Size);
                     }
                 }
             }
