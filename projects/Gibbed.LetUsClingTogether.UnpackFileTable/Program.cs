@@ -296,11 +296,16 @@ namespace Gibbed.LetUsClingTogether.UnpackFileTable
                         }
                     }
 
+                    var redirectPath = fileLookup["redirect"]?.AsString?.Value;
+                    Tommy.TomlNode redirectLookup = redirectPath != null
+                        ? Tommy.Extensions.TommyExtensions.FindNode(rootLookup, redirectPath) ?? fileLookup
+                        : fileLookup;
+
                     HandleFile(
                         file,
                         fileName,
                         filePath,
-                        fileLookup,
+                        redirectLookup,
                         fileQueue,
                         fileContainers,
                         settings);
@@ -433,11 +438,16 @@ namespace Gibbed.LetUsClingTogether.UnpackFileTable
                             }
                         }
 
+                        var redirectPath = fileLookup["redirect"]?.AsString?.Value;
+                        Tommy.TomlNode redirectLookup = redirectPath != null
+                            ? Tommy.Extensions.TommyExtensions.FindNode(rootLookup, redirectPath) ?? fileLookup
+                            : fileLookup;
+
                         HandleFile(
                             file,
                             fileName,
                             filePath,
-                            fileLookup,
+                            redirectLookup,
                             fileQueue,
                             fileContainers,
                             settings);
