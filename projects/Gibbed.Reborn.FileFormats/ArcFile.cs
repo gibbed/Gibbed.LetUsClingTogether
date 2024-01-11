@@ -96,6 +96,11 @@ namespace Gibbed.Reborn.FileFormats
                 entry.Offset = offsets[entryOffsetIndex];
                 entry.Name = input.ReadString(entryNameLength, true, Encoding.ASCII);
 
+                if (entry.UnknownC != 0 || entry.UnknownF != 0)
+                {
+                    throw new FormatException();
+                }
+
                 input.Position = nextPosition;
 
                 entries[i] = entry;
