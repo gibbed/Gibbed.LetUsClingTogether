@@ -149,7 +149,7 @@ namespace Gibbed.TacticsOgre.SheetFormats
 
         private static Dictionary<long, string> ParseEnum(TomlNode node)
         {
-            if (node == null || node.HasValue == false)
+            if (node == null || (node.HasValue == false && node.ChildrenCount == 0))
             {
                 return null;
             }
@@ -219,7 +219,7 @@ namespace Gibbed.TacticsOgre.SheetFormats
             }
             if (Enum.TryParse(s, true, out value) == false)
             {
-                throw new InvalidOperationException($"unknown name '{value}' for enum {nameof(T)}");
+                throw new InvalidOperationException($"unknown name '{s}' for enum {typeof(T).Name}");
             }
             return true;
         }
