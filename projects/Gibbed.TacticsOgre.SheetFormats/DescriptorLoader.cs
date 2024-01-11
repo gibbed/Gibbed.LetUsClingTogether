@@ -93,6 +93,10 @@ namespace Gibbed.TacticsOgre.SheetFormats
                 {
                     descriptor = new StringDescriptor((int)minimumWidth);
                 }
+                else if (type == PrimitiveType.Boolean)
+                {
+                    descriptor = new BooleanDescriptor((int)minimumWidth);
+                }
                 else if (type.IsInteger() == true)
                 {
                     var enumName = table["enum"]?.AsString;
