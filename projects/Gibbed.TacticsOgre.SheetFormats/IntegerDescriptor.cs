@@ -24,7 +24,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Gibbed.IO;
-using Tommy;
 
 namespace Gibbed.TacticsOgre.SheetFormats
 {
@@ -115,12 +114,12 @@ namespace Gibbed.TacticsOgre.SheetFormats
             _ => throw new NotImplementedException(),
         };
 
-        private static TomlInteger.Base Translate(IntegerBase integerBase) => integerBase switch
+        private static Tommy.TomlInteger.Base Translate(IntegerBase integerBase) => integerBase switch
         {
-            IntegerBase.Binary => TomlInteger.Base.Binary,
-            IntegerBase.Octal => TomlInteger.Base.Octal,
-            IntegerBase.Decimal => TomlInteger.Base.Decimal,
-            IntegerBase.Hexadecimal => TomlInteger.Base.Hexadecimal,
+            IntegerBase.Binary => Tommy.TomlInteger.Base.Binary,
+            IntegerBase.Octal => Tommy.TomlInteger.Base.Octal,
+            IntegerBase.Decimal => Tommy.TomlInteger.Base.Decimal,
+            IntegerBase.Hexadecimal => Tommy.TomlInteger.Base.Hexadecimal,
             _ => throw new NotSupportedException(),
         };
     }
