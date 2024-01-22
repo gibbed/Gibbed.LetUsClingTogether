@@ -1,7 +1,7 @@
 name = "buff_card_data"
 
 columns = [
-  { name = "ability_index", type = "uint16", width = 3 },
+  { name = "effect_index",  type = "uint16", width = 3 },
   { name = "u02",           type = "uint16", width = 4 },
-  { name = "u04",           type = "uint16" }
+  { name = "u04",           type = "uint16"            },
 ]
