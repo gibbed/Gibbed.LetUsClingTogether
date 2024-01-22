@@ -1,0 +1,57 @@
+name = "hp_damage_data"
+
+# The first row (row 0) is special. The columns 'basic.skill_category', 'bonus.status', and 'bonus.skill' act
+# as a configuration for what those columns in the remaining rows apply to. The value is divided by 100 to get its
+# id or index.
+
+# 'bonus.weapon_ATK' and 'bonus.weapon_DEF' are [ crushing, slashing, piercing ]
+
+# 'bonus.tribe_ATK' and 'bonus.tribe_DEF' are [ human, beast, reptile, dragon, divine, umbra, faerie, phantom, golem ]
+
+# 'bonus.element_ATK', 'bonus.element_DEF', and 'bonus.map_element' are
+# [ wind, earth, lightning, water, fire, ice, light, dark ]
+
+# 'bonus.hp_lost_percent' are used to give a bonus based on lost HP. This is default used by Allocer and Aym's
+# weapons, (Super Shortbow) and (Cast Stones).
+
+columns = [
+  { name = "basic", columns = [
+    { name = "total_ATK",            type = "int16",                   width = 3  }, # +00
+    { name = "total_DEF",            type = "int16",                   width = 3  }, # +02
+    { name = "weapon_element_relationship", columns = [
+      { name = "strong",             type = "int16",                   width = 3  }, # +04
+      { name = "neutral",            type = "int16",                   width = 3  }, # +06
+      { name = "weak",               type = "int16",                   width = 3  }, # +08
+    ] },
+    { name = "factor",               type = "int16",                   width = 3  }, # +0A
+    { name = "total_STR",            type = "int16",                   width = 3  }, # +0C
+    { name = "total_VIT",            type = "int16",                   width = 3  }, # +0E
+    { name = "total_DEX",            type = "int16",                   width = 3  }, # +10
+    { name = "total_INT",            type = "int16",                   width = 3  }, # +12
+    { name = "total_MND",            type = "int16",                   width = 3  }, # +14
+    { name = "total_RES",            type = "int16",                   width = 3  }, # +16
+    { name = "skill_category",       type = "int16", array_count = 22, width = 4  }, # +16
+  ] },
+  { name = "bonus", columns = [
+    { name = "petrified",            type = "int16",                   width = 5  }, # +44
+    { name = "petrified_up",         type = "int16",                   width = 4  }, # +46
+    { name = "petrified_down",       type = "int16",                   width = 4  }, # +48
+    { name = "status",               type = "int16", array_count = 9,  width = 5  }, # +4A
+    { name = "status_up",            type = "int16", array_count = 8,  width = 5  }, # +5C
+    { name = "status_down",          type = "int16", array_count = 8,  width = 5  }, # +6C
+    { name = "skill",                type = "int16", array_count = 16, width = 5  }, # +7C
+    { name = "weapon_ATK",           type = "int16", array_count = 3,  width = 3  }, # +9C
+    { name = "weapon_DEF",           type = "int16", array_count = 3,  width = 3  }, # +A2
+    { name = "tribe_ATK",            type = "int16", array_count = 9,  width = 3  }, # +A8
+    { name = "tribe_DEF",            type = "int16", array_count = 9,  width = 3  }, # +BA
+    { name = "element_ATK",          type = "int16", array_count = 8,  width = 3  }, # +CC
+    { name = "element_DEF",          type = "int16", array_count = 8,  width = 3  }, # +DC
+    { name = "unit_element_relationship", columns = [
+      { name = "strong",             type = "int16",                   width = 5  }, # +EC
+      { name = "neutral",            type = "int16",                   width = 5  }, # +EE
+      { name = "weak",               type = "int16",                   width = 5  }, # +F0
+    ] },
+    { name = "map_element",          type = "int16", array_count = 8,  width = 2  }, # +F2
+    { name = "hp_lost_percent",      type = "int16",                   width = 2  }, # +102
+  ] },
+]
