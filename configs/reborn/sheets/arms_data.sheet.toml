@@ -30,20 +30,22 @@ columns = [
   { name = "rt",                       type = "uint8",                   width = 2 },
   { name = "atk",                      type = "uint8",                   width = 3 },
   { name = "def",                      type = "uint8",                   width = 2 },
-  { name = "hp",                       type = "uint8",                   width = 3 },
-  { name = "mp",                       type = "uint8",                   width = 2 },
-  { name = "str",                      type = "uint8",                   width = 3 },
-  { name = "vit",                      type = "uint8",                   width = 3 },
-  { name = "dex",                      type = "uint8",                   width = 3 },
-  { name = "agi",                      type = "uint8",                   width = 3 },
-  { name = "avd",                      type = "uint8",                   width = 3 },
-  { name = "int",                      type = "uint8",                   width = 3 },
-  { name = "mnd",                      type = "uint8",                   width = 3 },
-  { name = "res",                      type = "uint8",                   width = 3 },
-  { name = "luk",                      type = "uint8",                   width = 3 },
+  { name = "stats", columns = [
+    { name = "HP",                     type = "uint8",                   width = 3 },
+    { name = "MP",                     type = "uint8",                   width = 2 },
+    { name = "STR",                    type = "uint8",                   width = 3 },
+    { name = "VIT",                    type = "uint8",                   width = 3 },
+    { name = "DEX",                    type = "uint8",                   width = 3 },
+    { name = "AGI",                    type = "uint8",                   width = 3 },
+    { name = "AVD",                    type = "uint8",                   width = 3 },
+    { name = "INT",                    type = "uint8",                   width = 3 },
+    { name = "MND",                    type = "uint8",                   width = 3 },
+    { name = "RES",                    type = "uint8",                   width = 3 },
+    { name = "LUK",                    type = "uint8",                   width = 3 },
+  ] },
   { name = "weight",                   type = "uint8",                   width = 3 },
   { name = "damage", columns = [
-    { name = "type",                   type = "uint8",                   width = 10, enum = [ "None", "Crushing", "Slashing", "Piercing" ] },
+    { name = "affinity",               type = "uint8",                   width = 10, enum = [ "None", "Crushing", "Slashing", "Piercing" ] },
     { name = "bonus",                  type = "uint8",                   width = 2 }
   ] },
   { name = "u29",                      type = "uint8",                   width = 2 },
@@ -51,8 +53,8 @@ columns = [
   { name = "u2B",                      type = "uint8",                   width = 2 },
   { name = "u2C",                      type = "uint8",                   width = 0 },
   { name = "u2D",                      type = "uint8",                   width = 0 },
-  { name = "racial_affinity", columns = [
-    { name = "type",                   type = "uint8",                   width = 9, enum = [ "None", "Human", "Beast", "Reptile", "Dragon", "Divine", "Umbra", "Faerie", "Phantom", "Golem" ] },
+  { name = "tribe", columns = [
+    { name = "affinity",               type = "uint8",                   width = 9, enum = [ "None", "Human", "Beast", "Reptile", "Dragon", "Divine", "Umbra", "Faerie", "Phantom", "Golem" ] },
     { name = "bonus",                  type = "uint8",                   width = 2 }
   ] },
   { name = "u30",                      type = "uint8",                   width = 0 },
@@ -64,8 +66,8 @@ columns = [
   { name = "u36",                      type = "uint8",                   width = 0 },
   { name = "u37",                      type = "uint8",                   width = 0 },
   { name = "u38",                      type = "uint8",                   width = 0 },
-  { name = "elemental_affinity", columns = [
-    { name = "type",                   type = "uint8",                   width = 11, enum = [ "None", "Air", "Earth", "Lightning", "Water", "Fire", "Ice", "Light", "Dark" ] },
+  { name = "element", columns = [
+    { name = "affinity",               type = "uint8",                   width = 11, enum = [ "None", "Air", "Earth", "Lightning", "Water", "Fire", "Ice", "Light", "Dark" ] },
     { name = "bonus",                  type = "uint8",                   width = 2 }
   ] },
   { name = "u3B",                      type = "uint8",                   width = 2 },
