@@ -1,0 +1,56 @@
+name = "hp_restore_data"
+
+# The first row (row 0) is special. The columns 'basic.skill_element', 'basic.skill_tribe', 'basic.status',
+# 'bonus.status', 'bonus.skill', 'bonus.status_element_up', and 'bonus.status_element_down' act as a configuration for
+# what those columns in the remaining rows apply to. The value is divided by 100 to get its id or index.
+
+# 'basic.skill_element', 'bonus.status_element_up', 'bonus.status_element_down', 'bonus.arms_element', and
+# 'bonus.map_element' are [ wind, earth, lightning, water, fire, ice, light, dark ]
+
+# 'basic.skill_tribe' are [ human, beast, reptile, dragon, divine, umbra, faerie, phantom, golem ]
+
+columns = [
+  { name = "basic", columns = [
+    { name = "VIT", columns = [
+      { name = "unit",               type = "int16",                   width = 3  }, # +00
+      { name = "weapon",             type = "int16",                   width = 3  }, # +02
+      { name = "shield",             type = "int16",                   width = 3  }, # +04
+      { name = "head",               type = "int16",                   width = 3  }, # +06
+      { name = "arms",               type = "int16",                   width = 3  }, # +08
+      { name = "jewelry",            type = "int16",                   width = 3  }, # +0A
+    ] },
+    { name = "MND", columns = [
+      { name = "unit",               type = "int16",                   width = 3  }, # +0C
+      { name = "weapon",             type = "int16",                   width = 3  }, # +0E
+      { name = "shield",             type = "int16",                   width = 3  }, # +10
+      { name = "head",               type = "int16",                   width = 3  }, # +12
+      { name = "arms",               type = "int16",                   width = 3  }, # +14
+      { name = "jewelry",            type = "int16",                   width = 3  }, # +16
+    ] },
+    { name = "RES", columns = [
+      { name = "unit",               type = "int16",                   width = 2  }, # +18
+      { name = "weapon",             type = "int16",                   width = 2  }, # +1A
+      { name = "shield",             type = "int16",                   width = 2  }, # +1C
+      { name = "head",               type = "int16",                   width = 2  }, # +1E
+      { name = "arms",               type = "int16",                   width = 2  }, # +20
+      { name = "jewelry",            type = "int16",                   width = 2  }, # +22
+    ] },
+    { name = "skill_element",        type = "int16", array_count = 8,  width = 4  }, # +24
+    { name = "skill_tribe",          type = "int16", array_count = 9,  width = 4  }, # +34
+    { name = "status",               type = "int16", array_count = 2,  width = 0  }, # +46
+  ] },
+  { name = "bonus", columns = [
+    { name = "status",               type = "int16", array_count = 2,  width = 5  }, # +4A
+    { name = "skill",                type = "int16", array_count = 5,  width = 5  }, # +4E
+    { name = "status_element_up",    type = "int16", array_count = 8,  width = 4  }, # +58
+    { name = "status_element_down",  type = "int16", array_count = 8,  width = 5  }, # +68
+    { name = "arms_element", columns = [
+      { name = "weapon",             type = "int16", array_count = 8,  width = 0  }, # +78
+      { name = "shield",             type = "int16", array_count = 8,  width = 3  }, # +88
+      { name = "head",               type = "int16", array_count = 8,  width = 3  }, # +98
+      { name = "arms",               type = "int16", array_count = 8,  width = 3  }, # +A8
+      { name = "jewelry",            type = "int16", array_count = 8,  width = 3  }, # +B8
+    ] },
+    { name = "map_element",          type = "int16", array_count = 8,  width = 3  }, # +C8
+  ] },
+]
