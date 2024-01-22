@@ -1,4 +1,4 @@
-name = "buff_cards"
+name = "buff_card_data"
 
 columns = [
   { name = "ability_index", type = "uint16", width = 3 },

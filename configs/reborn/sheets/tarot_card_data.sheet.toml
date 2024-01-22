@@ -1,4 +1,4 @@
-name = "tarot_cards"
+name = "tarot_card_data"
 
 columns = [
   { name = "u00",           type = "uint8",  width = 2                  },

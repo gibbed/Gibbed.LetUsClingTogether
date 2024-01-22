@@ -1,4 +1,4 @@
-name = "equipment"
+name = "arms_data"
 
 columns = [
   { name = "u00",                      type = "undefined8",              width = 0 },
