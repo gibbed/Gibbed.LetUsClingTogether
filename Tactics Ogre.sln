@@ -63,6 +63,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.Squish", "projects\G
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.DisassembleScript", "projects\Gibbed.TacticsOgre.DisassembleScript\Gibbed.TacticsOgre.DisassembleScript.csproj", "{92B0B318-03F9-4046-ACFE-1A93EC36DF59}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.ExportImage", "projects\Gibbed.TacticsOgre.ExportImage\Gibbed.TacticsOgre.ExportImage.csproj", "{DA4A102E-D1EF-439C-842B-FDFB74D6D628}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.ExportScreenplayInvocation", "projects\Gibbed.TacticsOgre.ExportScreenplayInvocation\Gibbed.TacticsOgre.ExportScreenplayInvocation.csproj", "{9243A0D2-1753-4651-BDF1-76790895C48A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.ExportScreenplayProgress", "projects\Gibbed.TacticsOgre.ExportScreenplayProgress\Gibbed.TacticsOgre.ExportScreenplayProgress.csproj", "{5E29EFAD-18B2-463B-A373-C87FCA0ED18F}"
@@ -70,8 +72,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.ExportScreenplayTask", "projects\Gibbed.TacticsOgre.ExportScreenplayTask\Gibbed.TacticsOgre.ExportScreenplayTask.csproj", "{E18EE6D0-A5CC-4555-9F1B-4635FD210EEE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.ExportSheet", "projects\Gibbed.TacticsOgre.ExportSheet\Gibbed.TacticsOgre.ExportSheet.csproj", "{4F831181-4A65-45A9-8BCC-481B9662B1DC}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.ExportSprite", "projects\Gibbed.TacticsOgre.ExportSprite\Gibbed.TacticsOgre.ExportSprite.csproj", "{DA4A102E-D1EF-439C-842B-FDFB74D6D628}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.FileFormats", "projects\Gibbed.TacticsOgre.FileFormats\Gibbed.TacticsOgre.FileFormats.csproj", "{6D3E7917-C9CE-4F94-99C7-8487F1BE4C9F}"
 EndProject

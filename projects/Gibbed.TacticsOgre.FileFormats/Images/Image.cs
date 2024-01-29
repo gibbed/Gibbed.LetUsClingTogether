@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -24,16 +24,16 @@ using System;
 using System.IO;
 using Gibbed.IO;
 
-namespace Gibbed.TacticsOgre.FileFormats.Sprite
+namespace Gibbed.TacticsOgre.FileFormats.Images
 {
-    public struct Sprite
+    public struct Image
     {
         public uint FrameWidth;
         public uint FrameHeight;
         public Texture? Texture;
         public Palette[] Palettes;
 
-        public static Sprite Read(Stream input, Endian endian)
+        public static Image Read(Stream input, Endian endian)
         {
             var basePosition = input.Position;
 
@@ -74,7 +74,7 @@ namespace Gibbed.TacticsOgre.FileFormats.Sprite
                 {
                     throw new FormatException();
                 }
-                texture = FileFormats.Sprite.Texture.Read(input, endian);
+                texture = Images.Texture.Read(input, endian);
             }
             else
             {
@@ -123,8 +123,8 @@ namespace Gibbed.TacticsOgre.FileFormats.Sprite
                 Palette palette;
                 palette.GECommands = null;
                 using (MemoryStream data = new(texture?.IsReborn == false
-                    ? FileFormats.Sprite.Palettes.DefaultPSP
-                    : FileFormats.Sprite.Palettes.DefaultReborn))
+                    ? Images.Palettes.DefaultPSP
+                    : Images.Palettes.DefaultReborn))
                 {
                     var colors = new uint[data.Length / 4];
                     for (int i = 0, o = 0; o < data.Length; i++, o += 4)
@@ -137,7 +137,7 @@ namespace Gibbed.TacticsOgre.FileFormats.Sprite
                 palettes[0] = palette;
             }
 
-            Sprite instance;
+            Image instance;
             instance.FrameWidth = frameWidth;
             instance.FrameHeight = frameHeight;
             instance.Texture = texture;

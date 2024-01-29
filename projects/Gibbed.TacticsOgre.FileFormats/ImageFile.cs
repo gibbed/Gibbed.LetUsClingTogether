@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -26,9 +26,9 @@ using Gibbed.IO;
 
 namespace Gibbed.TacticsOgre.FileFormats
 {
-    public class SpriteFile
+    public class ImageFile
     {
-        public Sprite.Sprite Sprite { get; set; }
+        public Images.Image Image { get; set; }
 
         public void Serialize(Stream output, Endian endian)
         {
@@ -73,7 +73,7 @@ namespace Gibbed.TacticsOgre.FileFormats
                 throw new FormatException();
             }
 
-            this.Sprite = FileFormats.Sprite.Sprite.Read(input, endian);
+            this.Image = Images.Image.Read(input, endian);
         }
     }
 }

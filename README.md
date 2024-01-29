@@ -61,7 +61,7 @@ _Requires corresponding sheet format files that describe the various spreadsheet
 
 ### Graphics
 
-* [`ExportSprite`](projects/Gibbed.TacticsOgre.ExportSprite): Exporter for sprite files (`*.spr`, `*.ashg`)— incomplete, still needs work.
+* [`ExportImage`](projects/Gibbed.TacticsOgre.ExportImage): Exporter for image files (`*.img`, `*.ashg`)— incomplete, still needs work.
 
 ### Sounds
 

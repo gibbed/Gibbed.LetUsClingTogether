@@ -29,17 +29,25 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using Gibbed.IO;
 using Gibbed.TacticsOgre.FileFormats;
+using Gibbed.TacticsOgre.FileFormats.Images;
 using NDesk.Options;
-using Palette = Gibbed.TacticsOgre.FileFormats.Sprite.Palette;
-using Texture = Gibbed.TacticsOgre.FileFormats.Sprite.Texture;
+using Image = Gibbed.TacticsOgre.FileFormats.Images.Image;
 
-namespace Gibbed.TacticsOgre.ExportSprite
+namespace Gibbed.TacticsOgre.ExportImage
 {
     internal class Program
     {
         private static string GetExecutableName()
         {
             return Path.GetFileName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase);
+        }
+
+        private static bool IsImagePath(string path)
+        {
+            return
+                path.EndsWith(".img", StringComparison.OrdinalIgnoreCase) ||
+                path.EndsWith(".spr", StringComparison.OrdinalIgnoreCase) ||
+                path.EndsWith(".ashg", StringComparison.OrdinalIgnoreCase);
         }
 
         public static void Main(string[] args)
@@ -73,20 +81,21 @@ namespace Gibbed.TacticsOgre.ExportSprite
 
             if (extras.Count < 1 || showHelp == true)
             {
-                Console.WriteLine("Usage: {0} [OPTIONS]+ input_spr+", GetExecutableName());
+                Console.WriteLine("Usage: {0} [OPTIONS]+ input_img+", GetExecutableName());
                 Console.WriteLine();
                 Console.WriteLine("Options:");
                 options.WriteOptionDescriptions(Console.Out);
                 return;
             }
 
-            var inputPaths = new List<string>();
+            List<string> inputPaths = new();
             foreach (var inputPath in extras)
             {
                 if (Directory.Exists(inputPath) == true)
                 {
-                    inputPaths.AddRange(Directory.GetFiles(inputPath, "*.spr", SearchOption.AllDirectories));
-                    inputPaths.AddRange(Directory.GetFiles(inputPath, "*.ashg", SearchOption.AllDirectories));
+                    inputPaths.AddRange(Directory
+                        .EnumerateFiles(inputPath, "*", SearchOption.AllDirectories)
+                        .Where(fp => IsImagePath(fp) == true));
                 }
                 else
                 {
@@ -103,14 +112,14 @@ namespace Gibbed.TacticsOgre.ExportSprite
             {
                 using (var input = File.OpenRead(palettePath))
                 {
-                    SpriteFile paletteFile = new();
+                    ImageFile paletteFile = new();
                     paletteFile.Deserialize(input, Endian.Little);
-                    if (paletteIndex < 0 || paletteIndex >= paletteFile.Sprite.Palettes.Length)
+                    if (paletteIndex < 0 || paletteIndex >= paletteFile.Image.Palettes.Length)
                     {
                         Console.WriteLine("Invalid palette index.");
                         return;
                     }
-                    palette = paletteFile.Sprite.Palettes[paletteIndex];
+                    palette = paletteFile.Image.Palettes[paletteIndex];
                 }
             }
 
@@ -136,16 +145,17 @@ namespace Gibbed.TacticsOgre.ExportSprite
                 inputBytes = RLE.Decompress(inputBytes, 0, inputBytes.Length);
             }
 
-            SpriteFile file = new();
+            Image image;
             using (var input = new MemoryStream(inputBytes, false))
             {
-                file.Deserialize(input, Endian.Little);
+                ImageFile imageFile = new();
+                imageFile.Deserialize(input, Endian.Little);
+                image = imageFile.Image;
             }
 
-            var sprite = file.Sprite;
-            if (sprite.Texture != null)
+            if (image.Texture != null)
             {
-                var texture = sprite.Texture.Value;
+                var texture = image.Texture.Value;
                 if (palette != null)
                 {
                     var bitmapPath = Path.ChangeExtension(outputPath, ".png");
@@ -159,14 +169,14 @@ namespace Gibbed.TacticsOgre.ExportSprite
                         bitmap.Save(bitmapPath, ImageFormat.Png);
                     }
                 }
-                else if (sprite.Palettes.Length == 1)
+                else if (image.Palettes.Length == 1)
                 {
                     var bitmapPath = Path.ChangeExtension(outputPath, ".png");
                     var data = ExportPalettized(texture);
                     var bitmap = MakeBitmapPalettized(
                         texture.TotalWidth, texture.TotalHeight,
                         data,
-                        sprite.Palettes[0]);
+                        image.Palettes[0]);
                     using (bitmap)
                     {
                         bitmap.Save(bitmapPath, ImageFormat.Png);
@@ -175,7 +185,7 @@ namespace Gibbed.TacticsOgre.ExportSprite
                 else
                 {
                     int i = 0;
-                    foreach (var palette2 in sprite.Palettes)
+                    foreach (var palette2 in image.Palettes)
                     {
                         var bitmapPath = Path.ChangeExtension($"{outputPath}_{i}", ".png");
                         var data = ExportPalettized(texture);

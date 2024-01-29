@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -242,7 +242,7 @@ namespace Gibbed.TacticsOgre.FileFormats
                 BitConverter.ToUInt32(buffer, index + 0x8) == 0x00100001 &&
                 BitConverter.ToUInt32(buffer, index + 0xC) == 3)
             {
-                return ".spr";
+                return ".img";
             }
             else if (
                 count >= 4 &&
