@@ -255,23 +255,6 @@ namespace Gibbed.TacticsOgre.ExportImage
             return data;
         }
 
-        private static Bitmap MakeBitmapARGB(int width, int height, byte[] buffer, bool keepAlpha)
-        {
-            var bitmap = new Bitmap(width, height, PixelFormat.Format32bppArgb);
-            for (int i = 0; i < width * height * 4; i += 4)
-            {
-                // flip red and blue
-                byte r = buffer[i + 0];
-                buffer[i + 0] = buffer[i + 2];
-                buffer[i + 2] = r;
-            }
-            var area = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
-            var data = bitmap.LockBits(area, ImageLockMode.WriteOnly, bitmap.PixelFormat);
-            Marshal.Copy(buffer, 0, data.Scan0, width * height * 4);
-            bitmap.UnlockBits(data);
-            return bitmap;
-        }
-
         private static Bitmap MakeBitmapPalettized(int width, int height, byte[] buffer, Palette palette)
         {
             var bitmap = new Bitmap(width, height, PixelFormat.Format8bppIndexed);
