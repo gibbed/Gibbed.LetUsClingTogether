@@ -38,7 +38,8 @@ namespace Gibbed.TacticsOgre.SheetFormats
                 throw new ArgumentOutOfRangeException(nameof(minimumWidth));
             }
 
-            this._MinimumWidth = minimumWidth;
+            // implicit minimum width of 5
+            this._MinimumWidth = minimumWidth > 0 ? minimumWidth : 5;
         }
 
         public int EntrySize => 1;
@@ -47,13 +48,11 @@ namespace Gibbed.TacticsOgre.SheetFormats
         public Tommy.TomlNode Export(Stream stream, Endian endian, Dictionary<uint, List<Tommy.TomlString>> strings)
         {
             bool value = stream.ReadValueB8();
-            Tommy.TomlNode node;
-            node = new Tommy.TomlBoolean()
+            return new Tommy.TomlBoolean()
             {
                 Value = value,
+                MinimumInlineWidth = this._MinimumWidth,
             };
-            node.MinimumInlineWidth = this._MinimumWidth;
-            return node;
         }
     }
 }
