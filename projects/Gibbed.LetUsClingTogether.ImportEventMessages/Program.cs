@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -24,8 +24,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Gibbed.LetUsClingTogether.FileFormats;
+using Gibbed.TacticsOgre.TextFormats;
 using NDesk.Options;
-using Text = Gibbed.TacticsOgre.FileFormats.Text;
 
 namespace Gibbed.LetUsClingTogether.ExportEventMessages
 {
@@ -138,15 +138,15 @@ namespace Gibbed.LetUsClingTogether.ExportEventMessages
                 messages.Entries[(ushort)id] = ((ushort)nameId, text);
             }
 
-            var formatter = language switch
+            IEncoder encoder = language switch
             {
-                LanguageOption.EN => Text.Formatter.ForEN(),
-                LanguageOption.JP => Text.Formatter.ForJP(),
+                LanguageOption.EN => null, //Text.PSPEncoder.ForEN(),
+                LanguageOption.JP => null, //Text.PSPEncoder.ForJP(),
                 _ => throw new NotSupportedException(),
             };
             using (var output = File.Create(outputPath))
             {
-                messages.Serialize(output, formatter);
+                messages.Serialize(output, encoder);
             }
         }
     }

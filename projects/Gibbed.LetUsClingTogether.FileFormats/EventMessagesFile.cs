@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -24,7 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Gibbed.IO;
-using Text = Gibbed.TacticsOgre.FileFormats.Text;
+using Gibbed.TacticsOgre.TextFormats;
 
 namespace Gibbed.LetUsClingTogether.FileFormats
 {
@@ -43,12 +43,12 @@ namespace Gibbed.LetUsClingTogether.FileFormats
         public Endian Endian { get; set; }
         public Dictionary<ushort, Entry> Entries => this._Entries;
 
-        public void Serialize(Stream output, Text.Formatter formatter)
+        public void Serialize(Stream output, IEncoder encoder)
         {
-            this.Serialize(output, formatter, true);
+            this.Serialize(output, encoder, true);
         }
 
-        public void Serialize(Stream output, Text.Formatter formatter, bool includeTags)
+        public void Serialize(Stream output, IEncoder encoder, bool includeTags)
         {
             if (this.Entries.Count > ushort.MaxValue)
             {
@@ -67,7 +67,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
                 {
                     entryPositions[i] = temp.Position;
                     temp.WriteValueU16(entry.NameId, endian);
-                    formatter.Encode(entry.Text, temp, endian);
+                    encoder.Encode(entry.Text, temp, endian);
                 }
                 data = temp.ToArray();
             }
@@ -100,12 +100,12 @@ namespace Gibbed.LetUsClingTogether.FileFormats
             output.WriteBytes(data);
         }
 
-        public void Deserialize(Stream input, Text.Formatter formatter)
+        public void Deserialize(Stream input, IDecoder decoder)
         {
-            this.Deserialize(input, formatter, true);
+            this.Deserialize(input, decoder, true);
         }
 
-        public void Deserialize(Stream input, Text.Formatter formatter, bool includeTags)
+        public void Deserialize(Stream input, IDecoder decoder, bool includeTags)
         {
             var magic = input.ReadValueU32(Endian.Little);
             if (magic != Signature && magic.Swap() != Signature)
@@ -141,7 +141,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
             {
                 input.Position = offsets[i];
                 var nameId = input.ReadValueU16(endian);
-                var text = formatter.Decode(input, endian/*, includeTags*/);
+                var text = decoder.Decode(input, endian/*, includeTags*/);
                 entries.Add(ids[i], new(nameId, text));
             }
 

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -20,9 +20,9 @@
  *    distribution.
  */
 
-namespace Gibbed.TacticsOgre.FileFormats.Text
+namespace Gibbed.TacticsOgre.TextFormats
 {
-    public enum FormatOpcode : byte
+    public enum MacroCode : byte
     {
         InsertNewline = 0x80,
         IndicateWrapArea = 0x81,
@@ -66,5 +66,18 @@ namespace Gibbed.TacticsOgre.FileFormats.Text
         UnknownA7 = 0xA7,
         UnknownA8 = 0xA8,
         MaybeNewPage = 0xA9,
+
+        RebornUnknownAA = 0xAA,
+        RebornUnknownAB = 0xAB,
+        RebornUnknownAC = 0xAC,
+        RebornUnknownAD = 0xAD,
+        RebornUnknownAE = 0xAE,
+        RebornUnknownAF = 0xAF,
+        RebornUnknownB0 = 0xB0,
+        RebornUnknownB1 = 0xB1,
+        RebornUnknownB2 = 0xB2,
+        RebornUnknownB3 = 0xB3,
+        RebornUnknownB4 = 0xB4,
+        RebornUnknownB5 = 0xB5,
     }
 }

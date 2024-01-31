@@ -25,7 +25,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Gibbed.IO;
-using Gibbed.TacticsOgre.FileFormats.Text;
 using Gibbed.TacticsOgre.SheetFormats;
 using NDesk.Options;
 
@@ -38,36 +37,15 @@ namespace Gibbed.TacticsOgre.ExportScreenplayProgress
             return Path.GetFileName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase);
         }
 
-        private enum LanguageOption
-        {
-            Invalid = 0,
-            EN,
-            JP,
-            English = EN,
-            Japanese = JP,
-            Default = EN,
-        }
-
-        private static LanguageOption ParseLanguageOption(string v)
-        {
-            if (Enum.TryParse<LanguageOption>(v, true, out var result) == false)
-            {
-                result = LanguageOption.Invalid;
-            }
-            return result;
-        }
-
         public static void Main(string[] args)
         {
             bool verbose = false;
             bool? isReborn = null;
-            var language = LanguageOption.Invalid;
             bool showHelp = false;
 
             OptionSet options = new()
             {
                 { "r|reborn", "set is reborn", v => isReborn = v != null },
-                { "e|language=", "set language", v => language = ParseLanguageOption(v) },
                 { "v|verbose", "be verbose", v => verbose = v != null },
                 { "h|help", "show this message and exit", v => showHelp = v != null },
             };
@@ -101,35 +79,24 @@ namespace Gibbed.TacticsOgre.ExportScreenplayProgress
                 ? Path.GetFullPath(extras[1])
                 : Path.ChangeExtension(inputPath, ".progress.toml");
 
-            if (isReborn == null || language == LanguageOption.Invalid || serializerName == null)
+            if (isReborn == null || serializerName == null)
             {
                 var manifestPath = GetManifestPath(inputPath);
                 if (string.IsNullOrEmpty(manifestPath) == false &&
                     File.Exists(manifestPath) == true)
                 {
                     var inputName = Path.GetFileName(inputPath);
-                    var (manifestIsReborn, manifestLanguage) = GetOptionsFromManifest(
+                    var (manifestIsReborn, _) = GetOptionsFromManifest(
                         manifestPath,
                         inputName);
                     if (isReborn == null)
                     {
                         isReborn = manifestIsReborn;
                     }
-                    if (language == LanguageOption.Invalid)
-                    {
-                        language = manifestLanguage;
-                    }
                 }
             }
 
-            var formatter = language switch
-            {
-                LanguageOption.EN => Formatter.ForEN(),
-                LanguageOption.JP => Formatter.ForJP(),
-                _ => throw new NotSupportedException(),
-            };
-
-            var descriptorFactory = DescriptorLoader.Load(isReborn == false ? "psp" : "reborn");
+            var descriptorFactory = DescriptorLoader.Load(isReborn == true);
 
             if (descriptorFactory.TryGet(serializerName, out var serializerInfo) == false)
             {
@@ -201,12 +168,11 @@ namespace Gibbed.TacticsOgre.ExportScreenplayProgress
                 : null;
         }
 
-        private static (bool isReborn, LanguageOption language) GetOptionsFromManifest(
+        private static (bool isReborn, object dummy) GetOptionsFromManifest(
             string path,
             string name)
         {
             const bool isRebornDefault = false;
-            const LanguageOption languageDefault = LanguageOption.Default;
 
             Tommy.TomlTable rootTable;
             var inputBytes = File.ReadAllBytes(path);
@@ -217,14 +183,8 @@ namespace Gibbed.TacticsOgre.ExportScreenplayProgress
             }
 
             var isReborn = rootTable["reborn"].AsBoolean?.Value ?? isRebornDefault;
-            var languageName = rootTable["language"].AsString?.Value;
-            LanguageOption language;
-            if (Enum.TryParse(languageName, true, out language) == false)
-            {
-                language = languageDefault;
-            }
 
-            return (isReborn, language);
+            return (isReborn, null);
         }
     }
 }

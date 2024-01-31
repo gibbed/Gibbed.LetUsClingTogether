@@ -1,4 +1,4 @@
-/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
+/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -26,8 +26,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Gibbed.LetUsClingTogether.FileFormats;
+using Gibbed.TacticsOgre.TextFormats;
 using NDesk.Options;
-using Text = Gibbed.TacticsOgre.FileFormats.Text;
 
 namespace Gibbed.LetUsClingTogether.ExportEventMessages
 {
@@ -103,8 +103,8 @@ namespace Gibbed.LetUsClingTogether.ExportEventMessages
                 }
             }
 
-            Text.Formatter englishFormatter = null;
-            Text.Formatter japaneseFormatter = null;
+            IDecoder englishDecoder = null;
+            IDecoder japaneseDecoder = null;
 
             string lastManifestPath = null;
             LanguageOption inputLanguage = LanguageOption.Invalid;
@@ -126,8 +126,8 @@ namespace Gibbed.LetUsClingTogether.ExportEventMessages
                 }
                 var formatter = inputLanguage switch
                 {
-                    LanguageOption.EN => englishFormatter ??= Text.Formatter.ForEN(),
-                    LanguageOption.JP => japaneseFormatter ??= Text.Formatter.ForJP(),
+                    LanguageOption.EN => englishDecoder ??= PSPDecoder.ForEN(),
+                    LanguageOption.JP => japaneseDecoder ??= PSPDecoder.ForJP(),
                     _ => throw new NotSupportedException(),
                 };
 

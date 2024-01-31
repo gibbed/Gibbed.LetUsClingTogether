@@ -26,8 +26,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Gibbed.IO;
-using Gibbed.TacticsOgre.FileFormats.Text;
 using Gibbed.TacticsOgre.SheetFormats;
+using Gibbed.TacticsOgre.TextFormats;
 using NDesk.Options;
 
 namespace Gibbed.TacticsOgre.ExportSheet
@@ -128,12 +128,21 @@ namespace Gibbed.TacticsOgre.ExportSheet
                 }
             }
 
-            var formatter = language switch
+            IDecoder decoder;
+
+            if (isReborn == true)
             {
-                LanguageOption.EN => Formatter.ForEN(),
-                LanguageOption.JP => Formatter.ForJP(),
-                _ => throw new NotSupportedException(),
-            };
+                decoder = new RebornDecoder();
+            }
+            else
+            {
+                decoder = language switch
+                {
+                    LanguageOption.EN => PSPDecoder.ForEN(),
+                    LanguageOption.JP => PSPDecoder.ForJP(),
+                    _ => throw new NotSupportedException(),
+                };
+            }
 
             DescriptorFactory descriptorFactory;
             try
@@ -261,7 +270,7 @@ namespace Gibbed.TacticsOgre.ExportSheet
                     foreach (var kv in pendingStrings)
                     {
                         data.Position = kv.Key;
-                        var value = formatter.Decode(data, endian);
+                        var value = decoder.Decode(data, endian);
                         foreach (var node in kv.Value)
                         {
                             node.Value = value;

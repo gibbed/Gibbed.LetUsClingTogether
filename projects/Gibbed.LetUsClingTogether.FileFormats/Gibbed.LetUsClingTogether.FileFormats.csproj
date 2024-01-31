@@ -13,5 +13,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Gibbed.IO\Gibbed.IO.csproj" />
     <ProjectReference Include="..\Gibbed.TacticsOgre.FileFormats\Gibbed.TacticsOgre.FileFormats.csproj" />
+    <ProjectReference Include="..\Gibbed.TacticsOgre.TextFormats\Gibbed.TacticsOgre.TextFormats.csproj" />
   </ItemGroup>
 </Project>

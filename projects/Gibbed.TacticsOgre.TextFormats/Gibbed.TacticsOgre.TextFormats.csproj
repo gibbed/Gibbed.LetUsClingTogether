@@ -5,10 +5,13 @@
     <Company>Gibbed</Company>
     <Authors>Gibbed</Authors>
     <Description>http://gib.me/</Description>
-    <Copyright>Copyright © Gibbed 2022</Copyright>
+    <Copyright>Copyright © Gibbed 2024</Copyright>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Gibbed.IO\Gibbed.IO.csproj" />
-    <ProjectReference Include="..\Gibbed.TacticsOgre.TextFormats\Gibbed.TacticsOgre.TextFormats.csproj" />
+    <ProjectReference Include="..\Gibbed.TacticsOgre.Extensions\Gibbed.TacticsOgre.Extensions.csproj" />
   </ItemGroup>
 </Project>
