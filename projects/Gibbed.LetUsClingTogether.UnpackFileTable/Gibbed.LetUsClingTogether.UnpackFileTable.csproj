@@ -19,6 +19,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gibbed.IO\Gibbed.IO.csproj" />
+    <ProjectReference Include="..\Gibbed.TacticsOgre.Extensions\Gibbed.TacticsOgre.Extensions.csproj" />
     <ProjectReference Include="..\Gibbed.TacticsOgre.FileFormats\Gibbed.TacticsOgre.FileFormats.csproj" />
     <ProjectReference Include="..\Gibbed.Reborn.FileFormats\Gibbed.Reborn.FileFormats.csproj" />
     <ProjectReference Include="..\NDesk.Options\NDesk.Options.csproj" />

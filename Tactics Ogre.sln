@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29613.14
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Archives", "Archives", "{3742DA58-0B92-4D2F-95DB-E780487C8C7E}"
 EndProject
@@ -72,6 +72,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.ExportScreenplayTask", "projects\Gibbed.TacticsOgre.ExportScreenplayTask\Gibbed.TacticsOgre.ExportScreenplayTask.csproj", "{E18EE6D0-A5CC-4555-9F1B-4635FD210EEE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.ExportSheet", "projects\Gibbed.TacticsOgre.ExportSheet\Gibbed.TacticsOgre.ExportSheet.csproj", "{4F831181-4A65-45A9-8BCC-481B9662B1DC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.Extensions", "projects\Gibbed.TacticsOgre.Extensions\Gibbed.TacticsOgre.Extensions.csproj", "{7E28CE94-A5CD-4D58-A48B-E34B70FDA066}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.FileFormats", "projects\Gibbed.TacticsOgre.FileFormats\Gibbed.TacticsOgre.FileFormats.csproj", "{6D3E7917-C9CE-4F94-99C7-8487F1BE4C9F}"
 EndProject
@@ -167,6 +169,10 @@ Global
 		{77AF33FD-2502-4159-AF08-834B55A44DC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77AF33FD-2502-4159-AF08-834B55A44DC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77AF33FD-2502-4159-AF08-834B55A44DC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E28CE94-A5CD-4D58-A48B-E34B70FDA066}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E28CE94-A5CD-4D58-A48B-E34B70FDA066}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E28CE94-A5CD-4D58-A48B-E34B70FDA066}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E28CE94-A5CD-4D58-A48B-E34B70FDA066}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7FAC7FC1-12DD-44C2-B925-DEB93F5A8AB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7FAC7FC1-12DD-44C2-B925-DEB93F5A8AB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FAC7FC1-12DD-44C2-B925-DEB93F5A8AB3}.Release|Any CPU.ActiveCfg = Release|Any CPU

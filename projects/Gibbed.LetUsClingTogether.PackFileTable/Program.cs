@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -27,7 +27,7 @@ using System.Linq;
 using Gibbed.IO;
 using Gibbed.TacticsOgre.FileFormats;
 using NDesk.Options;
-using static Gibbed.TacticsOgre.FileFormats.InvariantShorthand;
+using static Gibbed.TacticsOgre.Extensions.InvariantShorthand;
 using FileTable = Gibbed.TacticsOgre.FileFormats.FileTable;
 using FileTableManifest = Gibbed.LetUsClingTogether.UnpackFileTable.FileTableManifest;
 

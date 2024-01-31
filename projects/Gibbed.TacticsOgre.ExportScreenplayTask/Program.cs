@@ -27,7 +27,7 @@ using System.Text;
 using Gibbed.TacticsOgre.FileFormats;
 using Gibbed.TacticsOgre.FileFormats.Screenplay;
 using NDesk.Options;
-using static Gibbed.TacticsOgre.FileFormats.InvariantShorthand;
+using static Gibbed.TacticsOgre.Extensions.InvariantShorthand;
 using ValueType = Gibbed.TacticsOgre.FileFormats.Screenplay.ValueType;
 
 namespace Gibbed.TacticsOgre.ExportScreenplayTask

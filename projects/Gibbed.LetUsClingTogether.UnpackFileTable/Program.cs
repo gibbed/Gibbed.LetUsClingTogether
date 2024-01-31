@@ -28,7 +28,7 @@ using System.Text;
 using Gibbed.IO;
 using Gibbed.TacticsOgre.FileFormats;
 using NDesk.Options;
-using static Gibbed.TacticsOgre.FileFormats.InvariantShorthand;
+using static Gibbed.TacticsOgre.Extensions.InvariantShorthand;
 using DataBogoCrypt = Gibbed.Reborn.FileFormats.Crypt.DataBogoCrypt;
 using FileTable = Gibbed.TacticsOgre.FileFormats.FileTable;
 using PackId = Gibbed.LetUsClingTogether.UnpackFileTable.FileTableManifest.PackId;
