@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -85,9 +85,10 @@ namespace Gibbed.TacticsOgre.SheetFormats
             if (this._EnumMembers != null &&
                 this._EnumMembers.TryGetValue(value, out var enumName) == true)
             {
-                Tommy.TomlString stringNode = new();
-                stringNode.Value = enumName;
-                node = stringNode;
+                node = new Tommy.TomlString()
+                {
+                    Value = enumName,
+                };
             }
             else
             {

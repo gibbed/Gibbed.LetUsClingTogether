@@ -135,7 +135,28 @@ namespace Gibbed.TacticsOgre.ExportSheet
                 _ => throw new NotSupportedException(),
             };
 
-            var descriptorFactory = DescriptorLoader.Load(isReborn == false ? "psp" : "reborn");
+            DescriptorFactory descriptorFactory;
+            try
+            {
+                descriptorFactory = DescriptorLoader.Load(isReborn == true);
+            }
+            catch (DescriptorLoadException e)
+            {
+                if (e.InnerException is Tommy.TomlParseException parseException)
+                {
+                    Console.WriteLine($"Parse error while loading '{e.Path}':");
+                    foreach (var syntaxError in parseException.SyntaxErrors)
+                    {
+                        Console.WriteLine($"{syntaxError.Line} {syntaxError.Column} {syntaxError.Message}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"Exception while loading '{e.Path}':");
+                    Console.WriteLine(e);
+                }
+                return;
+            }
 
             Tommy.TomlArray rowsArray;
 

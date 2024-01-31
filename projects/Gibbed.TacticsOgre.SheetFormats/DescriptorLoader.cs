@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -37,15 +37,15 @@ namespace Gibbed.TacticsOgre.SheetFormats
             return Path.GetFullPath(path);
         }
 
-        public static DescriptorFactory Load(string subdirectory)
+        public static DescriptorFactory Load(bool isReborn)
         {
             var factory = new DescriptorFactory();
 
+            var subdirectory = isReborn == false ? "psp" : "reborn";
+
             var executablePath = GetExecutablePath();
             var binPath = Path.GetDirectoryName(executablePath);
-            var filetablesPath = string.IsNullOrEmpty(subdirectory) == true
-                ? Path.Combine(binPath, "..", "configs", "sheets")
-                : Path.Combine(binPath, "..", "configs", subdirectory, "sheets");
+            var filetablesPath = Path.Combine(binPath, "..", "configs", subdirectory, "sheets");
 
             if (Directory.Exists(filetablesPath) == false)
             {
@@ -59,13 +59,21 @@ namespace Gibbed.TacticsOgre.SheetFormats
                 using (var input = new MemoryStream(inputBytes, false))
                 using (var reader = new StreamReader(input, true))
                 {
-                    table = TOML.Parse(reader);
+                    try
+                    {
+                        table = TOML.Parse(reader);
+                    }
+                    catch (Exception e)
+                    {
+                        throw new DescriptorLoadException(inputPath, e);
+                    }
                 }
 
                 var descriptorName = table["name"]?.AsString?.Value ?? throw new FormatException();
                 var rowsAsTableArray = table["rows_table_array"]?.AsBoolean?.Value ?? false;
 
-                var descriptor = ParseDescriptor(table, table);
+                var descriptor = ParseDescriptor(table, table, isReborn);
+
                 var descriptorInfo = new DescriptorInfo(
                     descriptor.EntrySize,
                     descriptor.HasStrings,
@@ -76,14 +84,14 @@ namespace Gibbed.TacticsOgre.SheetFormats
             return factory;
         }
 
-        private static IDescriptor ParseDescriptor(TomlTable table, TomlTable rootTable)
+        private static IDescriptor ParseDescriptor(TomlTable table, TomlTable rootTable, bool isReborn)
         {
             IDescriptor descriptor;
 
             var columnsArray = table["columns"]?.AsArray;
             if (columnsArray != null)
             {
-                descriptor = ParseStructDescriptor(table, columnsArray, rootTable);
+                descriptor = ParseStructDescriptor(table, columnsArray, rootTable, isReborn);
             }
             else if (TryParseEnum<PrimitiveType>(table["type"], out var type) == true)
             {
@@ -91,7 +99,7 @@ namespace Gibbed.TacticsOgre.SheetFormats
 
                 if (type == PrimitiveType.String)
                 {
-                    descriptor = new StringDescriptor((int)minimumWidth);
+                    descriptor = new StringDescriptor((int)minimumWidth, isReborn);
                 }
                 else if (type == PrimitiveType.Boolean)
                 {
@@ -195,7 +203,7 @@ namespace Gibbed.TacticsOgre.SheetFormats
             return new ArrayDescriptor(descriptor, count, (int)minimumWidth, isInline);
         }
 
-        private static StructDescriptor ParseStructDescriptor(TomlTable table, TomlArray array, TomlTable rootTable)
+        private static StructDescriptor ParseStructDescriptor(TomlTable table, TomlArray array, TomlTable rootTable, bool isReborn)
         {
             var minimumWidth = table["width"]?.AsInteger?.Value ?? 0;
             var isInline = table["inline"]?.AsBoolean?.Value ?? false;
@@ -203,7 +211,7 @@ namespace Gibbed.TacticsOgre.SheetFormats
             foreach (TomlTable childTable in array)
             {
                 var name = childTable["name"]?.AsString?.Value ?? throw new FormatException();
-                instance.Add(name, ParseDescriptor(childTable, rootTable));
+                instance.Add(name, ParseDescriptor(childTable, rootTable, isReborn));
             }
             return instance;
         }

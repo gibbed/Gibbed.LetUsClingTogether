@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -61,9 +61,14 @@ namespace Gibbed.TacticsOgre.SheetFormats
 
         public void Add(string name, PrimitiveType type, int minimumWidth)
         {
+            this.Add(name, type, minimumWidth, false);
+        }
+
+        public void Add(string name, PrimitiveType type, int minimumWidth, bool isReborn)
+        {
             if (type == PrimitiveType.String)
             {
-                this.Add(name, new StringDescriptor(minimumWidth));
+                this.Add(name, new StringDescriptor(minimumWidth, isReborn));
             }
             else if (type.IsInteger() == true)
             {
