@@ -1,143 +1,171 @@
 name = "arms_data"
 
 columns = [
-  { name = "u00",                      type = "undefined8",              width = 0 },
-  { name = "u01",                      type = "undefined8",              width = 0 },
-  { name = "u02",                      type = "uint8",                   width = 2 }, # skills.xlc[value] and 41.xlc[index]
-  { name = "u03",                      type = "uint8",                   width = 0 },
-  { name = "u04",                      type = "uint8",                   width = 0 },
-  { name = "u05",                      type = "uint8",                   width = 0 },
-  { name = "u06",                      type = "uint8",                   width = 0 },
-  { name = "u07",                      type = "uint8",                   width = 2 },
-  { name = "u08",                      type = "uint8",                   width = 0 },
-  { name = "u09",                      type = "uint8",                   width = 0 },
-  { name = "u0A",                      type = "uint8",                   width = 2 },
-  { name = "u0B",                      type = "undefined8",              width = 0 },
-  { name = "u0C",                      type = "undefined8",              width = 0 },
-  { name = "u0D",                      type = "uint8",                   width = 0 },
-  { name = "u0E",                      type = "uint8",                   width = 0 },
-  { name = "u0F",                      type = "uint8",                   width = 0 },
-  { name = "u10",                      type = "uint8",                   width = 0 },
-  { name = "u11",                      type = "uint8",                   width = 0 },
-  { name = "u12",                      type = "uint8",                   width = 2 },
+  { name = "u00",                       type = "undefined16",                 width = 2  }, # +00  unused?
+  { name = "item_category_id",          type = "uint8",                       width = 2  }, # +02  item_category_data.xlc[item_category_id]
+  { name = "target_type", columns = [
+    { name = "unit",                    type = "boolean"                                 }, # +03  can target units
+    { name = "block",                   type = "boolean"                                 }, # +04  can target blocks (tiles)
+    { name = "obstruction",             type = "boolean"                                 }, # +05  can target obstructions (boxes, plants, etc)
+    { name = "shadow",                  type = "boolean"                                 }, # +06  can target shadows (summoned by skills like Sanctuary Shadow or Rampart Shadow)
+  ] },
+  { name = "range", columns = [
+    { name = "maximum",                 type = "uint8",                       width = 2  }, # +07
+    { name = "minimum",                 type = "uint8",                       width = 0  }, # +08
+    { name = "spread",                  type = "uint8",                       width = 0  }, # +09
+    { name = "type",                    type = "uint8",                       width = 2  }, # +0A
+  ] },
+  { name = "u0B",                       type = "undefined8",                  width = 0  }, # +0B
+  { name = "parabolic",                 type = "boolean"                                 }, # +0C  for ranged
+  { name = "two_handed",                type = "boolean"                                 }, # +0D
+  { name = "no_auto_equip",             type = "boolean"                                 }, # +0E
+  { name = "required_gender",           type = "uint8", enum = "gender",      width = 0  }, # +0F
+  { name = "exceed_range",              type = "boolean"                                 }, # +10
+  { name = "hit_rate_id",               type = "uint8",                       width = 0  }, # +11  hit_rate_data.xlc[hit_rate_id]
+  { name = "hp_damage_id",              type = "uint8",                       width = 2  }, # +12  hp_damage_data.xlc[hp_damage_id]
   { name = "on_hit", columns = [
-    { name = "type",                   type = "uint8",                   width = 2, enum = [ ] },
-    { name = "index",                  type = "uint8",                   width = 2 },
-    { name = "chance",                 type = "uint8",                   width = 2 },
-    { name = "value_type",             type = "uint8",                   width = 0 },
-    { name = "value",                  type = "uint8",                   width = 2 }
+    { name = "type",                    type = "uint8",                       width = 2  }, # +13
+    { name = "effect_id",               type = "uint8",                       width = 2  }, # +14  effect_data.xlc[effect_id]
+    { name = "chance",                  type = "uint8",                       width = 2  }, # +15
+    { name = "value_type",              type = "uint8",                       width = 0  }, # +16
+    { name = "value",                   type = "uint8",                       width = 2  }, # +17
   ] },
-  { name = "rt",                       type = "uint8",                   width = 2 },
-  { name = "atk",                      type = "uint8",                   width = 3 },
-  { name = "def",                      type = "uint8",                   width = 2 },
-  { name = "stats", columns = [
-    { name = "HP",                     type = "uint8",                   width = 3 },
-    { name = "MP",                     type = "uint8",                   width = 2 },
-    { name = "STR",                    type = "uint8",                   width = 3 },
-    { name = "VIT",                    type = "uint8",                   width = 3 },
-    { name = "DEX",                    type = "uint8",                   width = 3 },
-    { name = "AGI",                    type = "uint8",                   width = 3 },
-    { name = "AVD",                    type = "uint8",                   width = 3 },
-    { name = "INT",                    type = "uint8",                   width = 3 },
-    { name = "MND",                    type = "uint8",                   width = 3 },
-    { name = "RES",                    type = "uint8",                   width = 3 },
-    { name = "LUK",                    type = "uint8",                   width = 3 },
+  { name = "RT_delay",                  type = "uint8",                       width = 2  }, # +18
+  { name = "stats_bonus", columns = [
+    { name = "ATK",                     type = "uint8",                       width = 3  }, # +19
+    { name = "DEF",                     type = "uint8",                       width = 2  }, # +1A
+    { name = "HP",                      type = "int8",                        width = 3  }, # +1B
+    { name = "MP",                      type = "int8",                        width = 2  }, # +1C
+    { name = "STR",                     type = "int8",                        width = 2  }, # +1D
+    { name = "VIT",                     type = "int8",                        width = 2  }, # +1E
+    { name = "DEX",                     type = "int8",                        width = 2  }, # +1F
+    { name = "AGI",                     type = "int8",                        width = 2  }, # +20
+    { name = "AVD",                     type = "int8",                        width = 2  }, # +21
+    { name = "INT",                     type = "int8",                        width = 2  }, # +22
+    { name = "MND",                     type = "int8",                        width = 2  }, # +23
+    { name = "RES",                     type = "int8",                        width = 2  }, # +24
+    { name = "LUK",                     type = "int8",                        width = 3  }, # +25
   ] },
-  { name = "weight",                   type = "uint8",                   width = 3 },
+  { name = "weight",                    type = "int8",                        width = 2  }, # +26
   { name = "damage", columns = [
-    { name = "affinity",               type = "uint8",                   width = 10, enum = [ "None", "Crushing", "Slashing", "Piercing" ] },
-    { name = "bonus",                  type = "uint8",                   width = 2 }
+    { name = "affinity",                type = "uint8", enum = "damage",      width = 10 }, # +27
+    { name = "bonus",                   type = "uint8",                       width = 2  }, # +28
+    { name = "resist",                  type = "int8", array_count = 3,       width = 2  }, # +29
+    { name = "obstruction",             type = "uint8",                       width = 0  }, # +2C  damage to obstructions (boxes, plants, etc)
+    { name = "bonus_undead",            type = "boolean"                                 }, # +2D
   ] },
-  { name = "u29",                      type = "uint8",                   width = 2 },
-  { name = "u2A",                      type = "uint8",                   width = 2 },
-  { name = "u2B",                      type = "uint8",                   width = 2 },
-  { name = "u2C",                      type = "uint8",                   width = 0 },
-  { name = "u2D",                      type = "uint8",                   width = 0 },
   { name = "tribe", columns = [
-    { name = "affinity",               type = "uint8",                   width = 9, enum = [ "None", "Human", "Beast", "Reptile", "Dragon", "Divine", "Umbra", "Faerie", "Phantom", "Golem" ] },
-    { name = "bonus",                  type = "uint8",                   width = 2 }
+    { name = "affinity",                type = "uint8", enum = "tribe",       width = 9  }, # +2E
+    { name = "bonus",                   type = "uint8",                       width = 2  }, # +2F
+    { name = "resist",                  type = "int8", array_count = 9,       width = 0  }, # +30
   ] },
-  { name = "u30",                      type = "uint8",                   width = 0 },
-  { name = "u31",                      type = "uint8",                   width = 0 },
-  { name = "u32",                      type = "uint8",                   width = 0 },
-  { name = "u33",                      type = "uint8",                   width = 0 },
-  { name = "u34",                      type = "uint8",                   width = 0 },
-  { name = "u35",                      type = "uint8",                   width = 0 },
-  { name = "u36",                      type = "uint8",                   width = 0 },
-  { name = "u37",                      type = "uint8",                   width = 0 },
-  { name = "u38",                      type = "uint8",                   width = 0 },
   { name = "element", columns = [
-    { name = "affinity",               type = "uint8",                   width = 11, enum = [ "None", "Air", "Earth", "Lightning", "Water", "Fire", "Ice", "Light", "Dark" ] },
-    { name = "bonus",                  type = "uint8",                   width = 2 }
+    { name = "affinity",                type = "uint8", enum = "element",     width = 11 }, # +39
+    { name = "bonus",                   type = "uint8",                       width = 2  }, # +3A
+    { name = "resist",                  type = "int8", array_count = 8,       width = 2  }, # +3B
   ] },
-  { name = "u3B",                      type = "uint8",                   width = 2 },
-  { name = "u3C",                      type = "uint8",                   width = 2 },
-  { name = "u3D",                      type = "uint8",                   width = 2 },
-  { name = "u3E",                      type = "uint8",                   width = 2 },
-  { name = "u3F",                      type = "uint8",                   width = 2 },
-  { name = "u40",                      type = "uint8",                   width = 2 },
-  { name = "u41",                      type = "uint8",                   width = 2 },
-  { name = "u42",                      type = "uint8",                   width = 2 },
-  { name = "u43",                      type = "undefined8",              width = 0 },
+  { name = "u43",                       type = "undefined8",                  width = 0  }, # +43
   { name = "effect", columns = [
-    { name = "index",                  type = "uint16",                  width = 3 },
-    { name = "charges",                type = "uint8",                   width = 0 }
+    { name = "id",                      type = "uint16",                      width = 3  }, # +44  effect_data.xlc[id]
+    { name = "charges",                 type = "uint8",                       width = 0  }, # +45
   ] },
-  { name = "u47",                      type = "uint8",                   width = 0 }, # skills.xlc[value]
-  { name = "u48",                      type = "undefined8",              width = 0 },
-  { name = "u49",                      type = "undefined8",              width = 0 },
-  { name = "u4A",                      type = "undefined8",              width = 0 },
-  { name = "u4B",                      type = "undefined8",              width = 0 },
+  { name = "u47",                       type = "uint8",                       width = 0  }, # +47
+  { name = "u48",                       type = "uint8",                       width = 0  }, # +48
+  { name = "u49",                       type = "uint8",                       width = 0  }, # +49
+  { name = "u4A",                       type = "uint8",                       width = 0  }, # +4A
+  { name = "u4B",                       type = "undefined8",                  width = 0  }, # +4B
   { name = "skill_bonus", columns = [
-    { name = "index",                  type = "uint16",                  width = 2 },
-    { name = "levels",                 type = "uint8",                   width = 2 }
+    { name = "id",                      type = "uint16",                      width = 2  }, # +4C  skill_data.xlc[id]
+    { name = "levels",                  type = "uint8",                       width = 2  }, # +4E
   ] },
-  { name = "u4F",                      type = "undefined8",              width = 0 },
-  { name = "u50",                      type = "uint8",                   width = 0 },
-  { name = "u51",                      type = "uint8",                   width = 0 },
-  { name = "u52",                      type = "undefined8",              width = 0 },
-  { name = "u53",                      type = "undefined8",              width = 0 },
-  { name = "u54",                      type = "undefined8",              width = 0 },
-  { name = "u55",                      type = "undefined8",              width = 0 },
-  { name = "u56",                      type = "undefined8",              width = 0 },
-  { name = "u57",                      type = "undefined8",              width = 0 },
-  { name = "class_set_mask",           type = "uint64",                  width = 44, base = "bin" },
-  { name = "level",                    type = "uint8",                   width = 2 }, # unused?
-  { name = "u61",                      type = "uint8",                   width = 0 },
-  { name = "description_index",        type = "uint16",                  width = 3 }, # battle_text.xlc[value]
-  { name = "price",                    type = "uint16",                  width = 5 },
-  { name = "u66",                      type = "uint8",                   width = 2 }, # 12.xlc[value]
-  { name = "u67",                      type = "uint8",                   width = 2 }, # 42.xlc[value]
-  { name = "u68",                      type = "uint8",                   width = 2 },
-  { name = "u69",                      type = "uint8",                   width = 2 },
-  { name = "u6A",                      type = "uint16",                  width = 3 },
-  { name = "u6C",                      type = "uint16",                  width = 3 },
-  { name = "u6E",                      type = "uint16",                  width = 3 },
-  { name = "u70",                      type = "uint16",                  width = 3 },
-  { name = "u72",                      type = "uint8",                   width = 0 },
-  { name = "u73",                      type = "uint8",                   width = 0 },
-  { name = "u74",                      type = "uint8",                   width = 0 }, # icon background / rarity?
-  { name = "u75",                      type = "undefined8",              width = 0 },
-  { name = "u76",                      type = "uint8",                   width = 2 },
-  { name = "u77",                      type = "uint8",                   width = 0 },
-  { name = "u78",                      type = "uint16",                  width = 4 },
-  { name = "u7A",                      type = "uint16",                  width = 4, array_count = 4 },
-  { name = "u82",                      type = "undefined8",              width = 3 },
-  { name = "u83",                      type = "undefined8",              width = 0 },
-  { name = "u84",                      type = "uint8",                   width = 0 },
-  { name = "u85",                      type = "undefined8",              width = 0 },
-  { name = "name_index",               type = "uint16",                  width = 3 }, # battle_text.xlc[value]
-  { name = "battle_ability",           type = "uint16",                  width = 3 }, # skills.xlc[value]
-  { name = "u8A",                      type = "uint8",                   width = 2 },
-  { name = "u8B",                      type = "uint8",                   width = 0 },
-  { name = "u8C",                      type = "uint16",                  width = 3 },
-  { name = "u8E",                      type = "uint8",                   width = 2 },
-  { name = "u8F",                      type = "undefined8",              width = 0 },
-  { name = "u90",                      type = "uint16",                  width = 3 },
-  { name = "u92",                      type = "uint8",                   width = 2 },
-  { name = "u93",                      type = "uint8",                   width = 2 },
-  { name = "u94",                      type = "undefined8",              width = 0 }, # maybe padding
-  { name = "u95",                      type = "undefined8",              width = 0 }, # maybe padding
-  { name = "u96",                      type = "undefined8",              width = 0 }, # maybe padding
-  { name = "u97",                      type = "undefined8",              width = 0 }  # maybe padding
+  { name = "u4F",                       type = "undefined8",                  width = 0  }, # +4F
+  { name = "rare",                      type = "boolean"                                 }, # +50  ie unique, can only hold one at a time
+  { name = "precious",                  type = "boolean"                                 }, # +51  ie key item, cannot be removed once acquired
+  { name = "u52",                       type = "undefined8",                  width = 0  }, # +52
+  { name = "u53",                       type = "undefined8",                  width = 0  }, # +53
+  { name = "u54",                       type = "undefined8",                  width = 0  }, # +54
+  { name = "u55",                       type = "undefined8",                  width = 0  }, # +55
+  { name = "u56",                       type = "undefined8",                  width = 0  }, # +56
+  { name = "u57",                       type = "undefined8",                  width = 0  }, # +57
+  { name = "required_class_set_mask",   type = "uint64", base = "bin",        width = 44 }, # +58
+  { name = "required_level",            type = "uint8",                       width = 2  }, # +60
+  { name = "parabolic_flags",           type = "uint8",                       width = 6  }, # +61  only used if parabolic is true
+  { name = "description_id",            type = "uint16",                      width = 3  }, # +62  battle_text.xlc[description_id]
+  { name = "price",                     type = "uint16",                      width = 5  }, # +64
+  { name = "animation_id",              type = "uint8",                       width = 2  }, # +66  arms_animation_data.xlc[animation_id]
+  { name = "hit_effect_id",             type = "uint8",                       width = 2  }, # +67  hit_effect_data.xlc[hit_effect_id]
+  { name = "projectile_speed",          type = "uint8",                       width = 2  }, # +68  projectile_speed / 10.0f
+  { name = "equip_drop_chance",         type = "uint8",                       width = 2  }, # +69  rand(255) < equip_drop_chance to drop
+  { name = "sort_id",                   type = "uint16",                      width = 3  }, # +6A
+  { name = "image_file_id",             type = "uint16",                      width = 3  }, # +6C
+  { name = "projectile_image_file_id",  type = "uint16",                      width = 3  }, # +6E
+  { name = "icon_file_id",              type = "uint16",                      width = 3  }, # +70
+  { name = "image_palette_id",          type = "uint8",                       width = 0  }, # +72
+  { name = "icon_palette_id",           type = "uint8",                       width = 0  }, # +73
+  { name = "icon_back_id",              type = "uint8",                       width = 0  }, # +74
+  { name = "icon_fore_id",              type = "uint8",                       width = 0  }, # +75
+  { name = "ai_cost",                   type = "uint8",                       width = 2  }, # +76
+  { name = "set_id",                    type = "uint8",                       width = 0  }, # +77
+  { name = "crafting", columns = [
+    { name = "recipe_id",               type = "uint16",                      width = 4  }, # +78
+    { name = "material_ids",            type = "uint16", array_count = 4,     width = 4  }, # +7A
+    { name = "success_chance",          type = "uint8",                       width = 3  }, # +82
+  ] },
+  { name = "u83",                       type = "uint8",                       width = 0  }, # +83
+  { name = "spell_range_bonus",         type = "uint8",                       width = 0  }, # +84
+  { name = "u85",                       type = "undefined8",                  width = 0  }, # +85
+  { name = "name_id",                   type = "uint16",                      width = 3  }, # +86  battle_text.xlc[name_id]
+  { name = "battle_ability_id",         type = "uint16",                      width = 3  }, # +88  skill_data.xlc[battle_ability_id]
+  { name = "move_type_id",              type = "uint8",                       width = 2  }, # +8A  move_type_data.xlc[move_type_id]
+  { name = "no_level_sync",             type = "uint8"                                   }, # +8B
+  { name = "knockback",                 type = "uint16",                      width = 3  }, # +8C
+  { name = "level_sync_item_category",  type = "uint8",                       width = 2  }, # +8E
+  { name = "u8F",                       type = "undefined8",                  width = 0  }, # +8F
+  { name = "u90",                       type = "uint16",                      width = 3  }, # +90
+  { name = "sell_markdown", columns = [
+    { name = "shop",                    type = "uint8",                       width = 2  }, # +92  sell_value = (price * value) / 100
+    { name = "nonshop",                 type = "uint8",                       width = 2  }, # +93  sell_value = (price * value) / 100, ie when selling from inventory screen or when exceeding maximum quantity
+  ] },
+  { name = "u94",                       type = "undefined8",                  width = 0  }, # +94  maybe padding
+  { name = "u95",                       type = "undefined8",                  width = 0  }, # +95  maybe padding
+  { name = "u96",                       type = "undefined8",                  width = 0  }, # +96  maybe padding
+  { name = "u97",                       type = "undefined8",                  width = 0  }, # +97  maybe padding
+]
+
+types.gender = [
+  "None",   # 0
+  "Male",   # 1
+  "Female", # 2
+]
+
+types.damage = [
+  "None",     # 0
+  "Crushing", # 1
+  "Slashing", # 2
+  "Piercing", # 3
+]
+
+types.tribe = [
+  "None",    # 0
+  "Human",   # 1
+  "Beast",   # 2
+  "Reptile", # 3
+  "Dragon",  # 4
+  "Divine",  # 5
+  "Umbra",   # 6
+  "Faerie",  # 7
+  "Phantom", # 8
+  "Golem",   # 9
+]
+
+types.element = [
+  "None",      # 0
+  "Air",       # 1
+  "Earth",     # 2
+  "Lightning", # 3
+  "Water",     # 4
+  "Fire",      # 5
+  "Ice",       # 6
+  "Light",     # 7
+  "Dark",      # 8
 ]
