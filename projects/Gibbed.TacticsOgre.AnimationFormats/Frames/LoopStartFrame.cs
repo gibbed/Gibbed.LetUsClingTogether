@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -20,24 +20,30 @@
  *    distribution.
  */
 
-namespace Gibbed.TacticsOgre.SpriteAnimationFormats
+using System;
+
+namespace Gibbed.TacticsOgre.AnimationFormats.Frames
 {
-    public enum FrameType : byte
+    public struct LoopStartFrame : IFrame
     {
-        Sprite = 0,
-        Position = 1,
-        Unknown2 = 2,
-        Unknown3 = 3,
-        Undefined4 = 4,
-        Undefined5 = 5,
-        Undefined6 = 6,
-        LoopEnd = 7,
-        LoopStart = 8,
-        SetFlag = 9,
-        Unknown10 = 10,
-        GoTo = 11,
-        Unknown12 = 12,
-        Undefined13 = 13,
-        Unknown14 = 14,
+        FrameType IFrame.Type => FrameType.LoopStart;
+        ushort IFrame.Time { get => this.Time; set => this.Time = value; }
+
+        public ushort Time;
+        public ushort FrameIndex;
+
+        internal LoopStartFrame(FrameData data)
+        {
+            this.Time = default;
+            this.FrameIndex = data.FrameIndex;
+
+            if (data.Y1 != 0 ||
+                data.Unknown2 != 0 ||
+                data.X2 != 0 || data.Y2 != 0 ||
+                data.Unknown5 != 0)
+            {
+                throw new ArgumentException("invalid data", nameof(data));
+            }
+        }
     }
 }

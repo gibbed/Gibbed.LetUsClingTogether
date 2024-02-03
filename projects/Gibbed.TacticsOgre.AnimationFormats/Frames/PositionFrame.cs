@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -22,11 +22,11 @@
 
 using System;
 
-namespace Gibbed.TacticsOgre.SpriteAnimationFormats.Frames
+namespace Gibbed.TacticsOgre.AnimationFormats.Frames
 {
-    public struct Unknown12Frame : IFrame
+    public struct PositionFrame : IFrame
     {
-        FrameType IFrame.Type => FrameType.Unknown12;
+        FrameType IFrame.Type => FrameType.Position;
         ushort IFrame.Time { get => this.Time; set => this.Time = value; }
 
         public ushort Time;
@@ -35,7 +35,7 @@ namespace Gibbed.TacticsOgre.SpriteAnimationFormats.Frames
         public short X2;
         public short Y2;
 
-        internal Unknown12Frame(FrameData data)
+        internal PositionFrame(FrameData data)
         {
             this.Time = default;
             this.X1 = data.X1;
@@ -49,6 +49,11 @@ namespace Gibbed.TacticsOgre.SpriteAnimationFormats.Frames
             {
                 throw new ArgumentException("invalid data", nameof(data));
             }
+        }
+
+        public override string ToString()
+        {
+            return $"{this.Time} | pos {this.X1},{this.Y1} {this.X2},{this.Y2}";
         }
     }
 }

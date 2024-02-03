@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -22,38 +22,28 @@
 
 using System;
 
-namespace Gibbed.TacticsOgre.SpriteAnimationFormats.Frames
+namespace Gibbed.TacticsOgre.AnimationFormats.Frames
 {
-    public struct PositionFrame : IFrame
+    public struct Unknown10Frame : IFrame
     {
-        FrameType IFrame.Type => FrameType.Position;
+        FrameType IFrame.Type => FrameType.Unknown10;
         ushort IFrame.Time { get => this.Time; set => this.Time = value; }
 
         public ushort Time;
-        public sbyte X1;
-        public sbyte Y1;
-        public short X2;
-        public short Y2;
+        public byte SpriteIndex;
 
-        internal PositionFrame(FrameData data)
+        internal Unknown10Frame(FrameData data)
         {
             this.Time = default;
-            this.X1 = data.X1;
-            this.Y1 = data.Y1;
-            this.X2 = data.X2;
-            this.Y2 = data.Y2;
+            this.SpriteIndex = data.SpriteIndex;
 
-            if (data.SpriteIndex != 0 ||
+            if (data.X1 != 0 || data.Y1 != 0 ||
                 data.Unknown2 != 0 ||
+                data.X2 != 0 || data.Y2 != 0 ||
                 data.Unknown5 != 0)
             {
                 throw new ArgumentException("invalid data", nameof(data));
             }
-        }
-
-        public override string ToString()
-        {
-            return $"{this.Time} | pos {this.X1},{this.Y1} {this.X2},{this.Y2}";
         }
     }
 }

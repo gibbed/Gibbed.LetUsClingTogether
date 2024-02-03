@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -20,11 +20,24 @@
  *    distribution.
  */
 
-namespace Gibbed.TacticsOgre.SpriteAnimationFormats
+namespace Gibbed.TacticsOgre.AnimationFormats
 {
-    public interface IFrame
+    public enum FrameType : byte
     {
-        ushort Time { get; set; }
-        FrameType Type { get; }
+        Sprite = 0,
+        Position = 1,
+        Unknown2 = 2,
+        Unknown3 = 3,
+        Undefined4 = 4,
+        Undefined5 = 5,
+        Undefined6 = 6,
+        LoopEnd = 7,
+        LoopStart = 8,
+        SetFlag = 9,
+        Unknown10 = 10,
+        GoTo = 11,
+        Unknown12 = 12,
+        Undefined13 = 13,
+        Unknown14 = 14,
     }
 }

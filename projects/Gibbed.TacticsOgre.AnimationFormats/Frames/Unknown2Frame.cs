@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -20,29 +20,32 @@
  *    distribution.
  */
 
-using System;
-
-namespace Gibbed.TacticsOgre.SpriteAnimationFormats.Frames
+namespace Gibbed.TacticsOgre.AnimationFormats.Frames
 {
-    public struct LoopEndFrame : IFrame
+    public struct Unknown2Frame : IFrame
     {
-        FrameType IFrame.Type => FrameType.LoopEnd;
+        FrameType IFrame.Type => FrameType.Unknown2;
         ushort IFrame.Time { get => this.Time; set => this.Time = value; }
 
         public ushort Time;
+        public byte SpriteIndex;
+        public sbyte X1;
+        public sbyte Y1;
+        public byte Unknown2;
+        public short X2;
+        public short Y2;
+        public short Unknown5;
 
-        internal LoopEndFrame(FrameData data)
+        internal Unknown2Frame(FrameData data)
         {
             this.Time = default;
-
-            if (data.SpriteIndex != 0 ||
-                data.X1 != 0 || data.Y1 != 0 ||
-                data.Unknown2 != 0 ||
-                data.X2 != 0 || data.Y2 != 0 ||
-                data.Unknown5 != 0)
-            {
-                throw new ArgumentException("invalid data", nameof(data));
-            }
+            this.SpriteIndex = data.SpriteIndex;
+            this.X1 = data.X1;
+            this.Y1 = data.Y1;
+            this.Unknown2 = data.Unknown2;
+            this.X2 = data.X2;
+            this.Y2 = data.Y2;
+            this.Unknown5 = data.Unknown5;
         }
     }
 }

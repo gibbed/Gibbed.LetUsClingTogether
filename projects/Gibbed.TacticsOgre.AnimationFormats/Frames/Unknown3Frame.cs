@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -20,16 +20,36 @@
  *    distribution.
  */
 
-namespace Gibbed.TacticsOgre.SpriteAnimationFormats
-{
-    public struct Direction
-    {
-        public Animation Animation;
-        public bool IsFlipped;
+using System;
 
-        public override string ToString()
+namespace Gibbed.TacticsOgre.AnimationFormats.Frames
+{
+    public struct Unknown3Frame : IFrame
+    {
+        FrameType IFrame.Type => FrameType.Unknown3;
+        ushort IFrame.Time { get => this.Time; set => this.Time = value; }
+
+        public ushort Time;
+        public sbyte X1;
+        public sbyte Y1;
+        public short X2;
+        public short Y2;
+        public short Unknown5;
+
+        internal Unknown3Frame(FrameData data)
         {
-            return $"{this.Animation != null} {this.IsFlipped}";
+            this.Time = default;
+            this.X1 = data.X1;
+            this.Y1 = data.X1;
+            this.X2 = data.X2;
+            this.Y2 = data.X2;
+            this.Unknown5 = data.Unknown5;
+
+            if (data.SpriteIndex != 0 ||
+                data.Unknown2 != 0)
+            {
+                throw new ArgumentException("invalid data", nameof(data));
+            }
         }
     }
 }

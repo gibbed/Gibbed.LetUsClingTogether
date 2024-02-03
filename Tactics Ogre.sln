@@ -63,6 +63,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.Reborn.UnpackPAC", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.Squish", "projects\Gibbed.Squish\Gibbed.Squish.csproj", "{36D335C5-0AF9-42FC-A4F5-0772C36442A5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.AnimationFormats", "projects\Gibbed.TacticsOgre.AnimationFormats\Gibbed.TacticsOgre.AnimationFormats.csproj", "{6BD41052-CF7E-423D-BC55-0D98C18FB94C}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.DisassembleScript", "projects\Gibbed.TacticsOgre.DisassembleScript\Gibbed.TacticsOgre.DisassembleScript.csproj", "{92B0B318-03F9-4046-ACFE-1A93EC36DF59}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.ExportImage", "projects\Gibbed.TacticsOgre.ExportImage\Gibbed.TacticsOgre.ExportImage.csproj", "{DA4A102E-D1EF-439C-842B-FDFB74D6D628}"
@@ -82,8 +84,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.ScriptFormats", "projects\Gibbed.TacticsOgre.ScriptFormats\Gibbed.TacticsOgre.ScriptFormats.csproj", "{1531B625-79BA-49AF-84A4-4AEF68497C60}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.SheetFormats", "projects\Gibbed.TacticsOgre.SheetFormats\Gibbed.TacticsOgre.SheetFormats.csproj", "{E1086EA5-4FD5-443B-8226-CFAC3B2B13A5}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.SpriteAnimationFormats", "projects\Gibbed.TacticsOgre.SpriteAnimationFormats\Gibbed.TacticsOgre.SpriteAnimationFormats.csproj", "{6BD41052-CF7E-423D-BC55-0D98C18FB94C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.TacticsOgre.TextFormats", "projects\Gibbed.TacticsOgre.TextFormats\Gibbed.TacticsOgre.TextFormats.csproj", "{8D088AA7-7727-4881-8C01-B17769D5C41F}"
 EndProject

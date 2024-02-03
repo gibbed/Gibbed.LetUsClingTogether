@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -26,7 +26,7 @@ using System.IO;
 using System.Linq;
 using Gibbed.IO;
 
-namespace Gibbed.TacticsOgre.SpriteAnimationFormats
+namespace Gibbed.TacticsOgre.AnimationFormats
 {
     public class SequenceFile
     {
@@ -139,7 +139,7 @@ namespace Gibbed.TacticsOgre.SpriteAnimationFormats
                 var frames = new IFrame[frameCount];
                 for (ushort i = 0; i < frameCount; i++)
                 {
-                    using (var data = new MemoryStream(frameBytes, i * frameSize, frameSize, false))
+                    using (MemoryStream data = new(frameBytes, i * frameSize, frameSize, false))
                     {
                         frames[i] = version switch
                         {

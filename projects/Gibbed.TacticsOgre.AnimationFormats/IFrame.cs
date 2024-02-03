@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -20,20 +20,11 @@
  *    distribution.
  */
 
-using System.Collections.Generic;
-
-namespace Gibbed.TacticsOgre.SpriteAnimationFormats
+namespace Gibbed.TacticsOgre.AnimationFormats
 {
-    public class Animation
+    public interface IFrame
     {
-        private readonly List<IFrame> _Frames;
-
-        public Animation()
-        {
-            this._Frames = new();
-        }
-
-        public List<IFrame> Frames { get { return this._Frames; } }
-        public ushort TotalFrameCount { get; set; }
+        ushort Time { get; set; }
+        FrameType Type { get; }
     }
 }
