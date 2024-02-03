@@ -77,6 +77,15 @@ namespace Gibbed.TacticsOgre.TextFormats.Encodings
             return encodedCodepoint;
         }
 
+        public uint Decode(ushort encodedCodepoint)
+        {
+            if (this._EncodedCodepointToUnicode.TryGetValue(encodedCodepoint, out var ch) == false)
+            {
+                throw new EncoderFallbackException();
+            }
+            return (uint)ch;
+        }
+
         public override int GetByteCount(char[] chars, int index, int count)
         {
             if (chars == null)

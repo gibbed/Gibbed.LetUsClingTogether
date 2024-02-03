@@ -51,17 +51,24 @@ namespace Gibbed.TacticsOgre.TextFormats
             bytes[0] = b;
             if (b < 0xFC)
             {
+                ushort encodedCodepoint = b;
                 if ((b & 0xE0) == 0)
                 {
-                    bytes[1] = input.ReadValueU8();
+                    var b2 = bytes[1] = input.ReadValueU8();
                     length = 2;
+                    encodedCodepoint <<= 8;
+                    encodedCodepoint |= b2;
                 }
                 else
                 {
                     length = 1;
                 }
-                codepoint = default;
-                return CodepointType.RawBytes;
+
+                codepoint = this._Encoding.Decode(encodedCodepoint);
+
+                return IsGaiji(codepoint) == true
+                    ? CodepointType.Gaiji
+                    : CodepointType.RawBytes;
             }
 
             length = 1;
@@ -74,6 +81,14 @@ namespace Gibbed.TacticsOgre.TextFormats
                 _ => throw new NotSupportedException(),
             };
         }
+
+        private bool IsGaiji(uint codepoint) => codepoint switch
+        {
+            >= 0x0391 and <= 0x039C => true,
+            >= 0x2469 and <= 0x246A => true,
+            >= 0x246D and <= 0x2477 => true,
+            _ => false,
+        };
 
         public static PSPDecoder ForEN()
         {
