@@ -95,7 +95,7 @@ namespace Gibbed.TacticsOgre.TextFormats
 
                 if (type == CodepointType.Gaiji)
                 {
-                    // TODO(gibbed): should these be per platform/encoding?
+                    // TODO(gibbed): move these to be per platform/encoding
                     string gaijiLabel = codepoint switch
                     {
                         // PSP
