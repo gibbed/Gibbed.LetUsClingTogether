@@ -100,21 +100,21 @@ namespace Gibbed.TacticsOgre.TextFormats
                     {
                         // PSP
 
-                        0x000391u => "enemy1",
-                        0x000392u => "enemy2",
-                        0x000393u => "enemy3",
-                        0x000394u => "enemy4",
-                        0x000395u => "leader1",
-                        0x000396u => "leader2",
-                        0x000397u => "leader3",
-                        0x000398u => "leader4",
-                        0x000399u => "guest1",
-                        0x00039Au => "guest2",
-                        0x00039Bu => "guest3",
-                        0x00039Cu => "guest4",
+                        0x000391u => "enemy_1",
+                        0x000392u => "enemy_2",
+                        0x000393u => "enemy_3",
+                        0x000394u => "enemy_4",
+                        0x000395u => "leader_1",
+                        0x000396u => "leader_2",
+                        0x000397u => "leader_3",
+                        0x000398u => "leader_4",
+                        0x000399u => "guest_1",
+                        0x00039Au => "guest_2",
+                        0x00039Bu => "guest_3",
+                        0x00039Cu => "guest_4",
 
-                        0x002469u => "ai1",
-                        0x00246Au => "ai2",
+                        0x002469u => "ai_1",
+                        0x00246Au => "ai_2",
 
                         // Reborn
 
