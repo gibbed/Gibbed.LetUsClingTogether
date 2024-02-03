@@ -29,27 +29,6 @@ namespace Gibbed.TacticsOgre.TextFormats
 {
     public class RebornDecoder : BaseDecoder
     {
-        private static int GetCodepointLength(byte b)
-        {
-            if ((b & 0xF8) == 0xF0) // b11110xxx
-            {
-                return 4;
-            }
-            if ((b & 0xF0) == 0xE0) // b1110xxxx
-            {
-                return 3;
-            }
-            if ((b & 0xE0) == 0xC0) // b110xxxxx
-            {
-                return 2;
-            }
-            if ((b & 0x80) == 0x00) // b0xxxxxxx
-            {
-                return 1;
-            }
-            throw new NotSupportedException();
-        }
-
         public override string Decode(Stream input, Endian endian)
         {
             if (input == null)
@@ -73,44 +52,48 @@ namespace Gibbed.TacticsOgre.TextFormats
                 }
 
                 bytes[0] = b;
-                var byteLength = GetCodepointLength(b);
+                var byteLength = UTF8Helper.Length(b);
                 var bytesRead = input.Read(bytes, 1, byteLength - 1);
                 if (bytesRead != byteLength - 1)
                 {
                     throw new InvalidOperationException();
                 }
 
-                var s = encoding.GetString(bytes, 0, byteLength);
-                if (s.Length > 1)
+                if (UTF8Helper.DecodeUnsafe(bytes, 0, byteLength, out var codepoint) == false)
                 {
-                    string labelName = s switch
+                    throw new InvalidOperationException();
+                }
+
+                // unicode private use areas, with the exception of control codes
+                if ((codepoint >= 0x00E000u && codepoint <= 0x00F8FBu/*0x00F8FFu*/) ||
+                    (codepoint >= 0x0F0000u && codepoint <= 0x0FFFFDu) ||
+                    (codepoint >= 0x100000u && codepoint <= 0x10FFFDu))
+                {
+                    string gaijiLabel = codepoint switch
                     {
-                        "\U00100000" => "heart",
-                        "\U00100001" => "unknown1",
+                        0x100000u => "heart",
 
-                        "\U0010000B" => "unknown11", // !
-                        "\U0010000C" => "unknown12",
-                        "\U0010000D" => "enemy",
-                        "\U0010000E" => "leader",
-                        "\U0010000F" => "guest",
-                        _ => throw new NotSupportedException(),
+                        0x10000Du => "enemy",
+                        0x10000Eu => "leader",
+                        0x10000Fu => "guest",
+
+                        _ => $"0x{codepoint:X}",
                     };
-                    output.Append($"{{gaiji {labelName}}}");
+                    output.Append($"{{gaiji {gaijiLabel}}}");
                     continue;
                 }
 
-                var c = s[0];
-                if (c < '\xF8FC' || c > '\xF8FF')
+                if (codepoint < 0xF8FCu || codepoint > 0xF8FFu)
                 {
-                    output.Append(c);
+                    output.Append(Encoding.UTF8.GetString(bytes, 0, byteLength));
                     continue;
                 }
 
-                var controlCode = c switch
+                var controlCode = codepoint switch
                 {
-                    '\xF8FC' => MacroControlCode.Span,
-                    '\xF8FD' => MacroControlCode.UnknownFD,
-                    '\xF8FF' => MacroControlCode.Macro,
+                    0xF8FCu => MacroControlCode.Span,
+                    0xF8FDu => MacroControlCode.UnknownFD,
+                    0xF8FFu => MacroControlCode.Macro,
                     _ => throw new NotSupportedException(),
                 };
 
