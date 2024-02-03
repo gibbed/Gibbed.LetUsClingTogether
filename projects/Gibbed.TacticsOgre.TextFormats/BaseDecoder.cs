@@ -30,11 +30,99 @@ namespace Gibbed.TacticsOgre.TextFormats
 {
     public abstract class BaseDecoder : IDecoder
     {
-        public abstract string Decode(Stream input, Endian endian);
+        protected abstract Encoding Encoding { get; }
 
-        protected bool Decode(MacroControlCode controlCode, Stream input, Endian endian, StringBuilder output)
+        protected enum CodepointType
         {
-            if (controlCode == MacroControlCode.Span)
+            Null,
+            RawBytes,
+            Gaiji,
+            // macro control codes
+            Span,
+            UnknownFD,
+            UnknownFE,
+            Macro,
+        }
+
+        protected abstract CodepointType Decode(Stream input, Endian endian, byte[] bytes, out int length, out uint codepoint);
+
+        public string Decode(Stream input, Endian endian)
+        {
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
+
+            var encoding = this.Encoding;
+
+            var pendingBytes = new byte[128];
+            var pendingLength = pendingBytes.Length;
+            int pendingIndex = 0;
+
+            StringBuilder output = new();
+
+            void FlushPending()
+            {
+                if (pendingIndex < 1)
+                {
+                    return;
+                }
+                var value = encoding.GetString(pendingBytes, 0, pendingIndex);
+                output.Append(value.Replace("{", "{{").Replace("}", "}}"));
+                pendingIndex = 0;
+            }
+
+            var bytes = new byte[4];
+            for (; ; )
+            {
+                var type = this.Decode(input, endian, bytes, out var length, out var codepoint);
+                if (type == CodepointType.Null)
+                {
+                    break;
+                }
+
+                if (type != CodepointType.RawBytes || pendingIndex + length > pendingLength)
+                {
+                    FlushPending();
+                }
+
+                if (type == CodepointType.RawBytes)
+                {
+                    Array.Copy(bytes, 0, pendingBytes, pendingIndex, length);
+                    pendingIndex += length;
+                    continue;
+                }
+
+                if (type == CodepointType.Gaiji)
+                {
+                    string gaijiLabel = codepoint switch
+                    {
+                        0x100000u => "heart",
+
+                        0x10000Du => "enemy",
+                        0x10000Eu => "leader",
+                        0x10000Fu => "guest",
+
+                        _ => $"0x{codepoint:X}",
+                    };
+                    output.Append($"{{gaiji {gaijiLabel}}}");
+                    continue;
+                }
+
+                if (this.Decode(type, input, endian, output) == true)
+                {
+                    break;
+                }
+            }
+
+            FlushPending();
+
+            return output.ToString();
+        }
+
+        protected bool Decode(CodepointType type, Stream input, Endian endian, StringBuilder output)
+        {
+            if (type == CodepointType.Span)
             {
                 var flags = input.ReadValueU8();
                 //var width = stream.ReadValueU16(endian);
@@ -69,13 +157,13 @@ namespace Gibbed.TacticsOgre.TextFormats
                 output.Append(this.Decode(input, endian));
                 return true;
             }
-            else if (controlCode == MacroControlCode.UnknownFD)
+            else if (type == CodepointType.UnknownFD)
             {
                 var unknown1 = input.ReadValueU8();
                 output.Append(_($"{{unk#FD {unknown1}}}"));
                 return false;
             }
-            else if (controlCode == MacroControlCode.Macro)
+            else if (type == CodepointType.Macro)
             {
                 var opcode = (MacroCode)input.ReadValueU8();
                 if (opcode == MacroCode.InsertNewline)

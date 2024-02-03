@@ -21,7 +21,6 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Gibbed.IO;
@@ -37,57 +36,43 @@ namespace Gibbed.TacticsOgre.TextFormats
             this._Encoding = encoding ?? throw new ArgumentNullException(nameof(encoding));
         }
 
-        public override string Decode(Stream input, Endian endian)
+        protected override Encoding Encoding => this._Encoding;
+
+        protected override CodepointType Decode(Stream input, Endian endian, byte[] bytes, out int length, out uint codepoint)
         {
-            if (input == null)
+            var b = input.ReadValueU8();
+            if (b == 0)
             {
-                throw new ArgumentNullException(nameof(input));
+                length = default;
+                codepoint = default;
+                return CodepointType.Null;
             }
 
-            var encoding = this._Encoding;
-
-            StringBuilder output = new();
-            List<byte> pendingBytes = new();
-
-            for (; ; )
+            bytes[0] = b;
+            if (b < 0xFC)
             {
-                var b = input.ReadValueU8();
-                if (b == 0)
+                if ((b & 0xE0) == 0)
                 {
-                    break;
+                    bytes[1] = input.ReadValueU8();
+                    length = 2;
                 }
-
-                if (b < 0xFC)
+                else
                 {
-                    pendingBytes.Add(b);
-                    if ((b & 0xE0) == 0)
-                    {
-                        b = input.ReadValueU8();
-                        pendingBytes.Add(b);
-                    }
-                    continue;
+                    length = 1;
                 }
-
-                if (pendingBytes.Count > 0)
-                {
-                    var span = encoding.GetString(pendingBytes.ToArray());
-                    output.Append(span.Replace("{", "{{").Replace("}", "}}"));
-                    pendingBytes.Clear();
-                }
-
-                if (this.Decode((MacroControlCode)b, input, endian, output) == true)
-                {
-                    break;
-                }
+                codepoint = default;
+                return CodepointType.RawBytes;
             }
 
-            if (pendingBytes.Count > 0)
+            length = 1;
+            codepoint = default;
+            return b switch
             {
-                var span = encoding.GetString(pendingBytes.ToArray());
-                output.Append(span.Replace("{", "{{").Replace("}", "}}"));
-            }
-
-            return output.ToString();
+                0xFC => CodepointType.Span,
+                0xFD => CodepointType.UnknownFD,
+                0xFF => CodepointType.Macro,
+                _ => throw new NotSupportedException(),
+            };
         }
 
         public static PSPDecoder ForEN()
