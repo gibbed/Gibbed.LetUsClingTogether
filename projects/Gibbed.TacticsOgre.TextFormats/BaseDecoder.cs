@@ -232,7 +232,9 @@ namespace Gibbed.TacticsOgre.TextFormats
                     g--;
                     b--;
                     a--;
-                    output.Append(_($"{{#{r:X2}{g:X2}{b:X2}{a:X2}}}"));
+                    output.Append("{");
+                    output.Append(_($"#{r:X2}{g:X2}{b:X2}{a:X2}"));
+                    output.Append("}");
                     return;
                 }
 
