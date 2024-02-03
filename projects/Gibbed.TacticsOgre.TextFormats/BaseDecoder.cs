@@ -121,6 +121,7 @@ namespace Gibbed.TacticsOgre.TextFormats
                         0x100000u => "heart",
 
                         0x10000Bu => "ai",
+                        0x10000Cu => "skillrankup",
 
                         0x10000Du => "enemy",
                         0x10000Eu => "leader",
