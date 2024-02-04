@@ -36,7 +36,8 @@ namespace Gibbed.TacticsOgre.TextFormats
         {
             Null,
             RawBytes,
-            Gaiji,
+            Gaiji, // https://en.wiktionary.org/wiki/gaiji
+
             // macro control codes
             Span,
             UnknownFD,
