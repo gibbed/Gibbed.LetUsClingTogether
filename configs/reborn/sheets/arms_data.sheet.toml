@@ -109,9 +109,11 @@ columns = [
   { name = "crafting", columns = [
     { name = "recipe_id",               type = "uint16",                      width = 4  }, # +78
     { name = "material_ids",            type = "uint16", array_count = 4,     width = 4  }, # +7A
-    { name = "success_chance",          type = "uint8",                       width = 3  }, # +82
+    { name = "success_chance", columns = [
+      { name = "base",                  type = "uint8",                       width = 3  }, # +82  unused in Reborn
+      { name = "bonus_stat",            type = "uint8", enum = "craft_stat",  width = 5  }, # +83  unused in Reborn
+    ] },
   ] },
-  { name = "u83",                       type = "uint8",                       width = 0  }, # +83
   { name = "spell_range_bonus",         type = "uint8",                       width = 0  }, # +84
   { name = "u85",                       type = "undefined8",                  width = 0  }, # +85
   { name = "name_id",                   type = "uint16",                      width = 3  }, # +86  battle_text.xlc[name_id]
@@ -132,20 +134,21 @@ columns = [
   { name = "u97",                       type = "undefined8",                  width = 0  }, # +97  maybe padding
 ]
 
-types.gender = [
+[types]
+gender = [
   "None",   # 0
   "Male",   # 1
   "Female", # 2
 ]
 
-types.damage = [
+damage = [
   "None",     # 0
   "Crushing", # 1
   "Slashing", # 2
   "Piercing", # 3
 ]
 
-types.tribe = [
+tribe = [
   "None",    # 0
   "Human",   # 1
   "Beast",   # 2
@@ -158,7 +161,7 @@ types.tribe = [
   "Golem",   # 9
 ]
 
-types.element = [
+element = [
   "None",      # 0
   "Air",       # 1
   "Earth",     # 2
@@ -168,4 +171,19 @@ types.element = [
   "Ice",       # 6
   "Light",     # 7
   "Dark",      # 8
+]
+
+craft_stat = [
+  "HP",      # 0
+  "MP",      # 1
+  "STR",     # 2
+  "VIT",     # 3
+  "DEX",     # 4
+  "AGI",     # 5
+  "AVD",     # 6
+  "INT",     # 7
+  "MND",     # 8
+  "RES",     # 9
+  "LUK",     # 10  also takes LUK on equipped arms into account
+  "Loyalty", # 11
 ]
