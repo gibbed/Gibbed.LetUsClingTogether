@@ -117,7 +117,7 @@ columns = [
   { name = "name_id",                   type = "uint16",                      width = 3  }, # +86  battle_text.xlc[name_id]
   { name = "battle_ability_id",         type = "uint16",                      width = 3  }, # +88  skill_data.xlc[battle_ability_id]
   { name = "move_type_id",              type = "uint8",                       width = 2  }, # +8A  move_type_data.xlc[move_type_id]
-  { name = "no_level_sync",             type = "uint8"                                   }, # +8B
+  { name = "no_level_sync_sampling",    type = "boolean"                                 }, # +8B
   { name = "knockback",                 type = "uint16",                      width = 3  }, # +8C
   { name = "level_sync_item_category",  type = "uint8",                       width = 2  }, # +8E
   { name = "u8F",                       type = "undefined8",                  width = 0  }, # +8F
