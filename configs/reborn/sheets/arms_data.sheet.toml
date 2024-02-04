@@ -134,21 +134,20 @@ columns = [
   { name = "u97",                       type = "undefined8",                  width = 0  }, # +97  maybe padding
 ]
 
-[types]
-gender = [
+types.gender = [
   "None",   # 0
   "Male",   # 1
   "Female", # 2
 ]
 
-damage = [
+types.damage = [
   "None",     # 0
   "Crushing", # 1
   "Slashing", # 2
   "Piercing", # 3
 ]
 
-tribe = [
+types.tribe = [
   "None",    # 0
   "Human",   # 1
   "Beast",   # 2
@@ -161,7 +160,7 @@ tribe = [
   "Golem",   # 9
 ]
 
-element = [
+types.element = [
   "None",      # 0
   "Air",       # 1
   "Earth",     # 2
@@ -173,7 +172,7 @@ element = [
   "Dark",      # 8
 ]
 
-craft_stat = [
+types.craft_stat = [
   "HP",      # 0
   "MP",      # 1
   "STR",     # 2
