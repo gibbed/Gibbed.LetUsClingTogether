@@ -1,0 +1,100 @@
+name = "commodity_data"
+
+columns = [
+  { name = "u00",                       type = "undefined16",                 width = 2  }, # +00  unused?
+  { name = "item_category_id",          type = "uint8",                       width = 2  }, # +02  item_category_data.xlc[item_category_id]
+  { name = "u03",                       type = "uint8"                                   }, # +03
+  { name = "effect", columns = [
+    { name = "id",                      type = "uint16",                      width = 3  }, # +04  effect_data.xlc[id]
+    { name = "charges",                 type = "uint8",                       width = 0  }, # +06
+  ] },
+  { name = "u07",                       type = "uint8"                                   }, # +07
+  { name = "price",                     type = "uint16",                      width = 5  }, # +08
+  { name = "description_id",            type = "uint16",                      width = 4  }, # +0A  battle_text.xlc[2463 + description_id]
+  { name = "rare",                      type = "boolean"                                 }, # +0C  ie unique, can only hold one at a time
+  { name = "precious",                  type = "boolean"                                 }, # +0D  ie key item, cannot be removed once acquired
+  { name = "u0E",                       type = "uint8",                       width = 0  }, # +0E
+  { name = "throwable",                 type = "boolean"                                 }, # +0F
+  { name = "ai_throwable",              type = "boolean"                                 }, # +10
+  { name = "ai_unusable",               type = "boolean"                                 }, # +11
+  { name = "use_consumable_range",      type = "boolean"                                 }, # +12  when true item_category_data.xlc[32] for range_up/range_down, else hardcoded 32/32
+  { name = "u13",                       type = "undefined8"                              }, # +13
+  { name = "sort_id",                   type = "uint16",                      width = 4  }, # +14
+  { name = "icon_file_id",              type = "uint16",                      width = 3  }, # +16
+  { name = "icon_palette_id",           type = "uint8",                       width = 2  }, # +18
+  { name = "icon_back_id",              type = "uint8",                       width = 0  }, # +19
+  { name = "icon_fore_id",              type = "uint8",                       width = 0  }, # +1A
+  { name = "ai_cost",                   type = "uint8",                       width = 3  }, # +1B
+  { name = "u1C",                       type = "uint8",                       width = 0  }, # +1C
+  { name = "u1D",                       type = "undefined8"                              }, # +1D
+  { name = "crafting", columns = [
+    { name = "recipe_id",               type = "uint16",                      width = 4  }, # +1E
+    { name = "material_ids",            type = "uint16", array_count = 4,     width = 4  }, # +20
+    { name = "success_chance", columns = [
+      { name = "base",                  type = "uint8",                       width = 3  }, # +28  unused in Reborn
+      { name = "bonus_stat",            type = "uint8", enum = "craft_stat",  width = 5  }, # +29  unused in Reborn
+    ] },
+  ] },
+  { name = "name_id",                   type = "uint16",                      width = 4  }, # +2A  battle_text.xlc[2463 + name_id]
+  { name = "charm_type",                type = "uint8", enum = "charm_type",  width = 12 }, # +2C
+  { name = "u2D",                       type = "uint8",                       width = 0  }, # +2D
+  { name = "charm_value",               type = "uint16",                      width = 4  }, # +2E  depends on charm_type
+  { name = "found_flag_id",             type = "uint16",                      width = 4  }, # +30  for progress tracking
+  { name = "u32",                       type = "uint16",                      width = 3  }, # +32  battle stage id?
+  { name = "sell_markdown", columns = [
+    { name = "shop",                    type = "uint8",                       width = 2  }, # +34  sell_value = (price * value) / 100
+    { name = "nonshop",                 type = "uint8",                       width = 2  }, # +35  sell_value = (price * value) / 100, ie when selling from inventory screen or when exceeding maximum quantity
+  ] },
+  { name = "u36",                       type = "uint8"                                   }, # +36
+  { name = "u37",                       type = "undefined8"                              }, # +37  maybe padding
+]
+
+types.craft_stat = [
+  "HP",      # 0
+  "MP",      # 1
+  "STR",     # 2
+  "VIT",     # 3
+  "DEX",     # 4
+  "AGI",     # 5
+  "AVD",     # 6
+  "INT",     # 7
+  "MND",     # 8
+  "RES",     # 9
+  "LUK",     # 10  also takes LUK on equipped arms into account
+  "Loyalty", # 11
+]
+
+types.charm_type = [
+  "None",       # 0
+  "Level",      # 1
+  "Experience", # 2
+  "Stat",       # 3
+  "Element",    # 4
+]
+
+types.charm_value_stat = [
+  "HP",      # 0
+  "MP",      # 1
+  "STR",     # 2
+  "VIT",     # 3
+  "DEX",     # 4
+  "AGI",     # 5
+  "AVD",     # 6
+  "INT",     # 7
+  "MND",     # 8
+  "RES",     # 9
+  "LUK",     # 10
+  "Loyalty", # 11
+]
+
+types.charm_value_element = [
+  "None",      # 0
+  "Air",       # 1
+  "Earth",     # 2
+  "Lightning", # 3
+  "Water",     # 4
+  "Fire",      # 5
+  "Ice",       # 6
+  "Light",     # 7
+  "Dark",      # 8
+]
