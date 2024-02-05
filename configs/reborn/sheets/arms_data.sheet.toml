@@ -123,7 +123,7 @@ columns = [
   { name = "knockback",                 type = "uint16",                      width = 3  }, # +8C
   { name = "level_sync_item_category",  type = "uint8",                       width = 2  }, # +8E
   { name = "u8F",                       type = "undefined8",                  width = 0  }, # +8F
-  { name = "u90",                       type = "uint16",                      width = 3  }, # +90
+  { name = "found_flag_id",             type = "uint16",                      width = 3  }, # +90  for progress tracking
   { name = "sell_markdown", columns = [
     { name = "shop",                    type = "uint8",                       width = 2  }, # +92  sell_value = (price * value) / 100
     { name = "nonshop",                 type = "uint8",                       width = 2  }, # +93  sell_value = (price * value) / 100, ie when selling from inventory screen or when exceeding maximum quantity
