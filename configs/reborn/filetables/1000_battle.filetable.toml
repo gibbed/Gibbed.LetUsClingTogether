@@ -85,11 +85,6 @@ path = "battle_data"
 [1000.0.0]
 path = "unit_animations"
 
-#76.path = "???" # some sort of table into 75
-#77.path = "???" # possibly related to units
-
-83.path = "buff_cards.xlc"
-
 23.path = "dorgalua"
 24.path = "dorgalua_xl"
 
