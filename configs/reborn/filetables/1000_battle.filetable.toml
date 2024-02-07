@@ -1,57 +1,109 @@
 [1000]
 path = "battle"
 
-[1000.1]
-path = "battle_data_release"
+[1000.0]
+path = "battle_data"
 
-11.path = "equipment.xlc"
+11.path     = "arms_data.xlc"
+12.path     = "arms_animation_data.xlc"
+13.path     = "commodity_data.xlc"
+14.path     = "class_data.xlc"
+15.path     = "class_text.xlc"
+16.path     = "effect_data.xlc"
+17.path     = "battle_stage_data.xlc"
+18 = { path = "hit_rate_data.xlc",   sheet_format = "hit_rate_data" }
+19 = { path = "hp_damage_data.xlc",  sheet_format = "hp_damage_data" }
+20 = { path = "hp_restore_data.xlc", sheet_format = "hp_restore_data" }
+21 = { path = "mp_damage_data.xlc",  sheet_format = "mp_damage_data" }
+#22.path     = "???" # possibly related to chapters, unused?
+23.path     = "unit_template_data.xlc" # previously "racial_templates.xlc"
+24.path     = "map_block_data.xlc"
+25.path     = "skill_data.xlc"
+26.path     = "status_data.xlc"
+27.path     = "ai_param_data.xlc"
+28.path     = "random_character_name_data.xlc"
+#29.path     = "???" # unused?
+#30.path     = "???" # unused?
+31 = { path = "ai_script_index.xlc", sheet_format = "ai_script_index" }
+32 = { path = "ai_script_data.xlc",  sheet_format = "ai_script_data" }
+33.path     = "move_type_data.xlc"
+34.path     = "color_data.xlc"
+35.path     = "battle_text.xlc"
+36.path     = "union_data.xlc" # factions
+37.path     = "union_color_data.xlc"
+38.path     = "map_object_data.xlc"
+39.path     = "skill_status_data.xlc"
+40.path     = "tarot_card_data.xlc" # unused?
+41.path     = "arms_category_data.xlc"
+42.path     = "hit_effect_data.xlc"
+43.path     = "ai_skill_data.xlc" # unused?
+44.path     = "treasure_data.xlc" # unused?
+45.path     = "map_initial_placement_data.xlc" # previously "map_spawn_coordinates.xlc"
+46.path     = "battle_death_text.xlc"
+47.path     = "battle_skill_text.xlc"
+48.path     = "battle_notification_text.xlc"
+49.path     = "experience_data.xlc"
+50.path     = "experience_rate_data.xlc" # unused?
+51.path     = "effect_usability_data.xlc" # "spell_sets.xlc"
+52 = { path = "param_data.xlc", sheet_format = "param_data" } # previously "int_tweak_variables.xlc"
+#53.path     = "???"
+54.path     = "weather_change_rate_data.xlc" # unused?
+#55.path     = "???"
+#56.path     = "???"
+57.path     = "snapdragon_data.xlc"
+#58.path     = "???" # unused? ai related?
+59.path     = "effect_category_data.xlc"
+60.path     = "effect_weather_data.xlc"
+#61.path     = "???" # related to effects
+#62.path     = "???" # related to effects
+#63.path     = "???"
+64.path     = "relic_param_data.xlc"
+65.path     = "scream_voice_table_data.xlc"
+66.path     = "scream_voice_entry_data.xlc"
+67.path     = "bonus_task_data.xlc" # unused?
+#68.path     = "???"
+#69.path     = "???"
+#70.path     = "???"
+#71.path     = "???"
+72.path     = "magic_preset_data.xlc"
+73.path     = "magic_element_table_data.xlc"
+74.path     = "object_actors.xlc"
+#75 is a directory (see below)
+#76.path     = "???" # some sort of table into 75
+#77.path     = "???" # possibly related to units
+#78.path     = "???" # related to player unit level
+#79.path     = "???"
+80 = { path = "arms_level_sync_data.xlc", sheet_format = "arms_level_sync_data" }
+#81.path     = "???"
+#82.path     = "???"
+83.path     = "buff_card_data.xlc"
+84.path     = "damage_voice_table_data.xlc"
+85.path     = "damage_voice_entry_data.xlc"
+#86.path     = "???"
+#87.path     = "???"
 
-13.path = "sundries.xlc"
-14.path = "classes.xlc"
-15.path = "class_text.xlc"
-16.path = "abilities.xlc"
-17.path = "map_parties.xlc" # not sure if completely accurate
-
-#20.path = "???" # possibly related to unions
-#21.path = "???" # possibly related to chapters
-#22.path = "???" # possibly related to chapters
-23.path = "racial_templates.xlc"
-
-25.path = "skills.xlc"
-#26.path = "???" # related to arms
-
-28.path = "random_character_names.xlc"
-
-#33.path = "???" # related to 45?
-
-35.path = "battle_text.xlc"
-36.path = "unions.xlc" # factions
-
-45.path = "map_spawn_coordinates.xlc" # maybe also related to 36, 37
-46.path = "battle_death_messages.xlc"
-47.path = "battle_skill_messages.xlc"
-48.path = "battle_notification_messages.xlc"
-
-#50.path = "???" # possibly related to chapters
-51.path = "spell_sets.xlc"
-
-52.path = "int_tweak_variables.xlc"
-52.sheet_format = "int_tweak_variables"
-
-74.path = "object_actors.xlc"
+[1000.0.0]
+path = "unit_animations"
 
 #76.path = "???" # some sort of table into 75
 #77.path = "???" # possibly related to units
 
 83.path = "buff_cards.xlc"
 
-[1000.1.0]
-path = "unit_animations"
+23.path = "dorgalua"
+24.path = "dorgalua_xl"
 
-[1000.1.1]
-path = "weapon_animations"
+[1000.0.1]
+path = "weapon_graphics"
 
-[1000.1.2]
+[1000.0.2]
 path = "misc_graphics"
 
 10.path = "unit_palettes.spr"
+
+[1000.0.75]
+#path = "???"
+
+[1000.1]
+path = "battle_data_release"
+redirect = "1000.0"
