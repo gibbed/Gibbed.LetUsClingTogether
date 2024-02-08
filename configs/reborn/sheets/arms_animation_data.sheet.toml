@@ -1,0 +1,7 @@
+name = "arms_animation_data"
+
+columns = [
+  { name = "u00", type = "uint8", array_count = 3, width = 3  }, # +00
+  { name = "u03", type = "uint8", array_count = 3, width = 3  }, # +03
+  { name = "u06", type = "uint8", array_count = 3, width = 3  }, # +06
+]

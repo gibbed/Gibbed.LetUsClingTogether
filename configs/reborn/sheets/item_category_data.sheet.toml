@@ -1,0 +1,14 @@
+name = "item_category_data"
+
+columns = [
+  { name = "attack_short", type = "boolean",   width = 5 }, # +00
+  { name = "attack_long",  type = "boolean",   width = 5 }, # +01
+  { name = "weapon_short", type = "boolean",   width = 5 }, # +02
+  { name = "weapon_long",  type = "boolean",   width = 5 }, # +03
+  { name = "parry_short",  type = "boolean",   width = 5 }, # +04
+  { name = "parry_long",   type = "boolean",   width = 5 }, # +05
+  { name = "guard_short",  type = "boolean",   width = 5 }, # +06
+  { name = "range_up",     type = "uint8",     width = 2 }, # +07
+  { name = "range_down",   type = "uint8",     width = 2 }, # +08
+  { name = "unknown",      type = "undefined8"           }, # +09  unused?
+]

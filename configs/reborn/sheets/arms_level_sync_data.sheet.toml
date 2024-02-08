@@ -1,0 +1,13 @@
+name = "arms_level_sync_data"
+
+columns = [
+  { name = "STR", type = "uint8", width = 2 },
+  { name = "VIT", type = "uint8", width = 2 },
+  { name = "DEX", type = "uint8", width = 2 },
+  { name = "AGL", type = "uint8", width = 2 },
+  { name = "AVD", type = "uint8", width = 2 },
+  { name = "INT", type = "uint8", width = 2 },
+  { name = "MND", type = "uint8", width = 2 },
+  { name = "RES", type = "uint8", width = 2 },
+  { name = "LUK", type = "uint8", width = 2 },
+]
