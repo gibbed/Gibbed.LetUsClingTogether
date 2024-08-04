@@ -1487,13 +1487,14 @@ path = "EP_ST_710"
 
 pack_file_type = "scenario"
 scene_ids = [ 24059 ]
-event_entry_ids = [ 8001 ]
+event_entry_ids = [ 8000, 8001 ]
 
 0_24059.path = "scene_EP_83.script"
 1_24059.path = "scene_EP_83.idx"
 2_24059.path = "scene_EP_83.emes"
 
-6_8001.path  = "actors_8001.xlc"
+6_8000.path  = "actors_8000.xlc" # JP?
+6_8001.path  = "actors_8001.xlc" # US?
 3_123.path   = "portrait_123.ashg"
 3_690.path   = "portrait_690.ashg"
 3_692.path   = "portrait_692.ashg"
