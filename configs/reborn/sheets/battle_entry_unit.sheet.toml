@@ -1,82 +1,82 @@
 name = "battle_entry_unit"
 
 columns = [
-  { name = "name_id",                  type = "uint16",                                width = 3  },
-  { name = "unit_template_id",         type = "uint16",                                width = 3  },
-  { name = "event_id",                 type = "uint8",                                 width = 0  },
-  { name = "random_name_base_id",      type = "uint8",                                 width = 0  }, # (random_name_base_id << 8) | rand()
-  { name = "class_id",                 type = "uint8",                                 width = 3  },
-  { name = "u07",                      type = "uint8",                                 width = 0  },
-  { name = "unit_level_base",          type = "uint8",                                 width = 0  },
-  { name = "unit_level_modifier",      type = "uint8",                                 width = 0  },
+  { name = "name_id",                  type = "uint16",                                width = 3  }, # 00
+  { name = "unit_template_id",         type = "uint16",                                width = 3  }, # 02
+  { name = "event_id",                 type = "uint8",                                 width = 0  }, # 04
+  { name = "random_name_base_id",      type = "uint8",                                 width = 0  }, # 05  (random_name_base_id << 8) | rand()
+  { name = "class_id",                 type = "uint8",                                 width = 3  }, # 06
+  { name = "u07",                      type = "uint8",                                 width = 0  }, # 07
+  { name = "unit_level_base",          type = "uint8",                                 width = 0  }, # 08
+  { name = "unit_level_modifier",      type = "uint8",                                 width = 0  }, # 09
   { name = "position", columns = [
-    { name = "x",                      type = "int8",                                  width = 0  },
-    { name = "z",                      type = "int8",                                  width = 0  },
+    { name = "x",                      type = "int8",                                  width = 0  }, # 0A
+    { name = "z",                      type = "int8",                                  width = 0  }, # 0B
   ] },
-  { name = "facing",                   type = "uint8",                                 width = 0  },
-  { name = "u0D",                      type = "uint8",                                 width = 0  }, # possibly related to randomly picking this unit to appear
-  { name = "u0E",                      type = "uint8",                                 width = 0  }, # possibly related to randomly picking this unit to appear
-  { name = "u0F",                      type = "uint8",                                 width = 0  }, # some sort of scalar to HP?
-  { name = "u10",                      type = "uint8",                                 width = 0  }, # team?
-  { name = "guest",                    type = "boolean"                                           },
-  { name = "leader",                   type = "boolean"                                           },
-  { name = "target",                   type = "boolean"                                           },
-  { name = "alignment",                type = "uint8",                                 width = 0  },
-  { name = "loyalty",                  type = "uint8",                                 width = 0  },
-  { name = "clan",                     type = "uint8",                                 width = 0  }, # TODO(gibbed): enum definition
-  { name = "union",                    type = "uint8",                                 width = 2  }, # TODO(gibbed): enum definition
-  { name = "u18",                      type = "uint8",                                 width = 0  },
-  { name = "u19",                      type = "uint8",                                 width = 0  },
-  { name = "u1A",                      type = "uint8",                                 width = 0  },
-  { name = "u1B",                      type = "uint8",                                 width = 0  }, # something to do with magic
-  { name = "u1C",                      type = "uint8",                                 width = 0  }, # something to do with equipment
-  { name = "u1D",                      type = "uint8",                                 width = 0  },
-  { name = "zombie",                   type = "boolean"                                           },
-  { name = "subtarget",                type = "boolean"                                           },
-  { name = "u20",                      type = "uint8",                                 width = 0  },
-  { name = "u21",                      type = "undefined8",                            width = 0  },
-  { name = "equip_skills", array_count = 10, columns = [
-    { name = "id",                     type = "uint16",                                width = 3  },
-    { name = "rank",                   type = "uint16",                                width = 2  },
+  { name = "facing",                   type = "uint8",                                 width = 0  }, # 0C  TODO(gibbed): enum definition?
+  { name = "u0D",                      type = "uint8",                                 width = 0  }, # 0D  possibly related to randomly picking this unit to appear
+  { name = "u0E",                      type = "uint8",                                 width = 0  }, # 0E  possibly related to randomly picking this unit to appear
+  { name = "u0F",                      type = "uint8",                                 width = 0  }, # 0F  some sort of scalar to HP?
+  { name = "u10",                      type = "uint8",                                 width = 0  }, # 10  team?
+  { name = "guest",                    type = "boolean"                                           }, # 11
+  { name = "leader",                   type = "boolean"                                           }, # 12
+  { name = "target",                   type = "boolean"                                           }, # 13
+  { name = "alignment",                type = "uint8",                                 width = 0  }, # 14  TODO(gibbed): enum definition
+  { name = "loyalty",                  type = "uint8",                                 width = 0  }, # 15
+  { name = "clan",                     type = "uint8",                                 width = 0  }, # 16  TODO(gibbed): enum definition
+  { name = "union",                    type = "uint8",                                 width = 2  }, # 17  TODO(gibbed): enum definition
+  { name = "u18",                      type = "uint8",                                 width = 0  }, # 18
+  { name = "u19",                      type = "uint8",                                 width = 0  }, # 19
+  { name = "u1A",                      type = "uint8",                                 width = 0  }, # 1A
+  { name = "u1B",                      type = "uint8",                                 width = 0  }, # 1B  something to do with magic
+  { name = "u1C",                      type = "uint8",                                 width = 0  }, # 1C  something to do with equipment
+  { name = "u1D",                      type = "uint8",                                 width = 0  }, # 1D
+  { name = "zombie",                   type = "boolean"                                           }, # 1E
+  { name = "subtarget",                type = "boolean"                                           }, # 1F
+  { name = "u20",                      type = "uint8",                                 width = 0  }, # 20
+  { name = "u21",                      type = "undefined8",                            width = 0  }, # 21
+  { name = "equip_skills", array_count = 10, columns = [                                             # 22
+    { name = "id",                     type = "uint16",                                width = 3  }, # +0
+    { name = "rank",                   type = "uint16",                                width = 2  }, # +2
   ] },
-  { name = "equip_arms", array_count = 7, columns = [
-    { name = "id",                     type = "uint16",                                width = 3  },
-    { name = "drop_chance",            type = "uint8",                                 width = 0  },
-    { name = "unknown",                type = "uint8",                                 width = 0  },
+  { name = "equip_arms", array_count = 7, columns = [                                                # 4A
+    { name = "id",                     type = "uint16",                                width = 3  }, # +0
+    { name = "drop_chance",            type = "uint8",                                 width = 0  }, # +2
+    { name = "unknown",                type = "uint8",                                 width = 0  }, # +3
   ] },
-  { name = "equip_items", array_count = 4, columns = [
-    { name = "id",                     type = "uint16",                                width = 0  },
-    { name = "drop_chance",            type = "uint8",                                 width = 0  },
-    { name = "unknown",                type = "uint8",                                 width = 0  },
+  { name = "equip_items", array_count = 4, columns = [                                               # 66
+    { name = "id",                     type = "uint16",                                width = 0  }, # +0
+    { name = "drop_chance",            type = "uint8",                                 width = 0  }, # +2
+    { name = "unknown",                type = "uint8",                                 width = 0  }, # +3
   ] },
-  { name = "drop_items", array_count = 4, columns = [
-    { name = "id",                     type = "uint16",                                width = 0  },
-    { name = "quantity",               type = "uint8",                                 width = 0  },
-    { name = "drop_chance",            type = "uint8",                                 width = 0  },
+  { name = "drop_items", array_count = 4, columns = [                                                # 76
+    { name = "id",                     type = "uint16",                                width = 0  }, # +0
+    { name = "quantity",               type = "uint8",                                 width = 0  }, # +2
+    { name = "drop_chance",            type = "uint8",                                 width = 0  }, # +3
   ] },
-  { name = "equip_spell_ids",          type = "uint16", array_count = 4,               width = 3  },
-  { name = "u8E",                      type = "uint8",                                 width = 0  },
-  { name = "u8F",                      type = "uint8",                                 width = 0  },
-  { name = "u90",                      type = "uint8",                                 width = 0  },
-  { name = "u91",                      type = "uint8",                                 width = 0  },
-  { name = "u92",                      type = "uint8",                                 width = 0  },
-  { name = "u93",                      type = "uint8",                                 width = 0  },
-  { name = "ai_script_data_id",        type = "uint8",                                 width = 0  },
-  { name = "u95",                      type = "uint8",                                 width = 0  },
-  { name = "u96",                      type = "uint16",                                width = 0  },
-  { name = "element",                  type = "uint8",                                 width = 0  }, # TODO(gibbed): enum definition; 9 has a special meaning of "use from unit template", I think?
-  { name = "scream_voice_id",          type = "uint8",                                 width = 0  },
-  { name = "disable_persuade",         type = "boolean"                                           },
-  { name = "u9B",                      type = "uint8",                                 width = 0  },
-  { name = "equip_finisher_ids",       type = "uint16", array_count = 8,               width = 0  },
-  { name = "uAC",                      type = "uint8",                                 width = 0  },
-  { name = "equip_buff_card_ids",      type = "uint8", array_count = 4,                width = 0  },
-  { name = "uB1",                      type = "undefined8",                            width = 0  },
-  { name = "uB2", array_count = 4, columns = [                                                       # like drop_items, not sure when used
-    { name = "id",                     type = "uint16",                                width = 0  },
-    { name = "quantity",               type = "uint8",                                 width = 0  },
-    { name = "drop_chance",            type = "uint8",                                 width = 0  },
+  { name = "equip_spell_ids",          type = "uint16", array_count = 4,               width = 3  }, # 86
+  { name = "u8E",                      type = "uint8",                                 width = 0  }, # 8E
+  { name = "u8F",                      type = "uint8",                                 width = 0  }, # 8F
+  { name = "u90",                      type = "uint8",                                 width = 0  }, # 90
+  { name = "u91",                      type = "uint8",                                 width = 0  }, # 91
+  { name = "u92",                      type = "uint8",                                 width = 0  }, # 92
+  { name = "u93",                      type = "uint8",                                 width = 0  }, # 93
+  { name = "ai_script_data_id",        type = "uint8",                                 width = 0  }, # 94
+  { name = "u95",                      type = "uint8",                                 width = 0  }, # 95
+  { name = "u96",                      type = "uint16",                                width = 0  }, # 96
+  { name = "element",                  type = "uint8",                                 width = 0  }, # 98  TODO(gibbed): enum definition; 9 has a special meaning of "use from unit template", I think?
+  { name = "scream_voice_id",          type = "uint8",                                 width = 0  }, # 99
+  { name = "disable_persuade",         type = "boolean"                                           }, # 9A
+  { name = "u9B",                      type = "uint8",                                 width = 0  }, # 9B
+  { name = "equip_finisher_ids",       type = "uint16", array_count = 8,               width = 0  }, # 9C
+  { name = "uAC",                      type = "uint8",                                 width = 0  }, # AC
+  { name = "equip_buff_card_ids",      type = "uint8", array_count = 4,                width = 0  }, # AD
+  { name = "uB1",                      type = "undefined8",                            width = 0  }, # B1
+  { name = "uB2", array_count = 4, columns = [                                                       # B2  like drop_items, not sure when used
+    { name = "id",                     type = "uint16",                                width = 0  }, # +0
+    { name = "quantity",               type = "uint8",                                 width = 0  }, # +2
+    { name = "drop_chance",            type = "uint8",                                 width = 0  }, # +3
   ] },
-  { name = "uC2",                      type = "uint8",                                 width = 0  },
-  { name = "uC3",                      type = "uint8",                                 width = 0  },
+  { name = "uC2",                      type = "uint8",                                 width = 0  }, # C2
+  { name = "uC3",                      type = "uint8",                                 width = 0  }, # C3
 ]
