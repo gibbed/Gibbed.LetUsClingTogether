@@ -13,3 +13,7 @@
 	path = projects/Gibbed.Squish
 	url = https://github.com/gibbed/Gibbed.Squish.git
 	branch = main
+[submodule "projects/Gibbed.Memory"]
+	path = projects/Gibbed.Memory
+	url = https://github.com/gibbed/Gibbed.Memory.git
+	branch = main
