@@ -130,6 +130,7 @@ namespace Gibbed.TacticsOgre.ScriptFormats
                 4 => 0x40,
                 8 => 0x40,
                 12 => 0x40,
+                16 => 0x40,
                 20 => 0x40,
                 108 => 0x80,
                 124 => 0x80,

@@ -39,11 +39,13 @@ namespace DumpSceneNames
 
         public static void Main(string[] args)
         {
+            bool isReborn = false;
             bool verbose = false;
             bool showHelp = false;
 
             OptionSet options = new()
             {
+                { "r|reborn", "is Reborn", v => isReborn = v != null },
                 { "v|verbose", "be verbose", v => verbose = v != null },
                 { "h|help", "show this message and exit", v => showHelp = v != null },
             };
@@ -71,7 +73,7 @@ namespace DumpSceneNames
             }
 
             var basePath = extras[0];
-            var screenplaysPath = Path.Combine(basePath, "screenplays");
+            var screenplaysPath = Path.Combine(basePath, "event", "chapter");
 
             Dictionary<string, (int id, string path)> chapterInfos = new()
             {
@@ -82,18 +84,20 @@ namespace DumpSceneNames
                 { "C3b", (905, Path.Combine("chapter_3", "chaos")) },
                 { "C3c", (906, Path.Combine("chapter_3", "law")) },
                 { "C4", (907, "chapter_4") },
-                { "EP", (908, "epilogue") },
-                { "DLC", (909, "dlc") },
+                { "EP", (908, "chapter_ep") },
+                { "DLC", (909, "chapter_dlc") },
             };
 
             var screenplayBasePaths = Directory.GetDirectories(screenplaysPath, "*", SearchOption.AllDirectories);
             foreach (var screenplayBasePath in screenplayBasePaths.OrderBy(v => v))
             {
-                var screenplayPath = Directory.GetFiles(screenplayBasePath, "*.pgrs").SingleOrDefault();
-                if (screenplayPath == null)
+                var screenplayPaths = Directory.GetFiles(screenplayBasePath, "*.pgrs");
+                if (screenplayPaths.Length != 1)
                 {
                     continue;
                 }
+
+                var screenplayPath = screenplayPaths[0];
 
                 var screenplayName = Path.GetFileNameWithoutExtension(screenplayPath);
                 if (chapterInfos.TryGetValue(screenplayName, out var chapterInfo) == false)
@@ -106,7 +110,7 @@ namespace DumpSceneNames
 
                 Console.WriteLine($"# {chapterId} {chapterName}");
 
-                var chapterPath = Path.Combine(basePath, "scenarios", chapterName);
+                var chapterPath = Path.Combine(basePath, "event", "scene", chapterName);
                 chapterName = chapterName.Replace('\\', '/');
 
                 List<(ushort stageId, ushort mapId, ushort sceneId, ushort entryUnitsId, ushort eventEntryId)> screenplayEntries = new();
@@ -126,6 +130,11 @@ namespace DumpSceneNames
                         var menuTaskId = input.ReadValueU8();
                         var menuTaskParam1 = input.ReadValueU16(endian);
                         input.Position += 8;
+
+                        if (isReborn == true)
+                        {
+                            input.Position += 2;
+                        }
 
                         ushort entryUnitsId = 0;
                         if (menuTaskId == 1 || menuTaskId == 2 || menuTaskId == 3 || menuTaskId == 13)
@@ -167,7 +176,7 @@ namespace DumpSceneNames
                     List<string> indexPaths = new();
                     foreach (var sceneId in sceneIds)
                     {
-                        var scriptPath = Path.Combine(chapterPath, $"{stageId}", $"{sceneId}.script");
+                        var scriptPath = Path.Combine(chapterPath, $"{stageId}", $"0_{sceneId}.script");
                         if (File.Exists(scriptPath) == false)
                         {
                             continue;
@@ -180,7 +189,7 @@ namespace DumpSceneNames
                         }
 
                         var indexId = 0x8000 + sceneId;
-                        var indexPath = Path.Combine(chapterPath, $"{stageId}", $"{indexId}.idx");
+                        var indexPath = Path.Combine(chapterPath, $"{stageId}", $"0_{indexId}.idx");
                         if (File.Exists(indexPath) == true)
                         {
                             var fileKey = $"1_{sceneId}.path".PadRight(12);
@@ -189,11 +198,11 @@ namespace DumpSceneNames
                         }
 
                         var messageId = 0x10000 + sceneId;
-                        var messagePath = Path.Combine(chapterPath, $"{stageId}", $"{messageId}.msg");
+                        var messagePath = Path.Combine(chapterPath, $"{stageId}", $"0_{messageId}.emes");
                         if (File.Exists(messagePath) == true)
                         {
                             var fileKey = $"2_{sceneId}.path".PadRight(12);
-                            Console.WriteLine($"{fileKey} = \"scene_{sceneName}.msg\"");
+                            Console.WriteLine($"{fileKey} = \"scene_{sceneName}.emes\"");
                         }
 
                         Console.WriteLine();
@@ -203,7 +212,7 @@ namespace DumpSceneNames
                     foreach (var eventEntryId in eventEntryIds)
                     {
                         var fileId = 0x0A000 + eventEntryId;
-                        var filePath = Path.Combine(chapterPath, $"{stageId}", $"{fileId}.xlc");
+                        var filePath = Path.Combine(chapterPath, $"{stageId}", $"0_{fileId}.xlc");
                         if (File.Exists(filePath) == false)
                         {
                             continue;
@@ -216,7 +225,7 @@ namespace DumpSceneNames
                     foreach (var entryUnitId in entryUnitIds)
                     {
                         var fileId = 0x0D000 + entryUnitId;
-                        var filePath = Path.Combine(chapterPath, $"{stageId}", $"{fileId}.xlc");
+                        var filePath = Path.Combine(chapterPath, $"{stageId}", $"0_{fileId}.xlc");
                         if (File.Exists(filePath) == false)
                         {
                             throw new InvalidOperationException();
@@ -239,7 +248,9 @@ namespace DumpSceneNames
                     foreach (var kv in resourceMap.OrderBy(kv => kv.Key))
                     {
                         var typeId = kv.Key;
-                        var (fileIdBase, extension, namePrefix) = GetIndexTypeInfo(typeId);
+                        var (dirId, fileIdBase, extension, namePrefix) = isReborn == false
+                            ? GetIndexTypeInfoPSP(typeId)
+                            : GetIndexTypeInfoReborn(typeId);
                         foreach (var resourceId in kv.Value.OrderBy(v => v).Distinct())
                         {
                             if (kv.Key == 3 && resourceId == 0xFFFF)
@@ -247,9 +258,8 @@ namespace DumpSceneNames
                                 continue;
                             }
                             var fileId = fileIdBase + resourceId;
-                            var filePath = Path.Combine(chapterPath, $"{stageId}", $"{fileId}{extension}");
-                            if (File.Exists(filePath) == false &&
-                                Directory.Exists(filePath) == false)
+                            var filePath = Path.Combine(chapterPath, $"{stageId}", $"{dirId}_{fileId}{extension}");
+                            if (File.Exists(filePath) == false && Directory.Exists(filePath) == false)
                             {
                                 throw new InvalidOperationException();
                             }
@@ -267,12 +277,21 @@ namespace DumpSceneNames
             }
         }
 
-        private static (uint fileIdBase, string extension, string namePrefix) GetIndexTypeInfo(ushort key) => key switch
+        private static (ushort dirId, ushort fileIdBase, string extension, string namePrefix) GetIndexTypeInfoPSP(ushort key) => key switch
         {
-            3 => (0x11000, ".ashg", "portrait_"),
-            4 => (0x12000, null, "animation_"),
-            5 => (0x50000, null, "unit_"),
-            8 => (0x13000, ".scd", "sound_"),
+            3 => (1, 0x1000, ".ashg", "portrait_"),
+            4 => (1, 0x2000, null, "animation_"),
+            5 => (5, 0x0000, null, "unit_"),
+            8 => (1, 0x3000, ".scd", "sound_"),
+            _ => throw new NotSupportedException(),
+        };
+
+        private static (ushort dirId, ushort fileIdBase, string extension, string namePrefix) GetIndexTypeInfoReborn(ushort key) => key switch
+        {
+            3 => (1, 0x1000, ".tex", "portrait_"),
+            4 => (1, 0x2000, null, "animation_"),
+            5 => (5, 0x0000, null, "unit_"),
+            8 => (1, 0x3000, ".sab", "sound_"),
             _ => throw new NotSupportedException(),
         };
 
@@ -371,6 +390,10 @@ namespace DumpSceneNames
 
                 var typeId = input.ReadValueU16(endian);
                 var actualId = GetResourceTypeFromIndexType(typeId);
+                if (actualId == ushort.MaxValue)
+                {
+                    continue;
+                }
 
                 if (map.TryGetValue(actualId, out var resourceIds) == false)
                 {
@@ -390,6 +413,8 @@ namespace DumpSceneNames
             1 => 3,
             2 => 4,
             3 => 8,
+            5 => ushort.MaxValue,
+            6 => ushort.MaxValue,
             _ => throw new NotSupportedException(),
         };
 
