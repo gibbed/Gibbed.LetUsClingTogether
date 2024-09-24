@@ -127,10 +127,10 @@ namespace Gibbed.TacticsOgre.FileFormats
             }
             else if (
                 count >= 4 &&
-                buffer[index + 0] == 'S' &&
-                buffer[index + 1] == 'A' &&
-                buffer[index + 2] == 'B' &&
-                buffer[index + 3] == 'F')
+                buffer[index + 0] == 's' &&
+                buffer[index + 1] == 'a' &&
+                buffer[index + 2] == 'b' &&
+                buffer[index + 3] == 'f')
             {
                 return ".sab";
             }
