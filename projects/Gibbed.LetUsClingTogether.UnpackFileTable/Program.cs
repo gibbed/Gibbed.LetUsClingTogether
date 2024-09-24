@@ -482,8 +482,9 @@ namespace Gibbed.LetUsClingTogether.UnpackFileTable
         {
             var parent = file.Parent;
 
-            MemoryStream temp = null;
-            MemoryStream temp2 = null;
+            MemoryStream tempZip = null;
+            MemoryStream tempLZ = null;
+            MemoryStream tempRLE = null;
             Stream input = file.DataStream;
             long dataOffset = file.DataOffset;
             uint dataSize = file.DataSize;
@@ -495,7 +496,7 @@ namespace Gibbed.LetUsClingTogether.UnpackFileTable
             {
                 input.Position = dataOffset;
                 var fileMagic = input.ReadValueU32(Endian.Little);
-                if (fileMagic == 0x04034B50) // 'PK\x03\x04'
+                if (fileMagic == 0x04034B50u) // 'PK\x03\x04'
                 {
                     input.Position = dataOffset;
                     using (ICSharpCode.SharpZipLib.Zip.ZipInputStream zip = new(input))
@@ -514,8 +515,8 @@ namespace Gibbed.LetUsClingTogether.UnpackFileTable
                         }
 
                         // TODO(gibbed): this is currently leaky
-                        temp = zip.ReadToMemoryStream((int)zipEntry.Size);
-                        input = temp;
+                        tempZip = zip.ReadToMemoryStream((int)zipEntry.Size);
+                        input = tempZip;
                         dataOffset = 0;
                         dataSize = (uint)zipEntry.Size;
                         zipName = zipEntry.Name;
@@ -529,6 +530,28 @@ namespace Gibbed.LetUsClingTogether.UnpackFileTable
                 }
             }
 
+            if (/*settings.UnpackNestedMLZ0 == true && */ dataSize >= 8)
+            {
+                input.Position = dataOffset;
+                var fileMagic = input.ReadValueU32(Endian.Big);
+                if (fileMagic == 0x4D4C5A30u) // 'MLZ0'
+                {
+                    var outputLength = input.ReadValueS32(Endian.Little);
+                    input.Position = dataOffset;
+                    var inputBytes = input.ReadBytes((int)dataSize);
+                    var outputBytes = new byte[outputLength];
+                    var result = LZ4.LZ4Codec.Decode(inputBytes, 8, inputBytes.Length - 8, outputBytes, 0, outputLength, true);
+                    if (result != outputLength)
+                    {
+                        throw new InvalidOperationException();
+                    }
+                    tempLZ = new MemoryStream(outputBytes, false);
+                    input = tempLZ;
+                    dataOffset = 0;
+                    dataSize = (uint)outputBytes.Length;
+                }
+            }
+
             if (settings.UnpackNestedRLE == true && dataSize >= 8)
             {
                 input.Position = dataOffset;
@@ -538,8 +561,8 @@ namespace Gibbed.LetUsClingTogether.UnpackFileTable
                     input.Position = dataOffset;
                     var inputBytes = input.ReadBytes((int)dataSize);
                     inputBytes = RLE.Decompress(inputBytes, 0, inputBytes.Length);
-                    temp2 = new MemoryStream(inputBytes, false);
-                    input = temp2;
+                    tempRLE = new MemoryStream(inputBytes, false);
+                    input = tempRLE;
                     dataOffset = 0;
                     dataSize = (uint)inputBytes.Length;
                     isRLECompressed = true;
