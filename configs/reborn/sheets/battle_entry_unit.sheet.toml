@@ -65,11 +65,11 @@ columns = [
   { name = "u95",                      type = "uint8",                                 width = 0  }, # 95
   { name = "u96",                      type = "uint16",                                width = 0  }, # 96
   { name = "element",                  type = "uint8",                                 width = 0  }, # 98  TODO(gibbed): enum definition; 9 has a special meaning of "use from unit template", I think?
-  { name = "scream_voice_id",          type = "uint8",                                 width = 0  }, # 99
+  { name = "scream_voice_id",          type = "uint8",                                 width = 0  }, # 99  override unit template scream voice id if non-zero
   { name = "disable_persuade",         type = "boolean"                                           }, # 9A
   { name = "u9B",                      type = "uint8",                                 width = 0  }, # 9B
   { name = "equip_finisher_ids",       type = "uint16", array_count = 8,               width = 0  }, # 9C
-  { name = "uAC",                      type = "uint8",                                 width = 0  }, # AC
+  { name = "equip_finishers_auto",     type = "uint8",                                 width = 0  }, # AC  equip_finisher_ids is ignored; pick finishers based on equipment; this behavior is blocked for unit template 59 and 66
   { name = "equip_buff_card_ids",      type = "uint8", array_count = 4,                width = 0  }, # AD
   { name = "uB1",                      type = "undefined8",                            width = 0  }, # B1
   { name = "uB2", array_count = 4, columns = [                                                       # B2  like drop_items, not sure when used
