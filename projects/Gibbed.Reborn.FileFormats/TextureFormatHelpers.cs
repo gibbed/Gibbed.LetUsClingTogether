@@ -368,9 +368,14 @@ namespace Gibbed.Reborn.FileFormats
             return stride * rows;
         }
 
-        private static int RoundUp(int value, int multiple)
+        public static int DivRoundUp(int value, int divisor)
         {
-            return value != 0 ? (((value + multiple - 1) / multiple) * multiple) : multiple;
+            return (value + divisor - 1) / divisor;
+        }
+
+        public static int RoundUp(int value, int multiple)
+        {
+            return value != 0 ? DivRoundUp(value, multiple) * multiple : multiple;
         }
     }
 }

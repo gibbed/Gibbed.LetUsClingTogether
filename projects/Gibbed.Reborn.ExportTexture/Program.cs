@@ -149,7 +149,8 @@ namespace Gibbed.Reborn.ExportTexture
             var blockDim = texture.Format.IsCompressed() == false
                 ? TegraSwizzle.BlockDim.Uncompressed
                 : TegraSwizzle.BlockDim.Block4x4;
-            var blockHeightMip0 = TegraSwizzle.BlockHeightMip0(texture.Height / blockDim.Height);
+            var blockHeight = TextureFormatHelpers.DivRoundUp(texture.Height, (int)blockDim.Height);
+            var blockHeightMip0 = TegraSwizzle.BlockHeightMip0((uint)blockHeight);
             var bytesPerBlock = texture.Format.GetBytesPerBlock();
             var swizzledMipSize = TegraSwizzle.SwizzledSurfaceSize(
                 texture.Width, texture.Height, 1,
