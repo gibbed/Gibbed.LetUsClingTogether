@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2022 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -43,7 +43,7 @@ namespace Gibbed.Reborn.ExportTexture
             bool verbose = false;
             bool showHelp = false;
 
-            var options = new OptionSet()
+            OptionSet options = new()
             {
                 { "v|verbose", "be verbose", v => verbose = v != null },
                 { "h|help", "show this message and exit", v => showHelp = v != null },
@@ -76,8 +76,9 @@ namespace Gibbed.Reborn.ExportTexture
             {
                 if (Directory.Exists(inputPath) == true)
                 {
-                    inputPaths.AddRange(Directory.GetFiles(inputPath, "*.btx", SearchOption.AllDirectories));
-                    inputPaths.AddRange(Directory.GetFiles(inputPath, "*.tex", SearchOption.AllDirectories));
+                    inputPaths.AddRange(Directory.EnumerateFiles(inputPath, "*.btx", SearchOption.AllDirectories));
+                    inputPaths.AddRange(Directory.EnumerateFiles(inputPath, "*.tex", SearchOption.AllDirectories));
+                    inputPaths.AddRange(Directory.EnumerateFiles(inputPath, "*.fnt", SearchOption.AllDirectories));
                 }
                 else
                 {
@@ -105,8 +106,8 @@ namespace Gibbed.Reborn.ExportTexture
                 inputBytes = RLE.Decompress(inputBytes, 0, inputBytes.Length);
             }
 
-            var texture = new TextureFile();
-            using (var input = new MemoryStream(inputBytes, false))
+            TextureFile texture = new();
+            using (MemoryStream input = new(inputBytes, false))
             {
                 texture.Deserialize(input);
             }
@@ -115,8 +116,55 @@ namespace Gibbed.Reborn.ExportTexture
             {
                 const Endian endian = Endian.Little;
                 WriteDDSHeader(texture, output, endian);
-                output.WriteBytes(texture.DataBytes);
+
+                // TODO(gibbed): requires verification
+                if (texture.Unknown11 == 3)
+                {
+                    output.WriteBytes(DeswizzleSwitch(texture));
+                }
+                else
+                {
+                    output.WriteBytes(texture.DataBytes);
+                }
             }
+        }
+
+        private static byte[] DeswizzleSwitch(TextureFile texture)
+        {
+            var blockHeightMip0 = TegraSwizzle.BlockHeightMip0(texture.Height);
+            var blockDim = texture.Format.IsCompressed() == false
+                ? TegraSwizzle.BlockDim.Uncompressed
+                : TegraSwizzle.BlockDim.Block4x4;
+            var bytesPerBlock = texture.Format.GetBytesPerBlock();
+            var swizzledMipSize = TegraSwizzle.SwizzledSurfaceSize(
+                texture.Width, texture.Height, 1,
+                blockDim,
+                blockHeightMip0,
+                (uint)bytesPerBlock,
+                1, 1);
+            if (texture.DataBytes.Length != swizzledMipSize)
+            {
+                throw new InvalidOperationException();
+            }
+            var deswizzledMipSize = TegraSwizzle.DeswizzledSurfaceSize(
+                texture.Width, texture.Height, 1,
+                blockDim,
+                (uint)bytesPerBlock,
+                1, 1);
+            if (deswizzledMipSize != swizzledMipSize)
+            {
+                throw new FormatException();
+            }
+            var deswizzledBytes = new byte[(int)deswizzledMipSize];
+            TegraSwizzle.DeswizzleSurface(
+                texture.Width, texture.Height, 1,
+                texture.DataBytes, 0, texture.DataBytes.Length,
+                deswizzledBytes, 0, deswizzledBytes.Length,
+                blockDim,
+                blockHeightMip0,
+                (uint)bytesPerBlock,
+                1, 1);
+            return deswizzledBytes;
         }
 
         public static void WriteDDSHeader(TextureFile texture, FileStream output, Endian endian)

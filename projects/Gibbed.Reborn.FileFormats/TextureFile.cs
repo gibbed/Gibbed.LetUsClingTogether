@@ -35,6 +35,9 @@ namespace Gibbed.Reborn.FileFormats
         public ushort Height { get; set; }
         public uint Stride { get; set; }
         public TextureFormat Format { get; set; }
+        public byte Unknown11 { get; set; }
+        public int MipCount { get; set; }
+        public ushort Depth { get; set; }
         public string Name { get; set; }
         public byte[] DataBytes { get; set; }
 
@@ -54,36 +57,39 @@ namespace Gibbed.Reborn.FileFormats
             }
             var endian = magic == Signature ? Endian.Little : Endian.Big;
 
-            var probablyVersion = input.ReadValueU32(endian);
-            var width = input.ReadValueU16(endian);
-            var height = input.ReadValueU16(endian);
-            var stride = input.ReadValueU32(endian);
-            var format = (TextureFormat)input.ReadValueU8();
-            var unknown11 = input.ReadValueU8();
-            var unknown12 = input.ReadValueU8();
-            var unknown13 = input.ReadValueU8();
-            var unknown14 = input.ReadValueU8();
-            var unknown15 = input.ReadValueU8();
-            var unknown16 = input.ReadValueU8();
-            var unknown17 = input.ReadValueU8();
-            var dataOffset = input.ReadValueU32(endian);
-            var unknown1C = input.ReadValueU32(endian);
-            var unknown20 = input.ReadValueU32(endian);
-            var nameOffset = input.ReadValueU32(endian);
-            var unknown28 = input.ReadValueU32(endian);
-            var unknown2COffset = input.ReadValueU32(endian);
-            var unknown30 = input.ReadValueU32(endian);
+            var version = input.ReadValueU32(endian); // 04
+            var width = input.ReadValueU16(endian); // 08
+            var height = input.ReadValueU16(endian); // 0A
+            var stride = input.ReadValueU32(endian); // 0C
+            var format = (TextureFormat)input.ReadValueU8(); // 10
+            var unknown11 = input.ReadValueU8(); // 11
+            var mipCount =  input.ReadValueU8() + 1; // 12
+            var unknown13 = input.ReadValueU8(); // 13
+            var unknown14 = input.ReadValueU8(); // 14
+            var unknown15 = input.ReadValueU8(); // 15
+            var unknown16 = input.ReadValueU8(); // 16
+            var flags = input.ReadValueU8(); // 17
+            var dataOffset = input.ReadValueU32(endian); // 18
+            var unknown1C = input.ReadValueU16(endian); // 1C
+            var unknown1E = input.ReadValueU16(endian); // 1E
+            var unknown20Offset = input.ReadValueU32(endian); // 20
+            var nameOffset = input.ReadValueU32(endian); // 24
+            var depth = input.ReadValueU16(endian); // 28
+            var unknown2A = input.ReadValueU16(endian); // 2A
+            var unknown2COffset = input.ReadValueU32(endian); // 2C
+            var unknown30 = input.ReadValueU32(endian); // 30
 
-            if (probablyVersion != 0x0103 ||
-                unknown11 != 0 ||
-                unknown12 != 0 ||
+            if (version != 0x0103 ||
+                (unknown11 != 0 && unknown11 != 3) ||
+                (mipCount != 1 && mipCount != 3) ||
                 unknown13 != 1 ||
                 unknown14 != 1 ||
                 unknown15 != 5 ||
                 unknown16 != 0 ||
-                unknown17 != 0 ||
+                flags != 0 ||
                 unknown1C != 255 ||
-                unknown28 != 1 ||
+                depth != 1 ||
+                unknown2A != 0 ||
                 unknown30 != 0)
             {
                 throw new FormatException();
@@ -106,6 +112,9 @@ namespace Gibbed.Reborn.FileFormats
             this.Height = height;
             this.Stride = stride;
             this.Format = format;
+            this.Unknown11 = unknown11;
+            this.MipCount = mipCount;
+            this.Depth = depth;
             this.Name = name;
             this.DataBytes = dataBytes;
         }

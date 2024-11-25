@@ -302,38 +302,24 @@ namespace Gibbed.Reborn.FileFormats
             throw new NotSupportedException();
         }
 
-        public static bool IsPalettized(this TextureFormat format)
+        public static bool IsPalettized(this TextureFormat format) => format switch
         {
-            switch (format)
-            {
-                case TextureFormat.P8:
-                case TextureFormat.P4:
-                {
-                    return true;
-                }
-            }
+            TextureFormat.P8 => true,
+            TextureFormat.P4 => true,
+            _ => false,
+        };
 
-            return false;
-        }
-
-        public static bool IsCompressed(this TextureFormat format)
+        public static bool IsCompressed(this TextureFormat format) => format switch
         {
-            switch (format)
-            {
-                case TextureFormat.BC1:
-                case TextureFormat.BC2:
-                case TextureFormat.BC3:
-                case TextureFormat.BC4:
-                case TextureFormat.BC5:
-                case TextureFormat.BC6H:
-                case TextureFormat.BC7:
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
+            TextureFormat.BC1 => true,
+            TextureFormat.BC2 => true,
+            TextureFormat.BC3 => true,
+            TextureFormat.BC4 => true,
+            TextureFormat.BC5 => true,
+            TextureFormat.BC6H => true,
+            TextureFormat.BC7 => true,
+            _ => false,
+        };
 
         public static (int stride, int rows) CalculateBufferStrideAndRows(
             this TextureFormat format,
@@ -361,6 +347,20 @@ namespace Gibbed.Reborn.FileFormats
             }
 
             return (stride, rows);
+        }
+
+        public static int GetBytesPerBlock(this TextureFormat format)
+        {
+            if (format.IsCompressed() == false)
+            {
+                return format.GetBitCount() >> 3;
+            }
+            else
+            {
+                int blockSize = format.GetBlockSize();
+                var bitsPerPixel = format.GetBitCount();
+                return blockSize * blockSize * bitsPerPixel / 8;
+            }
         }
 
         public static int CalculateBufferSize(this TextureFormat format, int width, int height, int level)

@@ -18,6 +18,7 @@
     <ProjectReference Include="..\Gibbed.IO\Gibbed.IO.csproj" />
     <ProjectReference Include="..\Gibbed.Reborn.FileFormats\Gibbed.Reborn.FileFormats.csproj" />
     <ProjectReference Include="..\Gibbed.TacticsOgre.FileFormats\Gibbed.TacticsOgre.FileFormats.csproj" />
+    <ProjectReference Include="..\Gibbed.TegraSwizzle\Gibbed.TegraSwizzle.csproj" />
     <ProjectReference Include="..\NDesk.Options\NDesk.Options.csproj" />
   </ItemGroup>
 </Project>
