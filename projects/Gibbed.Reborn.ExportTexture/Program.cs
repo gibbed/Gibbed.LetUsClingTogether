@@ -107,34 +107,49 @@ namespace Gibbed.Reborn.ExportTexture
             }
 
             TextureFile texture = new();
+            byte[] dataBytes;
             using (MemoryStream input = new(inputBytes, false))
             {
                 texture.Deserialize(input);
+
+                input.Position = texture.DataOffset;
+
+                // TODO(gibbed): requires verification
+                if (texture.Unknown11 == 3)
+                {
+                    dataBytes = ReadSwitchSwizzledData(texture, input);
+                }
+                else
+                {
+                    dataBytes = ReadNormalData(texture, input);
+                }
             }
 
             using (var output = File.Create(outputPath))
             {
                 const Endian endian = Endian.Little;
                 WriteDDSHeader(texture, output, endian);
-
-                // TODO(gibbed): requires verification
-                if (texture.Unknown11 == 3)
-                {
-                    output.WriteBytes(DeswizzleSwitch(texture));
-                }
-                else
-                {
-                    output.WriteBytes(texture.DataBytes);
-                }
+                output.WriteBytes(dataBytes);
             }
         }
 
-        private static byte[] DeswizzleSwitch(TextureFile texture)
+        private static byte[] ReadNormalData(TextureFile texture, Stream input)
         {
-            var blockHeightMip0 = TegraSwizzle.BlockHeightMip0(texture.Height);
+            var (calculatedStride, calculatedRows) = texture.Format.CalculateBufferStrideAndRows(
+                texture.Width, texture.Height, 0);
+            if (calculatedStride != texture.Stride)
+            {
+                throw new InvalidOperationException();
+            }
+            return input.ReadBytes(calculatedStride * calculatedRows);
+        }
+
+        private static byte[] ReadSwitchSwizzledData(TextureFile texture, Stream input)
+        {
             var blockDim = texture.Format.IsCompressed() == false
                 ? TegraSwizzle.BlockDim.Uncompressed
                 : TegraSwizzle.BlockDim.Block4x4;
+            var blockHeightMip0 = TegraSwizzle.BlockHeightMip0(texture.Height / blockDim.Height);
             var bytesPerBlock = texture.Format.GetBytesPerBlock();
             var swizzledMipSize = TegraSwizzle.SwizzledSurfaceSize(
                 texture.Width, texture.Height, 1,
@@ -142,23 +157,16 @@ namespace Gibbed.Reborn.ExportTexture
                 blockHeightMip0,
                 (uint)bytesPerBlock,
                 1, 1);
-            if (texture.DataBytes.Length != swizzledMipSize)
-            {
-                throw new InvalidOperationException();
-            }
+            var swizzledBytes = input.ReadBytes((int)swizzledMipSize);
             var deswizzledMipSize = TegraSwizzle.DeswizzledSurfaceSize(
                 texture.Width, texture.Height, 1,
                 blockDim,
                 (uint)bytesPerBlock,
                 1, 1);
-            if (deswizzledMipSize != swizzledMipSize)
-            {
-                throw new FormatException();
-            }
-            var deswizzledBytes = new byte[(int)deswizzledMipSize];
+            var deswizzledBytes = new byte[deswizzledMipSize];
             TegraSwizzle.DeswizzleSurface(
                 texture.Width, texture.Height, 1,
-                texture.DataBytes, 0, texture.DataBytes.Length,
+                swizzledBytes, 0, swizzledBytes.Length,
                 deswizzledBytes, 0, deswizzledBytes.Length,
                 blockDim,
                 blockHeightMip0,

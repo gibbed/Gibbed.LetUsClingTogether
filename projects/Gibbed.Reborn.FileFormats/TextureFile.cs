@@ -39,7 +39,7 @@ namespace Gibbed.Reborn.FileFormats
         public int MipCount { get; set; }
         public ushort Depth { get; set; }
         public string Name { get; set; }
-        public byte[] DataBytes { get; set; }
+        public uint DataOffset { get; set; }
 
         public void Serialize(Stream output)
         {
@@ -88,6 +88,7 @@ namespace Gibbed.Reborn.FileFormats
                 unknown16 != 0 ||
                 flags != 0 ||
                 unknown1C != 255 ||
+                unknown1E != 0 ||
                 depth != 1 ||
                 unknown2A != 0 ||
                 unknown30 != 0)
@@ -98,16 +99,6 @@ namespace Gibbed.Reborn.FileFormats
             input.Position = basePosition + nameOffset;
             var name = input.ReadStringZ(Encoding.UTF8);
 
-            var (calculatedStride, calculatedRows) = format.CalculateBufferStrideAndRows(width, height, 0);
-            if (calculatedStride != stride)
-            {
-                throw new InvalidOperationException();
-            }
-
-            var dataSize = calculatedRows * calculatedStride;
-            input.Position = basePosition + dataOffset;
-            var dataBytes = input.ReadBytes(dataSize);
-
             this.Width = width;
             this.Height = height;
             this.Stride = stride;
@@ -116,7 +107,7 @@ namespace Gibbed.Reborn.FileFormats
             this.MipCount = mipCount;
             this.Depth = depth;
             this.Name = name;
-            this.DataBytes = dataBytes;
+            this.DataOffset = dataOffset;
         }
     }
 }

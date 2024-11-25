@@ -323,8 +323,7 @@ namespace Gibbed.Reborn.FileFormats
 
         public static (int stride, int rows) CalculateBufferStrideAndRows(
             this TextureFormat format,
-            int width,
-            int height,
+            int width, int height,
             int level)
         {
             width = Math.Max(1, width >> level);
