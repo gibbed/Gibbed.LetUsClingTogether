@@ -3,6 +3,7 @@
     <GibbedIO_TargetFrameworksToBuild>net48</GibbedIO_TargetFrameworksToBuild>
     <GibbedMemory_TargetFrameworksToBuild>net48</GibbedMemory_TargetFrameworksToBuild>
     <GibbedSquish_TargetFrameworksToBuild>net48</GibbedSquish_TargetFrameworksToBuild>
+    <GibbedTegraSwizzle_TargetFrameworksToBuild>net48</GibbedTegraSwizzle_TargetFrameworksToBuild>
     <NDeskOptions_TargetFrameworksToBuild>net48</NDeskOptions_TargetFrameworksToBuild>
     <Tommy_TargetFrameworksToBuild>net48</Tommy_TargetFrameworksToBuild>
   </PropertyGroup>

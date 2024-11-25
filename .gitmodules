@@ -17,3 +17,7 @@
 	path = projects/Gibbed.Memory
 	url = https://github.com/gibbed/Gibbed.Memory.git
 	branch = main
+[submodule "projects/Gibbed.TegraSwizzle"]
+	path = projects/Gibbed.TegraSwizzle
+	url = https://github.com/gibbed/Gibbed.TegraSwizzle.git
+	branch = main
