@@ -1,0 +1,74 @@
+name = "screenplay_progress"
+
+columns = [
+  { name = "stage_id",                 type = "uint16", width =  3                                }, # 00
+  { name = "map_id",                   type = "uint16", width =  3                                }, # 02
+  { name = "scene_id",                 type = "uint16", width =  5                                }, # 04
+  { name = "invocation_id",            type = "uint16", width =  5                                }, # 06
+  { name = "task_id",                  type = "uint16", width =  5                                }, # 08
+  { name = "next_scene_id",            type = "uint16", width =  5                                }, # 0A
+  { name = "extra_task_id",            type = "uint16", width =  5                                }, # 0C - id of some sort
+  { name = "u0E",                      type = "uint16", width =  5                                }, # 0E - id of some sort
+  { name = "battlestage_id",           type = "uint16", width =  3                                }, # 10
+  { name = "u12",                      type = "uint8",  width =  0                                }, # 12
+  { name = "u13",                      type = "uint8",  width =  3                                }, # 13
+  { name = "event_entry_id",           type = "uint16", width =  4                                }, # 14
+  { name = "value",                    type = "uint16", width =  2                                }, # 16
+  { name = "logical_expression",       type = "uint8",  width =  0                                }, # 18
+  { name = "invocation_task_type",     type = "uint8",  width = 14, enum = "invocation_task_type" }, # 19
+  { name = "target_label_for_flag",    type = "uint16", width =  4                                }, # 1A
+  { name = "u1C",                      type = "uint8",  width =  3                                }, # 1C
+  { name = "weather_default",          type = "uint8",  width =  0                                }, # 1D
+  { name = "flags",                    type = "uint8",  width =  3                                }, # 1E
+  { name = "menu_task_type",           type = "uint8",  width = 16, enum = "menu_task_type"       }, # 1F
+  { name = "menu_task_param_1",        type = "uint16", width =  3                                }, # 20
+  { name = "menu_task_param_2",        type = "uint16", width =  4                                }, # 22
+  { name = "next_other",               type = "uint8",  width = 11, enum = "next_other"           }, # 24
+  { name = "u25",                      type = "uint8",  width =  3                                }, # 25
+  { name = "bgm_for_event_id",         type = "uint8",  width =  2                                }, # 26
+  { name = "bgm_for_battle_id",        type = "uint8",  width =  2                                }, # 27
+  { name = "bgm_control_opening",      type = "uint8",  width =  0                                }, # 28
+  { name = "bgm_control_ending",       type = "uint8",  width =  0                                }  # 29
+]
+
+types.invocation_task_type = [
+  "nothing",        # 0
+  "select_index",   # 1
+  "global_flag",    # 2
+  "local_flag",     # 3
+  "invocation",     # 4
+  "unk5",           # 5
+  "unk6",           # 6
+  "unk7"            # 7
+]
+
+types.menu_task_type = [
+  "nothing",         # 0
+  "add_guest",       # 1
+  "recruit_guest",   # 2
+  "recruit_unit",    # 3
+  "remove_guest",    # 4
+  "system_message",  # 5
+  "unk6",            # 6
+  "unk7",            # 7
+  "menu_nameinput",  # 8
+  "system_message2", # 9
+  "unk10",           # 10
+  "set_chapter",     # 11
+  "unk12",           # 12
+  "unk13",           # 13
+  "kill_guest"       # 14
+]
+
+types.next_other = [
+  "nothing",        # 0
+  "world_map",      # 1
+  "mini_map",       # 2
+  "unk3",           # 3
+  "unk4",           # 4
+  "unk5"            # 5
+]
+
+[types.flags]
+1 = "WR_terminate"
+128 = "new_entry"
