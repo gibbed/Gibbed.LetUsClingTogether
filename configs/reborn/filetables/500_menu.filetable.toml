@@ -9,6 +9,7 @@ path = "menu"
 2053.path = "shopbg/shop_bg00"
 2054.path = "shopbg/shop_bg01"
 2055.path = "shopbg/shop_bg05"
+
 10243.path = "sequence/classchange"
 10244.path = "sequence/shop_denim_normal"
 10245.path = "sequence/shop_denim_load"
@@ -19,7 +20,9 @@ path = "menu"
 10250.path = "sequence/shop_owner_lich"
 10251.path = "sequence/shop_owner_smoke"
 10252.path = "sequence/shop_item_blend_tubo"
+
 10259.path = "texture_x4/tex_common_x4"
+
 10263.path = "fontset"
 10264.path = "texture_x4/bt_fortune"
 10265.path = "texture_x4/bt_parts"
@@ -95,6 +98,7 @@ path = "menu"
 10335.path = "texture_x4/zh-cn/itemicon"
 10336.path = "texture_x4/zh-tw/itemicon"
 10337.path = "texture_x4/ko-kr/itemicon"
+
 50000.path = "mapname/ja-jp/STRONGHOLD_000"
 50001.path = "mapname/en-us/STRONGHOLD_000"
 50002.path = "mapname/fr-fr/STRONGHOLD_000"
@@ -2861,6 +2865,8 @@ path = "menu"
 path = "menu_data"
 
 12.path = "title_text.xlc"
+
+35.path = "classmark_data.xlc"
 
 
 [500.10242]
