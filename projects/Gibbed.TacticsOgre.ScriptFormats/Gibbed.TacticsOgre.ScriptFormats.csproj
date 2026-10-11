@@ -1,15 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net48</TargetFramework>
-    <LangVersion>9.0</LangVersion>
     <Company>Gibbed</Company>
     <Authors>Gibbed</Authors>
     <Description>http://gib.me/</Description>
-    <Copyright>Copyright © Gibbed 2022</Copyright>
+    <Copyright>Copyright © Gibbed 2026</Copyright>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
-  </ItemGroup>
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(GibbedTacticsOgre_TargetFrameworksToBuild)' == '' ">
+    <GibbedTacticsOgre_TargetFrameworksToBuild>$(TargetFrameworksToBuild)</GibbedTacticsOgre_TargetFrameworksToBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(GibbedTacticsOgre_TargetFrameworksToBuild)' == '' ">
+    <TargetFrameworks>net8.0</TargetFrameworks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(GibbedTacticsOgre_TargetFrameworksToBuild)' != '' ">
+    <TargetFrameworks>$(GibbedTacticsOgre_TargetFrameworksToBuild)</TargetFrameworks>
+  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gibbed.IO\Gibbed.IO.csproj" />
   </ItemGroup>

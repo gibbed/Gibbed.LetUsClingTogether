@@ -3,21 +3,25 @@
     <Company>Gibbed</Company>
     <Authors>Gibbed</Authors>
     <Description>https://gib.me/</Description>
-    <Copyright>Copyright © Gibbed 2024</Copyright>
+    <Copyright>Copyright © Gibbed 2026</Copyright>
   </PropertyGroup>
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net48</TargetFramework>
-    <LangVersion>9.0</LangVersion>
+    <LangVersion>latest</LangVersion>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>..\..\bin\</OutputPath>
+  <PropertyGroup Condition=" '$(GibbedTacticsOgre_TargetFrameworksToBuild)' == '' ">
+    <GibbedTacticsOgre_TargetFrameworksToBuild>$(TargetFrameworksToBuild)</GibbedTacticsOgre_TargetFrameworksToBuild>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="IndexRange" Version="1.0.2" />
-    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
-  </ItemGroup>
+  <PropertyGroup Condition=" '$(GibbedTacticsOgre_TargetFrameworksToBuild)' == '' ">
+    <TargetFrameworks>net8.0</TargetFrameworks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(GibbedTacticsOgre_TargetFrameworksToBuild)' != '' ">
+    <TargetFrameworks>$(GibbedTacticsOgre_TargetFrameworksToBuild)</TargetFrameworks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\bin\tools\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gibbed.IO\Gibbed.IO.csproj" />
     <ProjectReference Include="..\Gibbed.TacticsOgre.FileFormats\Gibbed.TacticsOgre.FileFormats.csproj" />
