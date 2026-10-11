@@ -45,7 +45,7 @@ namespace Gibbed.TacticsOgre.SheetFormats
 
             var executablePath = GetExecutablePath();
             var binPath = Path.GetDirectoryName(executablePath);
-            var filetablesPath = Path.Combine(binPath, "..", "configs", subdirectory, "sheets");
+            var filetablesPath = Path.Combine(binPath, "..", "..", "configs", subdirectory, "sheets");
 
             if (Directory.Exists(filetablesPath) == false)
             {

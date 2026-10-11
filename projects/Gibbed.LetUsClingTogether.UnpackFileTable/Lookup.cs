@@ -41,8 +41,8 @@ namespace Gibbed.LetUsClingTogether.UnpackFileTable
             var executablePath = GetExecutablePath();
             var binPath = Path.GetDirectoryName(executablePath);
             var filetablesPath = subdirectory == null
-                ? Path.Combine(binPath, "..", "configs", "filetables")
-                : Path.Combine(binPath, "..", "configs", subdirectory, "filetables");
+                ? Path.Combine(binPath, "..", "..", "configs", "filetables")
+                : Path.Combine(binPath, "..", "..", "configs", subdirectory, "filetables");
 
             var root = new TomlTable();
             if (Directory.Exists(filetablesPath) == false)
