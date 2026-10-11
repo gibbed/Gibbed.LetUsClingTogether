@@ -85,11 +85,27 @@ path = "battle_data"
 [1000.0.0]
 path = "unit_animations"
 
-23.path = "dorgalua"
+0.path = "humanoid"
+1.path = "dragon__cloud_earth_flood_flame"
+2.path = "dragon__arc_crystal"
+3.path = "dragon__dark_onyx"
+4.path = "dragon__frost"
+5.path = "dragon__thunder"
+6.path = "octopus_kraken_dagon"
+7.path = "gryphon_cockatrice_hippogryph_phoenix_rukh_basilisk"
+8.path = "golem_ogre_cyclops_spriggan_titan"
+9.path = "dragon_hydra_scylla_naga"
+
+10.path = "humanoid_attack1"
+11.path = "humanoid_attack2"
+
+23.path = "dorgalua_revenant"
 24.path = "dorgalua_xl"
 
 [1000.0.1]
 path = "weapon_graphics"
+
+0.path = "weapon_palettes.spr"
 
 [1000.0.2]
 path = "misc_graphics"
