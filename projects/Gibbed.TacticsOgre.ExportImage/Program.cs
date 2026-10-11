@@ -39,7 +39,7 @@ namespace Gibbed.TacticsOgre.ExportImage
     {
         private static string GetExecutableName()
         {
-            return Path.GetFileName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase);
+            return Path.GetFileName(System.Reflection.Assembly.GetExecutingAssembly().Location);
         }
 
         private static bool IsImagePath(string path)

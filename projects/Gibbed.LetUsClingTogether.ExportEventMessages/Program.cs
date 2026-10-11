@@ -35,7 +35,7 @@ namespace Gibbed.LetUsClingTogether.ExportEventMessages
     {
         private static string GetExecutableName()
         {
-            return Path.GetFileName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase);
+            return Path.GetFileName(System.Reflection.Assembly.GetExecutingAssembly().Location);
         }
 
         private enum LanguageOption

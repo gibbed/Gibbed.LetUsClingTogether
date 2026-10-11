@@ -33,7 +33,7 @@ namespace Gibbed.TacticsOgre.UnpackPAKD
     {
         private static string GetExecutableName()
         {
-            return Path.GetFileName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase);
+            return Path.GetFileName(System.Reflection.Assembly.GetExecutingAssembly().Location);
         }
 
         public static void Main(string[] args)

@@ -44,10 +44,5 @@ namespace Gibbed.TacticsOgre.SheetFormats
         {
             this.Path = path;
         }
-
-        protected DescriptorLoadException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
     }
 }
