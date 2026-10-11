@@ -52,8 +52,8 @@ path = "chapter_4"
 0_1.path = "C4.pgrs"
 0_2.path = "C4.invk"
 0_3.path = "C4.task"
-0_4.path = "C4_0.emes"
-0_5.path = "C4_1.emes"
+0_4.path = "C4.emes"
+0_5.path = "C4sub.emes"
 
 [900.17]
 path = "chapter_ep"
@@ -68,11 +68,13 @@ path = "chapter_dlc"
 0_1.path = "DLC.pgrs"
 0_2.path = "DLC.invk"
 0_3.path = "DLC.task"
-0_4.path = "DLC_0.emes"
-0_5.path = "DLC_1.emes"
+0_4.path = "DLC.emes"
+0_5.path = "C4sub.emes"
 
 [900.20]
 path = "event_data"
+
+1.path = "character_names.xlc"
 
 3.path = "global_flags.xlc"
 4.path = "unknown_flags.xlc"
