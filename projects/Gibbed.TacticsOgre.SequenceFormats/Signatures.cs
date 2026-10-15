@@ -20,30 +20,11 @@
  *    distribution.
  */
 
-using System;
+namespace Gibbed.TacticsOgre.SequenceFormats;
 
-namespace Gibbed.TacticsOgre.AnimationFormats.Frames
+public static class Signatures
 {
-    public struct LoopStartFrame : IFrame
-    {
-        FrameType IFrame.Type => FrameType.LoopStart;
-        ushort IFrame.Time { get => this.Time; set => this.Time = value; }
-
-        public ushort Time;
-        public ushort FrameIndex;
-
-        internal LoopStartFrame(FrameData data)
-        {
-            this.Time = default;
-            this.FrameIndex = data.FrameIndex;
-
-            if (data.Y1 != 0 ||
-                data.Unknown2 != 0 ||
-                data.X2 != 0 || data.Y2 != 0 ||
-                data.Unknown5 != 0)
-            {
-                throw new ArgumentException("invalid data", nameof(data));
-            }
-        }
-    }
+    public const uint V1 = 0x00534153u; // 'SAS\0' PSP
+    public const uint V2 = 0x32534153u; // 'SAS2'
+    public const uint V3 = 0x33534153u; // 'SAS3'  Reborn
 }

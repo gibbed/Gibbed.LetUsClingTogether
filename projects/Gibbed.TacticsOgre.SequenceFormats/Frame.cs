@@ -20,68 +20,124 @@
  *    distribution.
  */
 
-using System.IO;
-using Gibbed.IO;
+using System;
+using System.Collections.Generic;
+using Gibbed.Memory;
+using IByteWriter = System.Buffers.IBufferWriter<byte>;
 
-namespace Gibbed.TacticsOgre.AnimationFormats
+namespace Gibbed.TacticsOgre.SequenceFormats;
+
+public sealed class Frame
 {
-    public struct Sprite
+    public byte SpritesheetIndex { get; set; }
+    public short CenterX { get; set; }
+    public short CenterY { get; set; }
+    public List<Cell> Cells { get; } = new();
+
+    public const int MaxCells = 255;
+
+    internal static Frame Read(ReadOnlySpan<byte> span, uint offset, FileVersion version, Endian endian) => version switch
     {
-        public byte SheetIndex;
-        public short CenterX;
-        public short CenterY;
-        public Cel[] Cels;
+        FileVersion.V1 => ReadV1(span, (int)offset, endian),
+        FileVersion.V2 => throw new NotImplementedException("unsupported file version"),
+        FileVersion.V3 => ReadV3(span, (int)offset, endian),
+        _ => throw new ArgumentOutOfRangeException(nameof(version), version, "unknown file version"),
+    };
 
-        public static Sprite ReadV0(Stream input, Endian endian)
+    internal static Frame ReadV1(ReadOnlySpan<byte> span, int index, Endian endian)
+    {
+        Frame instance = new();
+        instance.SpritesheetIndex = span.ReadValueU8(ref index);
+        instance.CenterX = span.ReadValueS8(ref index);
+        instance.CenterY = span.ReadValueS8(ref index);
+        var cellCount = span.ReadValueU8(ref index);
+        for (int i = 0; i < cellCount; i++)
         {
-            Sprite instance;
-            instance.SheetIndex = input.ReadValueU8();
-            instance.CenterX = input.ReadValueS8();
-            instance.CenterY = input.ReadValueS8();
-            var celCount = input.ReadValueU8();
-            instance.Cels = new Cel[celCount];
-            for (int i = 0; i < celCount; i++)
-            {
-                instance.Cels[i] = Cel.ReadV0(input, endian);
-            }
-            return instance;
+            instance.Cells.Add(Cell.ReadV1(span, ref index, endian));
         }
+        return instance;
+    }
 
-        public static Sprite ReadV3(Stream input, Endian endian)
+    internal static Frame ReadV3(ReadOnlySpan<byte> span, int index, Endian endian)
+    {
+        Frame instance = new();
+        instance.SpritesheetIndex = span.ReadValueU8(ref index);
+        var cellCount = span.ReadValueU8(ref index);
+        instance.CenterX = span.ReadValueS16(ref index, endian);
+        instance.CenterY = span.ReadValueS16(ref index, endian);
+        for (int i = 0; i < cellCount; i++)
         {
-            Sprite instance;
-            instance.SheetIndex = input.ReadValueU8();
-            var celCount = input.ReadValueU8();
-            instance.CenterX = input.ReadValueS16(endian);
-            instance.CenterY = input.ReadValueS16(endian);
-            instance.Cels = new Cel[celCount];
-            for (int i = 0; i < celCount; i++)
-            {
-                instance.Cels[i] = Cel.ReadV3(input, endian);
-            }
-            return instance;
+            instance.Cells.Add(Cell.ReadV3(span, ref index, endian));
         }
+        return instance;
+    }
 
-        public static void WriteV0(Stream output, Sprite instance, Endian endian)
+    internal void Write(IByteWriter writer, FileVersion version, Endian endian)
+    {
+        switch (version)
         {
-            if (instance.Cels.Length > byte.MaxValue)
+            case FileVersion.V1:
             {
-                throw new InvalidDataException();
+                this.WriteV1(writer, endian);
+                break;
             }
-            var celCount = (byte)instance.Cels.Length;
-            output.WriteValueU8(instance.SheetIndex);
-            output.WriteValueS8((sbyte)instance.CenterX);
-            output.WriteValueS8((sbyte)instance.CenterY);
-            output.WriteValueU8(celCount);
-            for (int i = 0; i < celCount; i++)
+            case FileVersion.V2:
             {
-                instance.Cels[i].WriteV0(output, endian);
+                throw new NotImplementedException("unsupported file version");
+            }
+            case FileVersion.V3:
+            {
+                this.WriteV3(writer, endian);
+                break;
+            }
+            default:
+            {
+                throw new ArgumentOutOfRangeException(nameof(version), version, "unknown file version");
             }
         }
+    }
 
-        public void WriteV0(Stream output, Endian endian)
+    internal void WriteV1(IByteWriter writer, Endian endian)
+    {
+        if (this.CenterX is < sbyte.MinValue or > sbyte.MaxValue ||
+            this.CenterY is < sbyte.MinValue or > sbyte.MaxValue)
         {
-            WriteV0(output, this, endian);
+            throw new SequenceFormatException($"Frame center ({this.CenterX}, {this.CenterY}) doesn't fit SAS version 1, which stores it as two s8s.");
         }
+        writer.WriteValueU8(this.SpritesheetIndex);
+        writer.WriteValueS8((sbyte)this.CenterX);
+        writer.WriteValueS8((sbyte)this.CenterY);
+        writer.WriteValueU8((byte)this.Cells.Count);
+        foreach (var cell in this.Cells)
+        {
+            cell.WriteV1(writer, endian);
+        }
+    }
+
+    internal void WriteV3(IByteWriter writer, Endian endian)
+    {
+        writer.WriteValueU8(this.SpritesheetIndex);
+        writer.WriteValueU8((byte)this.Cells.Count);
+        writer.WriteValueS16(this.CenterX, endian);
+        writer.WriteValueS16(this.CenterY, endian);
+        foreach (var cell in this.Cells)
+        {
+            cell.WriteV3(writer, endian);
+        }
+    }
+
+    public Frame Clone()
+    {
+        Frame clone = new()
+        {
+            SpritesheetIndex = this.SpritesheetIndex,
+            CenterX = this.CenterX,
+            CenterY = this.CenterY,
+        };
+        foreach (var p in this.Cells)
+        {
+            clone.Cells.Add(p.Clone());
+        }
+        return clone;
     }
 }

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2026 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -22,33 +22,15 @@
 
 using System;
 
-namespace Gibbed.TacticsOgre.AnimationFormats.Frames
+namespace Gibbed.TacticsOgre.SequenceFormats;
+
+[Flags]
+public enum OpcodeFields
 {
-    public struct GoToFrame : IFrame
-    {
-        FrameType IFrame.Type => FrameType.GoTo;
-        ushort IFrame.Time { get => this.Time; set => this.Time = value; }
+    None = 0,
 
-        public ushort Time;
-        public ushort FrameIndex;
-
-        internal GoToFrame(FrameData data)
-        {
-            this.Time = default;
-            this.FrameIndex = data.FrameIndex;
-
-            if (data.Y1 != 0 ||
-                data.Unknown2 != 0 ||
-                data.X2 != 0 || data.Y2 != 0 ||
-                data.Unknown5 != 0)
-            {
-                throw new ArgumentException("invalid data", nameof(data));
-            }
-        }
-
-        public override string ToString()
-        {
-            return $"{this.Time} | go: {this.FrameIndex}";
-        }
-    }
+    Flips = 1 << 0,
+    Priority = 1 << 1,
+    XY = 1 << 2,
+    Z = 1 << 3,
 }

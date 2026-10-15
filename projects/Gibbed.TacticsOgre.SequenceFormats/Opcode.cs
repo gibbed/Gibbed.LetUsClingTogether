@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2026 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -20,24 +20,23 @@
  *    distribution.
  */
 
-namespace Gibbed.TacticsOgre.AnimationFormats
+namespace Gibbed.TacticsOgre.SequenceFormats;
+
+public enum Opcode : byte
 {
-    public enum FrameType : byte
-    {
-        Sprite = 0,
-        Position = 1,
-        Unknown2 = 2,
-        Unknown3 = 3,
-        Undefined4 = 4,
-        Undefined5 = 5,
-        Undefined6 = 6,
-        LoopEnd = 7,
-        LoopStart = 8,
-        SetFlag = 9,
-        Unknown10 = 10,
-        GoTo = 11,
-        Unknown12 = 12,
-        Undefined13 = 13,
-        Unknown14 = 14,
-    }
+    ShowFrame = 0,
+    Move = 1,
+    ShowFrame3D = 2,
+    Move3D = 3,
+    Nop4 = 4,
+    Nop5 = 5,
+    Nop6 = 6,
+    Hide = 7,
+    PlaySound = 8,
+    Event = 9,
+    HitCue = 10,
+    Goto = 11,
+    AttachPoint = 12,
+    Nop13 = 13,
+    ReactionCue = 14,
 }

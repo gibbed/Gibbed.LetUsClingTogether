@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2026 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -20,32 +20,11 @@
  *    distribution.
  */
 
-namespace Gibbed.TacticsOgre.AnimationFormats.Frames
+namespace Gibbed.TacticsOgre.SequenceFormats;
+
+public enum FileVersion
 {
-    public struct Unknown2Frame : IFrame
-    {
-        FrameType IFrame.Type => FrameType.Unknown2;
-        ushort IFrame.Time { get => this.Time; set => this.Time = value; }
-
-        public ushort Time;
-        public byte SpriteIndex;
-        public sbyte X1;
-        public sbyte Y1;
-        public byte Unknown2;
-        public short X2;
-        public short Y2;
-        public short Unknown5;
-
-        internal Unknown2Frame(FrameData data)
-        {
-            this.Time = default;
-            this.SpriteIndex = data.SpriteIndex;
-            this.X1 = data.X1;
-            this.Y1 = data.Y1;
-            this.Unknown2 = data.Unknown2;
-            this.X2 = data.X2;
-            this.Y2 = data.Y2;
-            this.Unknown5 = data.Unknown5;
-        }
-    }
+    V1 = 1, // 'SAS\0' PSP
+    V2 = 2, // 'SAS2'
+    V3 = 3, // 'SAS3'  Reborn
 }

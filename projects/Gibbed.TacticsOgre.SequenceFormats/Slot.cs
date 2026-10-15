@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2026 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -20,16 +20,13 @@
  *    distribution.
  */
 
-namespace Gibbed.TacticsOgre.AnimationFormats
-{
-    public struct Direction
-    {
-        public Animation Animation;
-        public bool IsFlipped;
+namespace Gibbed.TacticsOgre.SequenceFormats;
 
-        public override string ToString()
-        {
-            return $"{this.Animation != null} {this.IsFlipped}";
-        }
-    }
+public sealed class Slot
+{
+    public Sequence? Sequence { get; set; }
+    public bool Mirror { get; set; }
+    public bool IsEmpty => this.Sequence == null;
+
+    public static Slot Empty() => new();
 }

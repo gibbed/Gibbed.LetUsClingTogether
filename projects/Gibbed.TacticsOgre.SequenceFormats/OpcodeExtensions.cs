@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2026 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -20,11 +20,9 @@
  *    distribution.
  */
 
-namespace Gibbed.TacticsOgre.AnimationFormats
+namespace Gibbed.TacticsOgre.SequenceFormats;
+
+internal static class OpcodeExtensions
 {
-    public interface IFrame
-    {
-        ushort Time { get; set; }
-        FrameType Type { get; }
-    }
+    public static bool HasXY(this Opcode opcode) => (Opcodes.Get(opcode).Fields & OpcodeFields.XY) != 0;
 }

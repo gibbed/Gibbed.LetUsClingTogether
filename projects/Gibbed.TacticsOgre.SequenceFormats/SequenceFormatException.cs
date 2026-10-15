@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2026 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -22,33 +22,12 @@
 
 using System;
 
-namespace Gibbed.TacticsOgre.AnimationFormats.Frames
+namespace Gibbed.TacticsOgre.SequenceFormats;
+
+public sealed class SequenceFormatException : Exception
 {
-    public struct Unknown12Frame : IFrame
+    public SequenceFormatException(string message)
+        : base(message)
     {
-        FrameType IFrame.Type => FrameType.Unknown12;
-        ushort IFrame.Time { get => this.Time; set => this.Time = value; }
-
-        public ushort Time;
-        public sbyte X1;
-        public sbyte Y1;
-        public short X2;
-        public short Y2;
-
-        internal Unknown12Frame(FrameData data)
-        {
-            this.Time = default;
-            this.X1 = data.X1;
-            this.Y1 = data.Y1;
-            this.X2 = data.X2;
-            this.Y2 = data.Y2;
-
-            if (data.SpriteIndex != 0 ||
-                data.Unknown2 != 0 ||
-                data.Unknown5 != 0)
-            {
-                throw new ArgumentException("invalid data", nameof(data));
-            }
-        }
     }
 }

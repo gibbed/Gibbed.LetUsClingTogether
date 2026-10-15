@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2024 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2026 Rick (rick 'at' gibbed 'dot' us)
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -20,62 +20,72 @@
  *    distribution.
  */
 
-using System.IO;
-using Gibbed.IO;
+using System;
+using Gibbed.Memory;
+using IByteWriter = System.Buffers.IBufferWriter<byte>;
 
-namespace Gibbed.TacticsOgre.AnimationFormats
+namespace Gibbed.TacticsOgre.SequenceFormats;
+
+public sealed class Cell
 {
-    public struct Cel
+    public short X { get; set; }
+    public short Y { get; set; }
+    public ushort Width { get; set; }
+    public ushort Height { get; set; }
+    public ushort U { get; set; }
+    public ushort V { get; set; }
+
+    internal static int GetSize(FileVersion version) => version == FileVersion.V1 ? 8 : 12;
+
+    internal static Cell ReadV1(ReadOnlySpan<byte> span, ref int index, Endian endian)
     {
-        public short RelativeX;
-        public short RelativeY;
-        public ushort SheetWidth;
-        public ushort SheetHeight;
-        public ushort SheetX;
-        public ushort SheetY;
-
-        public static Cel ReadV0(Stream input, Endian endian)
-        {
-            Cel instance;
-            instance.RelativeX = input.ReadValueS8();
-            instance.RelativeY = input.ReadValueS8();
-            instance.SheetWidth = input.ReadValueU8();
-            instance.SheetHeight = input.ReadValueU8();
-            instance.SheetX = input.ReadValueU16(endian);
-            instance.SheetY = input.ReadValueU16(endian);
-            return instance;
-        }
-
-        public static Cel ReadV3(Stream input, Endian endian)
-        {
-            Cel instance;
-            instance.RelativeX = input.ReadValueS16(endian);
-            instance.RelativeY = input.ReadValueS16(endian);
-            instance.SheetWidth = input.ReadValueU16(endian);
-            instance.SheetHeight = input.ReadValueU16(endian);
-            instance.SheetX = input.ReadValueU16(endian);
-            instance.SheetY = input.ReadValueU16(endian);
-            return instance;
-        }
-
-        public static void WriteV0(Stream output, Cel instance, Endian endian)
-        {
-            output.WriteValueS8((sbyte)instance.RelativeX);
-            output.WriteValueS8((sbyte)instance.RelativeY);
-            output.WriteValueU8((byte)instance.SheetWidth);
-            output.WriteValueU8((byte)instance.SheetHeight);
-            output.WriteValueU16(instance.SheetX, endian);
-            output.WriteValueU16(instance.SheetY, endian);
-        }
-
-        public void WriteV0(Stream output, Endian endian)
-        {
-            WriteV0(output, this, endian);
-        }
-
-        public override string ToString()
-        {
-            return $"{this.RelativeX},{this.RelativeY} @ {this.SheetWidth}x{this.SheetHeight} {this.SheetX},{this.SheetY}";
-        }
+        Cell cell = new();
+        cell.X = span.ReadValueS8(ref index);
+        cell.Y = span.ReadValueS8(ref index);
+        cell.Width = span.ReadValueU8(ref index);
+        cell.Height = span.ReadValueU8(ref index);
+        cell.U = span.ReadValueU16(ref index, endian);
+        cell.V = span.ReadValueU16(ref index, endian);
+        return cell;
     }
+
+    internal static Cell ReadV3(ReadOnlySpan<byte> span, ref int index, Endian endian)
+    {
+        Cell cell = new();
+        cell.X = span.ReadValueS16(ref index, endian);
+        cell.Y = span.ReadValueS16(ref index, endian);
+        cell.Width = span.ReadValueU16(ref index, endian);
+        cell.Height = span.ReadValueU16(ref index, endian);
+        cell.U = span.ReadValueU16(ref index, endian);
+        cell.V = span.ReadValueU16(ref index, endian);
+        return cell;
+    }
+
+    internal void WriteV1(IByteWriter writer, Endian endian)
+    {
+        if (this.X is < sbyte.MinValue or > sbyte.MaxValue ||
+            this.Y is < sbyte.MinValue or > sbyte.MaxValue ||
+            this.Width > byte.MaxValue || this.Height > byte.MaxValue)
+        {
+            throw new SequenceFormatException($"cell at ({this.X}, {this.Y}) sized {this.Width}x{this.Height} is too large for V1");
+        }
+        writer.WriteValueS8((sbyte)this.X);
+        writer.WriteValueS8((sbyte)this.Y);
+        writer.WriteValueU8((byte)this.Width);
+        writer.WriteValueU8((byte)this.Height);
+        writer.WriteValueU16(this.U, endian);
+        writer.WriteValueU16(this.V, endian);
+    }
+
+    internal void WriteV3(IByteWriter writer, Endian endian)
+    {
+        writer.WriteValueS16(this.X, endian);
+        writer.WriteValueS16(this.Y, endian);
+        writer.WriteValueU16(this.Width, endian);
+        writer.WriteValueU16(this.Height, endian);
+        writer.WriteValueU16(this.U, endian);
+        writer.WriteValueU16(this.V, endian);
+    }
+
+    public Cell Clone() => (Cell)this.MemberwiseClone();
 }
