@@ -50,7 +50,7 @@ public enum MacroCode : byte
     Unknown97 = 0x97,
     AutoAdvanceSeconds = 0x98,
     AutoAdvanceFrames = 0x99,
-    Unknown9A = 0x9A,
+    SetWindowTitle = 0x9A,
     ResetTextColor = 0x9B,
     Unknown9C = 0x9C,
     SetFontPalette = 0x9D,
@@ -74,8 +74,8 @@ public enum MacroCode : byte
     EndIf = 0xAD,
     IfMasculine = 0xAE,
     ElseIfFeminine = 0xAF,
-    RebornUnknownB0 = 0xB0,
-    RebornUnknownB1 = 0xB1,
+    VoiceBreakJapanese = 0xB0, // voice clip break when voice language is Japanese
+    VoiceBreakEnglish = 0xB1, // voice clip break when voice language is English
     InsertSymbol = 0xB2,
     InsertButton = 0xB3,
     IfOrderNameStartsWithVowel = 0xB4,

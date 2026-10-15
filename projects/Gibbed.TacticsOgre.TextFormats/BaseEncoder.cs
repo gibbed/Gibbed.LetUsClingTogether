@@ -359,6 +359,7 @@ public abstract class BaseEncoder : IEncoder
                 return true;
             }
             case "ww":
+            case "wordwrap": // deprecated
             case "np": // deprecated
             {
                 NoMoreArgs(1);
@@ -508,6 +509,33 @@ public abstract class BaseEncoder : IEncoder
                 this.WriteMacro(MacroCode.Pause, state, Arg(1, 1));
                 return false;
             }
+            case "title":
+            {
+                NoMoreArgs(2);
+                var title = Array.IndexOf(MacroCodeHelpers.WindowTitles, parts[1]);
+                this.WriteMacro(
+                    MacroCode.SetWindowTitle,
+                    state,
+                    title >= 0
+                        ? (byte)(title + 1)
+                        : Arg(1, 1)
+                );
+                return false;
+            }
+            case "vbreak":
+            {
+                NoMoreArgs(2);
+                this.WriteMacro(
+                    parts[1] switch
+                    {
+                        "ja" => MacroCode.VoiceBreakJapanese,
+                        "en" => MacroCode.VoiceBreakEnglish,
+                        _ => throw new FormatException($"unknown voice language in {{{tag}}}"),
+                    },
+                    state
+                );
+                return false;
+            }
             case "center":
             {
                 NoMoreArgs(1);
@@ -581,7 +609,10 @@ public abstract class BaseEncoder : IEncoder
             case "zombie": // older name
             {
                 NoMoreArgs(2);
-                var patch = this.WriteMacroWithLength(MacroCode.Conditional, state, Arg(1, 1));
+                var condition = parts[1] == "undead"
+                    ? (byte)(MacroCodeHelpers.Conditions.Undead + 1)
+                    : Arg(1, 1);
+                var patch = this.WriteMacroWithLength(MacroCode.Conditional, state, condition);
                 state.Frames.Push(
                     new()
                     {

@@ -394,7 +394,10 @@ public abstract class BaseDecoder : IDecoder
                     this.IsMacroAt(input, endPosition, MacroCode.ConditionalEnd) == true)
                 {
                     state.BranchPositions.Add(endPosition);
-                    output.Append(_($"{{cond {args[0] - 1}}}"));
+                    output.Append(args[0] - 1 == MacroCodeHelpers.Conditions.Undead
+                        ? "{cond undead}"
+                        : _($"{{cond {args[0] - 1}}}")
+                    );
                     return;
                 }
                 break;
@@ -419,6 +422,28 @@ public abstract class BaseDecoder : IDecoder
             case MacroCode.AutoAdvanceFrames:
             {
                 output.Append(_($"{{auto {MacroCodeHelpers.DecodeU16(args[0], args[1])}}}"));
+                return;
+            }
+
+            case MacroCode.SetWindowTitle:
+            {
+                var title = args[0] - 1;
+                output.Append(title >= 0 && title < MacroCodeHelpers.WindowTitles.Length
+                    ? _($"{{title {MacroCodeHelpers.WindowTitles[title]}}}")
+                    : _($"{{title {title}}}")
+                );
+                return;
+            }
+
+            case MacroCode.VoiceBreakJapanese:
+            {
+                output.Append("{vbreak ja}");
+                return;
+            }
+
+            case MacroCode.VoiceBreakEnglish:
+            {
+                output.Append("{vbreak en}");
                 return;
             }
 

@@ -61,6 +61,20 @@ internal static class MacroCodeHelpers
         return index >= 0 && index < sizes.Length ? sizes[index] : 0;
     }
 
+    public static readonly string[] WindowTitles =
+    [
+        "caution",
+        "confirm",
+        "notice",
+        "tutorial",
+        "warning",
+    ];
+
+    public static class Conditions
+    {
+        public const int Undead = 1;
+    }
+
     public static int DecodeU16(byte a, byte b) => ((a - 1) * 255) + (b - 1);
 
     public static (byte a, byte b) EncodeU16(int value)
