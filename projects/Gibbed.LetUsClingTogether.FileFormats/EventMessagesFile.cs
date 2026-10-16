@@ -107,6 +107,11 @@ namespace Gibbed.LetUsClingTogether.FileFormats
 
         public void Deserialize(Stream input, IDecoder decoder, bool includeTags)
         {
+            DecodeOptions decodeOptions = new()
+            {
+                SkipWordWrap = includeTags == false,
+            };
+
             var magic = input.ReadValueU32(Endian.Little);
             if (magic != Signature && magic.Swap() != Signature)
             {
@@ -141,7 +146,7 @@ namespace Gibbed.LetUsClingTogether.FileFormats
             {
                 input.Position = offsets[i];
                 var nameId = input.ReadValueU16(endian);
-                var text = decoder.Decode(input, endian/*, includeTags*/);
+                var text = decoder.Decode(input, endian, decodeOptions);
                 entries.Add(ids[i], new(nameId, text));
             }
 

@@ -134,7 +134,7 @@ namespace Gibbed.LetUsClingTogether.ExportEventMessages
                 var messages = new EventMessagesFile();
                 using (var input = File.OpenRead(inputPath))
                 {
-                    messages.Deserialize(input, formatter);
+                    messages.Deserialize(input, formatter, false);
                 }
 
                 string outputPath = Path.ChangeExtension(inputPath, null) + ".emsg.toml";

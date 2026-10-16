@@ -28,4 +28,5 @@ namespace Gibbed.TacticsOgre.TextFormats;
 public interface IDecoder
 {
     string Decode(Stream input, Endian endian);
+    string Decode(Stream input, Endian endian, DecodeOptions options);
 }

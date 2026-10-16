@@ -55,6 +55,7 @@ public abstract class BaseDecoder : IDecoder
 
     private sealed class State
     {
+        public DecodeOptions Options;
         public readonly StringBuilder Output = new();
         public int CharacterCount;
         public int NewlineCount;
@@ -64,6 +65,11 @@ public abstract class BaseDecoder : IDecoder
 
     public string Decode(Stream input, Endian endian)
     {
+        return this.Decode(input, endian, default);
+    }
+
+    public string Decode(Stream input, Endian endian, DecodeOptions options)
+    {
         ArgumentNullException.ThrowIfNull(input);
 
         var encoding = this.Encoding;
@@ -72,7 +78,10 @@ public abstract class BaseDecoder : IDecoder
         var pendingLength = pendingBytes.Length;
         int pendingIndex = 0;
 
-        State state = new();
+        State state = new()
+        {
+            Options = options,
+        };
         var output = state.Output;
 
         void FlushPending()
@@ -265,7 +274,10 @@ public abstract class BaseDecoder : IDecoder
             {
                 if (AllOnes() == true)
                 {
-                    output.Append("{wrap}");
+                    if (state.Options.SkipWordWrap == false)
+                    {
+                        output.Append("{wrap}");
+                    }
                     return;
                 }
                 break;

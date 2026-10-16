@@ -128,6 +128,11 @@ namespace Gibbed.TacticsOgre.ExportSheet
                 }
             }
 
+            DecodeOptions decodeOptions = new()
+            {
+                SkipWordWrap = true,
+            };
+
             IDecoder decoder;
 
             if (isReborn == true)
@@ -270,7 +275,7 @@ namespace Gibbed.TacticsOgre.ExportSheet
                     foreach (var kv in pendingStrings)
                     {
                         data.Position = kv.Key;
-                        var value = decoder.Decode(data, endian);
+                        var value = decoder.Decode(data, endian, decodeOptions);
                         foreach (var node in kv.Value)
                         {
                             node.Value = value;

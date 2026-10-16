@@ -91,6 +91,11 @@ namespace Gibbed.Reborn.FileFormats
 
             RebornDecoder decoder = new();
 
+            DecodeOptions decodeOptions = new()
+            {
+                SkipWordWrap = true,
+            };
+
             var entries = new Entry[count];
             for (int i = 0; i < count; i++)
             {
@@ -98,7 +103,7 @@ namespace Gibbed.Reborn.FileFormats
                 input.Position = entryHeader.IdOffset;
                 var id = input.ReadStringZ(Encoding.UTF8);
                 input.Position = entryHeader.ValueOffset;
-                var value = decoder.Decode(input, endian);
+                var value = decoder.Decode(input, endian, decodeOptions);
                 input.Position = entryHeader.Unknown10Offset;
                 var unknown10 = input.ReadStringZ(Encoding.UTF8);
                 input.Position = entryHeader.Unknown18Offset;
